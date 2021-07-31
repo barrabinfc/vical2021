@@ -28,7 +28,6 @@
     "graphql-type-json": "^0.3.2"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^0.12.1",
     "@types/react": "^17.0.8",
     "@types/webpack-env": "^1.16.0",
     "clean-webpack-plugin": "^4.0.0-alpha.0",

@@ -10,6 +10,11 @@ const databaseId = "9e64c3a89a9f4f858d5ab1674109cf7d";
 export const AnyText = {
   __resolveType: (text) => pascalCase(text.type),
 };
+export const Property = {
+  __resolveType(obj, ctx, info) {
+    return "PropertyTitle";
+  },
+};
 
 export async function projectsDatabase(
   _: any,
@@ -75,6 +80,7 @@ export default {
   RichTextTypeEnum,
   PropertyTypeEnum,
   AnyText,
+  Property,
   Query: {
     projectsDatabase,
     projects,
