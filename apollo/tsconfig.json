@@ -1,0 +1,19 @@
+{
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "types": ["webpack-env"],
+    "typeRoots": ["node_modules/@types","src/@types"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "noEmit": true,
+  },
+  "resolve": {
+    "extensions": [".ts", ".js", ".json",".graphql"]
+  }
+}

@@ -1,0 +1,23 @@
+#import "./Notion.graphql"
+
+type ProjectItem implements Node {
+  id: ID!
+  object: String
+  properties: [Property]
+}
+
+type ProjectItemsEdge implements Edge {
+  node: ProjectItem
+  cursor: ID!
+}
+
+type ProjectItemsConnection implements Page {
+  totalCount: Int!
+  edges: [ProjectItemsEdge]
+  pageInfo: PageInfo!
+}
+
+extend type Query {
+  projectsDatabase: Database
+  projects: ProjectItemsConnection
+}

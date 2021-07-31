@@ -1,0 +1,10 @@
+type Book implements Node {
+  id: ID!
+  name: String
+  synopsis: String
+  rating: Int
+}
+
+type Query {
+  books(limit: Int!, page: Int!): [Book]
+}

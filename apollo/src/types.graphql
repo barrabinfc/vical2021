@@ -1,0 +1,21 @@
+scalar JSONObject
+
+type PageInfo {
+  startCursor: ID
+  endCursor: ID
+  hasNextPage: Boolean
+}
+interface Edge {
+  node: Node
+  cursor: ID!
+}
+
+interface Node {
+  id: ID!
+}
+
+interface Page {
+  totalCount: Int!
+  edges: [Edge]
+  pageInfo: PageInfo!
+}

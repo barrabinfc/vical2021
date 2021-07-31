@@ -1,0 +1,27 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": [],
+			"label": "apollo:dev",
+			"detail": "npm run build:dev",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+    {
+			"type": "npm",
+			"script": "build",
+			"problemMatcher": [],
+			"label": "apollo:build",
+			"detail": "npm run build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+    }
+	]
+}

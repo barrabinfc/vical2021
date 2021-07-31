@@ -1,0 +1,105 @@
+#import "../types.graphql"
+
+enum RichTextTypeEnum {
+  TEXT
+  MENTION
+  EQUATION
+}
+
+enum PropertyTypeEnum {
+  TITLE
+  RICH_TEXT
+  NUMBER
+  SELECT
+  MULTI_SELECT
+  DATE
+  PEOPLE
+  FILE
+  CHECKBOX
+  URL
+  EMAIL
+  PHONE_NUMBER
+  FORMULA
+  RELATION
+  ROLLUP
+  CREATED_TIME
+  CREATED_BY
+  LAST_EDITED_TIME
+  LAST_EDITED_BY
+}
+
+enum NumberFormatEnum {
+  NUMBER
+  NUMBER_WITH_COMMAS
+  PERCENT
+  DOLLAR
+  EURO
+  POUND
+  YEN
+  RUBBLE
+  RUPEE
+  WON
+  YUAN
+}
+
+###############
+
+interface Property implements Node {
+  id: ID!
+  type: PropertyTypeEnum
+}
+
+type PropertyTitle implements Property & Node {
+  id: ID!
+  type: PropertyTypeEnum
+  name: String!
+  title: [RichText]
+}
+
+type Database implements Node {
+  id: ID!
+  object: String
+  created_time: String!
+  last_edited_time: String!
+  title: [RichText]
+  properties: JSONObject
+}
+
+#############
+
+type TextAnnotations {
+  bold: Boolean
+  italic: Boolean
+  strikethrough: Boolean
+  underline: Boolean
+  code: Boolean
+  color: String
+}
+fragment TextAnnotationsFragment on TextAnnotations {
+  bold
+  italic
+  strikethrough
+  underline
+  code
+  color
+}
+
+type Text {
+  type: RichTextTypeEnum
+  content: String
+  link: String
+}
+
+type RichText {
+  type: RichTextTypeEnum!
+  plain_text: String!
+  href: String
+  annotations: TextAnnotations
+}
+union AnyText = Text | RichText
+
+########
+
+type Number {
+  format: String
+}
