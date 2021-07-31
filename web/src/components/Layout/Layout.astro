@@ -1,0 +1,39 @@
+<section class="layout">
+  <header class="header">
+    <slot name="header" />
+  </header>
+  <main class="main" id="main" tabIndex={-1}>
+    <slot />
+  </main>
+  <footer class="footer">
+    <slot name="footer" />
+  </footer>
+</section>
+
+<style lang="scss">
+.layout {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
+  min-height: 100%;
+}
+
+.main {
+  display: block;
+}
+
+.footer {
+  border-top: 1px solid var(--color-very-light-gray);
+
+  @nest & a {
+    color: inherit;
+    text-decoration: none;
+
+    @media (hover: hover) {
+      @nest &:hover {
+        color: var(--color-accent);
+      }
+    }
+  }
+}
+</style>

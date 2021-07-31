@@ -1,0 +1,73 @@
+@use "public/styles/breakpoints" as bp;
+
+.nav {
+  display: none;
+
+  & ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  & ul li a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  @media (hover: hover) {
+    & ul li a:hover {
+      color: var(--color-accent);
+    }
+  }
+
+  @include bp.breakpoint(medium, max) {
+    position: absolute;
+    transform: translateX(calc(var(--gap) * 2));
+    width: calc(100% - calc(var(--gap) * 4));
+    background: var(--color-white);
+    color: var(--color-black);
+    border: 1px solid rgb(51, 51, 51);
+    box-shadow: rgb(210 210 249) 4px 4px 0px 0px;
+    left: 0;
+    right: 0;
+    top: 4.3rem;
+    animation: opacity var(--anim-quick) 1;
+
+    & ul {
+      padding: 1rem 0;
+    }
+
+    & ul li a {
+      padding: 0.5rem 1.5rem;
+    }
+  }
+
+  @include bp.breakpoint(medium, min) {
+    display: block;
+
+    & ul {
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    & ul li a {
+      padding: 0.5rem;
+    }
+  }
+}
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.showNav {
+  display: block;
+  opacity: 1;
+}

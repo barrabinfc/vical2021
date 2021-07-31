@@ -1,0 +1,30 @@
+@use "public/styles/breakpoints" as bp;
+
+@mixin grid {
+  @include bp.breakpoint(small, max) {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+
+  /**
+   * Desktop have 3 columns
+   */
+  @include bp.breakpoint(medium, min) {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+
+    :global(.item:nth-child(1n)) {
+      grid-column: span 1;
+    }
+
+    :global(.item:nth-child(2n)) {
+      grid-column: span 2;
+    }
+
+    :global(.item:nth-child(3n)) {
+      grid-column: span 3;
+    }
+  }
+}

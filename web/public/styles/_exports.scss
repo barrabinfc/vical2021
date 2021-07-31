@@ -1,0 +1,12 @@
+@use "variables" as *;
+
+/**
+ * Exported variables (available at buildtime only)
+ */
+:export {
+  breakpoint-small: map-get($breakpoints, "small");
+  breakpoint-medium: map-get($breakpoints, "medium");
+  breakpoint-large: map-get($breakpoints, "large");
+
+  gap: $gap;
+}

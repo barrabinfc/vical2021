@@ -1,0 +1,42 @@
+---
+import Layout from '../components/Layout/Layout.astro';
+import SEO from '../components/seo';
+
+import Header from '../components/Header/Header.tsx';
+import Footer from '../components/Footer/Footer.jsx';
+
+const content:any = Astro.props.content;
+---
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{content.title}</title>
+    <link rel="stylesheet" href="/styles/global.css" />
+    <meta name="description" content="{content.description}" />
+    <meta name="schema" content="{content.schema}" />
+    <style>
+      :global(.root) {
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+    <SEO module="og" ...content />
+    <SEO module="twitter" ...content />
+    <SEO module="ld" ...content />
+  </head>
+  <body data-layout="base">
+    <div class="root">
+      <div class="container">
+        <Layout>
+          <Header slot="header" client:idle />
+          <div class="wrapper">
+            <slot />
+          </div>
+          <Footer slot="footer" />
+        </Layout >
+      </div>
+    </div>
+  </body>
+</html>

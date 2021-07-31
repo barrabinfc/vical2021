@@ -1,0 +1,72 @@
+@use "variables" as *;
+@use "./custom-properties";
+@use "./helpers";
+
+@import url("https://rsms.me/inter/inter.css");
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-base-size);
+  line-height: var(--font-base-line-height);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  word-wrap: break-word;
+  background: var(--color-white);
+  color: var(--color-black);
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/** headings */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-family-heading);
+  font-weight: 900;
+}
+
+/** Reset margins/paddings */
+.m0 {
+  margin: 0;
+}
+.mx {
+  margin-left: 0;
+  margin-right: 0;
+}
+.my {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.p0 {
+  padding: 0;
+}
+.px {
+  padding-left: 0;
+  padding-right: 0;
+}
+.py {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/** Global wrapper */
+.container {
+  max-width: 1440px;
+  flex: 1 1 100%;
+  padding: $gap * 4 $gap * 4;
+}
