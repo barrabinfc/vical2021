@@ -1,31 +1,31 @@
 #import "../types.graphql"
 
 enum RichTextTypeEnum {
-  TEXT
-  MENTION
-  EQUATION
+  text
+  mention
+  equation
 }
 
 enum PropertyTypeEnum {
-  TITLE
-  RICH_TEXT
-  NUMBER
-  SELECT
-  MULTI_SELECT
-  DATE
-  PEOPLE
-  FILE
-  CHECKBOX
-  URL
-  EMAIL
-  PHONE_NUMBER
-  FORMULA
-  RELATION
-  ROLLUP
-  CREATED_TIME
-  CREATED_BY
-  LAST_EDITED_TIME
-  LAST_EDITED_BY
+  title
+  rich_text
+  number
+  select
+  multi_select
+  date
+  people
+  file
+  checkbox
+  url
+  email
+  phone_number
+  formula
+  relation
+  rollup
+  created_time
+  created_by
+  last_edited_time
+  last_edited_by
 }
 
 enum NumberFormatEnum {
@@ -40,6 +40,33 @@ enum NumberFormatEnum {
   RUPEE
   WON
   YUAN
+}
+
+###############
+
+interface NotionParentNode {
+  type: String
+  database_id: String
+}
+
+interface NotionPage implements Node {
+  id: ID!
+  object: String
+  url: String
+  parent: NotionParentNode
+  created_time: String
+  last_edited_time: String
+  archived: Boolean
+  properties: [Property]
+}
+
+type NotionDatabase implements Node {
+  id: ID!
+  object: String
+  created_time: String!
+  last_edited_time: String!
+  title: [RichText]
+  properties: JSONObject
 }
 
 ###############
@@ -71,13 +98,11 @@ type PropertyMultiSelect implements Property & Node {
   multi_select: [MultiSelectOptionItem]
 }
 
-type Database implements Node {
+type PropertyCheckbox implements Property & Node {
   id: ID!
-  object: String
-  created_time: String!
-  last_edited_time: String!
-  title: [RichText]
-  properties: JSONObject
+  type: PropertyTypeEnum
+  name: String!
+  checkbox: Boolean
 }
 
 #############

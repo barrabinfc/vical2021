@@ -2,8 +2,19 @@
 
 type ProjectItem implements Node {
   id: ID!
-  object: String
+  name: String!
+  slug: String!
+  title: String!
+  description: String
+
+  created_time: String
+  last_edited_time: String
+
+  published: Boolean
+  archived: Boolean
+
   properties: [Property]
+  content: JSONObject
 }
 
 type ProjectItemsEdge implements Edge {
@@ -19,5 +30,5 @@ type ProjectItemsConnection implements Page {
 
 extend type Query {
   # projectsDatabase: Database
-  projects: ProjectItemsConnection
+  projects(start_cursor: ID, page_size: Int): ProjectItemsConnection
 }

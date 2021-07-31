@@ -25,7 +25,8 @@
     "graphql-modules": "^1.4.2",
     "graphql-tag": "^2.12.4",
     "graphql-tools": "^4.0.8",
-    "graphql-type-json": "^0.3.2"
+    "graphql-type-json": "^0.3.2",
+    "slugify": "^1.6.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.8",
