@@ -23,7 +23,7 @@ type ProjectItemsEdge implements Edge {
 }
 
 type ProjectItemsConnection implements Page {
-  totalCount: Int!
+  totalCount: Int
   edges: [ProjectItemsEdge]
   pageInfo: PageInfo!
 }
@@ -35,4 +35,5 @@ extend type Query {
     page_size: Int
     sorts: [NotionSort]
   ): ProjectItemsConnection
+  # project(id: ID!): ProjectItem
 }

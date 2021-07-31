@@ -46,8 +46,9 @@ export async function projects(
     page_size,
     sorts,
   });
+  const projects = response.results;
 
-  console.log(response.results);
+  console.log(projects);
   // response.results.map((item) => {
   //   console.log(JSON.stringify(item.properties, null, "\t"));
   // });
@@ -70,8 +71,8 @@ export async function projects(
   }
 
   return {
-    totalCount: 0,
-    edges: response.results.map(validateProjectProperties).map((item) => {
+    totalCount: undefined,
+    edges: projects.map(validateProjectProperties).map((item) => {
       const name = getPlainText(item.properties["Name"]);
       const slug = getPlainText(item.properties["slug"]) || slugify(name);
       return {
