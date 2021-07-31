@@ -1,4 +1,5 @@
 #import "../types.graphql"
+#import "./sort.graphql"
 
 enum RichTextTypeEnum {
   text

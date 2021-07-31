@@ -1,0 +1,14 @@
+enum NotionSortTimestamp {
+  created_time
+  last_edited_time
+}
+enum NotionSortDirection {
+  ascending
+  descending
+}
+
+input NotionSort {
+  property: String
+  timestamp: NotionSortTimestamp
+  direction: NotionSortDirection
+}

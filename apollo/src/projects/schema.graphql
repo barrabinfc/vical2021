@@ -30,5 +30,9 @@ type ProjectItemsConnection implements Page {
 
 extend type Query {
   # projectsDatabase: Database
-  projects(start_cursor: ID, page_size: Int): ProjectItemsConnection
+  projects(
+    start_cursor: ID
+    page_size: Int
+    sorts: [NotionSort]
+  ): ProjectItemsConnection
 }

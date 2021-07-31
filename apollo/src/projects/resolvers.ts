@@ -1,4 +1,4 @@
-import { Page } from "@notionhq/client/build/src/api-types";
+import { Page, Sort } from "@notionhq/client/build/src/api-types";
 import GQLJson, { GraphQLJSONObject as JSONObject } from "graphql-type-json";
 
 import { DataSources, Notion } from "../dataSources";
@@ -34,8 +34,9 @@ export async function projects(
   _: any,
   {
     start_cursor,
+    sorts,
     page_size = 100,
-  }: { start_cursor?: string; page_size: number },
+  }: { start_cursor?: string; page_size: number; sorts: Sort[] },
   { dataSources }: { dataSources: DataSources }
 ) {
   const projectsAPI = dataSources.notion.api;
@@ -43,12 +44,13 @@ export async function projects(
     database_id: databaseId,
     start_cursor,
     page_size,
+    sorts,
   });
 
   console.log(response.results);
-  response.results.map((item) => {
-    console.log(JSON.stringify(item.properties, null, "\t"));
-  });
+  // response.results.map((item) => {
+  //   console.log(JSON.stringify(item.properties, null, "\t"));
+  // });
 
   /**
    * Validates if the project has the required propertys
