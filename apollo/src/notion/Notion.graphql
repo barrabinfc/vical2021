@@ -47,6 +47,7 @@ enum NumberFormatEnum {
 interface Property implements Node {
   id: ID!
   type: PropertyTypeEnum
+  name: String!
 }
 
 type PropertyTitle implements Property & Node {
@@ -54,6 +55,20 @@ type PropertyTitle implements Property & Node {
   type: PropertyTypeEnum
   name: String!
   title: [RichText]
+}
+
+type PropertyRichText implements Property & Node {
+  id: ID!
+  type: PropertyTypeEnum
+  name: String!
+  rich_text: [RichText]
+}
+
+type PropertyMultiSelect implements Property & Node {
+  id: ID!
+  type: PropertyTypeEnum
+  name: String!
+  multi_select: [MultiSelectOptionItem]
 }
 
 type Database implements Node {
@@ -96,6 +111,13 @@ type RichText {
   href: String
   annotations: TextAnnotations
 }
+
+type MultiSelectOptionItem {
+  id: ID!
+  name: String
+  color: String
+}
+
 union AnyText = Text | RichText
 
 ########

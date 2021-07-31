@@ -1,40 +1,31 @@
 import GQLJson, { GraphQLJSONObject as JSONObject } from "graphql-type-json";
 
-import { DataSources } from "../dataSources";
-import { pascalCase } from "change-case";
+import { DataSources, Notion } from "../dataSources";
 
-import { PropertyTypeEnum, RichTextTypeEnum } from "./enums";
+import * as NotionEnums from "../notion/enums";
+import * as NotionTypes from "../notion/resolvers";
 
 const databaseId = "9e64c3a89a9f4f858d5ab1674109cf7d";
 
-export const AnyText = {
-  __resolveType: (text) => pascalCase(text.type),
-};
-export const Property = {
-  __resolveType(obj, ctx, info) {
-    return "PropertyTitle";
-  },
-};
+// export async function projectsDatabase(
+//   _: any,
+//   params,
+//   { dataSources }: { dataSources: DataSources }
+// ) {
+//   const projectsAPI = dataSources.notion.api;
+//   const response = await projectsAPI.databases.retrieve({
+//     database_id: databaseId,
+//   });
 
-export async function projectsDatabase(
-  _: any,
-  params,
-  { dataSources }: { dataSources: DataSources }
-) {
-  const projectsAPI = dataSources.notion.api;
-  const response = await projectsAPI.databases.retrieve({
-    database_id: databaseId,
-  });
-
-  return {
-    id: response.id,
-    object: response.object,
-    created_time: response.created_time,
-    last_edited_time: response.last_edited_time,
-    title: response.title,
-    properties: response.properties,
-  };
-}
+//   return {
+//     id: response.id,
+//     object: response.object,
+//     created_time: response.created_time,
+//     last_edited_time: response.last_edited_time,
+//     title: response.title,
+//     properties: response.properties,
+//   };
+// }
 
 export async function projects(
   _: any,
@@ -51,6 +42,10 @@ export async function projects(
     // page_size,
   });
 
+  // console.log(response.results);
+  response.results.map((item) => {
+    console.log(item.properties);
+  });
   return {
     totalCount: 0,
     edges: response.results.map((item) => ({
@@ -77,12 +72,10 @@ export async function projects(
 
 export default {
   JSONObject,
-  RichTextTypeEnum,
-  PropertyTypeEnum,
-  AnyText,
-  Property,
+  ...NotionEnums,
+  ...NotionTypes,
   Query: {
-    projectsDatabase,
+    // projectsDatabase,
     projects,
   },
 };
