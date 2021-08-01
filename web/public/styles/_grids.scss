@@ -1,6 +1,10 @@
+@use "sass:math";
 @use "public/styles/breakpoints" as bp;
 
-@mixin grid {
+/**
+ * A grid with display grid technique (not animable in 2021)
+ */
+@mixin grid($columns: 3) {
   @include bp.breakpoint(small, max) {
     display: grid;
     gap: 2rem;
@@ -13,18 +17,53 @@
   @include bp.breakpoint(medium, min) {
     display: grid;
     gap: 2rem;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat($columns, 1fr);
 
-    :global(.item:nth-child(1n)) {
+    :global(.item:nth-child(1n), .span1) {
       grid-column: span 1;
     }
 
-    :global(.item:nth-child(2n)) {
+    :global(.item:nth-child(2n), .span2) {
       grid-column: span 2;
     }
 
-    :global(.item:nth-child(3n)) {
+    :global(.item:nth-child(3n), .span3) {
       grid-column: span 3;
+    }
+  }
+}
+
+/**
+ * A grid with display flex technique (animable)
+ */
+@mixin flexGrid($columns: 3, $gap: 8px) {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  padding: 0;
+
+  /** Emulate gap property */
+  $itemWidth: calc(#{math.div(100%, $columns)} - #{$gap});
+  margin: (-1 * $gap) 0 0 (-1 * $gap);
+  width: calc(100% + #{$gap});
+
+  :global(.item) {
+    margin: $gap 0 0 $gap;
+  }
+
+  @include bp.breakpoint(small, max) {
+    /** Phones are only 1 column */
+    :global(.item) {
+      flex-basis: 100%;
+    }
+  }
+
+  @include bp.breakpoint(medium, min) {
+    /** Items with equal width */
+    :global(.item) {
+      flex: 0 0 $itemWidth;
+      margin: $gap 0 0 $gap;
     }
   }
 }
