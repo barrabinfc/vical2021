@@ -1,47 +1,8 @@
 #import "../types.graphql"
+#import "./properties/index.graphql"
+#import "./blocks/index.graphql"
+
 #import "./sort.graphql"
-
-enum RichTextTypeEnum {
-  text
-  mention
-  equation
-}
-
-enum PropertyTypeEnum {
-  title
-  rich_text
-  number
-  select
-  multi_select
-  date
-  people
-  file
-  checkbox
-  url
-  email
-  phone_number
-  formula
-  relation
-  rollup
-  created_time
-  created_by
-  last_edited_time
-  last_edited_by
-}
-
-enum NumberFormatEnum {
-  NUMBER
-  NUMBER_WITH_COMMAS
-  PERCENT
-  DOLLAR
-  EURO
-  POUND
-  YEN
-  RUBBLE
-  RUPEE
-  WON
-  YUAN
-}
 
 ###############
 
@@ -50,7 +11,7 @@ interface NotionParentNode {
   database_id: String
 }
 
-interface NotionPage implements Node {
+type NotionPage implements Node {
   id: ID!
   object: String
   url: String
@@ -70,84 +31,4 @@ type NotionDatabase implements Node {
   properties: JSONObject
 }
 
-###############
-
-interface Property implements Node {
-  id: ID!
-  type: PropertyTypeEnum
-  name: String!
-}
-
-type PropertyTitle implements Property & Node {
-  id: ID!
-  type: PropertyTypeEnum
-  name: String!
-  title: [RichText]
-}
-
-type PropertyRichText implements Property & Node {
-  id: ID!
-  type: PropertyTypeEnum
-  name: String!
-  rich_text: [RichText]
-}
-
-type PropertyMultiSelect implements Property & Node {
-  id: ID!
-  type: PropertyTypeEnum
-  name: String!
-  multi_select: [MultiSelectOptionItem]
-}
-
-type PropertyCheckbox implements Property & Node {
-  id: ID!
-  type: PropertyTypeEnum
-  name: String!
-  checkbox: Boolean
-}
-
-#############
-
-type TextAnnotations {
-  bold: Boolean
-  italic: Boolean
-  strikethrough: Boolean
-  underline: Boolean
-  code: Boolean
-  color: String
-}
-fragment TextAnnotationsFragment on TextAnnotations {
-  bold
-  italic
-  strikethrough
-  underline
-  code
-  color
-}
-
-type Text {
-  type: RichTextTypeEnum
-  content: String
-  link: String
-}
-
-type RichText {
-  type: RichTextTypeEnum!
-  plain_text: String!
-  href: String
-  annotations: TextAnnotations
-}
-
-type MultiSelectOptionItem {
-  id: ID!
-  name: String
-  color: String
-}
-
-union AnyText = Text | RichText
-
 ########
-
-type Number {
-  format: String
-}

@@ -1,0 +1,13 @@
+type Paragraph {
+  text: [RichText]
+}
+
+type BlockParagraph implements Block & Node {
+  object: String!
+  id: ID!
+  type: BlockTypeEnum!
+  created_time: String!
+  last_edited_time: String!
+  has_children: Boolean!
+  paragraph: Paragraph
+}

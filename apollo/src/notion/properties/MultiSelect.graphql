@@ -1,0 +1,12 @@
+type MultiSelectOptionItem {
+  id: ID!
+  name: String
+  color: String
+}
+
+type PropertyMultiSelect implements Property & Node {
+  id: ID!
+  type: PropertyTypeEnum
+  name: String!
+  multi_select: [MultiSelectOptionItem]
+}

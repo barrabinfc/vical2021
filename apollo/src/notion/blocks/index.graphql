@@ -1,0 +1,9 @@
+#import "./Block.graphql"
+#import "./Unsupported.graphql"
+#import "./Heading1.graphql"
+#import "./Paragraph.graphql"
+
+# A dummy type to avoid <EOF> bug in graphql-tag/loader
+type Dummy {
+  nothing: Boolean
+}

@@ -1,0 +1,6 @@
+type PropertyTitle implements Property & Node {
+  id: ID!
+  type: PropertyTypeEnum
+  name: String!
+  title: [RichText]
+}

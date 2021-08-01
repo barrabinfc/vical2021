@@ -1,0 +1,16 @@
+type TextAnnotations {
+  bold: Boolean
+  italic: Boolean
+  strikethrough: Boolean
+  underline: Boolean
+  code: Boolean
+  color: String
+}
+fragment TextAnnotationsFragment on TextAnnotations {
+  bold
+  italic
+  strikethrough
+  underline
+  code
+  color
+}

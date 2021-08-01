@@ -1,0 +1,20 @@
+#import "./Notion.graphql"
+
+type NotionBlocksEdge implements Edge {
+  node: Block
+  cursor: ID!
+}
+
+type NotionBlocksConnection implements Page {
+  totalCount: Int
+  edges: [NotionBlocksEdge]
+  pageInfo: PageInfo!
+}
+
+extend type Query {
+  blocks(
+    block_id: ID!
+    start_cursor: ID
+    page_size: Int
+  ): NotionBlocksConnection
+}

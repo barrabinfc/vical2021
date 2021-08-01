@@ -6,16 +6,16 @@ import dataSourcesFactory from "./dataSources";
 
 import books from "./books/index";
 import projects from "./projects/index";
+import notion from "./notion/index";
 
 const app = createApplication({
-  modules: [books, projects],
+  modules: [notion, books, projects],
 });
 
 const schema = app.createSchemaForApollo();
 const server = new ApolloServer({
   schema,
   dataSources: dataSourcesFactory,
-  tracing: true,
   plugins: [ApolloServerPluginUsageReportingDisabled()],
 });
 

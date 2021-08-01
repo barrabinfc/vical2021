@@ -1,0 +1,17 @@
+enum NumberFormatEnum {
+  NUMBER
+  NUMBER_WITH_COMMAS
+  PERCENT
+  DOLLAR
+  EURO
+  POUND
+  YEN
+  RUBBLE
+  RUPEE
+  WON
+  YUAN
+}
+
+type Number {
+  format: String
+}

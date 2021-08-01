@@ -1,0 +1,6 @@
+type PropertyCheckbox implements Property & Node {
+  id: ID!
+  type: PropertyTypeEnum
+  name: String!
+  checkbox: Boolean
+}
