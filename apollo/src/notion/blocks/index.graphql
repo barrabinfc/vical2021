@@ -1,7 +1,9 @@
 #import "./Block.graphql"
 #import "./Unsupported.graphql"
-#import "./Heading1.graphql"
 #import "./Paragraph.graphql"
+#import "./Heading1.graphql"
+#import "./Heading2.graphql"
+#import "./Heading3.graphql"
 
 # A dummy type to avoid <EOF> bug in graphql-tag/loader
 type Dummy {

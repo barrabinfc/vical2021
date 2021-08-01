@@ -1,0 +1,13 @@
+type Heading3 {
+  text: [RichText]
+}
+
+type BlockHeading_3 implements Block & Node {
+  object: String!
+  id: ID!
+  type: BlockTypeEnum!
+  created_time: String!
+  last_edited_time: String!
+  has_children: Boolean!
+  heading_3: Heading3
+}
