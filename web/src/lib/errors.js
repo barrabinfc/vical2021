@@ -4,5 +4,3 @@ export class CustomError extends Error {
     this.name = this.constructor.name;
   }
 }
-
-export class SEOTypeNotFound extends CustomError {}

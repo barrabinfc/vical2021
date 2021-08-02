@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '~/layouts/base.astro';
 import Card from '~/components/Card/Card'
+import Work from './work/work.tsx';
 
 import {getAllProjects} from './work'
-import {LoremIpsum} from 'react-lorem-ipsum'
+
 export async function createCollection(){
   const works = await getAllProjects();
   return {
@@ -28,7 +29,6 @@ export async function createCollection(){
 <!DOCTYPE html>
 <BaseLayout ...Astro.props>
   <article id="content">
-    <Card ...props loading="eager" />
-    <LoremIpsum p={6} avgWordsPerSentence={6} avgSentencesPerParagraph={4} />
+    <Work ...props loading="eager" />
   </article>
 </BaseLayout>
