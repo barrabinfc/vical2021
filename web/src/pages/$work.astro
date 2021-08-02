@@ -1,0 +1,34 @@
+---
+import BaseLayout from '~/layouts/base.astro';
+import Card from '~/components/Card/Card'
+
+import {getAllProjects} from './work'
+import {LoremIpsum} from 'react-lorem-ipsum'
+export async function createCollection(){
+  const works = await getAllProjects();
+  return {
+    route: `/work/:slug`,
+    paths() {
+      return works.map( work => ({params: work}) )
+    },
+    async props({params}) {
+      return {
+        ...params,
+        content: {
+          title: params.content.title,
+          description: params.content.description,
+          schema: 'article'
+        }
+      };
+    }
+  }
+}
+
+---
+<!DOCTYPE html>
+<BaseLayout ...Astro.props>
+  <article id="content">
+    <Card ...props loading="eager" />
+    <LoremIpsum p={6} avgWordsPerSentence={6} avgSentencesPerParagraph={4} />
+  </article>
+</BaseLayout>

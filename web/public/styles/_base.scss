@@ -12,6 +12,8 @@
 html {
   font-family: var(--font-family-sans);
   font-size: var(--font-base-size);
+  font-style: normal;
+  font-weight: 400;
   line-height: var(--font-base-line-height);
 }
 
@@ -70,3 +72,5 @@ h4 {
   flex: 1 1 100%;
   padding: $gap * 4 $gap * 4;
 }
+
+@import "./anims";

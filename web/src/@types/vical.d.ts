@@ -17,7 +17,7 @@ interface Renderable {
 }
 
 interface Work {
-  route: string;
+  slug: string;
   href: string;
   avatar: {
     url: string;

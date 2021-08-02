@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/base.astro';
-import Card from '../components/Card/Card.jsx';
+import Card from '../components/Card/Card';
 
 import { Markdown } from 'astro/components';
 
@@ -44,10 +44,10 @@ Astro.props = {
   </article>
   <section id="work" class="work-wrapper">
     <h2>Works</h2>
-    <div class="card-grid">
+    <div class="work-grid">
     {
       projects.map((proj, i) => (
-        <Card key={i} className="item" ...proj />
+        <Card key={i} className="item" ...proj client:visible />
       ))
     }
     </div>
@@ -58,7 +58,7 @@ Astro.props = {
 @use "public/styles/breakpoints" as bp;
 @use "public/styles/grids" as grids;
 
-.card-grid {
+.work-grid {
   @include grids.flexGrid(3);
 }
 </style>

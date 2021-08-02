@@ -9,8 +9,8 @@
     --font-family-heading: "Inter var", sans-serif;
   }
 
-  --font-family-sans: ".SFNSText", "SFProText-Regular", "SFUIText-Regular",
-    ".SFUIText", Helvetica, Arial, sans-serif;
+  --font-family-sans: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   --font-family-code: "IBM Plex Mono", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
@@ -28,12 +28,13 @@
   --gap: $gap;
 
   /* Typography */
-  --unit: 16;
+  --unit: 18;
   --font-micro-size: calc(10 / var(--unit) * 1rem); /* 10px */
   --font-micro-line-height: calc(12 / 10); /* 12px */
   --font-small-size: calc(14 / var(--unit) * 1rem); /* 14px */
   --font-small-line-height: calc(21 / 14); /* 21px */
-  --font-base-size: 1em; /* 16px */
+
+  --font-base-size: 16px; /* 16px */
   --font-base-line-height: calc(24 / var(--unit)); /* 24px */
   --font-large-size: calc(18 / var(--unit) * 1rem); /* 18px */
   --font-large-line-height: calc(27 / 18); /* 27px */
@@ -47,4 +48,7 @@
 
   --anim-quick: 0.1s;
   --anim-default: 0.24s;
+  --anim-slow: 1.37s;
+
+  --anim-easeOutExpo: cubic-bezier(0.16, 1, 0.3, 1);
 }
