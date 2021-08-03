@@ -1,10 +1,10 @@
 @use "public/styles/variables" as *;
 @use "public/styles/helpers" as helpers;
 
-$cardHeight: 420px;
+$cardHeight: 280px;
 
 .card {
-  min-height: 280px;
+  height: 280px;
   max-height: $cardHeight;
 
   width: 100%;
@@ -30,8 +30,7 @@ $cardHeight: 420px;
     top: 0;
     left: 0;
     right: 0;
-    position: absolute;
-    z-index: 1;
+    position: fixed;
     overflow: hidden;
   }
 }
@@ -40,7 +39,7 @@ $cardHeight: 420px;
   pointer-events: auto;
   position: relative;
   border-radius: $gap * 4;
-  background: #1c1c1e;
+  background: white;
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -49,21 +48,17 @@ $cardHeight: 420px;
 
 .avatar {
   position: absolute;
-  width: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100vw;
   height: $cardHeight;
-
-  background: radial-gradient(
-    46.28% 66.31% at 66.95% 58.35%,
-    rgb(230, 230, 247) 0%,
-    rgb(231, 237, 250) 50%,
-    rgb(233, 251, 250) 100%
-  );
-  // box-shadow: rgb(0 0 0 / 10%) 0px -1px 0px inset;
+  transform: translateZ(0);
 
   :global(img) {
-    object-fit: cover;
     width: 100%;
-    height: 100%;
+    object-fit: cover;
+    // height: $cardHeight;
   }
 }
 
@@ -79,9 +74,31 @@ $cardHeight: 420px;
 
   color: white;
 }
-:global(.expanded) .title-container {
-  top: 0;
-  justify-content: flex-start;
+
+.content-placeholder {
+  margin-top: $cardHeight;
+  padding: 1em;
+
+  :global(.paragraph) {
+    overflow: auto;
+    margin: 0.5em 0 0.5em 0;
+
+    :global(div) {
+      border-radius: $gap;
+      margin: 0.5em 0 0.5em 0;
+      width: 70%;
+      height: 16px;
+      background: rgba(187, 0, 255, 0.16);
+    }
+    :global(div:nth-of-type(2n)),
+    :global(div:nth-of-type(3n)) {
+      width: 96%;
+    }
+    :global(div:first-of-type),
+    :global(div:nth-of-type(9n)) {
+      width: 40%;
+    }
+  }
 }
 
 .title {

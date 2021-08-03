@@ -2,14 +2,14 @@ import { range } from "~/lib/helpers";
 import faker from "faker/locale/en";
 import { lipsum } from "~/lib/lipsum";
 
+const imgPrefix = "https://5j0s6.csb.app/images/";
 export async function getAllProjects(): Promise<Work[]> {
   return [
     {
       slug: "eveniet-illo",
       href: `/work/eveniet-illo`,
       avatar: {
-        /** @ts-ignore */
-        url: faker.image.unsplash.imageUrl(),
+        url: imgPrefix + "a.jpg",
         width: 280 * 2,
         height: 280,
       },
@@ -23,7 +23,7 @@ export async function getAllProjects(): Promise<Work[]> {
       href: `/work/dicta-rerum`,
       avatar: {
         /** @ts-ignore */
-        url: faker.image.unsplash.imageUrl(),
+        url: imgPrefix + "b.jpg",
         width: 280 * 2,
         height: 280,
       },
@@ -36,8 +36,7 @@ export async function getAllProjects(): Promise<Work[]> {
       slug: "quod-autem",
       href: `/work/quod-autem`,
       avatar: {
-        /** @ts-ignore */
-        url: faker.image.unsplash.imageUrl(),
+        url: imgPrefix + "c.jpg",
         width: 280 * 2,
         height: 280,
       },
@@ -50,8 +49,7 @@ export async function getAllProjects(): Promise<Work[]> {
       slug: "velit-exercitationem",
       href: `/work/velit-exercitationem`,
       avatar: {
-        /** @ts-ignore */
-        url: faker.image.unsplash.imageUrl(),
+        url: imgPrefix + "d.jpg",
         width: 280 * 2,
         height: 280,
       },
