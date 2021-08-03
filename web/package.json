@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "astro": "astro",
     "dev": "astro dev",
     "build": "astro build",
     "debug": "DEBUG=* astro dev",

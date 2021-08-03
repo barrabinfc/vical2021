@@ -50,7 +50,7 @@ export default function Card({href, avatar, content, className, loading='lazy'}:
         >
           <motion.div className={cn(styles['content'])}>
             {avatar &&
-              <motion.div layout className={styles.avatar}>
+              <motion.div layout className={styles.avatar} >
                 <picture className="fade-in">
                   <motion.img layout initial={false} src={avatar?.url} loading={loading}
                     // width={avatarWidth} height={avatarHeight}

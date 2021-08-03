@@ -1,0 +1,34 @@
+---
+import BaseLayout from '~/layouts/base.astro';
+console.log(Astro.props);
+---
+
+<BaseLayout ...Astro.props>
+  <article id="content" class="post">
+    <slot />
+  </article>
+</BaseLayout>
+<style lang="scss">
+.post  {
+  :global(img) {
+    max-width: 100%;
+  }
+
+  /**
+    * Adjacent spacement fixes
+    */
+  :global(p > code),
+  :global(li > code) {
+    font-size: 85%;
+    padding: var(--gap);
+    background-color: var(--color-gray);
+    border-radius: 3px;
+  }
+
+  /* Adjacent list elements */
+  :global( ul + p ),
+  :global( ol + p ){
+    margin-top: 1.5rem;
+  }
+}
+</style>
