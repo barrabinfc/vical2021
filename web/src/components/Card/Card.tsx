@@ -5,6 +5,7 @@ import {motion, useMotionValue} from 'framer-motion';
 
 import { cn } from "~/lib/helpers";
 import styles from "./Card.module.css";
+import { spring } from '~/lib/animations';
 
 export interface CardProps extends Work {
   className: string|string[],
@@ -17,26 +18,27 @@ export default function Card({href, avatar, content, className, loading='lazy'}:
   const avatarHeight = avatar?.height || 280;
 
   const [expanded, setExpanded] = useState(false);
-
   return (
     <Link className={cn(styles.card, className)} href={href} onEnter={() => setExpanded(exp => !exp)}>
-      <div className={`card-content-container ${expanded && 'expanded'}`} >
-        <motion.div className="card-content">
+      <div className={cn(styles['content-container'], expanded && 'expanded')} >
+        <motion.div layout transition={spring}
+          className={cn(styles['content'])}
+        >
           {avatar &&
-            <div className={styles.avatar}>
+            <motion.div layout transition={spring} className={styles.avatar}>
               <picture className="fade-in">
-                <img src={avatar?.url} loading={loading}
+                <motion.img src={avatar?.url} loading={loading}
                   width={avatarWidth} height={avatarHeight}
                   alt={content?.title || 'A image'}  />
               </picture>
-            </div>
+            </motion.div>
           }
-          <div className={styles.content}>
-            <h1 className={styles.title}>{expanded ? 'isExpanded?' : false} {content?.title}</h1>
+          <motion.div layout transition={spring} className={styles['title-container']}>
+            <h1 className={styles.title}>{content?.title}</h1>
             {content?.description &&
               <p className={styles.description}>{content?.description}</p>
             }
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </Link>

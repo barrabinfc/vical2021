@@ -1,5 +1,6 @@
 import { range } from "~/lib/helpers";
 import faker from "faker/locale/en";
+import { lipsum } from "~/lib/lipsum";
 
 export async function getAllProjects(): Promise<Work[]> {
   return [
@@ -14,7 +15,7 @@ export async function getAllProjects(): Promise<Work[]> {
       },
       content: {
         title: faker.lorem.sentence(),
-        description: faker.lorem.paragraphs(),
+        description: lipsum(1).join(" "),
       },
     },
     {
@@ -28,7 +29,7 @@ export async function getAllProjects(): Promise<Work[]> {
       },
       content: {
         title: faker.lorem.sentence(),
-        description: faker.lorem.paragraphs(),
+        description: lipsum(1).join(" "),
       },
     },
     {
@@ -42,7 +43,7 @@ export async function getAllProjects(): Promise<Work[]> {
       },
       content: {
         title: faker.lorem.sentence(),
-        description: faker.lorem.paragraphs(),
+        description: lipsum(1).join(" "),
       },
     },
     {
@@ -56,7 +57,7 @@ export async function getAllProjects(): Promise<Work[]> {
       },
       content: {
         title: faker.lorem.sentence(),
-        description: faker.lorem.paragraphs(),
+        description: lipsum(1).join(" "),
       },
     },
   ];

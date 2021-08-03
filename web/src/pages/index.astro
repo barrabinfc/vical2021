@@ -45,22 +45,26 @@ Astro.props = {
 
     Orci eu lobortis elementum nibh tellus. Nisi porta lorem mollis aliquam ut porttitor. Lectus urna duis convallis convallis tellus id interdum velit. Condimentum vitae sapien pellentesque habitant. Morbi tristique senectus et netus et malesuada fames ac. Morbi tincidunt augue interdum velit euismod in. Quis auctor elit sed vulputate. Arcu felis bibendum ut tristique et egestas quis. Venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin. Velit sed ullamcorper morbi tincidunt ornare. Consequat id porta nibh venenatis cras sed. Sed risus ultricies tristique nulla aliquet enim. Turpis massa tincidunt dui ut. Aenean pharetra magna ac placerat. Suspendisse faucibus interdum posuere lorem ipsum dolor sit amet consectetur. Blandit cursus risus at ultrices mi tempus imperdiet. Magnis dis parturient montes nascetur ridiculus. Et egestas quis ipsum suspendisse ultrices gravida. At quis risus sed vulputate odio ut enim blandit volutpat.
     </Markdown>
+    <section id="work" class="work-wrapper">
+      <h2>Works</h2>
+      <div class="work-grid">
+      {
+        projects.map((proj, i) => (
+          <Card key={i} className="item" ...proj client:visible />
+        ))
+      }
+      </div>
+    </section>
   </article>
-  <section id="work" class="work-wrapper">
-    <h2>Works</h2>
-    <div class="work-grid">
-    {
-      projects.map((proj, i) => (
-        <Card key={i} className="item" ...proj client:visible />
-      ))
-    }
-    </div>
-  </section>
 </BaseLayout>
 
 <style lang="scss" scoped>
 @use "public/styles/breakpoints" as bp;
 @use "public/styles/grids" as grids;
+
+#content {
+  position: relative;
+}
 
 .work-grid {
   @include grids.flexGrid(3);
