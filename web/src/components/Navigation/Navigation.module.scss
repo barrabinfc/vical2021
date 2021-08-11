@@ -17,7 +17,7 @@
 
   @media (hover: hover) {
     & ul li a:hover {
-      color: var(--color-accent);
+      color: var(--text2);
     }
   }
 
@@ -25,10 +25,10 @@
     position: absolute;
     transform: translateX(calc(var(--gap) * 2));
     width: calc(100% - calc(var(--gap) * 4));
-    background: var(--color-white);
-    color: var(--color-black);
-    border: 1px solid rgb(51, 51, 51);
-    box-shadow: rgb(210 210 249) 4px 4px 0px 0px;
+    background: var(--surface1);
+    color: var(--text1);
+    border: 1px solid var(--surface2);
+    box-shadow: var(--surface-shadow) 4px 4px 0px 0px;
     left: 0;
     right: 0;
     top: 4.3rem;

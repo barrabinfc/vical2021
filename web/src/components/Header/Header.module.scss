@@ -3,7 +3,7 @@
 
 .header {
   position: relative;
-  border-bottom: 1px solid rgba(218, 138, 138, 0.1);
+  border-bottom: 1px solid var(--surface4);
   z-index: 100;
 }
 
@@ -31,7 +31,7 @@
 
     @media (hover: hover) {
       &:hover {
-        color: var(--color--accent);
+        color: var(--brand);
       }
     }
   }
@@ -58,8 +58,7 @@ a.skipMain:focus {
   margin: 0 35%;
   padding: var(--gap);
 
-  font-size: var(--font-large-size);
-  line-height: var(--font-large-line-height);
+  font-size: var(--s0);
 
   outline: 3px solid inherit;
   text-align: center;

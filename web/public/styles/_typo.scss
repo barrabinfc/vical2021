@@ -1,0 +1,92 @@
+@import url("https://rsms.me/inter/inter.css");
+// @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap");
+
+/* Typography */
+:root {
+  --unit: 14px;
+  --scale: 1.2 /** minor third */;
+
+  --text-lineheight: 1.5;
+  --text-weight: 400;
+  --text-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Ubuntu, sans-serif;
+
+  --title-family: "Inter", sans-serif;
+  @supports (font-variation-settings: normal) {
+    --title-family: "Inter var", sans-serif;
+  }
+  --title-lineheight: 1.3;
+  --title-weight: 900;
+
+  --code-family: Menlo, Consolas, monospace;
+  --code-weight: 400;
+
+  --s-2: calc(1rem / var(--scale) / var(--scale) / var(--scale));
+  --s-1: calc(1rem / var(--scale) / var(--scale));
+  --s0: calc(1rem / var(--scale));
+  --p0: 1rem;
+  --h5: calc(1rem * var(--scale));
+  --h4: calc(1rem * var(--scale) * var(--scale));
+  --h3: calc(1rem * var(--scale) * var(--scale) * var(--scale));
+  --h2: calc(1rem * var(--scale) * var(--scale) * var(--scale) * var(--scale));
+  --h1: calc(
+    1rem * var(--scale) * var(--scale) * var(--scale) * var(--scale) *
+      var(--scale)
+  );
+}
+
+html {
+  font-family: var(--text-family);
+  font-size: var(--unit);
+  font-style: normal;
+  font-weight: var(--text-weight);
+  line-height: var(--text-lineheight);
+}
+
+p {
+  margin-bottom: 1rem;
+  font-size: var(--p0);
+  orphans: 2;
+  widows: 2;
+}
+/** small */
+.small {
+  font-size: var(--s0);
+}
+.small-1 {
+  font-size: var(--s-1);
+}
+.small-2 {
+  font-size: var(--s-2);
+}
+
+/** headings */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--title-family);
+  font-weight: var(--title-weight);
+  margin: 3rem 0 1.38rem;
+  line-height: var(--title-lineheight);
+}
+
+h1 {
+  margin-top: 0;
+  font-size: var(--h1);
+}
+
+h2 {
+  font-size: var(--h2);
+}
+h3 {
+  font-size: var(--h3);
+}
+h4 {
+  font-size: var(--h4);
+}
+h5 {
+  font-size: var(--h5);
+}

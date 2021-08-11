@@ -2,29 +2,19 @@
 @use "./custom-properties";
 @use "./helpers";
 
-@import url("https://rsms.me/inter/inter.css");
-// @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap");
-
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-html {
-  font-family: var(--font-family-sans);
-  font-size: var(--font-base-size);
-  font-style: normal;
-  font-weight: 400;
-  line-height: var(--font-base-line-height);
 }
 
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   word-wrap: break-word;
-  background: var(--color-white);
-  color: var(--color-black);
+
+  background: var(--surface1);
+  color: var(--text1);
+
   margin: 0;
   padding: 0;
   overflow-y: scroll;
@@ -35,14 +25,7 @@ body {
   height: 100%;
 }
 
-/** headings */
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-family-heading);
-  font-weight: 900;
-}
+@import "./typo";
 
 /** lists */
 ol li::marker {
@@ -50,26 +33,16 @@ ol li::marker {
 }
 ul li {
   &::marker {
-    color: var(--color-lightgray);
+    color: var(--text2);
     font-size: 1.2rem;
   }
-}
-
-/* Paragraphs and codes */
-p {
-  padding: 0;
-  margin: 0 0 1.5rem 0;
-  line-height: 1.625rem;
-
-  orphans: 2;
-  widows: 2;
 }
 
 pre {
   padding: calc(4 * var(--gap));
   border-radius: $gap;
   margin: 0 0 1.5rem 0;
-  background-color: var(--color-lightblue);
+  background-color: var(--surface4);
   overflow: auto;
 }
 
@@ -77,7 +50,7 @@ code,
 pre,
 pre code {
   text-shadow: none;
-  font-family: var(--font-family-code);
+  font-family: var(--code-family);
   overflow: hidden;
 }
 
@@ -86,40 +59,39 @@ blockquote {
   margin: 0 0 1.5rem 0;
   padding-left: calc(2 * var(--gap));
   font-size: 1rem;
-  border-left: 4px solid var(--color-lightblue);
+  border-left: 4px solid var(--brand);
 }
 
 table {
   margin-bottom: 1.5rem;
   border-spacing: 0px;
   border-top: 0px;
-  font-size: var(--font-base-size);
   overflow: hidden;
 
   & thead {
-    background-color: var(--color-fg);
-    color: var(--color-bg);
+    background-color: var(--brand);
+    color: var(--text1);
     font-weight: bold;
-    font-family: var(--font-family-heading);
+    font-family: var(--title-family);
     font-size: 1.2rem;
   }
   & tr:not(:last-child) {
     & td {
-      border-bottom: 1px solid var(--color-lightgray);
+      border-bottom: 1px solid var(--surface4);
     }
   }
   & tr:last-child {
     & td {
-      border-bottom: 1px solid var(--color-lightgray);
+      border-bottom: 1px solid var(--surface4);
     }
   }
 
   & th,
   & td {
     padding: calc(2 * var(--gap));
-    border-right: 1px solid var(--color-lightgray);
+    border-right: 1px solid var(--surface4);
     &:first-of-type {
-      border-left: 1px solid var(--color-lightgray);
+      border-left: 1px solid var(--surface4);
     }
   }
 }
