@@ -11,9 +11,9 @@ import Card from '../components/Card/Card.tsx';
 import { StaticRouter as Router, Route} from 'react-router-dom'
 
 let content = {
-    title: 'Hello World',
-    description: 'Index description',
-    schema: 'article'
+  title: 'Hello World',
+  description: 'Index description',
+  schema: 'article'
 };
 let projects = await getAllProjects();
 
@@ -23,14 +23,13 @@ export interface Props {
     description: string
   }
 }
-Astro.props = {
+props = {
   content,
-  projects,
-};
-
+  projects
+}
 ---
 <!DOCTYPE html>
-<BaseLayout ...Astro.props>
+<BaseLayout ...props>
   <article id="content">
     <Markdown>
     # Hello World 🥰

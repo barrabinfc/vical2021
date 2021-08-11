@@ -1,26 +1,11 @@
 ---
-import { Markdown } from 'astro/components';
-import Post from '~/components/Post/Post.astro';
-
-let content = {
-    title: 'About',
-    description: 'I write about software programming.',
-    schema: 'article'
-};
-
-export interface Props {
-  content: {
-    title: string,
-    description: string
-  }
-}
-props = {
-  content,
-};
-
+title: About
+layout: ../layouts/base.astro
+description: I write about software programming.
+schema: article
+datePublished: Last Modified
 ---
-<Post ...props>
-<Markdown>
+
 # Styleguide
 
 This document shows Markdown formatting and style rules for hugo theme. Theme created by vical :smile:.
@@ -90,7 +75,7 @@ for i in range(10):
 // tailwind.config.js
 
 // This content is not transformed!
-const object = { 'someOtherValue': 10 };
+const object = { someOtherValue: 10 };
 ```
 
 ### An h3 header
@@ -107,13 +92,13 @@ Now a nested list:
 
 3.  Dump everything in the pot and follow this algorithm:
 
-  * find wooden spoon
-  * uncover pot
-  * stir
-  * cover pot
-  * balance wooden spoon precariously on pot handle
-  * wait 10 minutes
-  * goto first step (or shut off burner when done)
+- find wooden spoon
+- uncover pot
+- stir
+- cover pot
+- balance wooden spoon precariously on pot handle
+- wait 10 minutes
+- goto first step (or shut off burner when done)
 
 > > >     Do not bump wooden spoon or it will fall.
 
@@ -159,5 +144,3 @@ tomatoes
 
 Again, text is indented 4 spaces. (Put a blank line between each
 term/definition pair to spread things out more.)
-</Markdown>
-</Post>
