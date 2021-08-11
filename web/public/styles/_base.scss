@@ -1,6 +1,51 @@
 @use "variables" as *;
-@use "./custom-properties";
 @use "./helpers";
+@use "colorscheme" as colors;
+
+@import "./typo";
+@import "./anims";
+
+/**
+ * Custom css properties (available at runtime only)
+ */
+:root {
+  /* Margin/padding units */
+  --gap: #{$gap};
+
+  /** Default colorscheme is light */
+  color-scheme: light;
+  --brand: var(--brand-light);
+  --text1: var(--text1-light);
+  --text2: var(--text2-light);
+  --surface1: var(--surface1-light);
+  --surface2: var(--surface2-light);
+  --surface3: var(--surface3-light);
+  --surface4: var(--surface4-light);
+  --surface-shadow: var(--surface-shadow-light);
+  --shadow-strength: var(--shadow-strength-light);
+
+  --anim-quick: 0.1s;
+  --anim-default: 0.24s;
+  --anim-slow: 1.37s;
+
+  --anim-easeOutExpo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --brand: var(--brand-dark);
+    --text1: var(--text1-dark);
+    --text2: var(--text2-dark);
+    --surface1: var(--surface1-dark);
+    --surface2: var(--surface2-dark);
+    --surface3: var(--surface3-dark);
+    --surface4: var(--surface4-dark);
+    --surface-shadow: var(--surface-shadow-dark);
+    --shadow-strength: var(--shadow-strength-dark);
+  }
+}
 
 * {
   box-sizing: border-box;
@@ -25,16 +70,22 @@ body {
   height: 100%;
 }
 
-@import "./typo";
+/** Global wrapper */
+.container {
+  max-width: 1440px;
+  width: 100%;
+  flex: 1 1 100%;
+  padding: $gap * 4 $gap * 4;
+}
 
 /** lists */
 ol li::marker {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 ul li {
   &::marker {
     color: var(--text2);
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
 
@@ -95,37 +146,3 @@ table {
     }
   }
 }
-
-/** Reset margins/paddings */
-.m0 {
-  margin: 0;
-}
-.mx {
-  margin-left: 0;
-  margin-right: 0;
-}
-.my {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-.p0 {
-  padding: 0;
-}
-.px {
-  padding-left: 0;
-  padding-right: 0;
-}
-.py {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-/** Global wrapper */
-.container {
-  max-width: 1440px;
-  width: 100%;
-  flex: 1 1 100%;
-  padding: $gap * 4 $gap * 4;
-}
-
-@import "./anims";
