@@ -11,7 +11,7 @@ export default function Navigation({ showNav }) {
           <a href="/about">About</a>
         </li>
         <li>
-          <a href="/work">Work</a>
+          <a href="/projects">projects</a>
         </li>
       </ul>
     </nav>

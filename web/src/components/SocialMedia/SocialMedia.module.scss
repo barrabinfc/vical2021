@@ -1,0 +1,23 @@
+.socialMedia {
+  display: flex;
+  flex-direction: row;
+
+  ul {
+    margin-block-start: 0;
+    list-style-type: none;
+    padding-inline: 0;
+    margin: 0;
+
+    display: flex;
+    justify-content: flex-end;
+
+    li {
+      padding: 0 1em;
+      & a {
+        color: inherit;
+        text-decoration: none;
+        font-size: 2em;
+      }
+    }
+  }
+}

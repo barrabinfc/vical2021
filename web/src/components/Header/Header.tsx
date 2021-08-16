@@ -15,10 +15,11 @@ export default function Header() {
       <div className={styles.wrapper}>
         <div className={styles.branding}>
           <a href="/">vical</a>
-          <a className={styles.skipMain} href="#main">
-            Skip to main content
-          </a>
         </div>
+
+        <a className={styles.skipMain} href="#main">
+          Skip to main content
+        </a>
 
         <button
           className={styles.toggleNavButton}

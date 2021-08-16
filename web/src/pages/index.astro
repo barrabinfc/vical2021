@@ -31,28 +31,36 @@ props = {
 <!DOCTYPE html>
 <BaseLayout ...props>
   <article id="content">
-    <Markdown>
-    # Hello World 🥰
-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nascetur ridiculus mus mauris vitae ultricies leo. Risus nec feugiat in fermentum posuere. Sit amet tellus cras adipiscing enim. Convallis a cras semper auctor neque vitae tempus quam pellentesque. Bibendum enim facilisis gravida neque convallis. In dictum non consectetur a erat nam at lectus. Sed velit dignissim sodales ut eu. Viverra orci sagittis eu volutpat odio facilisis mauris. Amet purus gravida quis blandit turpis cursus in hac habitasse. Quam pellentesque nec nam aliquam sem et. In dictum non consectetur a erat. Ornare arcu odio ut sem nulla pharetra diam sit amet. Ultrices gravida dictum fusce ut placerat. Id faucibus nisl tincidunt eget nullam non nisi est. Scelerisque eleifend donec pretium vulputate sapien nec sagittis. Pretium aenean pharetra magna ac. Vitae semper quis lectus nulla at volutpat diam ut.
-
-    Fermentum dui faucibus in ornare quam. Cursus euismod quis viverra nibh cras. Diam sit amet nisl suscipit. Amet aliquam id diam maecenas ultricies mi eget mauris pharetra. Turpis cursus in hac habitasse platea dictumst. Tortor condimentum lacinia quis vel. Ac tincidunt vitae semper quis lectus. Lorem sed risus ultricies tristique. Justo laoreet sit amet cursus sit. Tristique senectus et netus et malesuada fames ac turpis. Eget gravida cum sociis natoque penatibus et magnis dis. Tristique senectus et netus et malesuada. Aliquam ultrices sagittis orci a scelerisque purus semper eget duis. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Vel facilisis volutpat est velit. Enim sed faucibus turpis in. Dolor sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Quam lacus suspendisse faucibus interdum.
-
-    Sit amet luctus venenatis lectus. Sagittis nisl rhoncus mattis rhoncus urna neque. Pellentesque id nibh tortor id aliquet lectus proin nibh. Ultrices sagittis orci a scelerisque purus semper eget duis. Rhoncus est pellentesque elit ullamcorper dignissim cras. Feugiat in fermentum posuere urna nec tincidunt praesent semper feugiat. Nibh ipsum consequat nisl vel pretium lectus. Suscipit adipiscing bibendum est ultricies integer quis auctor. Elit pellentesque habitant morbi tristique senectus et netus. Aliquet risus feugiat in ante metus dictum at tempor. Id eu nisl nunc mi ipsum faucibus vitae aliquet nec.
-
-    Integer feugiat scelerisque varius morbi. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce. Sit amet commodo nulla facilisi. Aliquam nulla facilisi cras fermentum odio. Venenatis tellus in metus vulputate. Quam nulla porttitor massa id neque aliquam vestibulum morbi. Neque sodales ut etiam sit amet nisl purus in. Ut sem viverra aliquet eget sit. Mauris commodo quis imperdiet massa. Potenti nullam ac tortor vitae purus faucibus ornare suspendisse. Pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus. Amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus.
-
-    Orci eu lobortis elementum nibh tellus. Nisi porta lorem mollis aliquam ut porttitor. Lectus urna duis convallis convallis tellus id interdum velit. Condimentum vitae sapien pellentesque habitant. Morbi tristique senectus et netus et malesuada fames ac. Morbi tincidunt augue interdum velit euismod in. Quis auctor elit sed vulputate. Arcu felis bibendum ut tristique et egestas quis. Venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin. Velit sed ullamcorper morbi tincidunt ornare. Consequat id porta nibh venenatis cras sed. Sed risus ultricies tristique nulla aliquet enim. Turpis massa tincidunt dui ut. Aenean pharetra magna ac placerat. Suspendisse faucibus interdum posuere lorem ipsum dolor sit amet consectetur. Blandit cursus risus at ultrices mi tempus imperdiet. Magnis dis parturient montes nascetur ridiculus. Et egestas quis ipsum suspendisse ultrices gravida. At quis risus sed vulputate odio ut enim blandit volutpat.
-    </Markdown>
-    <section id="work" class="work-wrapper">
-      <h2>Works</h2>
-      <div class="work-grid">
-      {
-        projects.map((proj, i) => (
-          <Card key={i} className="item" ...proj client:visible />
-        ))
-      }
+    <section class="home">
+      <div class="grid2">
+        <div class="item highlight pad4">
+          <div class="caption">
+            Hi 👋<br/>
+            I'm <strong>Vitor</strong><br/>
+            I write software for the web
+          </div>
+        </div>
+        <div class="item highlight2 pad4">
+          <div class="caption">
+            Hi 🙏 <br/>
+            I'm <strong>Vitor</strong><br/>
+            I write software for the web
+          </div>
+        </div>
+        <div class="item decoration">
+          <img alt="nada" src="/pictures/Dieffenbachia robusta.png" />
+        </div>👋
       </div>
+    </section>
+
+    <section class="pad4">
+      <Markdown>
+        # Hello World 🥰
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nascetur ridiculus mus mauris vitae ultricies leo. Risus nec feugiat in fermentum posuere. Sit amet tellus cras adipiscing enim. Convallis a cras semper auctor neque vitae tempus quam pellentesque. Bibendum enim facilisis gravida neque convallis. In dictum non consectetur a erat nam at lectus. Sed velit dignissim sodales ut eu. Viverra orci sagittis eu volutpat odio facilisis mauris. Amet purus gravida quis blandit turpis cursus in hac habitasse. Quam pellentesque nec nam aliquam sem et. In dictum non consectetur a erat. Ornare arcu odio ut sem nulla pharetra diam sit amet. Ultrices gravida dictum fusce ut placerat. Id faucibus nisl tincidunt eget nullam non nisi est. Scelerisque eleifend donec pretium vulputate sapien nec sagittis. Pretium aenean pharetra magna ac. Vitae semper quis lectus nulla at volutpat diam ut.
+
+        Orci eu lobortis elementum nibh tellus. Nisi porta lorem mollis aliquam ut porttitor. Lectus urna duis convallis convallis tellus id interdum velit. Condimentum vitae sapien pellentesque habitant. Morbi tristique senectus et netus et malesuada fames ac. Morbi tincidunt augue interdum velit euismod in. Quis auctor elit sed vulputate. Arcu felis bibendum ut tristique et egestas quis. Venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin. Velit sed ullamcorper morbi tincidunt ornare. Consequat id porta nibh venenatis cras sed. Sed risus ultricies tristique nulla aliquet enim. Turpis massa tincidunt dui ut. Aenean pharetra magna ac placerat. Suspendisse faucibus interdum posuere lorem ipsum dolor sit amet consectetur. Blandit cursus risus at ultrices mi tempus imperdiet. Magnis dis parturient montes nascetur ridiculus. Et egestas quis ipsum suspendisse ultrices gravida. At quis risus sed vulputate odio ut enim blandit volutpat.
+      </Markdown>
     </section>
   </article>
 </BaseLayout>
@@ -63,6 +71,58 @@ props = {
 
 #content {
   position: relative;
+}
+
+$homeHeight: 100vh;
+.home {
+  width: 100%;
+  height: $homeHeight;
+  overflow: hidden;
+}
+
+.grid2 {
+  height: 100%;
+
+  $gap: 0px;
+  @include grids.grid(6, $gap);
+  grid-template-rows: repeat(4, #{$homeHeight/4});
+  // justify-items: end;
+
+  :global(.highlight){
+    grid-column: 4 / span 4;
+    grid-row: 1 / span 3;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    // background-color: var(--brand);
+    // color: var(--text1-invert);
+
+    .caption {
+      font-family: var(--title-family);
+      font-size: calc( var(--h1) * 1.1 );
+      font-weight: 200;
+      margin-bottom: 1em;
+      // font-variation-settings: "wght" 200;
+    }
+  }
+  :global(.highlight2) {
+    grid-column: 4 / span 4;
+    grid-row: 4;
+  }
+  :global(.decoration) {
+    grid-column: 1 / span 3;
+    grid-row: 1/ span 4;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    > img {
+      height: 100%;
+    }
+  }
 }
 
 .work-grid {

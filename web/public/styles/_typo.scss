@@ -69,6 +69,7 @@ h4,
 h5 {
   font-family: var(--title-family);
   font-weight: var(--title-weight);
+  font-variation-settings: "wght" var(--title-weight);
   margin: 3rem 0 1.38rem;
   line-height: var(--title-lineheight);
 }

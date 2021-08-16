@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '~/layouts/base.astro';
-console.log(Astro.props);
 ---
 
 <BaseLayout ...Astro.props>
@@ -9,6 +8,8 @@ console.log(Astro.props);
   </article>
 </BaseLayout>
 <style lang="scss">
+@use "public/styles/grids" as grids;
+
 .post  {
   :global(img) {
     max-width: 100%;
@@ -20,9 +21,9 @@ console.log(Astro.props);
   :global(p > code),
   :global(li > code) {
     font-size: 100%;
-    padding: var(--gap);
-    background-color: var(--surface4);
-    border-radius: 3px;
+    padding: var(--gap) calc(var(--gap) * 1.5 );
+    background-color: var(--surface3);
+    border-radius: var(--gap);
   }
 
   /* Adjacent list elements */
@@ -31,4 +32,17 @@ console.log(Astro.props);
     margin-top: 1.5rem;
   }
 }
+
+:global(.grid2) {
+  @include grids.flexGrid(2);
+
+  :global(.surface) {
+    min-height: 180px;
+    border-radius: calc( var(--gap) * 4 );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 </style>

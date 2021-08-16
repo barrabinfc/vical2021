@@ -6,7 +6,9 @@
     <slot />
   </main>
   <footer class="footer">
-    <slot name="footer" />
+    <div class="container pad4">
+      <slot name="footer" class="container" />
+    </div>
   </footer>
 </section>
 
@@ -18,22 +20,24 @@
   min-height: 100%;
 }
 
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 .main {
   display: block;
 }
 
 .footer {
-  border-top: 1px solid var(--surface4);
+  color: var(--text2-invert);
+  background-color: var(--brand);
 
   @nest & a {
     color: inherit;
     text-decoration: none;
-
-    @media (hover: hover) {
-      @nest &:hover {
-        color: var(--brand);
-      }
-    }
   }
 }
 </style>
