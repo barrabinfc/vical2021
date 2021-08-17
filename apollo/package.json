@@ -2,12 +2,17 @@
   "name": "vical2021-graphql",
   "version": "0.1.0",
   "private": true,
+  "main": "dist/gcf.js",
+  "files": [
+    "dist/gcf.js"
+  ],
   "scripts": {
-    "build": "webpack --config webpack.production.js",
+    "build": "webpack -c webpack.production.js",
     "prestart": "npm run build",
-    "start": "node dist/server.js",
-    "build:dev": "webpack --config webpack.development.js",
-    "dev": "npm run build:dev"
+    "start": "node dist/local.js",
+    "build:dev": "webpack -c webpack.development.js",
+    "dev": "npm run build:dev",
+    "deploy:gcf": "gcloud functions deploy apollo-graphql-notion --entry-point handler --runtime nodejs14 --trigger-http"
   },
   "dependencies": {
     "@graphql-tools/graphql-file-loader": "^7.0.1",
@@ -17,15 +22,17 @@
     "airtable": "^0.11.0",
     "apollo-datasource-rest": "^3.1.1",
     "apollo-server": "^3.1.1",
+    "apollo-server-cloud-functions": "^3.1.2",
     "asyncairtable": "^2.1.0",
     "change-case": "^4.1.2",
     "dotenv": "^10.0.0",
-    "graphql": "^15.5.0",
+    "graphql": "^15.5.1",
     "graphql-import-node": "^0.0.4",
     "graphql-modules": "^1.4.2",
     "graphql-tag": "^2.12.4",
     "graphql-tools": "^8.0.0",
     "graphql-type-json": "^0.3.2",
+    "minimist": "^1.2.5",
     "slugify": "^1.6.0"
   },
   "devDependencies": {

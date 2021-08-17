@@ -10,16 +10,20 @@ const common = require("./webpack.common");
 
 module.exports = merge(common, {
   devtool: "inline-source-map",
-  entry: ["webpack/hot/poll?1000", path.join(__dirname, "src/index.ts")],
+  entry: ["webpack/hot/poll?1000", path.join(__dirname, "src/local.ts")],
   externals: [
     nodeExternals({
       allowlist: ["webpack/hot/poll?1000"],
     }),
   ],
   mode: "development",
+  output: {
+    filename: "local.js",
+    path: path.resolve(__dirname, "dist"),
+  },
   plugins: [
     new StartServerPlugin({
-      name: "server.js",
+      name: "local.js",
       nodeArgs: ["--inspect"],
       signal: true,
     }),
