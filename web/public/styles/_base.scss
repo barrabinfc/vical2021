@@ -11,6 +11,7 @@
 :root {
   /* Margin/padding units */
   --gap: #{$gap};
+  --headerH: 64px;
 
   /** Default colorscheme is light */
   color-scheme: light;
@@ -74,13 +75,16 @@ body {
 
 /** Global wrapper */
 .container {
-  // max-width: 1440px;
   width: 100%;
   flex: 1 1 100%;
 }
 
 .pad4 {
   padding: $gap * 4 $gap * 4;
+}
+
+.vertical {
+  writing-mode: vertical-rl;
 }
 
 .flex-column {

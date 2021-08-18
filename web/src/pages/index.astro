@@ -3,19 +3,17 @@
 import { Markdown } from 'astro/components';
 import BaseLayout from '../layouts/base.astro';
 
-import Work from './work/work.tsx';
-import { getAllProjects } from './work';
+// import Work from './work/work.tsx';
+// import { getAllProjects } from './work';
 
-import Card from '../components/Card/Card.tsx';
-
-import { StaticRouter as Router, Route} from 'react-router-dom'
+// import Card from '../components/Card/Card.tsx';
 
 let content = {
   title: 'Hello World',
   description: 'Index description',
   schema: 'article'
 };
-let projects = await getAllProjects();
+let projects = [];
 
 export interface Props {
   content: {
@@ -54,6 +52,7 @@ props = {
     </section>
 
     <section class="pad4">
+      <h1>Projects</h1>
       <Markdown>
         # Hello World 🥰
 
@@ -66,6 +65,7 @@ props = {
 </BaseLayout>
 
 <style lang="scss" scoped>
+@use "sass:math";
 @use "public/styles/breakpoints" as bp;
 @use "public/styles/grids" as grids;
 
@@ -73,10 +73,10 @@ props = {
   position: relative;
 }
 
-$homeHeight: 100vh;
+$fold: 100vh;
 .home {
   width: 100%;
-  height: $homeHeight;
+  height: $fold;
   overflow: hidden;
 }
 
@@ -85,8 +85,7 @@ $homeHeight: 100vh;
 
   $gap: 0px;
   @include grids.grid(6, $gap);
-  grid-template-rows: repeat(4, #{$homeHeight/4});
-  // justify-items: end;
+  grid-template-rows: repeat(4, math.div( $fold, 4 ));
 
   :global(.highlight){
     grid-column: 4 / span 4;

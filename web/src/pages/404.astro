@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/base.astro';
+import SvgPlaceholder from '../components/SvgPlaceholder';
+
+let content = {
+  title: 'Page not found',
+  description: 'Page not found',
+  schema: 'article'
+};
+
+export interface Props {
+  content: {
+    title: string,
+    description: string
+  }
+}
+props = {
+  content,
+}
+---
+<!DOCTYPE html>
+<BaseLayout ...props>
+  <article id="content">
+    <section class="page404">
+      <div class="grid2">
+        <div class="item headline">
+          <h1>NOT FOUND</h1>
+        </div>
+        <div class="item highlight">
+          <img src='/pictures/chichen-itza-1600-cropped.jpg' alt='Ruins of Chichen Itza - Mexico'/>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style lang="scss" scoped>
+@use "sass:math";
+@use "public/styles/variables" as *;
+@use "public/styles/breakpoints" as bp;
+@use "public/styles/grids" as grids;
+
+#content {
+  position: relative;
+}
+
+.page404 {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.grid2 {
+  width: 100%;
+  // height: 80%;
+  margin: 1em;
+  margin-top: var(--headerH);
+
+  // $gridGap: $gap * 4;
+  // @include grids.grid(6, $gridGap);
+  // grid-template-rows: repeat(6, minmax(80px, 100%) );
+  display: grid;
+  grid-gap: $gap * 4;
+
+  // justify-items: end;
+
+  :global(.headline) {
+    grid-column: span 1;
+    grid-row: span 6;
+
+    writing-mode: vertical-rl;
+
+    @include bp.breakpoint(small, max) {
+      writing-mode: horizontal-tb;
+      grid-column: span 6;
+      grid-row: 1;
+    }
+  }
+
+  :global(.highlight) {
+    grid-column: 2 / span 5;
+    grid-row: span 6;
+    display: flex;
+
+    > img {
+      max-width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    @include bp.breakpoint(small, max) {
+      grid-column: span 6;
+      grid-row: 2 / span 5;
+
+      > img {
+        min-height: 320px;
+        height: 70vh;
+      }
+    }
+  }
+}
+
+</style>

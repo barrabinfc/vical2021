@@ -6,14 +6,21 @@
   z-index: 100;
 }
 
+@include bp.breakpoint(small, min) {
+  :root {
+    --headerH: 92px;
+  }
+}
+
 .wrapper {
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 1em;
+  padding: $gap * 6;
   display: flex;
+  height: var(--headerH);
 
-  @include bp.breakpoint(small, min) {
-    padding: 1.5em;
+  @include bp.breakpoint(small, max) {
+    padding: $gap * 4;
   }
 }
 

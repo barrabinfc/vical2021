@@ -10,12 +10,12 @@ export default function SocialMediaList() {
       <ul>
         <li>
           <a href="https://github.com/barrabinfc" target="_blank">
-            <Icon symbol="github" />
+            <Icon symbol="github-outlined" />
           </a>
         </li>
         <li>
-          <a href="/email">
-            <Icon symbol="email" />
+          <a href="https://twitter.com/vical12772104">
+            <Icon symbol="twitter-outlined" target="_blank" />
           </a>
         </li>
       </ul>
