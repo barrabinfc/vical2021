@@ -1,4 +1,4 @@
-* {
+:root {
   --brand-hue: 15;
   --brand-saturation: 96%;
   --brand-lightness: 63%;
@@ -17,7 +17,7 @@
   --surface3-light: hsl(var(--brand-hue) 50% 92%);
   --surface4-light: hsl(var(--brand-hue) 96% 90%);
 
-  --surface-shadow-light: hsl(var(--brand-hue) var(--brand-saturation) 20%);
+  --surface-shadow-light: var(--brand-hue) 10% 20%;
   --shadow-strength-light: 0.02;
 
   /* dark */

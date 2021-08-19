@@ -5,29 +5,38 @@ const content = Astro.props.content || {};
 ---
 
 <BaseLayout {content}>
-  <article id="content" class="post">
+  <article id="content">
     <link rel="stylesheet" href="/styles/prism/solarizedLight.css" />
-    <slot />
+    <div class="heading">
+      <slot name="heading" />
+    </div>
+    <div class="post">
+      <slot />
+    </div>
   </article>
 </BaseLayout>
 
-<style lang="scss">
+<style lang="scss" global>
 @use "public/styles/grids" as grids;
+@use "public/styles/helpers" as h;
 
 .post  {
   max-width: 1440px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 80%;
   margin: 0 auto;
 
-  :global(img) {
+  img {
     max-width: 100%;
   }
 
   /**
     * Adjacent spacement fixes
     */
-  :global(p > code),
-  :global(li > code) {
+  p > code,
+  li > code {
     font-size: 100%;
     padding: var(--gap) calc(var(--gap) * 1.5 );
     background-color: var(--surface3);
@@ -35,22 +44,98 @@ const content = Astro.props.content || {};
   }
 
   /* Adjacent list elements */
-  :global( ul + p ),
-  :global( ol + p ){
+   ul + p ,
+   ol + p {
     margin-top: 1.5rem;
   }
+
+
+  /** lists */
+  ol li::marker {
+    font-size: 1rem;
+  }
+
+  ul li::marker {
+    color: var(--text2);
+    font-size: 1rem;
+  }
+
+  /** Codes & Blockquotes */
+  pre {
+    padding: calc(4 * var(--gap));
+    border-radius: var(--gap);
+    margin: 0 0 1.5rem 0;
+    background-color: var(--surface3);
+    overflow: auto;
+  }
+
+  pre,
+  code,
+  pre code {
+    text-shadow: none;
+    font-family: var(--code-family);
+    overflow: hidden;
+  }
+
+  blockquote {
+    width: 100%;
+    margin: 0 0 1.5rem 0;
+    padding-left: calc(2 * var(--gap));
+    font-size: 1rem;
+    border-left: 4px solid var(--brand);
+  }
+
+  table {
+    margin-bottom: 1.5rem;
+    border-spacing: 0px;
+    border-top: 0px;
+    overflow: hidden;
+
+    thead {
+      background-color: var(--brand);
+      color: var(--text1);
+      font-weight: bold;
+      font-family: var(--title-family);
+      font-size: 1.2rem;
+    }
+    tr:not(:last-child) {
+      & td {
+        border-bottom: 1px solid var(--surface2);
+      }
+    }
+    & tr:last-child {
+      & td {
+        border-bottom: 1px solid var(--surface2);
+      }
+    }
+
+    & th,
+    & td {
+      padding: calc(2 * var(--gap));
+      border-right: 1px solid var(--surface2);
+      &:first-of-type {
+        border-left: 1px solid var(--surface2);
+      }
+    }
+  }
+
 }
 
-:global(.surface) {
-  min-height: 180px;
+.surface {
+  min-height: 120px;
+  width: 80%;
   border-radius: calc( var(--gap) * 4 );
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @include h.shadow();
 }
 
 .grid2 {
-  @include grids.flexGrid(2);
+  @include grids.grid(2);
+  align-content: space-evenly;
+  justify-content: space-evenly;
 }
 
 </style>

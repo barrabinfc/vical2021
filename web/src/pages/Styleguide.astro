@@ -11,27 +11,31 @@ let content = {
 ---
 <Post {content}>
 
-<div class="pad4">
-  <h1>Colorscheme</h1>
-  <div class="grid2">
-    <div class="item grid2">
-      <div class="surface surface1 item">Surface 1</div>
-      <div class="surface surface2 item">Surface 2</div>
-      <div class="surface surface3 item">Surface 3</div>
-      <div class="surface surface4 item">Surface 4</div>
-    </div>
-    <div class="item fl-y-center pad4">
-      <div class="text1">
-        <h1>● Text color 1</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia nibh eu congue ullamcorper. Vestibulum vitae augue pharetra justo fringilla dignissim.</p>
+  <div class="surface4" slot="heading">
+    <h1>The title</h1>
+  </div>
+
+  <div class="pad4">
+    <h1>Colorscheme</h1>
+    <div class="grid2">
+      <div class="item grid2 pad4">
+        <div class="surface surface1 item">Surface 1</div>
+        <div class="surface surface2 item">Surface 2</div>
+        <div class="surface surface3 item">Surface 3</div>
+        <div class="surface surface4 item">Surface 4</div>
       </div>
-      <div class="text2">
-        <h2>● Text color 2</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia nibh eu congue ullamcorper. Vestibulum vitae augue pharetra justo fringilla dignissim.</p>
+      <div class="item fl-y-center pad4">
+        <div class="text1">
+          <h1>● Text color 1</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia nibh eu congue ullamcorper. Vestibulum vitae augue pharetra justo fringilla dignissim.</p>
+        </div>
+        <div class="text2">
+          <h2>● Text color 2</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia nibh eu congue ullamcorper. Vestibulum vitae augue pharetra justo fringilla dignissim.</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <Markdown>
 # Styleguide
