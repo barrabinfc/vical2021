@@ -1,6 +1,6 @@
 ---
 import { Markdown } from 'astro/components';
-import Post from '~/components/Post/Post.astro';
+import Post from '~/layouts/Post/Post.astro';
 
 let content = {
     title: 'About',
@@ -8,18 +8,8 @@ let content = {
     schema: 'article'
 };
 
-export interface Props {
-  content: {
-    title: string,
-    description: string
-  }
-}
-props = {
-  content,
-};
-
 ---
-<Post ...props>
+<Post {content}>
 
 <div class="pad4">
   <h1>Colorscheme</h1>
@@ -62,7 +52,7 @@ Cras pharetra urna nec est interdum, vitae aliquam odio egestas. Aliquam sollici
 > They can span multiple paragraphs,
 > if you like.
 >
-> And may contain <div class="bg:primary txt:hero align:center">HTML Markup</div>
+> And may contain
 
 Fusce congue mollis sem, quis tempus augue lacinia tincidunt. Integer vulputate, quam eu scelerisque aliquam, velit neque lobortis massa, at viverra metus tortor eu purus. In fringilla, felis interdum tristique dictum, lorem elit fermentum erat, id pellentesque velit ligula in velit. Sed eu neque rutrum, pretium nunc id, feugiat elit. Donec eget dui nec massa efficitur cursus eget eget purus. Proin ac nisl pretium, interdum nisi ac, placerat erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed egestas nec neque ac imperdiet. Integer vitae nunc sit amet urna gravida accumsan. Quisque ut libero nec arcu sodales sagittis ac facilisis orci. Proin venenatis quis diam eget malesuada. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec pretium mi eu pulvinar aliquam. Donec ac sem sed tortor dictum tempor. Suspendisse consequat eleifend tellus a blandit. Quisque et vestibulum nisi, eget pharetra sapien.
 
@@ -159,10 +149,6 @@ Here's a footnote [^1].
 
 Tables can look like this:
 
-<div class="align:center txt:hero">Table: Shoes, their sizes, and what they're made of</div>
-
----
-
 | size | material    | color       |
 | ---- | ----------- | ----------- |
 | 9    | leather     | brown       |
@@ -183,4 +169,5 @@ tomatoes
 Again, text is indented 4 spaces. (Put a blank line between each
 term/definition pair to spread things out more.)
 </Markdown>
+
 </Post>

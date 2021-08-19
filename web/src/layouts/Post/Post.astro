@@ -1,16 +1,24 @@
 ---
 import BaseLayout from '~/layouts/base.astro';
+
+const content = Astro.props.content || {};
 ---
 
-<BaseLayout ...Astro.props>
+<BaseLayout {content}>
   <article id="content" class="post">
+    <link rel="stylesheet" href="/styles/prism/solarizedLight.css" />
     <slot />
   </article>
 </BaseLayout>
+
 <style lang="scss">
 @use "public/styles/grids" as grids;
 
 .post  {
+  max-width: 1440px;
+  width: 80%;
+  margin: 0 auto;
+
   :global(img) {
     max-width: 100%;
   }
@@ -33,16 +41,16 @@ import BaseLayout from '~/layouts/base.astro';
   }
 }
 
-:global(.grid2) {
-  @include grids.flexGrid(2);
+:global(.surface) {
+  min-height: 180px;
+  border-radius: calc( var(--gap) * 4 );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  :global(.surface) {
-    min-height: 180px;
-    border-radius: calc( var(--gap) * 4 );
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.grid2 {
+  @include grids.flexGrid(2);
 }
 
 </style>

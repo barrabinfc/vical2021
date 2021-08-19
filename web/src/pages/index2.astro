@@ -1,16 +1,33 @@
 ---
+
 import { Markdown } from 'astro/components';
 import BaseLayout from '../layouts/base.astro';
+
+// import Work from './work/work.tsx';
+// import { getAllProjects } from './work';
+
+// import Card from '../components/Card/Card.tsx';
 
 let content = {
   title: 'Hello World',
   description: 'Index description',
   schema: 'article'
 };
----
+let projects = [];
 
+export interface Props {
+  content: {
+    title: string,
+    description: string
+  }
+}
+props = {
+  content,
+  projects
+}
+---
 <!DOCTYPE html>
-<BaseLayout {content}>
+<BaseLayout ...props>
   <article id="content">
     <section class="home">
       <div class="grid2">

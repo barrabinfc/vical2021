@@ -15,12 +15,12 @@
 .wrapper {
   box-sizing: border-box;
   margin: 0 auto;
-  padding: $gap * 6;
+  padding: calc(var(--gap) * 6);
   display: flex;
   height: var(--headerH);
 
   @include bp.breakpoint(small, max) {
-    padding: $gap * 4;
+    padding: calc(var(--gap) * 4);
   }
 }
 

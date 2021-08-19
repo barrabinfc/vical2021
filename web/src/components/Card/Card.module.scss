@@ -36,7 +36,7 @@ $cardHeight: 280px;
 .content {
   pointer-events: auto;
   position: relative;
-  border-radius: $gap * 4;
+  border-radius: var(--gap) * 4;
   background: white;
   overflow: hidden;
   width: 100%;
@@ -82,7 +82,7 @@ $cardHeight: 280px;
     margin: 0.5em 0 0.5em 0;
 
     :global(div) {
-      border-radius: $gap;
+      border-radius: var(--gap);
       margin: 0.5em 0 0.5em 0;
       width: 70%;
       height: 16px;

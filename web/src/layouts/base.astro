@@ -6,6 +6,7 @@ import Header from '../components/Header/Header.tsx';
 import Footer from '../components/Footer/Footer.jsx';
 
 const content:any = Astro.props.content;
+console.log('base.astro', Astro.props);
 ---
 <html lang="en">
   <head>
@@ -31,7 +32,7 @@ const content:any = Astro.props.content;
     <div class="root">
       <div class="container">
         <Layout>
-          <Header slot="header" client:idle />
+          <Header client:idle />
           <div class="wrapper">
             <slot />
           </div>

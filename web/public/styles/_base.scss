@@ -80,23 +80,7 @@ body {
 }
 
 .pad4 {
-  padding: $gap * 4 $gap * 4;
-}
-
-.vertical {
-  writing-mode: vertical-rl;
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.mt-auto {
-  margin-top: auto;
-}
-.mb-auto {
-  margin-bottom: auto;
+  padding: calc(var(--gap) * 4) calc(var(--gap) * 4);
 }
 
 .fl-y-center {
@@ -139,7 +123,7 @@ ul li {
 
 pre {
   padding: calc(4 * var(--gap));
-  border-radius: $gap;
+  border-radius: var(--gap);
   margin: 0 0 1.5rem 0;
   background-color: var(--surface3);
   overflow: auto;

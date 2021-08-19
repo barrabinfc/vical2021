@@ -61,7 +61,7 @@ props = {
   // @include grids.grid(6, $gridGap);
   // grid-template-rows: repeat(6, minmax(80px, 100%) );
   display: grid;
-  grid-gap: $gap * 4;
+  grid-gap: calc(var(--gap) * 4);
 
   // justify-items: end;
 

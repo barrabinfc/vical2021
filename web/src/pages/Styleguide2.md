@@ -1,6 +1,6 @@
 ---
 title: About
-layout: ../layouts/base.astro
+layout: ../layouts/Post/Post.astro
 description: I write about software programming.
 schema: article
 datePublished: Last Modified
