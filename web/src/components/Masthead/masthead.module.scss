@@ -1,0 +1,22 @@
+.masthead {
+  height: 600px;
+  max-height: 600px;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  background-color: var(--surface4);
+}
+
+.contentContainer {
+  width: 80%;
+  margin: 0 auto;
+  padding: var(--headerH) 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  margin-top: 0;
+}

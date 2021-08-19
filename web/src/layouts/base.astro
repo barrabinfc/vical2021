@@ -32,7 +32,7 @@ console.log('base.astro', Astro.props);
     <div class="root">
       <div class="container">
         <Layout>
-          <Header client:idle />
+          <Header slot="header" client:idle />
           <div class="wrapper">
             <slot />
           </div>

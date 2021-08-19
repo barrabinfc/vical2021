@@ -1,15 +1,17 @@
 ---
 import BaseLayout from '~/layouts/base.astro';
+import Masthead from '~/components/Masthead';
 
 const content = Astro.props.content || {};
+console.log(Astro.props);
 ---
 
 <BaseLayout {content}>
   <article id="content">
     <link rel="stylesheet" href="/styles/prism/solarizedLight.css" />
-    <div class="heading">
-      <slot name="heading" />
-    </div>
+    <Masthead className="surface4"
+      title={content.title}
+    />
     <div class="post">
       <slot />
     </div>
@@ -51,8 +53,13 @@ const content = Astro.props.content || {};
 
 
   /** lists */
+  ol, ul {
+    margin-block-start: 0;
+    padding-inline-start: 1em;
+  }
+
   ol li::marker {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   ul li::marker {
@@ -64,7 +71,7 @@ const content = Astro.props.content || {};
   pre {
     padding: calc(4 * var(--gap));
     border-radius: var(--gap);
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 1rem 0;
     background-color: var(--surface3);
     overflow: auto;
   }
