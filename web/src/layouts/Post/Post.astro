@@ -3,10 +3,10 @@ import BaseLayout from '~/layouts/base.astro';
 import Masthead from '~/components/Masthead';
 
 const content = Astro.props.content || {};
-console.log(Astro.props);
 ---
 
 <BaseLayout {content}>
+  <base target="_blank"/>
   <article id="content">
     <link rel="stylesheet" href="/styles/prism/solarizedLight.css" />
     <Masthead className="surface4"
@@ -25,13 +25,18 @@ console.log(Astro.props);
 .post  {
   max-width: 1440px;
   position: relative;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   width: 80%;
-  margin: 0 auto;
+  margin: 3em auto;
 
   img {
     max-width: 100%;
+  }
+  figcaption {
+    text-align: center;
+    color: var(--text2);
+    font-style: italic;
   }
 
   /**
@@ -147,6 +152,24 @@ console.log(Astro.props);
     }
     ol {
       margin-left: 1em;
+    }
+  }
+
+  /**
+   * Images float
+   */
+  .right-25 {
+    float: right;
+    width: 25%;
+    padding: 1em;
+  }
+
+  .centered {
+    display: flex;
+    flex-direction: column;
+
+    > img {
+      margin: 0 auto;
     }
   }
 }
