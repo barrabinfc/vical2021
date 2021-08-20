@@ -1,5 +1,5 @@
 ---
-title: About
+title: Styleguide
 layout: ../layouts/Post/Post.astro
 description: I write about software programming.
 schema: article
@@ -44,7 +44,9 @@ Cras pharetra urna nec est interdum, vitae aliquam odio egestas. Aliquam sollici
 > They can span multiple paragraphs,
 > if you like.
 
-Fusce congue mollis sem, quis tempus augue lacinia tincidunt. Integer vulputate, quam eu scelerisque aliquam, velit neque lobortis massa, at viverra metus tortor eu purus. In fringilla, felis interdum tristique dictum, lorem elit fermentum erat, id pellentesque velit ligula in velit. Sed eu neque rutrum, pretium nunc id, feugiat elit. Donec eget dui nec massa efficitur cursus eget eget purus. Proin ac nisl pretium, interdum nisi ac, placerat erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed egestas nec neque ac imperdiet. Integer vitae nunc sit amet urna gravida accumsan. Quisque ut libero nec arcu sodales sagittis ac facilisis orci. Proin venenatis quis diam eget malesuada. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec pretium mi eu pulvinar aliquam. Donec ac sem sed tortor dictum tempor. Suspendisse consequat eleifend tellus a blandit. Quisque et vestibulum nisi, eget pharetra sapien.
+Fusce congue mollis sem, quis tempus augue lacinia tincidunt. Integer vulputate, quam eu scelerisque aliquam, velit neque lobortis massa, at viverra metus tortor eu purus. In fringilla, felis interdum tristique dictum, lorem elit fermentum erat, id pellentesque velit ligula in velit. Sed eu neque rutrum, pretium nunc id, feugiat elit. Donec eget dui nec massa efficitur cursus eget eget purus. Proin ac nisl pretium, interdum nisi ac, placerat erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed egestas nec neque ac imperdiet. Integer vitae nunc sit amet urna gravida accumsan. Quisque ut libero nec arcu sodales sagittis ac facilisis orci. Proin venenatis quis diam eget malesuada. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec pretium mi eu pulvinar aliquam. Donec ac sem sed tortor dictum tempor. Suspendisse consequat eleifend tellus a blandit. Quisque et vestibulum nisi, eget pharetra sapien [^1].
+
+[^1]: Constructing a case for every possible input requires 2n hidden neurons, when you have n input neurons. In reality, the situation isn’t usually that bad. You can have cases that encompass multiple inputs. And you can have overlapping cases that add together to achieve the right input on their intersection.
 
 And here's a numbered list:
 
@@ -62,10 +64,6 @@ for i in range(10):
     time.sleep(0.5)
     print i
 ```
-
-Here's a footnote [^1].
-
-[^1]: Footnote text goes here.
 
 Tables can look like this:
 
@@ -126,12 +124,34 @@ Nested bulleted lists, deeper levels:
     - Ab item, second level - 4 spaces possible too
 - B item, first level
 
-## Todo Input
+### A two column page
 
-- [ ] a task list item
-- [ ] list syntax required
-- [ ] incomplete
-- [x] completed
+<div class="twocolumn-page">
 
-Again, text is indented 4 spaces. (Put a blank line between each
-term/definition pair to spread things out more.)
+Language model pre-training has been shown tobe effective for improving many natural languageprocessing tasks [^2]. These include sentence-level tasks such as
+natural language inference[^3] and paraphrasing (Dolanand Brockett, 2005), which aim to predict the re-
+lationships between sentences by analyzing themholistically, as well as token-level tasks such asnamed entity recognition and question answering,where models are required to produce ﬁne-grainedoutput at the token level[^4]
+
+There are two existing strategies for apply-ing pre-trained language representations to down-stream tasks: feature-based and ﬁne-tuning. Thefeature-based approach, such as ELMo (Peters
+et al., 2018a), uses task-speciﬁc architectures that
+include the pre-trained representations as addi-tional features. The ﬁne-tuning approach, such asthe Generative Pre-trained Transformer (OpenAIGPT) (Radford et al., 2018), introduces minimaltask-speciﬁc parameters, and is trained on thedownstream tasks by simply ﬁne-tuning all pre-trained parameters. The two approaches share thesame objective function during pre-training, wherethey use unidirectional language models to learngeneral language representations.We argue that current techniques restrict thepower of the pre-trained representations, espe-cially for the ﬁne-tuning approaches. The ma-jor limitation is that standard language models areunidirectional, and this limits the choice of archi-tectures that can be used during pre-training. Forexample, in OpenAI GPT, the authors use a left-to-right architecture, where every token can only at-tend to previous tokens in the self-attention layersof the Transformer (Vaswani et al., 2017). Such re-
+strictions are sub-optimal for sentence-level tasks,and could be very harmful when applying ﬁne-tuning based approaches to token-level tasks suchas question answering, where it is crucial to incor-porate context from both directions.In this paper, we improve the ﬁne-tuning basedapproaches by proposing BERT: BidirectionalEncoder Representations from Transformers.
+
+BERT alleviates the previously mentioned unidi-rectionality constraint by using a “masked lan-guage model” (MLM) pre-training objective, in-spired by the Cloze task (Taylor, 1953). The
+masked language model randomly masks some ofthe tokens from the input, and the objective is topredict the original vocabulary id of the masked
+
+[^2]:
+    Dai and Le, 2015;
+    Peters et al.,2018a;
+    Radford et al., 2018;
+    Howard and Ruder, 2018
+
+[^3]:
+    Bowman et al., 2015;
+    Williams et al., 2018
+
+[^4]:
+    Tjong Kim Sang and De Meulder, 2003;
+    Rajpurkar et al., 2016.
+
+</div>

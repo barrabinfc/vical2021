@@ -92,6 +92,9 @@ console.log(Astro.props);
     border-left: 4px solid var(--brand);
   }
 
+  /**
+   * Tables
+   */
   table {
     margin-bottom: 1.5rem;
     border-spacing: 0px;
@@ -100,10 +103,14 @@ console.log(Astro.props);
 
     thead {
       background-color: var(--brand);
-      color: var(--text1);
-      font-weight: bold;
-      font-family: var(--title-family);
-      font-size: 1.2rem;
+      color: var(--text1-invert);
+
+      & th {
+        font-size: 1.2rem;
+        font-weight: var(--title-weight);
+        font-size: 1.2rem;
+        text-align: left;
+      }
     }
     tr:not(:last-child) {
       & td {
@@ -118,14 +125,30 @@ console.log(Astro.props);
 
     & th,
     & td {
+      font-family: var(--code-family);
       padding: calc(2 * var(--gap));
       border-right: 1px solid var(--surface2);
+
       &:first-of-type {
         border-left: 1px solid var(--surface2);
       }
     }
   }
 
+  /**
+   *
+   */
+  .footnotes {
+    hr {
+      margin: 1em 0em;
+      border-top: 0;
+      border-style: solid;
+      border-color:  hsl(var(--brand-hue) 0% 90%)
+    }
+    ol {
+      margin-left: 1em;
+    }
+  }
 }
 
 .surface {
@@ -143,6 +166,14 @@ console.log(Astro.props);
   @include grids.grid(2);
   align-content: space-evenly;
   justify-content: space-evenly;
+}
+
+.twocolumn-page {
+  columns: 2;
+
+  > p:first-of-type {
+    margin-top: 0;
+  }
 }
 
 </style>
