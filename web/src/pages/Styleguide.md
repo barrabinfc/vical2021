@@ -79,7 +79,10 @@ Donec non ex orci. Suspendisse purus felis, laoreet ac interdum eget, ultrices i
 
 Images can be specified like so:
 
-![alt text](https://images.unsplash.com/photo-1532680678473-a16f2cda8e43?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c35c44795a15fb33ba90a783355c2fc6&auto=format&fit=crop&w=1500&q=80 "Logo Title Text 1")
+![alt text](/pictures/dancing-master-1600.jpeg "Dancing masters")
+
+Many important downstream tasks such as Question Answering (QA) and Natural Language Inference (NLI) are based on understanding the relationship between two sentences, which is not directly captured by language modeling. In orderto train a model that understands sentence relationships, we pretrain for a binarized next sen
+tence prediction task that can be trivially generated from any monolingual corpus. Speciﬁcally,when choosing the sentences A and B for each pre-training example, 50% of the time B is the actualnext sentence that follows A (labeled as IsNext),and 50% of the time it is a random sentence fromthe corpus (labeled as NotNext).
 
 ```jsx
 // tailwind.config.js
