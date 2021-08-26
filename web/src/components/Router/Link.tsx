@@ -16,7 +16,6 @@ export default function Link({href, className, target, onEnter, onLeave, childre
     if(onEnter) {
       onEnter(window.location.href, href);
     }
-    console.log('Clicked on link', e.currentTarget);
   }
 
   function filterKeyPress(e, key='enter'): boolean {
