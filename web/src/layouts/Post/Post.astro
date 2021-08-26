@@ -6,7 +6,6 @@ const content = Astro.props.content || {};
 ---
 
 <BaseLayout {content}>
-  <base target="_blank"/>
   <article id="content">
     <link rel="stylesheet" href="/styles/prism/solarizedLight.css" />
     <Masthead className="surface4"
@@ -21,14 +20,21 @@ const content = Astro.props.content || {};
 <style lang="scss" global>
 @use "public/styles/grids" as grids;
 @use "public/styles/helpers" as h;
+@use "public/styles/typo" as typo;
 
 .post  {
   max-width: 1440px;
   position: relative;
-  // display: flex;
-  // flex-direction: column;
   width: 80%;
   margin: 3em auto;
+
+  a:not(.footnote-ref,.footnote-backref) {
+    @include typo.link-text;
+  }
+  a.footnote-backref {
+    padding: 0 var(--gap);
+    text-decoration: none;
+  }
 
   img {
     max-width: 100%;

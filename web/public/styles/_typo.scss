@@ -1,18 +1,19 @@
 @use "public/styles/breakpoints" as bp;
 
 @import url("https://rsms.me/inter/inter.css");
+@import url("htt;ps://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap");
-
+// @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap");
 /* Typography */
+
 :root {
   --unit: 14px;
   --scale: 1.2 /** minor third */;
 
   --text-lineheight: 1.5;
-  --text-weight: 400;
-  --text-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Helvetica Neue, Ubuntu, sans-serif;
+  --text-weight: 300;
+  --text-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Helvetica Neue, Ubuntu, sans-serif;
 
   --title-family: "Inter", sans-serif;
   @supports (font-variation-settings: normal) {
@@ -95,4 +96,21 @@ h4 {
 }
 h5 {
   font-size: var(--h5);
+}
+
+/** Links */
+@mixin link-text {
+  text-decoration: none;
+  color: var(--text2);
+  position: relative;
+  padding: 0 var(--gap) 0.25em var(--gap);
+
+  &::after {
+    content: " ";
+    width: 100%;
+    border-bottom: 2px solid var(--text2);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
 }
