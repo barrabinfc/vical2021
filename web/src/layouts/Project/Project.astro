@@ -1,0 +1,126 @@
+---
+import BaseLayout from '~/layouts/base.astro';
+import Masthead from '~/components/Masthead';
+
+const content = Astro.props.content || {};
+---
+
+<BaseLayout {content}>
+  <script type="text/javascript" src="https://unpkg.com/external-svg-loader@latest/svg-loader.min.js" async></script>
+  <article id="content">
+    <link rel="stylesheet" href="/styles/devices.min.css" />
+    <link rel="stylesheet" href="/styles/prism/solarizedLight.css" />
+    <Masthead className="surface4"
+      title={content.title}
+      subtitle={content.subtitle}
+      image={content.logo}
+    />
+    <div class="project">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style lang="scss" global>
+@use "public/styles/grids" as grids;
+@use "public/styles/helpers" as h;
+@use "public/styles/typo" as typo;
+
+.project  {
+  max-width: 1440px;
+  position: relative;
+  width: 80%;
+  margin: 3em auto;
+
+  .description {
+    margin: 2em 0;
+  }
+
+  a:not(.footnote-ref,.footnote-backref) {
+    @include typo.link-text;
+  }
+  a.footnote-backref {
+    padding: 0 var(--gap);
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+  }
+  figcaption {
+    text-align: center;
+    color: var(--text2);
+    font-style: italic;
+  }
+
+  /**
+   * Tables
+   */
+  table {
+    margin-bottom: 1.5rem;
+    border-spacing: 0px;
+    border-top: 0px;
+    overflow: hidden;
+
+    thead {
+      background-color: var(--brand);
+      color: var(--text1-invert);
+
+      & th {
+        font-size: 1.2rem;
+        font-weight: var(--title-weight);
+        font-size: 1.2rem;
+        text-align: center;
+      }
+    }
+    tr:not(:last-child) {
+      & td {
+        border-bottom: 1px solid var(--surface2);
+      }
+    }
+    & tr:last-child {
+      & td {
+        border-bottom: 1px solid var(--surface2);
+      }
+    }
+
+    & th,
+    & td {
+      font-family: var(--code-family);
+      padding: calc(2 * var(--gap));
+      border-right: 1px solid var(--surface2);
+      text-align: center;
+
+      &:first-of-type {
+        border-left: 1px solid var(--surface2);
+      }
+    }
+  }
+
+  hr {
+    margin: 3em 0em;
+    border-top: 0;
+    border-style: solid;
+    border-color:  hsl(var(--brand-hue) 0% 90%)
+  }
+
+}
+
+.phone-mockup {
+  zoom: 0.7;
+  > .marvel-device {
+    &::after {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      @include h.shadow();
+    }
+  }
+  // box-shadow: var(--surface-shadow) 4px 4px 0px 0px;
+}
+
+</style>

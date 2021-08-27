@@ -1,13 +1,13 @@
 @use "public/styles/breakpoints" as bp;
 
 @import url("https://rsms.me/inter/inter.css");
-@import url("htt;ps://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap");
 /* Typography */
 
 :root {
-  --unit: 14px;
+  --unit: 16px;
   --scale: 1.2 /** minor third */;
 
   --text-lineheight: 1.5;
