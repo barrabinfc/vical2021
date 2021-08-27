@@ -120,7 +120,7 @@ const content = Astro.props.content || {};
         font-size: 1.2rem;
         font-weight: var(--title-weight);
         font-size: 1.2rem;
-        text-align: left;
+        text-align: center;
       }
     }
     tr:not(:last-child) {
@@ -145,6 +145,14 @@ const content = Astro.props.content || {};
       }
     }
   }
+
+    hr {
+      margin: 1em 0em;
+      border-top: 0;
+      border-style: solid;
+      border-color:  hsl(var(--brand-hue) 0% 90%)
+    }
+
 
   /**
    *
@@ -189,20 +197,6 @@ const content = Astro.props.content || {};
   justify-content: center;
 
   @include h.shadow();
-}
-
-.grid2 {
-  @include grids.grid(2);
-  align-content: space-evenly;
-  justify-content: space-evenly;
-}
-
-.twocolumn-page {
-  columns: 2;
-
-  > p:first-of-type {
-    margin-top: 0;
-  }
 }
 
 </style>
