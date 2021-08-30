@@ -1,9 +1,13 @@
 {
   "include": [
-    "./src/**/*",
+    "./src",
   ],
   "compilerOptions": {
     "baseUrl": "./src",
+    "paths": {
+      "~/*": ["./*"]
+    },
+    "module": "CommonJS",
     "jsx": "react-jsx",
     "lib": [
       "dom",
@@ -15,12 +19,8 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "paths": {
-      "~/*": ["./*"]
-    },
     "strict": false,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
