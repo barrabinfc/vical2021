@@ -3,6 +3,7 @@ draft: false
 layout: ../../../layouts/Project/Project.astro
 title: "I Ching"
 subtitle: "The book of changes"
+thumbnail: "/images/textures/cashmere-la.jpg"
 schema: "article"
 color: "#0f0f0f"
 bg_color: "#f8fbfb"
