@@ -18,12 +18,25 @@
     "checkJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noEmit": true,
-  }
-}
+  },
+  "ts-node": {
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "CommonJS"
+    },
+    "ignore": [
+      "node_modules/@astrojs",
+      "(?:^|/)node_modules/"
+    ],
+    "include": [
+      "tests/**/*"
+    ]
+},}

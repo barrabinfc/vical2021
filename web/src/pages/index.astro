@@ -2,11 +2,14 @@
 import { Markdown } from 'astro/components';
 import BaseLayout from '../layouts/base.astro';
 
+import {listProjects} from './projects';
+
 let content = {
   title: 'Hello World',
   description: 'Index description',
   schema: 'article'
 };
+let projects = await listProjects();
 ---
 
 <!DOCTYPE html>
@@ -36,6 +39,15 @@ let content = {
 
     <section class="pad4">
       <h1>Projects</h1>
+      <ul>
+        {projects.slice(0, 3).map((project) => (
+          <li>
+            <h1>{project.name}</h1>
+            <a href={project.abspath}>{project.abspath}</a>
+            <p>{JSON.stringify(project.frontmatter,null,'\t')}</p>
+          </li>
+        ))}
+      </ul>
       <!-- <Markdown>
         # Hello World 🥰
 
