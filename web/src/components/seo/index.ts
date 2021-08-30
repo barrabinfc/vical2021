@@ -6,7 +6,9 @@ import { CustomError } from "../../lib/errors";
 
 const debug = createDebug("vical:components:seo");
 
-export class SEOModuleNotFound extends CustomError {}
+export class SEOModuleNotFound extends CustomError {
+  name: "SEOModuleNotFound";
+}
 
 import ldModule from "./ld";
 import ogModule from "./og";
@@ -17,7 +19,7 @@ export const defaultModule = "ld";
 const availableModules = {
   ld: ldModule,
   og: ogModule,
-  twitter: twModule,
+  twitter: twModule
 };
 
 /**
@@ -65,7 +67,7 @@ export default function SEO(
     images: [],
 
     author: null,
-    datePublished: "",
+    datePublished: ""
   }
 ) {
   const seoRenderFn = getSEOSchemaModule(
