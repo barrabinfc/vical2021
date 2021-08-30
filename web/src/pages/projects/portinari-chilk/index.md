@@ -1,8 +1,11 @@
 ---
 draft: false
 layout: ../../../layouts/Project/Project.astro
-title: "Portinari & Ligalight"
-subtitle: "Cerâmicas Portinari"
+slug: portinari-chilk
+path: /projects/portinari-chilk
+title: chilk
+subtitle: Portinari On-site Kiosk App
+thumbnail: "/images/portinari/portal.jpg"
 schema: "article"
 
 # color: "#0f0f0f"
@@ -12,13 +15,21 @@ schema: "article"
 # currentColor: asd
 
 date: "2018-06-03"
-thumbnail: "/images/uploads/portinari/portal.jpg"
 thumbscheme: "dark"
 thumb_position: "top"
 
 website: "https://vitocal.bitbucket.io/"
-description: "<p>Produzimos um aplicativo <b>PWA</b> customizado, baseado na idéia <i>“faça vc mesmo”</i>, permitindo que cada pessoa crie seu próprio desenho nos panéis de entrada do stand através de um IPad.</p><p>Transformando paredes em panéis criativos, uma ferramenta digital que preserva a espontaneidade e interatividade.</p>"
+description: "Junto com Ligalight, produzimos o aplicativo e projeções do kiosk da portinari. Baseado na idéia <i>faça vc mesmo</i>, os desenhos criados no aplicativo são projetados no stand.</p><p>Utilizamos Processing e Vue</p>"
 ---
+
+Produzimos em conjunto com a **Ligalight** o aplicativo SPA e projeções para Portinari, baseado na idéia <i>faça vc mesmo</i>.
+
+Os desenhos criados pelos visitantes através de um iPad são reproduzidos no ambiente através de poderosos projetores.
+O aplicativo também permite a visualização do catálogo da portinari, lendo o código QR no stand.
+
+- Para as projeções, criamos sketchs Processing que estilizam os desenhos.
+- Usamos um iPad e VueJS para o aplicativo de controle remoto.
+- Para comunicação entre os 2 aplicativos, criamos uma ponte Websocket e OSC UDP.
 
 <div class="gallery">
   <img src="/images/portinari/thumb.jpg" alt="Showcase" />

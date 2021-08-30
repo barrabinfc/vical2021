@@ -10,7 +10,6 @@ export interface FileRef {
 
 /**
  * List files in `path`
- *
  */
 export const listFiles = (
   path: string,

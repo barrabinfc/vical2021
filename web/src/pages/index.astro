@@ -3,20 +3,21 @@ import { Markdown } from 'astro/components';
 import BaseLayout from '../layouts/base.astro';
 
 import {listProjects} from './projects';
+import Card from '../components/Card/Card.tsx';
 
 let content = {
   title: 'Hello World',
   description: 'Index description',
   schema: 'article'
 };
-let projects = await listProjects();
+let projects: Projects[] = await listProjects();
 ---
 
 <!DOCTYPE html>
 <BaseLayout {content}>
   <article id="content">
     <section class="home">
-      <div class="grid2">
+      <div class="home-grid">
         <div class="item highlight pad4">
           <div class="caption">
             Hi 👋<br/>
@@ -39,22 +40,17 @@ let projects = await listProjects();
 
     <section class="pad4">
       <h1>Projects</h1>
-      <ul>
+      <ul class="project-grid">
         {projects.slice(0, 3).map((project) => (
-          <li>
-            <h1>{project.name}</h1>
-            <a href={project.abspath}>{project.abspath}</a>
-            <p>{JSON.stringify(project.frontmatter,null,'\t')}</p>
-          </li>
+          <Card
+            href={project.path}
+            avatar={project.avatar}
+            content={project.content}
+            className={`item ${project.slug}`}
+            />
         ))}
       </ul>
-      <!-- <Markdown>
-        # Hello World 🥰
-
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nascetur ridiculus mus mauris vitae ultricies leo. Risus nec feugiat in fermentum posuere. Sit amet tellus cras adipiscing enim. Convallis a cras semper auctor neque vitae tempus quam pellentesque. Bibendum enim facilisis gravida neque convallis. In dictum non consectetur a erat nam at lectus. Sed velit dignissim sodales ut eu. Viverra orci sagittis eu volutpat odio facilisis mauris. Amet purus gravida quis blandit turpis cursus in hac habitasse. Quam pellentesque nec nam aliquam sem et. In dictum non consectetur a erat. Ornare arcu odio ut sem nulla pharetra diam sit amet. Ultrices gravida dictum fusce ut placerat. Id faucibus nisl tincidunt eget nullam non nisi est. Scelerisque eleifend donec pretium vulputate sapien nec sagittis. Pretium aenean pharetra magna ac. Vitae semper quis lectus nulla at volutpat diam ut.
-
-        Orci eu lobortis elementum nibh tellus. Nisi porta lorem mollis aliquam ut porttitor. Lectus urna duis convallis convallis tellus id interdum velit. Condimentum vitae sapien pellentesque habitant. Morbi tristique senectus et netus et malesuada fames ac. Morbi tincidunt augue interdum velit euismod in. Quis auctor elit sed vulputate. Arcu felis bibendum ut tristique et egestas quis. Venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin. Velit sed ullamcorper morbi tincidunt ornare. Consequat id porta nibh venenatis cras sed. Sed risus ultricies tristique nulla aliquet enim. Turpis massa tincidunt dui ut. Aenean pharetra magna ac placerat. Suspendisse faucibus interdum posuere lorem ipsum dolor sit amet consectetur. Blandit cursus risus at ultrices mi tempus imperdiet. Magnis dis parturient montes nascetur ridiculus. Et egestas quis ipsum suspendisse ultrices gravida. At quis risus sed vulputate odio ut enim blandit volutpat.
-      </Markdown> -->
+      <div class="pad4"/>
     </section>
   </article>
 </BaseLayout>
@@ -75,7 +71,7 @@ $fold: 100vh;
   overflow: hidden;
 }
 
-.grid2 {
+.home-grid {
   height: 100%;
 
   $gap: 0px;
@@ -119,7 +115,25 @@ $fold: 100vh;
   }
 }
 
-.work-grid {
-  @include grids.flexGrid(3);
+.project-grid {
+  $columns: 3;
+  $gap: 32px;
+  $itemWidth: calc(#{math.div(100%, $columns)} - #{$gap});
+
+  @include grids.flexGrid($columns, $gap);
+
+
+  @include bp.breakpoint(medium, min) {
+    :global(.item:nth-child(1n)) {
+      flex: 0 0 33%;
+    }
+    :global(.item:nth-child(2n)) {
+      flex: 0 0  calc(2 * #{$itemWidth});
+    }
+    :global(.item:nth-child(3n)) {
+      flex: 0 0  calc(3 * #{$itemWidth});
+    }
+  }
+
 }
 </style>
