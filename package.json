@@ -1,5 +1,5 @@
 {
-  "name": "vicalme",
+  "name": "vical",
   "version": "0.0.1",
   "description": "",
   "private": true,
@@ -7,7 +7,7 @@
     "test": "echo ok && exit 0",
     "version": "changeset version"
   },
-  "author": "",
+  "author": "Vitor Calejuri",
   "license": "ISC",
   "devDependencies": {
     "@changesets/cli": "^2.16.0"
