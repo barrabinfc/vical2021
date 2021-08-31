@@ -1,0 +1,15 @@
+{
+  "name": "vicalme",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo ok && exit 0",
+    "version": "changeset version"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@changesets/cli": "^2.16.0"
+  }
+}
