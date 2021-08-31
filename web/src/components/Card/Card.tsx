@@ -40,8 +40,8 @@ export default function Card({href, avatar, content, className, loading='lazy'}:
                 </picture>
               </motion.div>
             }
-            <motion.div layout="position" className={styles['title-container']}>
-              <h4 className={styles.title}>{content?.title}</h4>
+            <motion.div layout="position" className={styles['title-container']} align-at="bottom">
+              <h3 className={styles.title}>{content?.title}</h3>
               {content?.description &&
                 <p className={styles.description}>{content?.description}</p>
               }

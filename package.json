@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "private": true,
+  "workspaces": ["web", "apollo"],
   "scripts": {
     "test": "echo ok && exit 0",
     "version": "changeset version"
