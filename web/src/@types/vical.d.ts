@@ -16,16 +16,25 @@ interface Renderable {
   (props: any): JSX.Element;
 }
 
-interface Work {
+/**
+ * A page in markdown.
+ * Every page must have those fields.
+ */
+interface MarkdownPage {
   slug: string;
-  href: string;
+  path: string;
+  schema: string;
+  layout: string;
+  draft: boolean;
+
   avatar: {
     url: string;
-    width: number;
-    height: number;
   };
   content: {
     title: string;
     description: string;
+    frontmatter: Record<any, string>;
+    headers: any[];
+    content: string;
   };
 }

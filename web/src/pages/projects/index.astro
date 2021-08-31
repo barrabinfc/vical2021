@@ -1,12 +1,11 @@
 ---
 import BaseLayout from '../../layouts/base.astro';
-import {allProjects} from './fetchProjects';
 
 let projects = Astro.fetchContent("./**/*.md");
 
 let content = {
-  title: 'Page not found',
-  description: 'Page not found',
+  title: 'Projects',
+  description: 'Page about projects',
   schema: 'article'
 };
 
