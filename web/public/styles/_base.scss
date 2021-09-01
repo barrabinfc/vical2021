@@ -60,6 +60,10 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -70,13 +74,6 @@ body {
 
   margin: 0;
   padding: 0;
-  overflow-y: scroll;
-}
-
-html,
-body {
-  height: 100%;
-  overflow-x: hidden;
 }
 
 /** Global wrapper */
@@ -85,8 +82,30 @@ body {
   flex: 1 1 100%;
 }
 
+/* Reusable wrapper */
+.wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
+
 .pad4 {
   padding: calc(var(--gap) * 4) calc(var(--gap) * 4);
+}
+.pad4-x {
+  padding: 0 calc(var(--gap) * 4);
+}
+.pad4-y {
+  padding: calc(var(--gap) * 4) 0;
+}
+
+.pad8 {
+  padding: calc(var(--gap) * 8) calc(var(--gap) * 8);
+}
+.pad8-x {
+  padding: 0 calc(var(--gap) * 8);
+}
+.pad8-y {
+  padding: calc(var(--gap) * 8) 0;
 }
 
 .fl-y-center {

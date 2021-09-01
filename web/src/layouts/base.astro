@@ -16,13 +16,6 @@ const content:any = Astro.props.content;
     <link rel="stylesheet" href="/styles/global.css" />
     <meta name="description" content="{content.description}" />
     <meta name="schema" content="{content.schema}" />
-    <style>
-      :global(.root) {
-        display: flex;
-        justify-content: center;
-        height: 100%;
-      }
-    </style>
     <SEO module="og" ...content />
     <SEO module="twitter" ...content />
     <SEO module="ld" ...content />
@@ -32,7 +25,7 @@ const content:any = Astro.props.content;
       <div class="container">
         <Layout>
           <Header slot="header" client:idle />
-          <div class="wrapper">
+          <div class="container-wrapper">
             <slot />
           </div>
           <Footer slot="footer" />

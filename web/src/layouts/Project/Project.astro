@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '~/layouts/base.astro';
 import Masthead from '~/components/Masthead';
-
+import {cn} from '../../lib/helpers';
 const content = Astro.props.content || {};
 ---
 
@@ -9,33 +9,52 @@ const content = Astro.props.content || {};
   <script type="text/javascript" src="https://unpkg.com/external-svg-loader@latest/svg-loader.min.js" async></script>
   <article id="content">
     <link rel="stylesheet" href="/styles/devices.min.css" />
-    <link rel="stylesheet" href="/styles/prism/solarizedLight.css" />
+    <link rel="stylesheet" href="/styles/browser.min.css" />
+
     <Masthead className="surface4"
       title={content.title}
       subtitle={content.subtitle}
       image={content.logo}
     />
-    <div class="project">
+    <div class={cn('project',content.wrapper)}>
       <slot />
     </div>
   </article>
 </BaseLayout>
 
 <style lang="scss" global>
+@use "sass:math";
+
 @use "public/styles/grids" as grids;
 @use "public/styles/helpers" as h;
 @use "public/styles/typo" as typo;
 
+$containerPadW: 0.1;
+$containerWidth: 100vw - (100vw * $containerPadW);
 .project  {
   max-width: 1440px;
   position: relative;
-  width: 80%;
-  margin: 3em auto;
 
   .description {
     margin: 2em 0;
   }
 
+  /** Limit line-lengths */
+  p,
+  li {
+    max-width: 120ch;
+  }
+
+  h1 {
+    max-width: 15ch;
+  }
+
+  h2,
+  h3 {
+    max-width: 25ch;
+  }
+
+  /** Links */
   a:not(.footnote-ref,.footnote-backref) {
     @include typo.link-text;
   }
@@ -53,14 +72,20 @@ const content = Astro.props.content || {};
     font-style: italic;
   }
 
+  p:first-of-type {
+    margin-top: 0;
+  }
+
   /**
    * Tables
    */
   table {
-    margin-bottom: 1.5rem;
     border-spacing: 0px;
     border-top: 0px;
-    overflow: hidden;
+
+    &:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
 
     thead {
       background-color: var(--brand);
@@ -106,9 +131,69 @@ const content = Astro.props.content || {};
 
 }
 
-.phone-mockup {
-  zoom: 0.7;
+.two-columns {
+  /**
+   * Subdivide in 5 columns
+   * left is  2 pieces
+   * right is 3 pieces
+   */
+  $columns: 5;
+  $columnSizeVW: $containerWidth / $columns;
+  $gap: calc( var(--gap) * 16);
+
+  @include grids.grid($columns, $gap);
+  width: 100%;
+
+  .left {
+    min-width: 0;
+    grid-column: span 2;
+  }
+  .right {
+    min-width: 0;
+    grid-column: 3 / #{($columns+1)};
+
+    img, video {
+      width: 100%;
+    }
+  }
+}
+
+/**
+ * Gallery
+ */
+.gallery {
+  .page {
+    width: 100%;
+    height: clamp(30vh, 50vh, 60vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.h100 {
+      height: 100vh;
+    }
+    &.h50 {
+      height: 50vh;
+    }
+    &.h70 {
+      height: 70vh;
+    }
+    &.h80 {
+      height: 80vh;
+    }
+  }
+}
+
+.mockup {
+  text-align: center;
+
+  > .browser-mockup {
+    width: 70%;
+    margin: 0 auto;
+  }
+
   > .marvel-device {
+    zoom: 0.5;
     &::after {
       content: ' ';
       position: absolute;
@@ -120,7 +205,6 @@ const content = Astro.props.content || {};
       @include h.shadow();
     }
   }
-  // box-shadow: var(--surface-shadow) 4px 4px 0px 0px;
 }
 
 </style>
