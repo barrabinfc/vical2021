@@ -1,0 +1,94 @@
+---
+import Project from './Project.astro'
+import {resolve, relative, dirname } from 'node:path'
+import {readFileSync} from 'node:fs';
+const content = Astro.props.content || {};
+
+/** If we have a gallery file, load it's html */
+const galleryAddress = content.gallery;
+let galleryHTML = `File ${galleryAddress} Not found`
+if(galleryAddress) {
+  const galleryAddressFullPath = resolve(`${process.cwd()}/${galleryAddress}`);
+  const galleryAddressRelativePath = relative(dirname(import.meta.url.pathname), galleryAddressFullPath );
+  galleryHTML = readFileSync(galleryAddressFullPath).toString();
+}
+
+---
+
+<Project {content}>
+  <div class="two-columns">
+    <section class="content pad8 left">
+      <slot/>
+    </section>
+    <section class="showcase right">
+      {galleryHTML}
+    </section>
+  </div>
+</Project>
+
+<style lang="scss" global>
+@use "sass:math";
+
+@use "public/styles/grids" as grids;
+@use "public/styles/helpers" as h;
+@use "public/styles/typo" as typo;
+
+$containerPadW: 0.1;
+$containerWidth: 100vw - (100vw * $containerPadW);
+
+.two-columns {
+  /**
+   * Subdivide in 5 columns
+   * left is  2 pieces
+   * right is 3 pieces
+   */
+  $columns: 5;
+  $columnSizeVW: math.div( $containerWidth , $columns );
+  $gap: calc( var(--gap) * 16);
+
+  @include grids.grid($columns, $gap);
+  width: 100%;
+
+  .left {
+    min-width: 0;
+    grid-column: span 2;
+    position: sticky;
+    top: 0px;
+  	align-self: start;
+  }
+  .right {
+    min-width: 0;
+    grid-column: 3 / #{($columns+1)};
+
+    img, video {
+      width: 100%;
+    }
+  }
+}
+
+/**
+ * Gallery
+ */
+.gallery {
+  .page {
+    width: 100%;
+    height: clamp(30vh, 50vh, 60vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.h100 {
+      height: 100vh;
+    }
+    &.h50 {
+      height: 50vh;
+    }
+    &.h70 {
+      height: 70vh;
+    }
+    &.h80 {
+      height: 80vh;
+    }
+  }
+}
+</style>

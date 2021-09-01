@@ -6,6 +6,7 @@ path: /projects/iching
 title: "I Ching"
 subtitle: "The book of changes app"
 thumbnail: "/images/textures/cashmere-la.jpg"
+wrapper: "wrapper pad8-y"
 schema: "article"
 color: "#0f0f0f"
 bg_color: "#f8fbfb"
@@ -13,14 +14,6 @@ dark_gray: "#f8f8f8"
 logo: "/images/icons/yin_yang.svg"
 currentColor: asd
 ---
-
-<div class="toc-contents center">
-
-| Source Code                                    | URL                   | Created at | Technology | License          |
-| ---------------------------------------------- | --------------------- | ---------- | ---------- | ---------------- |
-| [github](https://github.com/barrabinfc/iching) | [website](iching.xyz) | 06/2018    | React, SPA | Creative commons |
-
-</div>
 
 <div class="description">
 
@@ -30,10 +23,18 @@ A Progressive Web Application that is lightweight, open source and offline & wit
 
 </div>
 
+<div class="toc-contents center">
+
+| Source Code                                    | URL                   | Created at | Technology | License          |
+| ---------------------------------------------- | --------------------- | ---------- | ---------- | ---------------- |
+| [github](https://github.com/barrabinfc/iching) | [website](iching.xyz) | 06/2018    | React, SPA | Creative commons |
+
+</div>
+
 ---
 
 <div class="grid2 justifyCenter">
-  <div class="phone-mockup">
+  <div class="mockup">
     <div class="marvel-device iphone-x">
         <div class="notch">
           <div class="camera"></div>
@@ -57,7 +58,7 @@ A Progressive Web Application that is lightweight, open source and offline & wit
         </div>
     </div>
   </div>
-  <div class="phone-mockup">
+  <div class="mockup">
     <div class="marvel-device iphone-x">
       <div class="notch">
         <div class="camera"></div>

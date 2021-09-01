@@ -1,6 +1,7 @@
 ---
 draft: false
-layout: ../../../layouts/Project/Project.astro
+layout: ../../../layouts/Project/Project2Column.astro
+gallery: src/pages/projects/portinari-chilk/portinari-gallery.astro
 slug: portinari-chilk
 path: /projects/portinari-chilk
 title: chilk
@@ -22,47 +23,14 @@ website: "https://vitocal.bitbucket.io/"
 description: "Junto com Ligalight, produzimos o aplicativo e projeções do kiosk da portinari. Baseado na idéia <i>faça vc mesmo</i>, os desenhos criados no aplicativo são projetados no stand.</p><p>Utilizamos Processing e Vue</p>"
 ---
 
-Produzimos em conjunto com a **Ligalight** o aplicativo SPA e projeções para Portinari, baseado na idéia <i>faça vc mesmo</i>.
+Produzimos em parceria com a [Ligalight](https://www.ligalight.com.br/about/) um aplicativo de desenho e projeções para Portinari[^1], baseado na idéia _faça você mesmo_. Queriamos que os visitantes tivessem a impressão de desenhar no ambiente.
 
-Os desenhos criados pelos visitantes através de um iPad são reproduzidos no ambiente através de poderosos projetores.
-O aplicativo também permite a visualização do catálogo da portinari, lendo o código QR no stand.
+Através de _iPads_ disponíveis no ambiente, os visitantes criam desenhos e frases que são reproduzidos através de poderosos projetores. Além disso, os visitantes também podiam simular uma parede de cerâmica, apontando a camera para o _QRCode_ de cada produto.
 
-- Para as projeções, criamos sketchs Processing que estilizam os desenhos.
-- Usamos um iPad e VueJS para o aplicativo de controle remoto.
-- Para comunicação entre os 2 aplicativos, criamos uma ponte Websocket e OSC UDP.
+### Tecnologias usadas:
 
-<div class="gallery">
-  <img src="/images/portinari/thumb.jpg" alt="Showcase" />
-  <div class="container grid browser-mask">
-    <div class="cellphone margin:auto pad:big">
-      <div class="marvel-device ipad landscape">
-          <div class="camera"></div>
-          <div class="screen">
-              <img src="/images/portinari/screen.png" alt="Vector drawing app" />
-              <!-- <img src="//images/portinari/uploads/portinari/screen.png" alt="Vector drawing app" /> -->
-          </div>
-          <div class="home"></div>
-      </div>
-    </div>
-  </div>
-<!--
-  <div class="browser-mask">
-    <div class="browser-screen appearFromBottom :play">
-      img src="/images/portinari/admin.png" alt="Administrator screen
-    </div>
-  </div>
--->
-  <video poster='/images/portinari/tree_poster.jpg' preload="none"
-        controls src='/images/portinari/tree.mp4' type="video/mp4"></video>
+- Para as projeções, criamos sketchs [Processing](https://processing.org/) que estilizam os desenhos.
+- Usamos um iPad e [Vue](https://vuejs.org/) para o aplicativo de controle remoto.
+- Para comunicação entre os 2 aplicativos, criamos uma ponte [Websocket e OSC](https://github.com/vicalejuri/cli-ws2osc).
 
-  <div class="gallery-columns">
-    <div>
-        <video poster='/images/portinari/user_poster.jpg' preload="none"
-          controls src='/images/portinari/user.mp4' type="video/mp4"></video>
-    </div>
-    <div>
-        <img src="/images/portinari/text.jpg" alt="Text panel" />
-        <img src="/images/portinari/t2.jpg" alt="People taking pictures on portinari stand" />
-    </div>
-  </div>
-</div>
+[^1]: [Cerâmicas portinari](https://www.ceramicaportinari.com.br/)
