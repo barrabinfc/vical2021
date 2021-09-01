@@ -22,8 +22,8 @@ export default function MastHead({
       <div className={cn(styles.contentContainer)}>
         {image && <InlineImage src={image} alt={title} />}
         <div className="content">
-          <h1 className={cn(styles.title)}>{title}</h1>
-          {subtitle && <h3 className={cn(styles.subtitle)}>{subtitle}</h3>}
+          <h1 id="masthead-title" className={cn(styles.title)}>{title}</h1>
+          {subtitle && <h2 className={cn(styles.subtitle)}>{subtitle}</h2>}
         </div>
       </div>
     </div>

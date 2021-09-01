@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "description": "",
   "private": true,
-  "workspaces": ["web", "apollo"],
+  "workspaces": [
+    "web",
+    "apollo"
+  ],
   "scripts": {
     "test": "echo ok && exit 0",
     "version": "changeset version"
@@ -11,6 +14,6 @@
   "author": "Vitor Calejuri",
   "license": "ISC",
   "devDependencies": {
-    "@changesets/cli": "^2.16.0"
+    "@changesets/cli": "^2.17.0"
   }
 }

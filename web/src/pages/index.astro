@@ -13,13 +13,12 @@ let content = {
 let projects: Projects[] = await listProjects();
 ---
 
-<!DOCTYPE html>
 <BaseLayout {content}>
-  <article id="content">
-    <section class="home">
+  <div id="content">
+    <section class="home" aria-labelledby="welcome">
       <div class="home-grid">
         <div class="item highlight pad4">
-          <div class="caption">
+          <div role="heading" aria-level="1" id="welcome" class="caption">
             Hi 👋<br/>
             I'm <strong>Vitor</strong><br/>
             I write software for the web
@@ -39,26 +38,26 @@ let projects: Projects[] = await listProjects();
     </section>
 
     <section class="pad4">
-      <h1>Projects</h1>
-      <ul class="project-grid">
+      <h2>Projects</h2>
+      <div class="project-grid">
         {projects.slice(0, 3).map((project) => (
-          <Card
+          <Card tag="li"
             href={project.path}
             avatar={project.avatar}
             content={project.content}
             className={`item ${project.slug}`}
             />
         ))}
-      </ul>
+      </div>
       <div class="pad4"/>
     </section>
-  </article>
+  </div>
 </BaseLayout>
 
 <style lang="scss" scoped>
 @use "sass:math";
-@use "public/styles/breakpoints" as bp;
-@use "public/styles/grids" as grids;
+@use "src/styles/breakpoints" as bp;
+@use "src/styles/grids" as grids;
 
 #content {
   position: relative;
@@ -88,7 +87,7 @@ $fold: 100vh;
     // background-color: var(--brand);
     // color: var(--text1-invert);
 
-    .caption {
+    > :global(.caption) {
       font-family: var(--title-family);
       font-size: calc( var(--h1) * 1.1 );
       font-weight: 200;

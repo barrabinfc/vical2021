@@ -20,18 +20,18 @@ if(galleryAddress) {
     <section class="content pad8 left">
       <slot/>
     </section>
-    <section class="showcase right">
+    <aside class="showcase right">
       {galleryHTML}
-    </section>
+    </aside>
   </div>
 </Project>
 
 <style lang="scss" global>
 @use "sass:math";
 
-@use "public/styles/grids" as grids;
-@use "public/styles/helpers" as h;
-@use "public/styles/typo" as typo;
+@use "src/styles/grids" as grids;
+@use "src/styles/helpers" as h;
+@use "src/styles/typo" as typo;
 
 $containerPadW: 0.1;
 $containerWidth: 100vw - (100vw * $containerPadW);
