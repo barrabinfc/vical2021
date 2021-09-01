@@ -16,18 +16,18 @@ const content = Astro.props.content || {};
       subtitle={content.subtitle}
       image={content.logo}
     />
-    <div class={cn('project',content.wrapper)}>
+    <section class={cn('project',content.wrapper)} aria-labelledby="masthead-title">
       <slot />
-    </div>
+    </section>
   </article>
 </BaseLayout>
 
 <style lang="scss" global>
 @use "sass:math";
 
-@use "public/styles/grids" as grids;
-@use "public/styles/helpers" as h;
-@use "public/styles/typo" as typo;
+@use "src/styles/grids" as grids;
+@use "src/styles/helpers" as h;
+@use "src/styles/typo" as typo;
 
 $containerPadW: 0.1;
 $containerWidth: 100vw - (100vw * $containerPadW);
@@ -129,59 +129,6 @@ $containerWidth: 100vw - (100vw * $containerPadW);
     border-color:  hsl(var(--brand-hue) 0% 90%)
   }
 
-}
-
-.two-columns {
-  /**
-   * Subdivide in 5 columns
-   * left is  2 pieces
-   * right is 3 pieces
-   */
-  $columns: 5;
-  $columnSizeVW: $containerWidth / $columns;
-  $gap: calc( var(--gap) * 16);
-
-  @include grids.grid($columns, $gap);
-  width: 100%;
-
-  .left {
-    min-width: 0;
-    grid-column: span 2;
-  }
-  .right {
-    min-width: 0;
-    grid-column: 3 / #{($columns+1)};
-
-    img, video {
-      width: 100%;
-    }
-  }
-}
-
-/**
- * Gallery
- */
-.gallery {
-  .page {
-    width: 100%;
-    height: clamp(30vh, 50vh, 60vh);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &.h100 {
-      height: 100vh;
-    }
-    &.h50 {
-      height: 50vh;
-    }
-    &.h70 {
-      height: 70vh;
-    }
-    &.h80 {
-      height: 80vh;
-    }
-  }
 }
 
 .mockup {

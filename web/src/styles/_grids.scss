@@ -1,5 +1,5 @@
 @use "sass:math";
-@use "public/styles/breakpoints" as bp;
+@use "src/styles/breakpoints" as bp;
 
 /**
  * A grid with display grid technique (not animable in 2021)
@@ -19,17 +19,17 @@
     gap: $gap;
     grid-template-columns: repeat($columns, 1fr);
 
-    :global(.item:nth-child(1n), .span1) {
-      grid-column: span 1;
-    }
+    // :global(.item:nth-child(1n), .span1) {
+    //   grid-column: span 1;
+    // }
 
-    :global(.item:nth-child(2n), .span2) {
-      grid-column: span 2;
-    }
+    // :global(.item:nth-child(2n), .span2) {
+    //   grid-column: span 2;
+    // }
 
-    :global(.item:nth-child(3n), .span3) {
-      grid-column: span 3;
-    }
+    // :global(.item:nth-child(3n), .span3) {
+    //   grid-column: span 3;
+    // }
   }
 }
 
