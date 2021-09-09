@@ -1,10 +1,13 @@
 ---
 import { Markdown } from 'astro/components';
 import BaseLayout from '../layouts/base.astro';
+import {cn,toDMYDateString} from '~/lib/helpers';
 
 import {listProjects} from './projects';
 import {listGarden} from './garden';
+
 import Card from '../components/Card/Card.tsx';
+import Tag from '../components/Tag/Tag.tsx';
 
 let content = {
   title: 'Hello World',
@@ -13,6 +16,19 @@ let content = {
 };
 let projects: MarkdownPage[] = await listProjects();
 let garden: GardenPage[] = await listGarden();
+
+const emojifyGardenItemStatus = (status: GardenPage['status']): string => {
+  switch(status){
+    case 'draft':
+      return '🌱'
+    case 'in progress':
+      return '🌿';
+    case 'complete':
+      return '🌳';
+    default:
+      return '❌';
+  }
+}
 ---
 
 <BaseLayout {content}>
@@ -55,17 +71,26 @@ let garden: GardenPage[] = await listGarden();
     </section>
 
     <section class="pad4">
-      <h2>Garden</h2>
-      <div class="garden-grid">
+      <h2>Digital Garden</h2>
+      <ul class="garden-list">
         {garden.map((garden) => (
-          <Card tag="li"
-            href={garden.path}
-            avatar={garden.thumbnail}
-            content={garden.content}
-            className={`item ${garden.slug}`}
-            />
+          <li class={cn(garden.slug,'garden-item')} >
+            <a href={garden.path} target="_blank">
+              <h4 class="title">{garden.content.title}</h4>
+              {garden.collection && (
+                <dl class="tags-container" aria-label="in collection">
+                  <Tag className="collection">{garden.collection}</Tag>
+                </dl>
+              )}
+              <dl class="extra-container">
+                <dd class="status" aria-label={`Published at: ${toDMYDateString(garden.publishedAt)}`}><em>{toDMYDateString(garden.publishedAt)}</em></dd>
+                <Tag className="status" variant="transparent" aria-label={garden.status}>{emojifyGardenItemStatus(garden.status)}</Tag>
+              </dl>
+
+            </a>
+          </li>
         ))}
-      </div>
+      </ul>
       <div class="pad4"/>
     </section>
   </div>
@@ -75,6 +100,7 @@ let garden: GardenPage[] = await listGarden();
 @use "sass:math";
 @use "src/styles/breakpoints" as bp;
 @use "src/styles/grids" as grids;
+@use "src/styles/typo" as typo;
 
 #content {
   position: relative;
@@ -107,7 +133,8 @@ $fold: 100vh;
     > :global(.caption) {
       font-family: var(--title-family);
       font-size: calc( var(--h1) * 1.1 );
-      font-weight: 200;
+      @include typo.weight(var(--text-weight));
+
       margin-bottom: 1em;
       // font-variation-settings: "wght" 200;
     }
@@ -149,6 +176,56 @@ $fold: 100vh;
       flex: 0 0  calc(3 * #{$itemWidth});
     }
   }
+}
 
+.garden-list {
+  list-style: decimal;
+  padding-inline-end: calc( 8 * var(--gap));
+  padding-inline-start: calc( 8 * var(--gap));
+
+  li.garden-item {
+    margin-block-end: 1em;
+    margin-block-start: 1em;
+    &::marker {
+      font-size: var(--h4);
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .title {
+      color: var(--text2);
+      @include typo.weight(var(--text-weight));
+      margin-block-start: 0;
+      margin-block-end: 0;
+      margin-right: auto;
+    }
+  }
+
+  :global(.tags-container) {
+    display: inline-flex;
+    align-items: center;
+    margin-block-start: 0;
+    margin-block-end: 0;
+
+  }
+
+  :global(.extra-container) {
+    display: inline-flex;
+    align-items: center;
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+
+  dd { margin-inline-start: 0; padding: calc(2 * var(--gap)); }
+
+  /** Adjacent tags */
+  :global(dd + dd),
+  :global(dl + dl) {
+    margin-left: var(--gap);
+  }
 }
 </style>

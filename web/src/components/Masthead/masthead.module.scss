@@ -25,7 +25,7 @@
 }
 .subtitle {
   color: var(--text2);
-  font-variation-settings: "wght" 200;
+  font-variation-settings: "wght" var(--text-weight);
 }
 
 .logo {

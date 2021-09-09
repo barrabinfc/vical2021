@@ -4,6 +4,7 @@ layout: ../../../layouts/Post/Post.astro
 description: Personal notes about complexity course of Santa Fe institute
 schema: article
 status: draft
+publishedAt: 2021-10-02
 published: true
 ---
 

@@ -6,10 +6,10 @@ const toGardenPage = (
   gardenPath: string
 ): GardenPage => {
   const relativePath = relative(gardenPath, dirname(markdownPage.abspath));
-  const collections = (relativePath && relativePath.split("/")) || [];
+  const collections = (relativePath && relativePath.split("/")) || null;
   return {
     ...markdownPage,
-    collection: collections || null
+    collection: collections
   };
 };
 

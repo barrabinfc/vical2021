@@ -45,11 +45,9 @@ $cardHeight: 280px;
   height: 100%;
   position: relative;
   display: block;
-  pointer-events: none;
 }
 
 .content {
-  pointer-events: auto;
   position: relative;
   // border-radius: calc(var(--gap) * 4);
   background: var(--surface4);
@@ -137,7 +135,6 @@ $cardHeight: 280px;
 
   padding: 1em;
   overflow: hidden;
-  pointer-events: none;
 
   color: var(--surface1);
 }

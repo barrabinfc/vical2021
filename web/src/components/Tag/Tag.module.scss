@@ -1,0 +1,30 @@
+/** Codes & Blockquotes */
+.tag {
+  padding: calc(2 * var(--gap));
+  border-radius: var(--gap);
+  margin: 0;
+  overflow: hidden;
+
+  font-family: var(--code-family);
+  font-size: var(--s-1);
+  text-shadow: none;
+}
+
+.default {
+  background-color: var(--surface3);
+  color: var(--text2);
+}
+
+.success {
+  background-color: hsl(160, var(--brand-saturation), 35%);
+  color: var(--surface1);
+}
+.error {
+  background-color: hsl(10, var(--brand-saturation), 35%);
+  color: var(--surface1);
+}
+
+.transparent {
+  background-color: transparent;
+  color: var(--text2);
+}

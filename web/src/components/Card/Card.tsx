@@ -20,13 +20,11 @@ export interface CardProps {
     description: string;
   },
   className: string|string[],
+  children?: React.ReactNode | React.ReactNode[]
   loading: 'lazy'|'eager',
 }
 
-export default function Card({href, avatar, content, className, loading='lazy'}: CardProps) {
-  const avatarWidth = avatar?.width || 280;
-  const avatarHeight = avatar?.height || 280;
-
+export default function Card({href, avatar, content, className, children,loading='lazy'}: CardProps) {
   return (
     <Link className={cn(styles.card, className)} href={href}>
       <AnimatePresence>
@@ -45,6 +43,7 @@ export default function Card({href, avatar, content, className, loading='lazy'}:
               {content?.description &&
                 <p className={styles.description}>{content?.description}</p>
               }
+              {children && children }
             </motion.div>
           </motion.div>
         </motion.div>

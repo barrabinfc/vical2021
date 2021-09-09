@@ -1,3 +1,13 @@
+---
+title: Hipocratic oath for developers
+layout: ../../../layouts/Post/Post.astro
+description: A hipocratic oath for developers
+schema: article
+status: draft
+publishedAt: 2021-10-09
+published: true
+---
+
 Always start with customer needs. Those are the foundation of any software product. That’s why you are building the thing.
 Don’t impose artificial limitations on the customer. That is, don’t require an account to change the keyboard LED scheme. We know it’s possible - Ducky keyboards, for example, can be entirely managed through the keyboard itself, without any software.
 Respect user choices. If someone doesn’t want to send telemetry (or any data for that matter), give them the option to not do it. At the time of writing, this blog collects anonymized data with Google Analytics. Don’t want to send it? Have your browser send a Do Not Track request and no data will leave this page. It takes an if statement to do this, not a month of engineering work.

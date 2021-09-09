@@ -2,7 +2,6 @@
 status: complete
 published: true
 layout: ../../../layouts/Project/Project.astro
-slug: iching
 path: /projects/iching
 title: "I Ching"
 subtitle: "The book of changes app"

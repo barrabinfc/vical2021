@@ -7,11 +7,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "debug": "DEBUG=* astro dev",
-    "test": "uvu -r esbuild-register ",
-    "graphql": "cd apollo; npm start;"
+    "test": "uvu -r esbuild-register -r tests/setup/register ",
+    "graphql": "cd apollo; npm start;",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.1",
     "@changesets/cli": "^2.17.0",
     "@types/chai": "^4.2.21",
     "@types/sinon": "^10.0.2",
@@ -19,24 +20,33 @@
     "dotenv": "^10.0.0",
     "framer-motion": "^4.1.17",
     "graphql": "^15.5.0",
+    "module-alias": "^2.2.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-lorem-ipsum": "^1.4.9",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "slugify": "^1.6.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.15.5",
     "@types/node": "^16.4.7",
     "@types/react": "^17.0.19",
     "@types/react-dom": "17.0.9",
     "@types/webpack-env": "^1.16.2",
+    "babel-loader": "^8.2.2",
     "chai": "^4.3.4",
+    "css-modules-require-hook": "^4.2.3",
     "esbuild": "^0.12.24",
     "esbuild-register": "^3.0.0",
     "faker": "^5.5.3",
+    "jsdom": "^17.0.0",
     "sinon": "^11.1.2",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.2",
     "uvu": "^0.5.1",
     "webpack-env": "^0.8.0"
+  },
+  "_moduleAliases": {
+    "~": "./src"
   }
 }

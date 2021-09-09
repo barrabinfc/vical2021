@@ -1,7 +1,7 @@
 @use "src/styles/breakpoints" as bp;
 
 @import url("https://rsms.me/inter/inter.css");
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap");
 /* Typography */
@@ -11,7 +11,7 @@
   --scale: 1.2 /** minor third */;
 
   --text-lineheight: 1.5;
-  --text-weight: 300;
+  --text-weight: 200;
   --text-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, Segoe UI,
     Roboto, Helvetica Neue, Ubuntu, sans-serif;
 
@@ -98,6 +98,10 @@ h5 {
   font-size: var(--h5);
 }
 
+.thin-weight {
+  font-variation-settings: "wght" 200;
+}
+
 /** Links */
 @mixin link-text {
   text-decoration: none;
@@ -113,4 +117,8 @@ h5 {
     left: 0;
     bottom: 0;
   }
+}
+
+@mixin weight($weight) {
+  font-variation-settings: "wght" $weight;
 }

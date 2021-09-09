@@ -1,5 +1,5 @@
 import { listFiles, FileRef } from "./listFiles";
-import { fromISOString, toUnixTimestamp } from "./helpers";
+import { fromISOString, toUnixTimestamp, slugifyFilepath } from "./helpers";
 import { dirname, relative } from "node:path";
 import { readFileSync } from "node:fs";
 
@@ -21,8 +21,10 @@ export interface MarkdownContent {
  * Convert from MarkdownContent to MarkdownPage
  */
 export const toMarkdownPage = (content: MarkdownContent): MarkdownPage => {
-  const slug = content.name;
+  /** Transform from a path/filename.xx into a url friendly slug  */
+  const slug = slugifyFilepath(content.name.replace(/\.\w*?$/g, ""));
   const abspath = content.abspath;
+
   return {
     name: content.name,
     abspath,

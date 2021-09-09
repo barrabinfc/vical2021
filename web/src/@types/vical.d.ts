@@ -1,5 +1,4 @@
 type HTMLString = string;
-type UnixTimestamp = number;
 
 /**  Article has title & description */
 interface Article {
@@ -28,7 +27,7 @@ interface MarkdownPage {
   path: string;
   schema: string;
   layout: string;
-  status: "draft" | "in-progress" | "complete";
+  status: "draft" | "in progress" | "complete";
   published: boolean;
   publishedAt: UnixTimestamp;
 
