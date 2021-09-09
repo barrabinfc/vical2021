@@ -1,5 +1,6 @@
 ---
-draft: false
+status: complete
+published: true
 layout: ../../../layouts/Project/Project.astro
 slug: iching
 path: /projects/iching

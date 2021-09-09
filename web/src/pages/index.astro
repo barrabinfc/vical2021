@@ -3,6 +3,7 @@ import { Markdown } from 'astro/components';
 import BaseLayout from '../layouts/base.astro';
 
 import {listProjects} from './projects';
+import {listGarden} from './garden';
 import Card from '../components/Card/Card.tsx';
 
 let content = {
@@ -10,7 +11,8 @@ let content = {
   description: 'Index description',
   schema: 'article'
 };
-let projects: Projects[] = await listProjects();
+let projects: MarkdownPage[] = await listProjects();
+let garden: GardenPage[] = await listGarden();
 ---
 
 <BaseLayout {content}>
@@ -43,9 +45,24 @@ let projects: Projects[] = await listProjects();
         {projects.slice(0, 3).map((project) => (
           <Card tag="li"
             href={project.path}
-            avatar={project.avatar}
+            avatar={project.thumbnail}
             content={project.content}
             className={`item ${project.slug}`}
+            />
+        ))}
+      </div>
+      <div class="pad4"/>
+    </section>
+
+    <section class="pad4">
+      <h2>Garden</h2>
+      <div class="garden-grid">
+        {garden.map((garden) => (
+          <Card tag="li"
+            href={garden.path}
+            avatar={garden.thumbnail}
+            content={garden.content}
+            className={`item ${garden.slug}`}
             />
         ))}
       </div>

@@ -4,7 +4,7 @@ layout: ../../../layouts/Post/Post.astro
 description: Personal notes about complexity course of Santa Fe institute
 schema: article
 status: draft
-datePublished: Last Modified
+published: true
 ---
 
 What is complexity? The term is incredibly hard to describe, but we can start

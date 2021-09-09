@@ -1,5 +1,6 @@
 ---
-draft: false
+status: complete
+published: true
 layout: ../../../layouts/Project/Project2Column.astro
 gallery: src/pages/projects/portinari-chilk/portinari-gallery.astro
 slug: portinari-chilk

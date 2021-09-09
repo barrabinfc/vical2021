@@ -1,28 +1,5 @@
 import { dirname } from "node:path";
-import { listMarkdown, MarkdownContent } from "../../lib/listMarkdown";
-
-/**
- * Convert from MarkdownContent to MarkdownPage
- */
-export const toMarkdownPage = (content: MarkdownContent): MarkdownPage => {
-  return {
-    slug: content.frontmatter.slug,
-    path: content.frontmatter.path,
-    layout: content.frontmatter.layout,
-    schema: content.frontmatter.schema,
-    draft: content.frontmatter.draft,
-    avatar: {
-      url: content.frontmatter.thumbnail
-    },
-    content: {
-      title: content.frontmatter.title,
-      description: content.frontmatter.subtitle,
-      headers: content.astro.headers,
-      frontmatter: content.frontmatter,
-      content: content.content
-    }
-  };
-};
+import { listMarkdown, toMarkdownPage } from "../../lib/listMarkdown";
 
 /**
  * Fetch all projects in the folder 'src/pages/projects'.
@@ -36,5 +13,7 @@ export const listProjects = async (): Promise<MarkdownPage[]> => {
   }
 
   const markdownFiles = [...(await listMarkdown(cwd))];
-  return markdownFiles.map(toMarkdownPage);
+  return markdownFiles
+    .map(toMarkdownPage)
+    .filter(markdownPage => markdownPage.published);
 };

@@ -7,7 +7,7 @@ module.exports = {
     /* ... */
   },
   alias: {
-    "~": "./src",
+    "~": "./src"
   },
   plugins: [
     /* ... */
@@ -20,5 +20,5 @@ module.exports = {
   },
   buildOptions: {
     /* ... */
-  },
+  }
 };

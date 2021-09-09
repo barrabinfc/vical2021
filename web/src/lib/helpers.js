@@ -16,3 +16,13 @@ export const errorId = (method, error) => {
     return method;
   }
 };
+
+/**
+ * Read a ISO string
+ */
+export const fromISOString = str => {
+  return Date.parse(str);
+};
+
+/** Convert from MilliTimestamp (javascript default) to unix  */
+export const toUnixTimestamp = milliTimestamp => milliTimestamp / 1000;
