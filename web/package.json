@@ -48,5 +48,29 @@
   },
   "_moduleAliases": {
     "~": "./src"
+  },
+  "_astroConfig": {
+    "projectRoot": "./src",
+    "pages": "./src/pages",
+    "dist": "./dist",
+    "buildOptions": {
+      "site": "http://vical.me",
+      "sitemap": true
+    },
+    "devOptions": {},
+    "renderers": [
+      "@astrojs/renderer-react"
+    ],
+    "markdownOptions": {
+      "remarkPlugins": [
+        "remark-code-titles",
+        "remark-slug",
+        ["remark-autolink-headings", { "behavior": "prepend" }]
+      ],
+      "rehypePlugins": [
+        ["rehype-toc", { "headings": ["h3", "h4"] }],
+        ["rehype-add-classes", { "h1,h2,h3": "title" }]
+      ]
+    }
   }
 }

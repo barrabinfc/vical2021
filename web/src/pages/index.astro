@@ -1,7 +1,7 @@
 ---
 import { Markdown } from 'astro/components';
 import BaseLayout from '../layouts/base.astro';
-import {cn,toDMYDateString} from '~/lib/helpers';
+import {cn,toDMYDateString, emojifyStatus} from '~/lib/helpers';
 
 import {listProjects} from './projects';
 import {listGarden} from './garden';
@@ -15,20 +15,8 @@ let content = {
   schema: 'article'
 };
 let projects: MarkdownPage[] = await listProjects();
-let garden: GardenPage[] = await listGarden();
+let gardenItems: GardenPage[] = await listGarden();
 
-const emojifyGardenItemStatus = (status: GardenPage['status']): string => {
-  switch(status){
-    case 'draft':
-      return '🌱'
-    case 'in progress':
-      return '🌿';
-    case 'complete':
-      return '🌳';
-    default:
-      return '❌';
-  }
-}
 ---
 
 <BaseLayout {content}>
@@ -60,7 +48,7 @@ const emojifyGardenItemStatus = (status: GardenPage['status']): string => {
       <div class="project-grid">
         {projects.slice(0, 3).map((project) => (
           <Card tag="li"
-            href={project.path}
+            href={project.url.pathname}
             avatar={project.thumbnail}
             content={project.content}
             className={`item ${project.slug}`}
@@ -73,10 +61,10 @@ const emojifyGardenItemStatus = (status: GardenPage['status']): string => {
     <section class="pad4">
       <h2>Digital Garden</h2>
       <ul class="garden-list">
-        {garden.map((garden) => (
-          <li class={cn(garden.slug,'garden-item')} >
-            <a href={garden.path} target="_blank">
-              <h4 class="title">{garden.content.title}</h4>
+        {gardenItems.map((garden) => (
+          <li class={cn(garden.slug)} >
+            <div class="garden-item">
+              <h4 class="title"><a href={garden.url.pathname}>{garden.content.title}</a></h4>
               {garden.collection && (
                 <dl class="tags-container" aria-label="in collection">
                   <Tag className="collection">{garden.collection}</Tag>
@@ -84,10 +72,9 @@ const emojifyGardenItemStatus = (status: GardenPage['status']): string => {
               )}
               <dl class="extra-container">
                 <dd class="status" aria-label={`Published at: ${toDMYDateString(garden.publishedAt)}`}><em>{toDMYDateString(garden.publishedAt)}</em></dd>
-                <Tag className="status" variant="transparent" aria-label={garden.status}>{emojifyGardenItemStatus(garden.status)}</Tag>
+                <Tag className="status" variant="transparent" aria-label={garden.status}>{emojifyStatus(garden.status)}</Tag>
               </dl>
-
-            </a>
+            </div>
           </li>
         ))}
       </ul>
@@ -183,25 +170,29 @@ $fold: 100vh;
   padding-inline-end: calc( 8 * var(--gap));
   padding-inline-start: calc( 8 * var(--gap));
 
-  li.garden-item {
+  li {
     margin-block-end: 1em;
     margin-block-start: 1em;
+    color: var(--text2);
+
     &::marker {
       font-size: var(--h4);
     }
 
-    a {
+    .garden-item {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-    }
 
-    .title {
-      color: var(--text2);
-      @include typo.weight(var(--text-weight));
-      margin-block-start: 0;
-      margin-block-end: 0;
-      margin-right: auto;
+      a {
+        @include typo.link-text;
+      }
+      .title {
+        @include typo.weight(var(--text-weight));
+        margin-block-start: 0;
+        margin-block-end: 0;
+        margin-right: auto;
+      }
     }
   }
 

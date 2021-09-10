@@ -17,6 +17,7 @@ module.exports = {
   },
   devOptions: {
     /* ... */
+    openUrl: "http://localhost:3000"
   },
   buildOptions: {
     /* ... */

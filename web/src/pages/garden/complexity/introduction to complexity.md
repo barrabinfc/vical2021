@@ -1,6 +1,9 @@
 ---
 title: Introduction to complexity
 layout: ../../../layouts/Post/Post.astro
+tags:
+  - personal-notes
+  - santa-fe institute
 description: Personal notes about complexity course of Santa Fe institute
 schema: article
 status: draft

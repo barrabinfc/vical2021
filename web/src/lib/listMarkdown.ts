@@ -3,6 +3,7 @@ import { fromISOString, toUnixTimestamp, slugifyFilepath } from "./helpers";
 import { dirname, relative } from "node:path";
 import { readFileSync } from "node:fs";
 
+import { pagePathToUrl } from "./pagePathToUrl";
 import { renderMarkdownWithFrontmatter } from "@astrojs/markdown-support";
 
 export interface MarkdownContent {
@@ -29,7 +30,8 @@ export const toMarkdownPage = (content: MarkdownContent): MarkdownPage => {
     name: content.name,
     abspath,
     slug,
-    path: content.frontmatter.path,
+    url: pagePathToUrl(abspath),
+    tags: content.frontmatter.tags || [],
     layout: content.frontmatter.layout,
     schema: content.frontmatter.schema,
     status: content.frontmatter.status,

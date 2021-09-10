@@ -1,3 +1,5 @@
+import React from "react";
+
 export const cn = (...args) => {
   return args.filter(Boolean).join(" ");
 };
@@ -18,6 +20,21 @@ export const errorId = (method, error) => {
 };
 
 /**
+ *  Check if there's a children passed
+ *  (because astro will always fill children, but with props.value = '')
+ */
+export const hasReactChildren = (child: React.ReactElement): boolean => {
+  return (
+    child &&
+    child["$$typeof"] &&
+    child["$$typeof"] === Symbol.for("react.element") &&
+    child.props &&
+    child.props.value &&
+    child.props.value !== ""
+  );
+};
+
+/**
  * Read a ISO string
  */
 export const fromISOString = str => {
@@ -25,7 +42,9 @@ export const fromISOString = str => {
 };
 
 /** Convert from MilliTimestamp (javascript default) to unix  */
-export const toUnixTimestamp = milliTimestamp => milliTimestamp / 1000;
+export const toUnixTimestamp = (milliTimestamp: number): UnixTimestamp => {
+  return (milliTimestamp / 1000) as UnixTimestamp;
+};
 
 /* From Unix timestamp to DMY(internatially popular) string date   */
 export const toDMYDateString = (unixTimestamp: UnixTimestamp): string => {
@@ -57,3 +76,19 @@ export const slugifyFilepath: (txt: string) => string = slugifyRaw.bind(null, [
   "/",
   "-"
 ]);
+
+/** Emojify status */
+export const emojifyStatus = (
+  status: "draft" | "in progress" | "complete"
+): string => {
+  switch (status) {
+    case "draft":
+      return "🌱";
+    case "in progress":
+      return "🌿";
+    case "complete":
+      return "🌳";
+    default:
+      return "❌";
+  }
+};

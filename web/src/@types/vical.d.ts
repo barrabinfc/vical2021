@@ -24,7 +24,8 @@ interface MarkdownPage {
   name: string;
   abspath: string;
   slug: string;
-  path: string;
+  url: URL;
+  tags: string[];
   schema: string;
   layout: string;
   status: "draft" | "in progress" | "complete";

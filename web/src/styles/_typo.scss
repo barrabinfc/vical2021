@@ -107,16 +107,25 @@ h5 {
   text-decoration: none;
   color: var(--text2);
   position: relative;
-  padding: 0 var(--gap) 0.25em var(--gap);
+  padding: 0 var(--gap) 0 var(--gap);
+  margin-bottom: 0.25em;
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
 
-  &::after {
-    content: " ";
-    width: 100%;
-    border-bottom: 2px solid var(--text2);
-    position: absolute;
-    left: 0;
-    bottom: 0;
+  transition: color 0.078s ease-in-out;
+
+  &:hover {
+    color: var(--brand);
   }
+
+  // &::after {
+  //   content: " ";
+  //   width: 100%;
+  //   border-bottom: 2px solid var(--text2);
+  //   position: absolute;
+  //   left: 0;
+  //   bottom: 0;
+  // }
 }
 
 @mixin weight($weight) {

@@ -16,9 +16,10 @@ export interface TagProps {
   [key: string]: any
 }
 
+/**
+ * A simple tag component
+ */
 export const Tag = ({className, children, variant=TagVariant.DEFAULT, ...attrs}: TagProps) => {
-  console.log('attrs', attrs);
-
   return <dd className={cn(styles.tag, styles[variant], className)} {...attrs}>{children}</dd>
 }
 

@@ -29,7 +29,7 @@ export const listGarden = async (): Promise<MarkdownPage[]> => {
     .map(toMarkdownPage)
     .map(page => toGardenPage(page, cwd))
     .filter(page => page.published)
-    .sort((pageA, pageB) => pageA.publishedAt - pageB.publishedAt);
+    .sort((pageA, pageB) => pageB.publishedAt - pageA.publishedAt);
 
   return markdownPages;
 };
