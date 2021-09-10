@@ -1,7 +1,9 @@
 import { listFiles, FileRef } from "./listFiles";
+import { fromISOString, toUnixTimestamp, slugifyFilepath } from "./helpers";
 import { dirname, relative } from "node:path";
 import { readFileSync } from "node:fs";
 
+import { pagePathToUrl } from "./pagePathToUrl";
 import { renderMarkdownWithFrontmatter } from "@astrojs/markdown-support";
 
 export interface MarkdownContent {
@@ -15,6 +17,45 @@ export interface MarkdownContent {
   };
   content: string;
 }
+
+/**
+ * Convert from MarkdownContent to MarkdownPage
+ */
+export const toMarkdownPage = (content: MarkdownContent): MarkdownPage => {
+  /** Transform from a path/filename.xx into a url friendly slug  */
+  const slug = slugifyFilepath(content.name.replace(/\.\w*?$/g, ""));
+  const abspath = content.abspath;
+
+  return {
+    name: content.name,
+    abspath,
+    slug,
+    url: pagePathToUrl(abspath),
+    tags: content.frontmatter.tags || [],
+    layout: content.frontmatter.layout,
+    schema: content.frontmatter.schema,
+    status: content.frontmatter.status,
+    published: content.frontmatter.published,
+    publishedAt: toUnixTimestamp(
+      fromISOString(content.frontmatter.publishedAt)
+    ),
+    content: {
+      title: content.frontmatter.title,
+      description: content.frontmatter.subtitle,
+      headers: content.astro.headers,
+      frontmatter: content.frontmatter,
+      content: content.content
+    },
+    /** Thumbnail? */
+    ...(content.frontmatter.thumbnail
+      ? {
+          thumbnail: {
+            url: content.frontmatter.thumbnail
+          }
+        }
+      : {})
+  };
+};
 
 /**
  * Fetch all projects in the folder 'src/pages/projects'.

@@ -4,18 +4,28 @@
   width: 100%;
   display: flex;
   background-color: var(--surface4);
+
+  /** Give more space to children */
+  &.hasChildrenVariant {
+    .contentContainer {
+      padding-bottom: calc(var(--headerH) / 2);
+    }
+  }
 }
 
 .contentContainer {
   width: 100%;
   margin: 0 auto;
-  padding: var(--headerH) 0;
-  padding-left: calc(var(--gap) * 8);
+  padding: var(--headerH) calc(var(--gap) * 8);
 
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-start;
+}
+
+.content {
+  width: 100%;
 }
 
 .title,
@@ -25,7 +35,7 @@
 }
 .subtitle {
   color: var(--text2);
-  font-variation-settings: "wght" 200;
+  font-variation-settings: "wght" var(--text-weight);
 }
 
 .logo {

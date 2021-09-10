@@ -7,7 +7,7 @@ module.exports = {
     /* ... */
   },
   alias: {
-    "~": "./src",
+    "~": "./src"
   },
   plugins: [
     /* ... */
@@ -17,8 +17,9 @@ module.exports = {
   },
   devOptions: {
     /* ... */
+    openUrl: "http://localhost:3000"
   },
   buildOptions: {
     /* ... */
-  },
+  }
 };

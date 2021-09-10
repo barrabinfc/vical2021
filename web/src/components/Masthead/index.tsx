@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./masthead.module.scss";
-import { cn } from "~/lib/helpers";
+import { cn, hasReactChildren } from "~/lib/helpers";
 
 function InlineImage({src,alt}: {src: string, alt: string}){
   if(src.match(/svg/)) {
@@ -13,17 +13,19 @@ function InlineImage({src,alt}: {src: string, alt: string}){
 
 export default function MastHead({
   title,
-  subtitle = null,
-  image = null,
+  subtitle = undefined,
+  image = undefined,
+  children = undefined,
   className
 }) {
   return (
-    <div className={cn(styles.masthead, className)}>
+    <div className={cn(styles.masthead, className, (hasReactChildren(children) && styles.hasChildrenVariant))}>
       <div className={cn(styles.contentContainer)}>
         {image && <InlineImage src={image} alt={title} />}
-        <div className="content">
+        <div className={cn(styles.content)}>
           <h1 id="masthead-title" className={cn(styles.title)}>{title}</h1>
           {subtitle && <h2 className={cn(styles.subtitle)}>{subtitle}</h2>}
+          {hasReactChildren(children) && children}
         </div>
       </div>
     </div>

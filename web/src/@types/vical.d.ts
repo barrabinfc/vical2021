@@ -21,15 +21,17 @@ interface Renderable {
  * Every page must have those fields.
  */
 interface MarkdownPage {
+  name: string;
+  abspath: string;
   slug: string;
-  path: string;
+  url: URL;
+  tags: string[];
   schema: string;
   layout: string;
-  draft: boolean;
+  status: "draft" | "in progress" | "complete";
+  published: boolean;
+  publishedAt: UnixTimestamp;
 
-  avatar: {
-    url: string;
-  };
   content: {
     title: string;
     description: string;
@@ -37,4 +39,13 @@ interface MarkdownPage {
     headers: any[];
     content: string;
   };
+
+  thumbnail?: {
+    url: string;
+  };
+}
+
+interface GardenPage extends MarkdownPage {
+  /** Is part of a collection(aka folder?) ?  */
+  collection: string[] | null;
 }

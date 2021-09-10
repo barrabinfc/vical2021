@@ -15,7 +15,7 @@ const content = Astro.props.content || {};
       title={content.title}
       subtitle={content.subtitle}
       image={content.logo}
-    />
+    ></Masthead>
     <section class={cn('project',content.wrapper)} aria-labelledby="masthead-title">
       <slot />
     </section>

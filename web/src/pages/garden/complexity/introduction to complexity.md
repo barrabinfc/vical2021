@@ -1,10 +1,14 @@
 ---
 title: Introduction to complexity
 layout: ../../../layouts/Post/Post.astro
+tags:
+  - personal-notes
+  - santa-fe institute
 description: Personal notes about complexity course of Santa Fe institute
 schema: article
 status: draft
-datePublished: Last Modified
+publishedAt: 2021-10-02
+published: true
 ---
 
 What is complexity? The term is incredibly hard to describe, but we can start

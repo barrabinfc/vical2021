@@ -1,16 +1,39 @@
 ---
 import BaseLayout from '~/layouts/base.astro';
 import Masthead from '~/components/Masthead';
+import Tag from '~/components/Tag';
 
-const content = Astro.props.content || {};
+import {cn,fromISOString, toUnixTimestamp, toDMYDateString, emojifyStatus} from '~/lib/helpers';
+
+const content = {
+  ...Astro.props.content,
+  // TODO: Change MarkdownContent / MarkdownPage to have the same interface for listing/get
+  publishedAt: toUnixTimestamp(
+    fromISOString(Astro.props.content.publishedAt)
+  ),
+}
+
 ---
 
 <BaseLayout {content}>
   <article id="content">
     <link rel="stylesheet" href="/styles/prism/solarizedLight.css" />
-    <Masthead className="surface4"
+    <Masthead className="post-masthead surface4"
       title={content.title}
-    />
+      subtitle={content.subtitle}
+    >
+      {content.tags && (
+        <div class="metadata-container" aria-label="Tagged as">
+          <dl class="date-container">
+            <Tag className="status" variant="transparent" aria-label={content.status}>{emojifyStatus(content.status)}</Tag>
+            <dd class="status" aria-label={`Published at: ${toDMYDateString(content.publishedAt)}`}><em>{toDMYDateString(content.publishedAt)}</em></dd>
+          </dl>
+          <dl class="tags-container" aria-label="Tagged as">
+            {content.tags.map(tag => <Tag className="tag" variant='transparent'>{tag}</Tag>)}
+          </dl>
+        </div>
+      )}
+    </Masthead>
     <div class="post">
       <slot />
     </div>
@@ -22,6 +45,38 @@ const content = Astro.props.content || {};
 @use "src/styles/helpers" as h;
 @use "src/styles/typo" as typo;
 
+.post-masthead {
+  .metadata-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    margin-block-start: 3em;
+    // border-top: 1px solid hsla(var(--brand-hue), var(--brand-saturation), var(--brand-lightness), 30% );
+
+    .date-container, .tags-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .tags-container {
+      margin-left: auto;
+    }
+
+    dl {
+      margin-block-start: 0;
+      margin-block-end: 0;
+    }
+    dd {
+      margin-inline-start: 0;
+    }
+
+    dd + dd {
+      margin-left: calc( 2 * var(--gap));
+    }
+  }
+}
+
 .post  {
   max-width: 1440px;
   position: relative;
@@ -29,6 +84,14 @@ const content = Astro.props.content || {};
   width: clamp(16rem, 90vw, 70rem);
   position: relative;
   margin: 3em auto;
+
+  > p:first-of-type::first-letter {
+    font-family: var(--title-family);
+    float: left;
+    font-size: 4em;
+    line-height: 0.65;
+    margin: 0.1em 0.15em 0em 0px;
+  }
 
   a:not(.footnote-ref,.footnote-backref) {
     @include typo.link-text;
@@ -49,18 +112,13 @@ const content = Astro.props.content || {};
 
 
   /** Limit line-lengths */
-  p,
-  li {
-    max-width: 90ch;
-  }
-
   h1 {
-    max-width: 15ch;
+    max-width: 30ch;
   }
 
   h2,
   h3 {
-    max-width: 25ch;
+    max-width: 30ch;
   }
 
   /**
