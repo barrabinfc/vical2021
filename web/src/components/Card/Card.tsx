@@ -45,6 +45,7 @@ export default function Card({href, avatar, content, className, children,loading
               }
               {children && children }
             </motion.div>
+            <div className='cast-shadow'></div>
           </motion.div>
         </motion.div>
       </AnimatePresence>

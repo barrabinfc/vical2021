@@ -14,6 +14,7 @@ module.exports = {
   ],
   packageOptions: {
     /* ... */
+    knownEntrypoints: ["is-extendable"]
   },
   devOptions: {
     /* ... */

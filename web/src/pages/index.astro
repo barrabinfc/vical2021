@@ -3,6 +3,7 @@ import { Markdown } from 'astro/components';
 import BaseLayout from '../layouts/base.astro';
 import {cn,toDMYDateString, emojifyStatus} from '~/lib/helpers';
 
+import Flashlight from '../components/Flashlight/Flashlight.tsx'
 import {listProjects} from './projects';
 import {listGarden} from './garden';
 
@@ -81,6 +82,8 @@ let gardenItems: GardenPage[] = await listGarden();
       <div class="pad4"/>
     </section>
   </div>
+
+  <Flashlight client:idle />
 </BaseLayout>
 
 <style lang="scss" scoped>
