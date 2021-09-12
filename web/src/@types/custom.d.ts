@@ -1,13 +1,15 @@
 /// <reference types="react-scripts" />
 declare module "react-lorem-ipsum";
-
+import { Settings } from "../hooks/useSharedSettings";
 import Router from "~/components/Router/Router";
+
 declare global {
   declare module "*.module.css";
   declare module "*.module.scss";
 
   interface Window {
     router: Router;
+    settings: Settings;
   }
 
   interface ImportMeta {

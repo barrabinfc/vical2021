@@ -5,6 +5,8 @@ import SEO from '../components/seo';
 import Header from '../components/Header/Header.tsx';
 import Footer from '../components/Footer/Footer.jsx';
 
+import GlobalSettings from '../components/Settings/Settings.tsx';
+
 const content:any = Astro.props.content;
 ---
 <!DOCTYPE html>
@@ -20,18 +22,24 @@ const content:any = Astro.props.content;
     <SEO module="og" ...content />
     <SEO module="twitter" ...content />
     <SEO module="ld" ...content />
+
   </head>
   <body data-layout="base">
+
     <div class="root">
       <div class="container">
         <Layout>
+
           <Header slot="header" client:idle />
           <div class="container-wrapper">
             <slot />
+            <GlobalSettings client:idle />
           </div>
+
           <Footer slot="footer" />
         </Layout >
       </div>
     </div>
+
   </body>
 </html>
