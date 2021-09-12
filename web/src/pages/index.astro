@@ -4,9 +4,11 @@ import BaseLayout from '../layouts/base.astro';
 import {cn,toDMYDateString, emojifyStatus} from '~/lib/helpers';
 
 import FlashlightEffect from '../components/FlashlightEffect/FlashlightEffect.tsx'
+
 import {listProjects} from './projects';
 import {listGarden} from './garden';
 
+import ProjectGrid from '../components/Project/ProjectGrid.tsx';
 import Card from '../components/Card/Card.tsx';
 import Tag from '../components/Tag/Tag.tsx';
 
@@ -46,16 +48,7 @@ let gardenItems: GardenPage[] = await listGarden();
 
     <section class="pad4">
       <h2>Projects</h2>
-      <div class="project-grid">
-        {projects.slice(0, 3).map((project) => (
-          <Card tag="li"
-            href={project.url.pathname}
-            avatar={project.thumbnail}
-            content={project.content}
-            className={`item ${project.slug}`}
-            />
-        ))}
-      </div>
+      <ProjectGrid projects={projects} client:idle />
       <div class="pad4"/>
     </section>
 
@@ -146,26 +139,6 @@ $fold: 100vh;
   }
 }
 
-.project-grid {
-  $columns: 3;
-  $gap: 32px;
-  $itemWidth: calc(#{math.div(100%, $columns)} - #{$gap});
-
-  @include grids.flexGrid($columns, $gap);
-
-
-  @include bp.breakpoint(medium, min) {
-    :global(.item:nth-child(1n)) {
-      flex: 0 0 33%;
-    }
-    :global(.item:nth-child(2n)) {
-      flex: 0 0  calc(2 * #{$itemWidth});
-    }
-    :global(.item:nth-child(3n)) {
-      flex: 0 0  calc(3 * #{$itemWidth});
-    }
-  }
-}
 
 .garden-list {
   list-style: decimal;

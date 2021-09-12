@@ -1,0 +1,24 @@
+@use "sass:math";
+@use "src/styles/breakpoints" as bp;
+@use "src/styles/grids" as grids;
+@use "src/styles/typo" as typo;
+
+.project-grid {
+  $columns: 3;
+  $gap: 32px;
+  $itemWidth: calc(#{math.div(100%, $columns)} - #{$gap});
+
+  @include grids.flexGrid($columns, $gap);
+
+  @include bp.breakpoint(medium, min) {
+    :global(.item:nth-child(1n)) {
+      flex: 0 0 33%;
+    }
+    :global(.item:nth-child(2n)) {
+      flex: 0 0 calc(2 * #{$itemWidth});
+    }
+    :global(.item:nth-child(3n)) {
+      flex: 0 0 calc(3 * #{$itemWidth});
+    }
+  }
+}

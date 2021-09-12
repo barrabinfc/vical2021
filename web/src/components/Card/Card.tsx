@@ -1,15 +1,14 @@
-import React, {useState} from 'react';
-import Link from '~/components/Router/Link';
+import React, { useEffect } from "react";
+import { cn, range } from "~/lib/helpers";
 
-import {AnimatePresence, AnimateSharedLayout, motion, useMotionValue} from 'framer-motion';
+import { motion, useAnimation } from "framer-motion";
+import AppearWhenVisible from "../anims/AppearWhenVisible";
 
 import styles from "./Card.module.css";
-
-import { cn, range } from "~/lib/helpers";
-import { springs } from '~/lib/animations';
+import { useInView } from "react-intersection-observer";
 
 export interface CardProps {
-  href: string,
+  href: string;
   avatar: {
     url: string;
     width: number;
@@ -18,37 +17,85 @@ export interface CardProps {
   content: {
     title: string;
     description: string;
-  },
-  className: string|string[],
-  children?: React.ReactNode | React.ReactNode[]
-  loading: 'lazy'|'eager',
+  };
+  className: string | string[];
+  children?: React.ReactNode | React.ReactNode[];
+  loading: "lazy" | "eager";
+
+  /** Anim options */
+  delay?: number;
 }
 
-export default function Card({href, avatar, content, className, children,loading='lazy'}: CardProps) {
+export default function Card({
+  href,
+  avatar,
+  content,
+  className,
+  children,
+  loading = "lazy",
+  delay = 0
+}: CardProps) {
+  const controls = useAnimation();
+  const [ref, inView] = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
   return (
-    <Link className={cn(styles.card, className)} href={href}>
-      <AnimatePresence>
-        <motion.div className={cn(styles['content-container'])}>
-          <motion.div className={cn(styles['content'])}>
-            {avatar &&
-              <motion.div layout className={styles.avatar} >
-                <picture className="fade-in">
-                  <motion.img layout initial={false} src={avatar?.url} loading={loading}
-                    alt={content?.title || 'A image'}  />
-                </picture>
-              </motion.div>
-            }
-            <motion.div layout="position" className={styles['title-container']} align-at="bottom">
-              <h3 className={styles.title}>{content?.title}</h3>
-              {content?.description &&
-                <p className={styles.description}>{content?.description}</p>
-              }
-              {children && children }
-            </motion.div>
-            <div className='cast-shadow'></div>
-          </motion.div>
+    <motion.a
+      ref={ref}
+      href={href}
+      className={cn(styles.card, className)}
+      whileHover={{ scale: 1.05 }}
+    >
+      <motion.div className={cn(styles["content-container"])}>
+        <motion.div className={cn(styles["content"])}>
+          {avatar && (
+            <div className={styles.avatar}>
+              <picture>
+                <img
+                  src={avatar?.url}
+                  loading={loading}
+                  alt={content?.title || "A image"}
+                />
+              </picture>
+            </div>
+          )}
+          <div className={styles["title-container"]} align-at="bottom">
+            <motion.h3
+              className={styles.title}
+              animate={controls}
+              initial="hidden"
+              transition={{ duration: 0.5 }}
+              variants={{
+                visible: { y: 0, transition: { delay: delay + 0.15 } },
+                hidden: { y: 50 }
+              }}
+            >
+              {content?.title}
+            </motion.h3>
+            {content?.description && (
+              <motion.p
+                className={styles.description}
+                animate={controls}
+                initial="hidden"
+                transition={{ duration: 0.5 }}
+                variants={{
+                  visible: { y: 0, transition: { delay: delay + 0.25 } },
+                  hidden: { y: 50 }
+                }}
+              >
+                {content?.description}
+              </motion.p>
+            )}
+            {children && children}
+          </div>
+          <div className="cast-shadow"></div>
         </motion.div>
-      </AnimatePresence>
-    </Link>
+      </motion.div>
+    </motion.a>
   );
 }
