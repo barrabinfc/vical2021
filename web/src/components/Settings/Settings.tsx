@@ -17,7 +17,6 @@ const GlobalSettingsStaticDOM = (settings?: ReturnType<typeof useSharedSettings>
 const GlobalSettings = () => {
   let settings = useSharedSettings();
   let showTweaksPanel = useKeyPressed( (ev: KeyboardEvent) => {
-    console.log(ev.metaKey , ev.ctrlKey, ev.key);
     return ((ev.metaKey || ev.ctrlKey) && ev.key == 'p');
   });
   useEffect( () => {
