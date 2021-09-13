@@ -1,13 +1,13 @@
 ---
 status: complete
 published: true
+publishedAt: 2018-06-03
 layout: ../../../layouts/Project/Project2Column.astro
 gallery: src/pages/projects/portinari-chilk/portinari-gallery.astro
-path: /projects/portinari-chilk
 title: chilk
 subtitle: Portinari On-site Kiosk App
-thumbnail: "/images/portinari/portal.jpg"
-schema: "article"
+thumbnail: '/images/portinari/portal.jpg'
+schema: 'basic'
 
 # color: "#0f0f0f"
 # bg_color: "#f8fbfb"
@@ -15,12 +15,11 @@ schema: "article"
 # logo: "/images/icons/yin_yang.svg"
 # currentColor: asd
 
-date: "2018-06-03"
-thumbscheme: "dark"
-thumb_position: "top"
+thumbscheme: 'dark'
+thumb_position: 'top'
 
-website: "https://vitocal.bitbucket.io/"
-description: "Junto com Ligalight, produzimos o aplicativo e projeções do kiosk da portinari. Baseado na idéia <i>faça vc mesmo</i>, os desenhos criados no aplicativo são projetados no stand.</p><p>Utilizamos Processing e Vue</p>"
+website: 'https://vitocal.bitbucket.io/'
+description: 'Junto com Ligalight, produzimos o aplicativo e projeções do kiosk da portinari. Baseado na idéia <i>faça vc mesmo</i>, os desenhos criados no aplicativo são projetados no stand.</p><p>Utilizamos Processing e Vue</p>'
 ---
 
 Produzimos em parceria com a [Ligalight](https://www.ligalight.com.br/about/) um aplicativo de desenho e projeções para Portinari[^1], baseado na idéia _faça você mesmo_. Queriamos que os visitantes tivessem a impressão de desenhar no ambiente.

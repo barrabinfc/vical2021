@@ -16,36 +16,12 @@ interface Renderable {
   (props: any): JSX.Element;
 }
 
-/**
- * A page in markdown.
- * Every page must have those fields.
- */
-interface MarkdownPage {
-  name: string;
-  abspath: string;
-  slug: string;
-  url: URL;
-  tags: string[];
-  schema: string;
-  layout: string;
-  status: "draft" | "in progress" | "complete";
-  published: boolean;
-  publishedAt: UnixTimestamp;
-
-  content: {
-    title: string;
-    description: string;
-    frontmatter: Record<any, string>;
+interface AstroMarkdownPage {
+  frontmatter: Record<string, any>;
+  astro: {
     headers: any[];
-    content: string;
+    source: string;
+    html: string;
   };
-
-  thumbnail?: {
-    url: string;
-  };
-}
-
-interface GardenPage extends MarkdownPage {
-  /** Is part of a collection(aka folder?) ?  */
-  collection: string[] | null;
+  content: string;
 }

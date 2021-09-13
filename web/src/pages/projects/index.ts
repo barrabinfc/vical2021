@@ -1,5 +1,5 @@
-import { dirname } from "node:path";
-import { listMarkdown, toMarkdownPage } from "../../lib/listMarkdown";
+import { dirname } from 'node:path';
+import { listMarkdown, toPage } from '../../lib/listMarkdown';
 
 /**
  * Fetch all projects in the folder 'src/pages/projects'.
@@ -7,13 +7,11 @@ import { listMarkdown, toMarkdownPage } from "../../lib/listMarkdown";
  */
 export const listProjects = async (): Promise<MarkdownPage[]> => {
   /** @ts-ignore */
-  const cwd = dirname(import.meta?.url?.pathname ?? process.cwd());
+  const cwd = dirname(import.meta?.url?.pathname ?? `${__dirname}/projects`);
   if (!/projects$/.test(cwd)) {
     throw new Error(`cwd() should be in pages/projects/ folder`);
   }
 
   const markdownFiles = [...(await listMarkdown(cwd))];
-  return markdownFiles
-    .map(toMarkdownPage)
-    .filter(markdownPage => markdownPage.published);
+  return markdownFiles.map(page => toPage(page, cwd)).filter(markdownPage => markdownPage.published);
 };
