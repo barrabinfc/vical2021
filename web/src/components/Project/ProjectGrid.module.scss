@@ -1,7 +1,6 @@
 @use "sass:math";
 @use "src/styles/breakpoints" as bp;
 @use "src/styles/grids" as grids;
-@use "src/styles/typo" as typo;
 
 .project-grid {
   $columns: 3;

@@ -43,14 +43,10 @@
 
   padding: 0;
 
-  /** Emulate gap property */
   $itemWidth: calc(#{math.div(100%, $columns)} - #{$gap});
-  margin: (-1 * $gap) 0 0 (-1 * $gap);
-  width: calc(100% + #{$gap});
-
-  :global(.item) {
-    margin: $gap 0 0 $gap;
-  }
+  width: 100%;
+  row-gap: $gap;
+  column-gap: $gap;
 
   @include bp.breakpoint(small, max) {
     /** Phones are only 1 column */
@@ -63,7 +59,7 @@
     /** Items with equal width */
     :global(.item) {
       flex: 0 0 $itemWidth;
-      margin: $gap 0 0 $gap;
+      // margin: $gap 0 0 $gap;
     }
   }
 }

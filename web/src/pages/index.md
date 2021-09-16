@@ -15,13 +15,6 @@ publishedAt: 2021-10-15
   I write software for the web
 </div>
 
-<section class="pad4">
-  <h2>Projects</h2>
-  <!-- <ProjectGrid client:idle /> -->
-  <div class="pad4"/>
-</section>
-
-<section class="pad4">
-  <h2>Digital Garden</h2>
-  <div class="pad4"/>
-</section>
+<div id="caption" class="caption">
+  Potatoes
+</div>

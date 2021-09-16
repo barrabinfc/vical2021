@@ -2,6 +2,7 @@
 import {dirname,basename} from 'node:path'
 import {cn,toDMYDateString, emojifyStatus} from '../lib/helpers';
 import {Page, toPage} from '../lib/page/Page'
+import {loadHTML, html} from '../lib/html';
 
 import BaseLayout from './base.astro';
 
@@ -9,7 +10,7 @@ import {listProjects} from '../pages/projects';
 import {listGarden} from '../pages/garden';
 
 import ProjectGrid from '../components/Project/ProjectGrid.tsx';
-import Tag from '../components/Tag/Tag.tsx';
+import GardenList from '../components/Garden/GardenList.tsx';
 
 /** @ts-ignore */
 const abspath = import.meta.url.pathname;
@@ -25,6 +26,8 @@ let page:Page = toPage({
 let projects: Page[] = await listProjects();
 let gardenItems: Page[] = await listGarden();
 
+let $ = loadHTML(page.content.content,null,false);
+
 ---
 
 <BaseLayout {page}>
@@ -32,17 +35,11 @@ let gardenItems: Page[] = await listGarden();
     <section class="home" aria-labelledby="welcome">
       <div class="home-grid">
         <div class="item highlight pad4">
-          <div role="heading" aria-level="1" id="welcome" class="caption">
-            Hi 👋<br/>
-            I'm <strong>Vitor</strong><br/>
-            I write software for the web
-          </div>
+          {html( $('#welcome') )}
         </div>
         <div class="item highlight2 pad4">
           <div class="caption">
-            <!-- Hi 🙏 <br/>
-            I'm <strong>Vitor</strong><br/>
-            I write software for the web -->
+            {html( $('#caption') ) }
           </div>
         </div>
         <div class="item decoration">
@@ -59,24 +56,7 @@ let gardenItems: Page[] = await listGarden();
 
     <section class="pad4">
       <h2>Digital Garden</h2>
-      <ul class="garden-list">
-        {gardenItems.map((garden) => (
-          <li class={cn(garden.slug)} >
-            <div class="garden-item">
-              <h4 class="title"><a href={garden.url.pathname}>{garden.content.title}</a></h4>
-              {garden.collection?.length > 0 && (
-                <dl class="tags-container" aria-label="in collection">
-                  <Tag className="collection">{garden.collection}</Tag>
-                </dl>
-              )}
-              <dl class="extra-container">
-                <dd class="status" aria-label={`Published at: ${toDMYDateString(garden.publishedAt)}`}><em>{toDMYDateString(garden.publishedAt)}</em></dd>
-                <Tag className="status" variant="transparent" aria-label={garden.status}>{emojifyStatus(garden.status)}</Tag>
-              </dl>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <GardenList items={gardenItems} />
       <div class="pad4"/>
     </section>
   </div>
@@ -114,16 +94,12 @@ $fold: 100vh;
     flex-direction: column;
     justify-content: flex-end;
 
-    // background-color: var(--brand);
-    // color: var(--text1-invert);
-
     > :global(.caption) {
       font-family: var(--title-family);
       font-size: calc( var(--h1) * 1.1 );
       @include typo.weight(var(--text-weight));
 
       margin-bottom: 1em;
-      // font-variation-settings: "wght" 200;
     }
   }
   :global(.highlight2) {
@@ -144,59 +120,4 @@ $fold: 100vh;
   }
 }
 
-
-.garden-list {
-  list-style: decimal;
-  padding-inline-end: calc( 8 * var(--gap));
-  padding-inline-start: calc( 8 * var(--gap));
-
-  li {
-    margin-block-end: 1em;
-    margin-block-start: 1em;
-    color: var(--text2);
-
-    &::marker {
-      font-size: var(--h4);
-    }
-
-    .garden-item {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-
-      a {
-        @include typo.link-text;
-      }
-      .title {
-        @include typo.weight(var(--text-weight));
-        margin-block-start: 0;
-        margin-block-end: 0;
-        margin-right: auto;
-      }
-    }
-  }
-
-  :global(.tags-container) {
-    display: inline-flex;
-    align-items: center;
-    margin-block-start: 0;
-    margin-block-end: 0;
-
-  }
-
-  :global(.extra-container) {
-    display: inline-flex;
-    align-items: center;
-    margin-block-start: 0;
-    margin-block-end: 0;
-  }
-
-  dd { margin-inline-start: 0; padding: calc(2 * var(--gap)); }
-
-  /** Adjacent tags */
-  :global(dd + dd),
-  :global(dl + dl) {
-    margin-left: var(--gap);
-  }
-}
 </style>

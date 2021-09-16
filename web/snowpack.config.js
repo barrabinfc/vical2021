@@ -7,18 +7,18 @@ module.exports = {
     /* ... */
   },
   alias: {
-    "~": "./src"
+    '~': './src'
   },
   plugins: [
     /* ... */
   ],
   packageOptions: {
     /* ... */
-    knownEntrypoints: ["is-extendable"]
+    knownEntrypoints: ['is-extendable', 'entities']
   },
   devOptions: {
     /* ... */
-    openUrl: "http://localhost:3000"
+    openUrl: 'http://localhost:3000'
   },
   buildOptions: {
     /* ... */
