@@ -1,9 +1,13 @@
 ---
+schema: basic
+status: in progress
+published: true
+
 title: Styleguide
+subtitle: Styleguide
 layout: ../layouts/Post/Post.astro
 description: I write about software programming.
-schema: article
-datePublished: Last Modified
+publishedAt: 2021-16-10
 ---
 
 <div class="pad4">
@@ -79,7 +83,7 @@ Donec non ex orci. Suspendisse purus felis, laoreet ac interdum eget, ultrices i
 
 Images can be specified like so:
 
-![alt text](/pictures/dancing-master-1600.jpeg "Dancing masters")
+![alt text](/pictures/dancing-master-1600.jpeg 'Dancing masters')
 
 Many important downstream tasks such as Question Answering (QA) and Natural Language Inference (NLI) are based on understanding the relationship between two sentences, which is not directly captured by language modeling. In orderto train a model that understands sentence relationships, we pretrain for a binarized next sen
 tence prediction task that can be trivially generated from any monolingual corpus. Speciﬁcally,when choosing the sentences A and B for each pre-training example, 50% of the time B is the actualnext sentence that follows A (labeled as IsNext),and 50% of the time it is a random sentence fromthe corpus (labeled as NotNext).
@@ -146,17 +150,20 @@ BERT alleviates the previously mentioned unidi-rectionality constraint by using 
 masked language model randomly masks some ofthe tokens from the input, and the objective is topredict the original vocabulary id of the masked
 
 [^2]:
-    Dai and Le, 2015;
-    Peters et al.,2018a;
-    Radford et al., 2018;
-    Howard and Ruder, 2018
+
+  Dai and Le, 2015;
+  Peters et al.,2018a;
+  Radford et al., 2018;
+  Howard and Ruder, 2018
 
 [^3]:
-    Bowman et al., 2015;
-    Williams et al., 2018
+
+  Bowman et al., 2015;
+  Williams et al., 2018
 
 [^4]:
-    Tjong Kim Sang and De Meulder, 2003;
-    Rajpurkar et al., 2016.
+
+  Tjong Kim Sang and De Meulder, 2003;
+  Rajpurkar et al., 2016.
 
 </div>

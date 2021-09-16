@@ -14,17 +14,17 @@ tagSuite.before.each(ReactTest.reset);
 
 tagSuite('Should render <Tag /> with a default class ', () => {
   const { container } = ReactTest.render(<Tag />);
-  const el = container.querySelector('dd');
+  const el = container.querySelector('dfn');
   assert.match(el.className, 'default');
 });
 tagSuite('Should render <Tag /> with children ', () => {
   const { container } = ReactTest.render(<Tag>Food</Tag>);
-  const el = container.querySelector('dd');
+  const el = container.querySelector('dfn');
   assert.match(el.textContent, 'Food');
 });
 tagSuite('Should render <Tag /> with variants ', () => {
   const { container } = ReactTest.render(<Tag variant={TagVariant.SUCCESS} />);
-  const el = container.querySelector('dd');
+  const el = container.querySelector('dfn');
   assert.match(el.className, 'success');
 });
 tagSuite('All variants should have a style class', () => {

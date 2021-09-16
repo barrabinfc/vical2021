@@ -3,6 +3,7 @@ schema: basic
 status: in progress
 published: true
 layout: ../layouts/home.astro
+
 title: Vical
 subtitle: I'm vitor and i write web software
 description: Personal website

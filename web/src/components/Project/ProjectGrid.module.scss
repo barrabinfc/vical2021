@@ -5,7 +5,7 @@
 .project-grid {
   $columns: 3;
   $gap: 32px;
-  $itemWidth: calc(#{math.div(100%, $columns)} - #{$gap});
+  $itemWidth: calc(#{math.div(100%, $columns)});
 
   @include grids.flexGrid($columns, $gap);
 
@@ -14,10 +14,10 @@
       flex: 0 0 33%;
     }
     :global(.item:nth-child(2n)) {
-      flex: 0 0 calc(2 * #{$itemWidth});
+      flex: 0 0 calc(2 * #{$itemWidth} - #{$gap});
     }
     :global(.item:nth-child(3n)) {
-      flex: 0 0 calc(3 * #{$itemWidth});
+      flex: 0 0 calc(3 * #{$itemWidth} - (2 * #{$gap}));
     }
   }
 }

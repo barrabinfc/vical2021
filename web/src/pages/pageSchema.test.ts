@@ -19,7 +19,7 @@ export const listRootPages = async (): Promise<Page[]> => {
   }
 
   const markdownFiles = [...(await listMarkdown(cwd))];
-  return markdownFiles.map(page => toPage(page, cwd)).filter(markdownPage => markdownPage.published);
+  return markdownFiles.map(page => toPage(page, cwd));
 };
 
 test('Pages should match Page interface', async () => {

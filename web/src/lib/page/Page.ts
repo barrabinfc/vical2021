@@ -30,6 +30,7 @@ function isAstroPage(subject: Record<string | symbol, any>): subject is AstroPag
   return subject[AstroContextSymbol] !== undefined;
 }
 
+/** Markdown returned from @astrojs/markdown parser */
 interface AstroMarkdownPage {
   astro: {
     headers: any[];
@@ -69,7 +70,7 @@ const isPageContent = t.isObject(
     extra: t.isUnknown()
   }
 );
-type PageContent = t.InferType<typeof isPageContent>;
+type PageContent = Required<t.InferType<typeof isPageContent>>;
 
 /**
  * Page Entity
