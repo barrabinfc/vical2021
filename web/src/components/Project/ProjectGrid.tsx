@@ -1,24 +1,21 @@
-import React from "react";
-import { cn } from "~/lib/helpers";
-import { motion } from "framer-motion";
+import React from 'react';
+import { cn } from '~/lib/helpers';
+import { Page } from '../../lib/page';
+import { motion } from 'framer-motion';
 
-import style from "./ProjectGrid.module.scss";
+import style from './ProjectGrid.module.scss';
 
-import FadeInWhenVisible from "../anims/FadeInWhenVisible";
-import Card from "../Card/Card";
+import FadeInWhenVisible from '../anims/FadeInWhenVisible';
+import Card from '../Card/Card';
 
-export default function ProjectList({
-  projects
-}: {
-  projects: MarkdownPage[];
-}) {
+export default function ProjectList({ projects }: { projects: Page[] }) {
   return (
-    <motion.div className={cn(style["project-grid"])}>
-      {projects.slice(0, 3).map((project, i) => (
+    <motion.div className={cn(style['project-grid'])}>
+      {projects.map((project, i) => (
         <FadeInWhenVisible key={project.slug} className="item" delay={i / 10}>
           <Card
             key={project.slug}
-            delay={i / 10}
+            delay={i / 5}
             href={project.url.pathname}
             avatar={{ ...project.thumbnail, width: 0, height: 0 }}
             content={project.content}

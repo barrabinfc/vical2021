@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 export const cn = (...args) => {
-  return args.filter(Boolean).join(" ");
+  return args.filter(Boolean).join(' ');
 };
 
 export const range = n => {
@@ -26,11 +26,11 @@ export const errorId = (method, error) => {
 export const hasReactChildren = (child: React.ReactElement): boolean => {
   return (
     child &&
-    child["$$typeof"] &&
-    child["$$typeof"] === Symbol.for("react.element") &&
+    child['$$typeof'] &&
+    child['$$typeof'] === Symbol.for('react.element') &&
     child.props &&
     child.props.value &&
-    child.props.value !== ""
+    child.props.value !== ''
   );
 };
 
@@ -47,48 +47,44 @@ export const toUnixTimestamp = (milliTimestamp: number): UnixTimestamp => {
 };
 
 /* From Unix timestamp to DMY(internatially popular) string date   */
-export const toDMYDateString = (unixTimestamp: UnixTimestamp): string => {
-  const date = new Date(unixTimestamp * 1000);
-  return date.toLocaleDateString("pt-BR");
-};
+export function toDMYDateString(date: UnixTimestamp): string;
+export function toDMYDateString(date: Date): string;
+export function toDMYDateString(date: UnixTimestamp | Date): string {
+  switch (typeof date) {
+    case 'number':
+      return new Date(date * 1000).toLocaleDateString('pt-BR');
+    case 'object':
+      return date.toLocaleDateString('pt-BR');
+  }
+}
 
 /**
  * Slugify
  * Transform `txt` into a url friendly slug.
  * Capitalize each word, join it together, and strip non 09AZ-_ chars
  */
-export const slugifyRaw = (
-  splitTransform: [string, string] = [" ", ""],
-  txt: string = ""
-): string => {
+export const slugifyRaw = (splitTransform: [string, string] = [' ', ''], txt: string = ''): string => {
   return txt
     .trim()
     .split(splitTransform[0])
-    .map(
-      token => token.slice(0, 1).toUpperCase() + token.slice(1).toLowerCase()
-    )
+    .map(token => token.slice(0, 1).toUpperCase() + token.slice(1).toLowerCase())
     .join(splitTransform[1])
-    .replace(/[^0-9a-z_-]/gi, "");
+    .replace(/[^0-9a-z_-]/gi, '');
 };
 
 export const slugify: (txt: string) => string = slugifyRaw.bind(null, null);
-export const slugifyFilepath: (txt: string) => string = slugifyRaw.bind(null, [
-  "/",
-  "-"
-]);
+export const slugifyFilepath: (txt: string) => string = slugifyRaw.bind(null, ['/', '-']);
 
 /** Emojify status */
-export const emojifyStatus = (
-  status: "draft" | "in progress" | "complete"
-): string => {
+export const emojifyStatus = (status: 'draft' | 'in progress' | 'complete'): string => {
   switch (status) {
-    case "draft":
-      return "🌱";
-    case "in progress":
-      return "🌿";
-    case "complete":
-      return "🌳";
+    case 'draft':
+      return '🌱';
+    case 'in progress':
+      return '🌿';
+    case 'complete':
+      return '🌳';
     default:
-      return "❌";
+      return '❌';
   }
 };

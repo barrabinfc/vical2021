@@ -1,0 +1,62 @@
+@use "sass:math";
+@use "src/styles/typo" as typo;
+
+.garden-list {
+  list-style: decimal;
+  padding-inline-end: calc(8 * var(--gap));
+  padding-inline-start: calc(8 * var(--gap));
+
+  li {
+    margin-block-end: 1em;
+    margin-block-start: 1em;
+    color: var(--text2);
+
+    &::marker {
+      font-size: var(--h4);
+    }
+  }
+}
+
+.garden-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  dfn {
+    margin-inline-start: 0;
+    padding: calc(2 * var(--gap));
+  }
+
+  /** Adjacent tags */
+  :global(dfn + dfn) {
+    margin-left: var(--gap);
+  }
+}
+
+.link-title {
+  @include typo.link-text;
+}
+.title {
+  @include typo.weight(var(--text-weight));
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-right: auto;
+}
+
+:global(.tags-container) {
+  display: inline-flex;
+  align-items: center;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+:global(.extra-container) {
+  display: inline-flex;
+  align-items: center;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+:global(.tags-container + .extra-container) {
+  margin-left: 1em;
+}

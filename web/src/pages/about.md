@@ -1,9 +1,13 @@
 ---
-title: About
+schema: basic
+status: in progress
+published: true
 layout: ../layouts/base.astro
+
+title: About
+subtitle: I write software for the web plataform
 description: I write about software programming.
-schema: article
-datePublished: Last Modified
+publishedAt: 2021-10-18
 ---
 
 # About 🍑

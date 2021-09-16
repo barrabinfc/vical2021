@@ -6,8 +6,9 @@ import Header from '../components/Header/Header.tsx';
 import Footer from '../components/Footer/Footer.jsx';
 
 import GlobalSettings from '../components/Settings/Settings.tsx';
+import {toPage} from '../lib/page/Page';
 
-const content:any = Astro.props.content;
+const page:Page = Astro.props.page;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -15,13 +16,13 @@ const content:any = Astro.props.content;
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{content.title}</title>
+    <title>{page.title}</title>
     <link rel="stylesheet" href={Astro.resolve('../styles/global.css')} />
-    <meta name="description" content="{content.description}" />
-    <meta name="schema" content="{content.schema}" />
-    <SEO module="og" ...content />
-    <SEO module="twitter" ...content />
-    <SEO module="ld" ...content />
+    <meta name="description" content="{page.description}" />
+    <meta name="schema" content="{page.schema}" />
+    <SEO module="og" ...page />
+    <SEO module="twitter" ...page />
+    <SEO module="ld" ...page />
 
   </head>
   <body data-layout="base">
@@ -33,7 +34,7 @@ const content:any = Astro.props.content;
           <Header slot="header" client:idle />
           <div class="container-wrapper">
             <slot />
-            <GlobalSettings client:idle />
+            <!-- <GlobalSettings client:idle /> -->
           </div>
 
           <Footer slot="footer" />

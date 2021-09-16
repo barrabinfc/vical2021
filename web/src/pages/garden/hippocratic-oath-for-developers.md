@@ -1,15 +1,15 @@
 ---
-title: Hippocratic oath for developers
+schema: article
+status: draft
+published: true
 layout: ../../layouts/Post/Post.astro
-description: A hippocratic oath for developers
+title: Hippocratic oath for developers
 subtitle: Let's fight against user-hostile software
+description: A hippocratic oath for developers
 tags:
   - opinion
   - user-hostile software
-schema: article
-status: draft
 publishedAt: 2021-10-09
-published: true
 ---
 
 Let's face it, today software trends are user hostile. Every website in 2021 is hugely bloated, wants to send you notifications,

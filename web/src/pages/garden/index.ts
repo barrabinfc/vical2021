@@ -1,35 +1,22 @@
-import { dirname, relative } from "node:path";
-import { listMarkdown, toMarkdownPage } from "../../lib/listMarkdown";
-
-const toGardenPage = (
-  markdownPage: MarkdownPage,
-  gardenPath: string
-): GardenPage => {
-  const relativePath = relative(gardenPath, dirname(markdownPage.abspath));
-  const collections = (relativePath && relativePath.split("/")) || null;
-  return {
-    ...markdownPage,
-    collection: collections
-  };
-};
+import { dirname, relative } from 'node:path';
+import { Page, toPage } from '../../lib/page';
+import { listMarkdown } from '../../lib/listMarkdown';
 
 /**
  * Fetch all garden posts in the folder 'src/pages/garden'.
- * @return {MarkdownPage[]}
+ * @return {Page[]}
  */
-export const listGarden = async (): Promise<MarkdownPage[]> => {
+export const listGarden = async (): Promise<Page[]> => {
   /** @ts-ignore */
-  const cwd = dirname(import.meta?.url?.pathname ?? process.cwd());
+  const cwd = dirname(import.meta?.url?.pathname ?? `${__dirname}/garden`);
   if (!/garden$/.test(cwd)) {
-    throw new Error(`cwd() should be in pages/garden/ folder`);
+    throw new Error(`cwd() should be in pages/garden/ folder: ${cwd}`);
   }
 
   const markdownFiles = [...(await listMarkdown(cwd))];
-  const markdownPages = markdownFiles
-    .map(toMarkdownPage)
-    .map(page => toGardenPage(page, cwd))
-    .filter(page => page.published)
-    .sort((pageA, pageB) => pageB.publishedAt - pageA.publishedAt);
+  const pages = markdownFiles.map(page => toPage(page, cwd));
+  // .filter(page => page.published);
+  // .sort((pageA, pageB) => pageB.publishedAt - pageA.publishedAt);
 
-  return markdownPages;
+  return pages;
 };

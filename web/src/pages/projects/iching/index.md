@@ -1,17 +1,21 @@
 ---
+schema: 'basic'
 status: complete
 published: true
 layout: ../../../layouts/Project/Project.astro
-path: /projects/iching
-title: "I Ching"
-subtitle: "The book of changes app"
-thumbnail: "/images/textures/cashmere-la.jpg"
-wrapper: "wrapper pad8-y"
-schema: "article"
-color: "#0f0f0f"
-bg_color: "#f8fbfb"
-dark_gray: "#f8f8f8"
-logo: "/images/icons/yin_yang.svg"
+title: I Ching
+subtitle: The book of changes app
+description: The book of changes app
+thumbnail:
+  path: /images/textures/cashmere-la.jpg
+
+publishedAt: 2018-06-01
+
+wrapper: 'wrapper pad8-y'
+color: '#0f0f0f'
+bg_color: '#f8fbfb'
+dark_gray: '#f8f8f8'
+logo: '/images/icons/yin_yang.svg'
 currentColor: asd
 ---
 
