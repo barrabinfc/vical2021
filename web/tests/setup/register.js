@@ -1,13 +1,13 @@
 /**
  * Aliases
  */
-require("module-alias/register");
+require('module-alias/register');
 
 /**
- * Css
+ * Register css modules in UVU test runner
  */
-const hook = require("css-modules-require-hook");
+const hook = require('css-modules-require-hook');
 
 hook({
-  extensions: [".css", ".scss"]
+  extensions: ['.css', '.scss']
 });

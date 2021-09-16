@@ -1,14 +1,15 @@
 ---
-title: Introduction to complexity
+schema: article
+status: draft
+published: true
 layout: ../../../layouts/Post/Post.astro
+title: Introduction to complexity
+subtitle: Introduction to complexity - Personal notes over Santa Fe Course
+description: Personal notes about complexity course of Santa Fe institute
 tags:
   - personal-notes
   - santa-fe institute
-description: Personal notes about complexity course of Santa Fe institute
-schema: article
-status: draft
 publishedAt: 2021-10-02
-published: true
 ---
 
 What is complexity? The term is incredibly hard to describe, but we can start

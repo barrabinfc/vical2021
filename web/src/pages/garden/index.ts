@@ -1,6 +1,6 @@
 import { dirname, relative } from 'node:path';
-import { isPage, Page } from '../../lib/page';
-import { listMarkdown, MarkdownPageReference, toPage } from '../../lib/listMarkdown';
+import { Page, toPage } from '../../lib/page';
+import { listMarkdown } from '../../lib/listMarkdown';
 
 /**
  * Fetch all garden posts in the folder 'src/pages/garden'.

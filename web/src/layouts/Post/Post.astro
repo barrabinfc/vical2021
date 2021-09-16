@@ -1,35 +1,40 @@
 ---
-import BaseLayout from '~/layouts/base.astro';
-import Masthead from '~/components/Masthead';
-import Tag from '~/components/Tag';
+import BaseLayout from '../base.astro';
+import {Page, toPage} from '../../lib/page/Page';
 
-import {cn,fromISOString, toUnixTimestamp, toDMYDateString, emojifyStatus} from '~/lib/helpers';
+import Masthead from '../../components/Masthead';
+import Tag from '../../components/Tag';
 
-const content = {
+import {cn,fromISOString, toUnixTimestamp, toDMYDateString, emojifyStatus} from '../../lib/helpers';
+
+/** @ts-ignore */
+const abspath = import.meta.url.pathname;
+const astroContextSymbol = Symbol.for('astro.context');
+const astroContext = Astro.props[astroContextSymbol];
+
+let page:Page = toPage({
+  layout: abspath,
   ...Astro.props.content,
-  // TODO: Change MarkdownContent / MarkdownPage to have the same interface for listing/get
-  publishedAt: toUnixTimestamp(
-    fromISOString(Astro.props.content.publishedAt)
-  ),
-}
+  [astroContextSymbol]: astroContext
+});
 
 ---
 
-<BaseLayout {content}>
+<BaseLayout {page}>
   <article id="content">
     <link rel="stylesheet" href="/styles/prism/solarizedLight.css" />
     <Masthead className="post-masthead surface4"
-      title={content.title}
-      subtitle={content.subtitle}
+      title={page.content.title}
+      subtitle={page.content.subtitle}
     >
-      {content.tags && (
+      {page.tags && (
         <div class="metadata-container" aria-label="Tagged as">
           <dl class="date-container">
-            <Tag className="status" variant="transparent" aria-label={content.status}>{emojifyStatus(content.status)}</Tag>
-            <dd class="status" aria-label={`Published at: ${toDMYDateString(content.publishedAt)}`}><em>{toDMYDateString(content.publishedAt)}</em></dd>
+            <Tag className="status" variant="transparent" aria-label={page.status}>{emojifyStatus(page.status)}</Tag>
+            <dd class="status" aria-label={`Published at: ${toDMYDateString(page.publishedAt)}`}><em>{toDMYDateString(page.publishedAt)}</em></dd>
           </dl>
           <dl class="tags-container" aria-label="Tagged as">
-            {content.tags.map(tag => <Tag className="tag" variant='transparent'>{tag}</Tag>)}
+            {page.tags.map(tag => <Tag className="tag" variant='transparent'>{tag}</Tag>)}
           </dl>
         </div>
       )}

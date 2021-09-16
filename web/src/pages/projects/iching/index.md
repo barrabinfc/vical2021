@@ -1,15 +1,17 @@
 ---
+schema: 'basic'
 status: complete
 published: true
-publishedAt: 2018-06-01
-description: The book of changes app
 layout: ../../../layouts/Project/Project.astro
-path: /projects/iching
-title: 'I Ching'
-subtitle: 'The book of changes app'
-thumbnail: '/images/textures/cashmere-la.jpg'
+title: I Ching
+subtitle: The book of changes app
+description: The book of changes app
+thumbnail:
+  path: /images/textures/cashmere-la.jpg
+
+publishedAt: 2018-06-01
+
 wrapper: 'wrapper pad8-y'
-schema: 'basic'
 color: '#0f0f0f'
 bg_color: '#f8fbfb'
 dark_gray: '#f8f8f8'

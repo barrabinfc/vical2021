@@ -72,7 +72,7 @@ $cardHeight: 280px;
    */
   &::before,
   &::after {
-    content: "";
+    content: '';
     width: 100%;
     height: 100%;
     position: absolute;
@@ -108,10 +108,8 @@ $cardHeight: 280px;
   &::after {
     background: linear-gradient(
       45deg,
-      hsl(var(--brand-hue) var(--brand-saturation) var(--brand-lightness) / 0.7)
-        0,
-      hsl(var(--brand-hue) var(--brand-saturation) var(--brand-lightness) / 0)
-        100%
+      hsl(var(--brand-hue) var(--brand-saturation) var(--brand-lightness) / 0.7) 0,
+      hsl(var(--brand-hue) var(--brand-saturation) var(--brand-lightness) / 0) 100%
     );
     transition: 300ms opacity ease-out;
   }
@@ -130,7 +128,7 @@ $cardHeight: 280px;
   color: var(--surface1);
 }
 
-.title-container[align-at="bottom"] {
+.title-container[align-at='bottom'] {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -144,7 +142,7 @@ $cardHeight: 280px;
   margin-bottom: 0.5em;
 }
 
-.description {
+.subtitle {
   @include helpers.text-truncate(2, 2);
 
   margin: 0;

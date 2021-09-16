@@ -16,8 +16,8 @@ export const expectPageInterface = (page: Page): void => {
 
 const pageContent: PageContent = {
   title: 'hello world',
+  subtitle: 'A hello world subtitle',
   description: 'Hello World',
-  props: {},
   headers: [],
   content: '<h1>Hello world</h1>'
 };

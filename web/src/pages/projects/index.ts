@@ -1,11 +1,12 @@
 import { dirname } from 'node:path';
-import { listMarkdown, toPage } from '../../lib/listMarkdown';
+import { Page, toPage } from '../../lib/page';
+import { listMarkdown } from '../../lib/listMarkdown';
 
 /**
  * Fetch all projects in the folder 'src/pages/projects'.
  * @return {MarkdownPage[]}
  */
-export const listProjects = async (): Promise<MarkdownPage[]> => {
+export const listProjects = async (): Promise<Page[]> => {
   /** @ts-ignore */
   const cwd = dirname(import.meta?.url?.pathname ?? `${__dirname}/projects`);
   if (!/projects$/.test(cwd)) {

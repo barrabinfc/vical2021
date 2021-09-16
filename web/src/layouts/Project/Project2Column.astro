@@ -1,12 +1,21 @@
 ---
+import {toPage} from '../../lib/page/Page'
 import Project from './Project.astro'
 import {resolve, relative, dirname } from 'node:path'
 import {readFileSync} from 'node:fs';
-const content = Astro.props.content || {};
+
+
+const astroContextSymbol = Symbol.for('astro.context');
+const astroContext = Astro.props[astroContextSymbol];
+
+const page = toPage({
+  ...Astro.props.content,
+  [astroContextSymbol]: astroContext
+});
 
 /** If we have a gallery file, load it's html */
-const galleryAddress = content.gallery;
-let galleryHTML = `File ${galleryAddress} Not found`
+const galleryAddress = page.content.gallery;
+let galleryHTML = `<pre>File ${galleryAddress} Not found</pre>`
 if(galleryAddress) {
   const galleryAddressFullPath = resolve(`${process.cwd()}/${galleryAddress}`);
   const galleryAddressRelativePath = relative(dirname(import.meta.url.pathname), galleryAddressFullPath );
@@ -15,7 +24,7 @@ if(galleryAddress) {
 
 ---
 
-<Project {content}>
+<Project content={page.content}>
   <div class="two-columns">
     <section class="content pad8 left">
       <slot/>

@@ -9,7 +9,7 @@ test('listMarkdown(path) should return a parsed markdown', async () => {
   expect(markdownFiles.size).to.be.greaterThan(0);
 
   const firstFile = [...markdownFiles][0];
-  expect(firstFile).to.include.all.keys('name', 'abspath', 'frontmatter', 'astro', 'content');
+  expect(firstFile).to.include.all.keys('name', 'abspath', 'astro', 'frontmatterExample');
 });
 
 test.run();

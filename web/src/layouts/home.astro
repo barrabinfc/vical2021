@@ -1,28 +1,33 @@
 ---
-import { Markdown } from 'astro/components';
-import BaseLayout from '../layouts/base.astro';
-import {cn,toDMYDateString, emojifyStatus} from '~/lib/helpers';
+import {dirname,basename} from 'node:path'
+import {cn,toDMYDateString, emojifyStatus} from '../lib/helpers';
+import {Page, toPage} from '../lib/page/Page'
 
-import FlashlightEffect from '../components/FlashlightEffect/FlashlightEffect.tsx'
+import BaseLayout from './base.astro';
 
-import {listProjects} from './projects';
-import {listGarden} from './garden';
+import {listProjects} from '../pages/projects';
+import {listGarden} from '../pages/garden';
 
 import ProjectGrid from '../components/Project/ProjectGrid.tsx';
-import Card from '../components/Card/Card.tsx';
 import Tag from '../components/Tag/Tag.tsx';
 
-let content = {
-  title: 'Hello World',
-  description: 'Index description',
-  schema: 'article'
-};
-let projects: MarkdownPage[] = await listProjects();
-let gardenItems: GardenPage[] = await listGarden();
+/** @ts-ignore */
+const abspath = import.meta.url.pathname;
+const astroContextSymbol = Symbol.for('astro.context');
+const astroContext = Astro.props[astroContextSymbol];
+
+let page:Page = toPage({
+  layout: abspath,
+  ...Astro.props.content,
+  [astroContextSymbol]: astroContext
+});
+
+let projects: Page[] = await listProjects();
+let gardenItems: Page[] = await listGarden();
 
 ---
 
-<BaseLayout {content}>
+<BaseLayout {page}>
   <div id="content">
     <section class="home" aria-labelledby="welcome">
       <div class="home-grid">
@@ -35,9 +40,9 @@ let gardenItems: GardenPage[] = await listGarden();
         </div>
         <div class="item highlight2 pad4">
           <div class="caption">
-            Hi 🙏 <br/>
+            <!-- Hi 🙏 <br/>
             I'm <strong>Vitor</strong><br/>
-            I write software for the web
+            I write software for the web -->
           </div>
         </div>
         <div class="item decoration">
@@ -59,7 +64,7 @@ let gardenItems: GardenPage[] = await listGarden();
           <li class={cn(garden.slug)} >
             <div class="garden-item">
               <h4 class="title"><a href={garden.url.pathname}>{garden.content.title}</a></h4>
-              {garden.collection && (
+              {garden.collection?.length > 0 && (
                 <dl class="tags-container" aria-label="in collection">
                   <Tag className="collection">{garden.collection}</Tag>
                 </dl>

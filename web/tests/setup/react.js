@@ -1,9 +1,10 @@
-import { JSDOM } from "jsdom";
-import React from "react";
-import { render as reactRender, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
+/** React browser environment */
+import { JSDOM } from 'jsdom';
+import React from 'react';
+import { render as reactRender, unmountComponentAtNode } from 'react-dom';
+import { act } from 'react-dom/test-utils';
 
-const { window } = new JSDOM("<main></main>");
+const { window } = new JSDOM('<main></main>');
 
 export function setup() {
   // @ts-ignore
@@ -15,9 +16,9 @@ export function setup() {
 }
 
 export function reset() {
-  window.document.title = "";
-  window.document.head.innerHTML = "";
-  window.document.body.innerHTML = "<main></main>";
+  window.document.title = '';
+  window.document.head.innerHTML = '';
+  window.document.body.innerHTML = '<main></main>';
 }
 
 /**
@@ -27,15 +28,17 @@ export function reset() {
  */
 
 /**
+ * React render
  * @return {RenderOutput}
  */
 export function render(component, props = {}) {
-  const container = window.document.querySelector("main");
+  const container = window.document.querySelector('main');
   reactRender(component, container);
   return { container, component };
 }
 
 /**
+ * dispatchEvent
  * @param {HTMLElement} elem
  * @param {String} event
  * @param {any} [details]

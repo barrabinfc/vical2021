@@ -49,6 +49,7 @@
     "esbuild-register": "^3.0.0",
     "faker": "^5.5.3",
     "jsdom": "^17.0.0",
+    "linkedom": "^0.11.2",
     "react-intersection-observer": "^8.32.1",
     "sinon": "^11.1.2",
     "ts-node": "^10.2.1",

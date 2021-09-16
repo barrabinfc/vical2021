@@ -15,13 +15,3 @@ interface Person {
 interface Renderable {
   (props: any): JSX.Element;
 }
-
-interface AstroMarkdownPage {
-  frontmatter: Record<string, any>;
-  astro: {
-    headers: any[];
-    source: string;
-    html: string;
-  };
-  content: string;
-}
