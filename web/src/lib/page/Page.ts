@@ -157,7 +157,7 @@ function toPage(content: AstroPage | MarkdownPageReference, cwd?: string): Page 
     schema: content?.schema,
     status: content?.status,
     published: content?.published,
-    publishedAt: content?.publishedAt,
+    publishedAt: new Date(content?.publishedAt),
     content: {
       title: content?.title,
       subtitle: content?.subtitle,
