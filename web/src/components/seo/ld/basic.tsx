@@ -25,7 +25,7 @@ export default function Basic(
     }),
 
     /** Thumbnails */
-    ...(props.images?.length && {
+    ...(props.images?.length > 0 && {
       image: props.images
     }),
 
