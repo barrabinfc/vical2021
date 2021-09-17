@@ -1,14 +1,26 @@
 ---
+import {Page} from '../lib/page/Page';
+import defaultSettings from '../lib/settings'
 import Layout from '../components/Layout/Layout.astro';
+
 import SEO from '../components/seo';
 
 import Header from '../components/Header/Header.tsx';
 import Footer from '../components/Footer/Footer.jsx';
 
-import GlobalSettings from '../components/Settings/Settings.tsx';
-import {toPage} from '../lib/page/Page';
+import SettingsPanel from '../components/Settings/SettingsPanel.tsx';
 
 const page:Page = Astro.props.page;
+let seo = {
+  schema: page.schema,
+  permalink: page.url.href,
+  title: page.content.title,
+  description: page.content.description,
+  datePublished: page.publishedAt.toISOString(),
+  images: (page.thumbnail?.path && [page.thumbnail.path]) ?? [],
+  author: defaultSettings.author
+}
+
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -16,30 +28,39 @@ const page:Page = Astro.props.page;
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{page.title}</title>
+    <title>{page.content.title}</title>
     <link rel="stylesheet" href={Astro.resolve('../styles/global.css')} />
-    <meta name="description" content="{page.description}" />
-    <meta name="schema" content="{page.schema}" />
-    <SEO module="og" ...page />
-    <SEO module="twitter" ...page />
-    <SEO module="ld" ...page />
 
+    <link rel="shortcut icon" href="/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#fb7346">
+
+    <meta name="description" content={page.content.description} />
+    <meta name="schema" content={page.schema} />
+    <SEO module="og" {...seo} />
+    <SEO module="twitter" {...seo} />
+    <SEO module="ld" {...seo} />
   </head>
   <body data-layout="base">
 
     <div class="root">
-      <div class="container">
+      <main class="container">
         <Layout>
 
           <Header slot="header" client:idle />
           <div class="container-wrapper">
             <slot />
-            <!-- <GlobalSettings client:idle /> -->
+            <!-- <SettingsPanel client:idle /> -->
           </div>
 
           <Footer slot="footer" />
         </Layout >
-      </div>
+      </main>
     </div>
 
   </body>

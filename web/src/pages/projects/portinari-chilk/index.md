@@ -4,15 +4,15 @@ status: complete
 published: true
 layout: ../../../layouts/Project/Project2Column.astro
 title: chilk
-subtitle: Portinari On-site Kiosk App
-description: 'Junto com Ligalight, produzimos o aplicativo e projeções do kiosk da portinari. Baseado na idéia <i>faça vc mesmo</i>, os desenhos criados no aplicativo são projetados no stand.</p><p>Utilizamos Processing e Vue</p>'
+subtitle: Portinari Kiosk App
+description: Portinari kiosk app
 publishedAt: 2018-06-03
 
 thumbnail:
   path: '/images/portinari/portal.jpg'
 
 gallery: src/pages/projects/portinari-chilk/portinari-gallery.astro
-website: 'https://vitocal.bitbucket.io/'
+website: https://vitocal.bitbucket.io/
 ---
 
 Produzimos em parceria com a [Ligalight](https://www.ligalight.com.br/about/) um aplicativo de desenho e projeções para Portinari[^1], baseado na idéia _faça você mesmo_. Queriamos que os visitantes tivessem a impressão de desenhar no ambiente.

@@ -1,16 +1,16 @@
-export type SEOModules = "ld" | "og" | "twitter";
-export type SEOSchema = "basic" | "article" | "nadica";
+export type SEOModules = 'ld' | 'og' | 'twitter';
+export type SEOSchema = 'basic' | 'article' | 'ClaimReview' | 'HowTo';
 
 export interface SEOItem {
   schema: SEOSchema;
   permalink: string;
 
-  author?: Person;
+  author?: string;
   title: string;
   description: string;
-  content?: string;
 
+  content?: string;
   images: string[];
-  dateModified?: string;
+
   datePublished?: string;
 }

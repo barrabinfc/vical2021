@@ -11,11 +11,12 @@ thumbnail:
 
 publishedAt: 2018-06-01
 
-wrapper: 'wrapper pad8-y'
+variant: 'wrapper pad8-y'
+logo: /images/icons/yin_yang.svg
+
 color: '#0f0f0f'
 bg_color: '#f8fbfb'
 dark_gray: '#f8f8f8'
-logo: '/images/icons/yin_yang.svg'
 currentColor: asd
 ---
 

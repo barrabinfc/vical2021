@@ -7,10 +7,6 @@ interface Article {
   images: string[];
 }
 
-interface Person {
-  name: string;
-}
-
 /** Implements a render method that returns html string */
 interface Renderable {
   (props: any): JSX.Element;
