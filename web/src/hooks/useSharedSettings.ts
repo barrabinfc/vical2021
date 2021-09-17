@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from "react";
-import { useBetween } from "use-between";
+import React, { useState } from 'react';
+import { useBetween } from 'use-between';
 
 export interface Settings {
   tweaksEnabled: boolean;

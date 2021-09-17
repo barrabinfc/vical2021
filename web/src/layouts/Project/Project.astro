@@ -28,7 +28,7 @@ let page:Page = toPage({
       subtitle={page.content.subtitle}
       image={page.logo}
     ></Masthead>
-    <section class={cn('project',page.wrapper)} aria-labelledby="masthead-title">
+    <section class={cn('project',page.variant)} aria-labelledby="masthead-title">
       <slot />
     </section>
   </article>
