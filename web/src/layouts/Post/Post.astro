@@ -1,4 +1,5 @@
 ---
+import {relative,dirname} from 'node:path'
 import BaseLayout from '../base.astro';
 import {Page, toPage} from '../../lib/page/Page';
 
@@ -6,6 +7,7 @@ import Masthead from '../../components/Masthead';
 import Tag, {TagVariant} from '../../components/Tag/Tag';
 
 import {cn,fromISOString, toUnixTimestamp, toDMYDateString, emojifyStatus} from '../../lib/helpers';
+import {buildHTMLTransformerFn , HTMLTransformFn} from '../../lib/html';
 
 /** @ts-ignore */
 const abspath = import.meta.url.pathname;
@@ -17,6 +19,18 @@ let page:Page = toPage({
   ...Astro.props.content,
   [astroContextSymbol]: astroContext
 });
+
+function resolveRelative(el) {
+  const relativeToPagePath = relative(dirname(import.meta.url.pathname), dirname(page.abspath) );
+  const src = el.attr('src');
+  el.attr('src', Astro.resolve(relativeToPagePath + src.slice(1)) );
+}
+
+const transformRelativeImagePath = buildHTMLTransformerFn( 'img[src^="./"]',  resolveRelative );
+let content = transformRelativeImagePath( page.content.content );
+
+// let content = await transformRelativeImages2Absolute(page.content.content, page.abspath, Astro.resolve);
+// .replace('ASTRO_ESCAPED_LEFT_CURLY_BRACKET', '{');
 
 ---
 
@@ -31,7 +45,13 @@ let page:Page = toPage({
         <div class="metadata-container" aria-label="Tagged as">
           <span class="date-container">
             <Tag className="status" variant="transparent" aria-label={page.status}>{emojifyStatus(page.status)}</Tag>
-            <dfn class="status" aria-label={`Published at: ${toDMYDateString(page.publishedAt)}`}><em>{toDMYDateString(page.publishedAt)}</em></dfn>
+            <time
+              className="publishedAt"
+              dateTime={page.publishedAt.toString()}
+              aria-label={`Published at: ${toDMYDateString(page.publishedAt)}`}
+            >
+              {toDMYDateString(page.publishedAt)}
+            </time>
           </span>
           <span class="tags-container" aria-label="Tagged as">
             {page.tags.map(tag => <Tag className="tag" variant={TagVariant.TRANSPARENT}>{tag}</Tag>)}
@@ -40,7 +60,7 @@ let page:Page = toPage({
       )}
     </Masthead>
     <div class="post">
-      <slot />
+      {content}
     </div>
   </article>
 </BaseLayout>
@@ -48,7 +68,6 @@ let page:Page = toPage({
 <style lang="scss" global>
 @use "src/styles/grids" as grids;
 @use "src/styles/helpers" as h;
-@use "src/styles/typo" as typo;
 
 .post-masthead {
   .metadata-container {
@@ -90,16 +109,16 @@ let page:Page = toPage({
   position: relative;
   margin: 3em auto;
 
-  > p:first-of-type::first-letter {
-    font-family: var(--title-family);
-    float: left;
-    font-size: 4em;
-    line-height: 0.65;
-    margin: 0.1em 0.15em 0em 0px;
-  }
+  // > p:first-of-type::first-letter {
+  //   font-family: var(--title-family);
+  //   float: left;
+  //   font-size: 4em;
+  //   line-height: 0.65;
+  //   margin: 0.1em 0.15em 0em 0px;
+  // }
 
   a:not(.footnote-ref,.footnote-backref) {
-    @include typo.link-text;
+    @include h.link-text;
   }
   a.footnote-backref {
     padding: 0 var(--gap);
@@ -108,6 +127,8 @@ let page:Page = toPage({
 
   img {
     max-width: 100%;
+    display: flex;
+    margin: 0 auto;
   }
   figcaption {
     text-align: center;
@@ -116,14 +137,19 @@ let page:Page = toPage({
   }
 
 
-  /** Limit line-lengths */
-  h1 {
-    max-width: 30ch;
-  }
+  /** Headers */
+  .title {
+      /** Headings of text shoul be smooth */
+    --title-weight: var(--subtitle-weight);
 
-  h2,
-  h3 {
-    max-width: 30ch;
+
+    position: relative;
+    max-width: 50ch;
+
+    /** Headings links */
+    a {
+      position: absolute;
+    }
   }
 
   /**
@@ -171,17 +197,37 @@ let page:Page = toPage({
   pre,
   code,
   pre code {
-    text-shadow: none;
     font-family: var(--code-family);
+    font-size: var(--s0);
+    font-weight: var(--code-weight);
+    text-shadow: none;
     overflow: hidden;
   }
 
   blockquote {
     width: 100%;
     margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
     padding-left: calc(2 * var(--gap));
-    font-size: 1rem;
-    border-left: 4px solid var(--brand);
+    position: relative;
+
+    > p {
+      font-size: inherit;
+      font-style: italic;
+
+      &::before {
+        position: absolute;
+        opacity: 0.9;
+        top: -0.5em;
+        left: -0.5em;
+        width: 1em;
+        height: 1em;
+        font-size: 6rem;
+        font-weight: bold;
+        content: "\201C";
+        color: var(--surface3);
+      }
+    }
   }
 
   /**
@@ -198,9 +244,8 @@ let page:Page = toPage({
       color: var(--text1-invert);
 
       & th {
-        font-size: 1.2rem;
-        font-weight: var(--title-weight);
-        font-size: 1.2rem;
+        font-size: 1.0rem;
+        font-weight: var(--code-weight);
         text-align: center;
       }
     }
@@ -218,6 +263,8 @@ let page:Page = toPage({
     & th,
     & td {
       font-family: var(--code-family);
+      font-weight: var(--code-weight);
+      font-size: var(--s0);
       padding: calc(2 * var(--gap));
       border-right: 1px solid var(--surface2);
 
@@ -229,9 +276,9 @@ let page:Page = toPage({
 
     hr {
       margin: 1em 0em;
-      border-top: 0;
-      border-style: solid;
-      border-color:  hsl(var(--brand-hue) 0% 90%)
+      border: 0;
+      height: 1px;
+      background-image: radial-gradient(circle at center, var(--surface4),transparent)
     }
 
 
@@ -239,12 +286,6 @@ let page:Page = toPage({
    *
    */
   .footnotes {
-    hr {
-      margin: 1em 0em;
-      border-top: 0;
-      border-style: solid;
-      border-color:  hsl(var(--brand-hue) 0% 90%)
-    }
     ol {
       margin-left: 1em;
     }

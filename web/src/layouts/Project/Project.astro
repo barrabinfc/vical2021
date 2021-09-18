@@ -1,7 +1,7 @@
 ---
-import {toPage} from '../../lib/page/Page'
-import BaseLayout from '~/layouts/base.astro';
-import Masthead from '~/components/Masthead';
+import {toPage, Page} from '../../lib/page/Page'
+import BaseLayout from '../../layouts/base.astro';
+import Masthead from '../../components/Masthead';
 
 import {cn} from '../../lib/helpers';
 
@@ -26,9 +26,9 @@ let page:Page = toPage({
     <Masthead className="surface4"
       title={page.content.title}
       subtitle={page.content.subtitle}
-      image={page.logo}
+      image={page.content.logo ?? null}
     ></Masthead>
-    <section class={cn('project',page.variant)} aria-labelledby="masthead-title">
+    <section class={cn('project',page.content.variant)} aria-labelledby="masthead-title">
       <slot />
     </section>
   </article>
@@ -39,7 +39,6 @@ let page:Page = toPage({
 
 @use "src/styles/grids" as grids;
 @use "src/styles/helpers" as h;
-@use "src/styles/typo" as typo;
 
 $containerPadW: 0.1;
 $containerWidth: 100vw - (100vw * $containerPadW);
@@ -56,19 +55,9 @@ $containerWidth: 100vw - (100vw * $containerPadW);
   li {
     max-width: 120ch;
   }
-
-  h1 {
-    max-width: 15ch;
-  }
-
-  h2,
-  h3 {
-    max-width: 25ch;
-  }
-
   /** Links */
   a:not(.footnote-ref,.footnote-backref) {
-    @include typo.link-text;
+    @include h.link-text;
   }
   a.footnote-backref {
     padding: 0 var(--gap);
@@ -82,6 +71,21 @@ $containerWidth: 100vw - (100vw * $containerPadW);
     text-align: center;
     color: var(--text2);
     font-style: italic;
+  }
+
+  /** Headers */
+  .title {
+      /** Headings of text shoul be smooth */
+    --title-weight: var(--subtitle-weight);
+
+
+    position: relative;
+    max-width: 50ch;
+
+    /** Headings links */
+    a {
+      position: absolute;
+    }
   }
 
   p:first-of-type {
@@ -104,9 +108,8 @@ $containerWidth: 100vw - (100vw * $containerPadW);
       color: var(--text1-invert);
 
       & th {
-        font-size: 1.2rem;
-        font-weight: var(--title-weight);
-        font-size: 1.2rem;
+        font-weight: var(--code-weight);
+        font-size: 1.0rem;
         text-align: center;
       }
     }
@@ -124,6 +127,8 @@ $containerWidth: 100vw - (100vw * $containerPadW);
     & th,
     & td {
       font-family: var(--code-family);
+      font-weight: var(--code-weight);
+      font-size: var(--s0);
       padding: calc(2 * var(--gap));
       border-right: 1px solid var(--surface2);
       text-align: center;
@@ -136,9 +141,9 @@ $containerWidth: 100vw - (100vw * $containerPadW);
 
   hr {
     margin: 3em 0em;
-    border-top: 0;
-    border-style: solid;
-    border-color:  hsl(var(--brand-hue) 0% 90%)
+    border: 0;
+    height: 1px;
+    background-image: radial-gradient(circle at center, var(--surface4),transparent)
   }
 
 }
