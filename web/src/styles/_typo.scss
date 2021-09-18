@@ -1,29 +1,31 @@
 @use "src/styles/breakpoints" as bp;
 
-@import url("https://rsms.me/inter/inter.css");
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap");
 /* Typography */
 
 :root {
-  --unit: 16px;
+  --unit: 18px;
   --scale: 1.2 /** minor third */;
 
   --text-lineheight: 1.5;
-  --text-weight: 200;
-  --text-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, Segoe UI,
-    Roboto, Helvetica Neue, Ubuntu, sans-serif;
+  --text-weight: 300;
+  --text-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Ubuntu,
+    sans-serif;
 
-  --title-family: "Inter", sans-serif;
+  --title-family: 'Inter', sans-serif;
   @supports (font-variation-settings: normal) {
-    --title-family: "Inter var", sans-serif;
+    --title-family: 'Inter var', sans-serif;
   }
   --title-lineheight: 1.3;
   --title-weight: 900;
 
-  --code-family: Menlo, Consolas, monospace;
-  --code-weight: 400;
+  --subtitle-family: var(--title-family;)
+  --subtitle-lineheight: 1.3;
+  --subtitle-weight: 200;
+
+  --code-family: Menlo, Monaco, Consolas, monospace;
+  --code-weight: 300;
 
   --s-2: calc(1rem / var(--scale) / var(--scale) / var(--scale));
   --s-1: calc(1rem / var(--scale) / var(--scale));
@@ -33,10 +35,7 @@
   --h4: calc(1rem * var(--scale) * var(--scale));
   --h3: calc(1rem * var(--scale) * var(--scale) * var(--scale));
   --h2: calc(1rem * var(--scale) * var(--scale) * var(--scale) * var(--scale));
-  --h1: calc(
-    1rem * var(--scale) * var(--scale) * var(--scale) * var(--scale) *
-      var(--scale)
-  );
+  --h1: calc(1rem * var(--scale) * var(--scale) * var(--scale) * var(--scale) * var(--scale));
 }
 
 html {
@@ -69,10 +68,11 @@ h1,
 h2,
 h3,
 h4,
-h5 {
+h5,
+.title {
   font-family: var(--title-family);
   font-weight: var(--title-weight);
-  font-variation-settings: "wght" var(--title-weight);
+  font-variation-settings: 'wght' var(--title-weight);
   margin: 3rem 0 1.38rem;
   line-height: var(--title-lineheight);
 
@@ -81,53 +81,28 @@ h5 {
   }
 }
 
-h1 {
+/** Variants size */
+h1,.title1 {
   font-size: var(--h1);
 }
-
-h2 {
+h2,.title2 {
   font-size: var(--h2);
 }
-h3 {
+h3,.title3 {
   font-size: var(--h3);
 }
-h4 {
+h4,.title4 {
   font-size: var(--h4);
 }
-h5 {
+h5,.title5 {
   font-size: var(--h5);
 }
 
-.thin-weight {
-  font-variation-settings: "wght" 200;
-}
-
-/** Links */
-@mixin link-text {
-  text-decoration: none;
-  color: var(--text2);
-  position: relative;
-  padding: 0 var(--gap) 0 var(--gap);
-  margin-bottom: 0.25em;
-  text-decoration: underline;
-  text-decoration-thickness: from-font;
-
-  transition: color 0.078s ease-in-out;
-
-  &:hover {
-    color: var(--brand);
-  }
-
-  // &::after {
-  //   content: " ";
-  //   width: 100%;
-  //   border-bottom: 2px solid var(--text2);
-  //   position: absolute;
-  //   left: 0;
-  //   bottom: 0;
-  // }
-}
-
-@mixin weight($weight) {
-  font-variation-settings: "wght" $weight;
+/** Subtitle */
+.subtitle {
+  font-family: var(--subtitle-family);
+  font-weight: var(--subtitle-weight);
+  margin: 3rem 0 1.38rem;
+  line-height: var(--subtitle-lineheight);
+  font-variation-settings: 'wght' var(--subtitle-weight);
 }

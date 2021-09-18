@@ -1,5 +1,5 @@
 @use "sass:math";
-@use "src/styles/typo" as typo;
+@use "src/styles/helpers" as h;
 
 .garden-list {
   list-style: decimal;
@@ -34,10 +34,10 @@
 }
 
 .link-title {
-  @include typo.link-text;
+  @include h.link-text;
 }
 .title {
-  @include typo.weight(var(--text-weight));
+  @include h.weight(var(--text-weight));
   margin-block-start: 0;
   margin-block-end: 0;
   margin-right: auto;
