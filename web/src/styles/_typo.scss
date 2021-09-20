@@ -47,7 +47,7 @@ html {
 }
 
 p {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-size: var(--p0);
   orphans: 2;
   widows: 2;
@@ -73,11 +73,11 @@ h5,
   font-family: var(--title-family);
   font-weight: var(--title-weight);
   font-variation-settings: 'wght' var(--title-weight);
-  margin: 3rem 0 1.38rem;
+  margin: 2rem 0 2rem;
   line-height: var(--title-lineheight);
 
   @include bp.breakpoint(small, max) {
-    margin: 1rem 0 1.38rem;
+    margin: 1.38rem 0 1.38rem;
   }
 }
 
