@@ -4,8 +4,8 @@ status: draft
 published: true
 layout: ../../../layouts/Post/Post.astro
 title: Introduction to complexity
-subtitle: Introduction to complexity - Personal notes over Santa Fe Course
-description: Personal notes about complexity course of Santa Fe institute
+subtitle: My Personal notes of Santa Fe Course
+description: Personal notes of the complexity course(Santa Fe institute)
 tags:
   - personal-notes
   - santa-fe institute

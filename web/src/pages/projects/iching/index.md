@@ -11,7 +11,6 @@ thumbnail:
 
 publishedAt: 2018-06-01
 
-variant: 'wrapper pad8-y'
 logo: /images/icons/yin_yang.svg
 
 color: '#0f0f0f'

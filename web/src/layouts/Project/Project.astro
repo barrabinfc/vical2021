@@ -23,7 +23,7 @@ let page:Page = toPage({
     <link rel="stylesheet" href="/styles/devices.min.css" />
     <link rel="stylesheet" href="/styles/browser.min.css" />
 
-    <Masthead className="surface4"
+    <Masthead className={cn('project-masthead','surface4', page.content.variant)}
       title={page.content.title}
       subtitle={page.content.subtitle}
       image={page.content.logo ?? null}
@@ -40,11 +40,29 @@ let page:Page = toPage({
 @use "src/styles/grids" as grids;
 @use "src/styles/helpers" as h;
 
-$containerPadW: 0.1;
-$containerWidth: 100vw - (100vw * $containerPadW);
+.project-masthead {
+  .content-container {
+    max-width: 80vw;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+.project-masthead.full-width {
+  .content-container {
+    max-width: none;
+    padding: var(--headerH) calc(var(--gap) * 8);
+  }
+}
+
 .project  {
   max-width: 1440px;
   position: relative;
+
+  &:not(.full-width) {
+    width: 75vw;
+    width: clamp(16rem, 75vw, 90rem);
+    margin: 3em auto;
+  }
 
   .description {
     margin: 2em 0;

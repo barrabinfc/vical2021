@@ -49,7 +49,7 @@ content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
       {page.tags && (
         <div class="metadata-container" aria-label="Tagged as">
           <span class="date-container">
-            <Tag className="status" variant="transparent" aria-label={page.status}>{emojifyStatus(page.status)}</Tag>
+            <Tag className="status" variant={TagVariant.TRANSPARENT} aria-label={page.status}>{emojifyStatus(page.status)}</Tag>
             <time
               className="publishedAt"
               dateTime={page.publishedAt.toString()}
@@ -75,13 +75,18 @@ content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
 @use "src/styles/helpers" as h;
 
 .post-masthead {
+  .content-container {
+    max-width: 80vw;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   .metadata-container {
     display: flex;
     align-items: center;
     justify-content: flex-start;
 
     margin-block-start: 3em;
-    // border-top: 1px solid hsla(var(--brand-hue), var(--brand-saturation), var(--brand-lightness), 30% );
 
     .date-container, .tags-container {
       display: flex;
@@ -90,6 +95,10 @@ content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
     }
     .tags-container {
       margin-left: auto;
+    }
+    .status {
+      font-style: normal;
+      font-size: 1.25em;
     }
 
     dl {
@@ -109,9 +118,8 @@ content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
 .post  {
   max-width: 1440px;
   position: relative;
-  width: 90vw;
-  width: clamp(16rem, 90vw, 70rem);
-  position: relative;
+  width: 75vw;
+  width: clamp(16rem, 75vw, 90rem);
   margin: 3em auto;
 
   // > p:first-of-type::first-letter {

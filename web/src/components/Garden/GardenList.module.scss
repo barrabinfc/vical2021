@@ -23,8 +23,13 @@
   justify-content: flex-end;
 
   dfn {
+    font-style: normal;
     margin-inline-start: 0;
     padding: calc(2 * var(--gap));
+  }
+
+  :global(.status) {
+    font-size: 1.25em;
   }
 
   /** Adjacent tags */
