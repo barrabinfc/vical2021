@@ -4,7 +4,7 @@ import cheerio, { Cheerio, Node } from 'cheerio';
 export type HTMLTransformFn = (el: Cheerio<Node>, ctx: any) => void;
 
 /**
- * Create a function that will transform elements that match `selector`
+ * Create a function that will transform HTML elements that match `selector`
  * by calling `transformFn(el,context)`
  *
  * @param selector The CSS Selector to find elements

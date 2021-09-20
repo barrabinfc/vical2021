@@ -9,7 +9,7 @@ description: Personal notes about complexity course of Santa Fe institute
 tags:
   - personal-notes
   - santa-fe institute
-publishedAt: 2021-10-02
+publishedAt: 2021-09-02
 ---
 
 What is complexity? The term is incredibly hard to describe, but we can start

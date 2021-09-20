@@ -2,13 +2,13 @@
 @use "src/styles/helpers" as h;
 
 .garden-list {
-  list-style: decimal;
+  list-style: lower-greek;
   padding-inline-end: calc(8 * var(--gap));
   padding-inline-start: calc(8 * var(--gap));
 
   li {
-    margin-block-end: 1em;
-    margin-block-start: 1em;
+    margin-block-end: 1.5em;
+    margin-block-start: 1.5em;
     color: var(--text2);
 
     &::marker {

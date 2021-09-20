@@ -24,7 +24,12 @@ let page:Page = toPage({
 });
 
 let projects: Page[] = await listProjects();
-let gardenItems: Page[] = await listGarden();
+let gardenItems: Page[] = (await listGarden()).sort( (a,b) => {
+  // Order by status (first are complete, then in-progresss, finally draft);
+  const statusOrder = {'draft': -1, 'in progress': 0, 'complete': 1};
+  const [statusA, statusB] = [statusOrder[a.status], statusOrder[b.status]];
+  return statusB - statusA;
+});
 
 let $ = loadHTML(page.content.content);
 

@@ -20,17 +20,22 @@ let page:Page = toPage({
   [astroContextSymbol]: astroContext
 });
 
-function resolveRelative(el) {
-  const relativeToPagePath = relative(dirname(import.meta.url.pathname), dirname(page.abspath) );
-  const src = el.attr('src');
-  el.attr('src', Astro.resolve(relativeToPagePath + src.slice(1)) );
+function resolveRelativeToCwd( path: string ) {
+  /** @ts-ignore */
+  const cwd = dirname(import.meta.url.pathname)
+  const relativeToPagePath = relative(cwd, path );
+  return relativeToPagePath;
 }
 
-const transformRelativeImagePath = buildHTMLTransformerFn( 'img[src^="./"]',  resolveRelative );
-let content = transformRelativeImagePath( page.content.content );
+const transformRelativeImagePath = buildHTMLTransformerFn( 'img[src^="./"]',  (el,ctx) => {
+  const targetPath = dirname(page.abspath);
+  const relativeTargetPath = resolveRelativeToCwd( targetPath );
+  const src = el.attr('src');
+  el.attr('src', Astro.resolve(relativeTargetPath + src.slice(1)) );
+});
 
-// let content = await transformRelativeImages2Absolute(page.content.content, page.abspath, Astro.resolve);
-// .replace('ASTRO_ESCAPED_LEFT_CURLY_BRACKET', '{');
+let content = transformRelativeImagePath( page.content.content );
+content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
 
 ---
 
