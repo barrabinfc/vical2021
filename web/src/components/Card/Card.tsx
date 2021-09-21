@@ -37,7 +37,7 @@ export default function Card({ href, avatar, content, className, children, loadi
   }, [controls, inView]);
 
   return (
-    <motion.a ref={ref} href={href} className={cn(styles.card, className)} whileHover={{ scale: 1.05 }}>
+    <motion.a ref={ref} href={href} className={cn(styles.card, className)} whileHover={{ scale: 1.02 }}>
       <motion.div className={cn(styles['content-container'])}>
         <motion.div className={cn(styles['content'])}>
           {avatar && (

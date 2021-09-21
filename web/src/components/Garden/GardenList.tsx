@@ -9,7 +9,7 @@ export const GardenList = ({ items }: { items: Page[] }) => {
   return (
     <ul className={cn(style['garden-list'])}>
       {items.map(garden => (
-        <li className={cn(garden.slug)} key={garden.slug}>
+        <li className={cn(garden.slug, 'list-item')} key={garden.slug}>
           <div className={cn(style['garden-item'])}>
             <div className={cn('title4', style['title'])}>
               <a href={garden.url.pathname} className={cn(style['link-title'])}>

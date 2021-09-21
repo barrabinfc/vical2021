@@ -17,6 +17,7 @@ const abspath = import.meta.url.pathname;
 const astroContextSymbol = Symbol.for('astro.context');
 const astroContext = Astro.props[astroContextSymbol];
 
+
 let page:Page = toPage({
   layout: abspath,
   ...Astro.props.content,

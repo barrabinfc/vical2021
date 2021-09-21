@@ -14,6 +14,13 @@
     &::marker {
       font-size: var(--h4);
     }
+
+    &:hover,
+    &:focus-within {
+      color: var(--brand);
+      transform: translateY(-1px);
+      text-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
   }
 }
 
@@ -41,6 +48,7 @@
 .link-title {
   @include h.link-text;
 }
+
 .title {
   @include h.weight(var(--text-weight));
   margin-block-start: 0;
