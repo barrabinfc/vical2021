@@ -5,23 +5,35 @@ import Tag, { TagVariant } from '../Tag/Tag';
 
 import style from './GardenList.module.scss';
 
-export const GardenList = ({ items }: { items: Page[] }) => {
+export enum GardenListVariant {
+  DEFAULT = 'default',
+  WITH_SUBTITLE = 'with-subtitle',
+  WITH_DESCRIPTION = 'with-description'
+}
+
+export interface GardenListProps {
+  items: Page[];
+  className?: string | string[];
+  variant?: GardenListVariant;
+}
+
+export const GardenList = ({ items, variant = GardenListVariant.DEFAULT }: GardenListProps) => {
   return (
     <ul className={cn(style['garden-list'])}>
       {items.map(garden => (
         <li className={cn(garden.slug, 'list-item')} key={garden.slug}>
           <div className={cn(style['garden-item'])}>
-            <div className={cn('title4', style['title'])}>
+            <div className={cn('title4', style['item-title'])}>
               <a href={garden.url.pathname} className={cn(style['link-title'])}>
                 {garden.content.title}
               </a>
             </div>
-            {garden.collection?.length > 0 && (
-              <span className="tags-container" aria-label="in collection">
-                <Tag className="collection">{garden.collection}</Tag>
-              </span>
-            )}
             <div className="extra-container">
+              {garden.collection?.length > 0 && (
+                <span className="tags-container" aria-label="in collection">
+                  <Tag className="collection">{garden.collection}</Tag>
+                </span>
+              )}
               <time
                 className="publishedAt"
                 dateTime={garden.publishedAt.toString()}
@@ -33,6 +45,9 @@ export const GardenList = ({ items }: { items: Page[] }) => {
                 {emojifyStatus(garden.status)}
               </Tag>
             </div>
+            {variant === GardenListVariant.WITH_SUBTITLE && (
+              <div className={cn('item-subtitle', style['item-subtitle'])}>{garden.content.subtitle}</div>
+            )}
           </div>
         </li>
       ))}

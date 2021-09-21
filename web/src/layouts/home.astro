@@ -10,7 +10,7 @@ import {listProjects} from '../pages/projects';
 import {listGarden} from '../pages/garden';
 
 import ProjectGrid from '../components/Project/ProjectGrid.tsx';
-import GardenList from '../components/Garden/GardenList.tsx';
+import GardenList, {GardenListVariant} from '../components/Garden/GardenList.tsx';
 
 /** @ts-ignore */
 const abspath = import.meta.url.pathname;
@@ -60,7 +60,7 @@ title.text( avoidWidowedWords(title.text()) );
 
     <section class="digital-garden pad4">
       <h2 class="title1">Digital Garden</h2>
-      <GardenList items={gardenItems} />
+      <GardenList items={gardenItems} variant={GardenListVariant.WITH_SUBTITLE} />
       <div class="pad4"/>
     </section>
   </div>
