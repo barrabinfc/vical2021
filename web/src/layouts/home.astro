@@ -52,14 +52,14 @@ title.text( avoidWidowedWords(title.text()) );
       </div>
     </section>
 
-    <section class="pad4">
-      <h2>Projects</h2>
+    <section class="projects">
+      <h2 class="title1 pad4-y">Projects</h2>
       <ProjectGrid projects={projects} client:idle />
       <div class="pad4"/>
     </section>
 
-    <section class="digital-garden pad4">
-      <h2 class="title1">Digital Garden</h2>
+    <section class="digital-garden">
+      <h2 class="title1 pad4-y">🌻 Digital Garden</h2>
       <GardenList items={gardenItems} variant={GardenListVariant.WITH_SUBTITLE} />
       <div class="pad4"/>
     </section>
@@ -129,6 +129,9 @@ $fold: 80vh;
   }
 }
 
+.projects {
+  padding: 2em 4em;
+}
 
 .digital-garden {
   padding: 2em 4em;

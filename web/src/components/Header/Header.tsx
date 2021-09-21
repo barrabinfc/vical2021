@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import Navigation from "../Navigation/Navigation";
-import {cn} from '~/lib/helpers';
+import React, { useState } from 'react';
+import Navigation from '../Navigation/Navigation';
+import { cn } from '~/lib/helpers';
 
-import Icon from "../icon";
-import styles from "./Header.module.scss";
+import Icon from '../icon';
+import styles from './Header.module.scss';
 
 export default function Header() {
   const [showNav, setShowNav] = useState(false);
@@ -13,13 +13,16 @@ export default function Header() {
   return (
     <div className={cn(styles.header)}>
       <div className={styles.wrapper}>
-        <div className={styles.branding}>
-          <a href="/">vical</a>
-        </div>
-
         <a className={styles.skipMain} href="#main">
           Skip to main content
         </a>
+
+        <div className={styles.branding}>
+          <a href="/">
+            <span className="visually-hidden">Home</span>
+            <Icon symbol="vical" />
+          </a>
+        </div>
 
         <button
           className={styles.toggleNavButton}
