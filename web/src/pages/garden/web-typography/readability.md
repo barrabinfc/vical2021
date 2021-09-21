@@ -7,9 +7,8 @@ title: Text readability on the web
 subtitle: Strategies for improving text readability on the web
 description: Strategies for improving text readability on the web
 tags:
-  - web text readability
+  - text readability
   - web typography
-  - web typography tips
 publishedAt: 2021-09-20
 ---
 
@@ -87,3 +86,22 @@ The feature is behind prefix `-webkit` and only works in combination with `displ
   <h4 class="titleMax2Lines">Aliqua culpa dolore ullamco voluptate id dolore aliquip sit cupidatat. Officia tempor minim esse incididunt velit ex eu incididunt officia magna aute enim ex. Magna occaecat non deserunt Lorem occaecat sit voluptate adipisicing et culpa anim deserunt. Nisi voluptate magna aliqua excepteur ex adipisicing. Est sunt Lorem pariatur velit veniam anim veniam et excepteur cillum consectetur excepteur.</h4>
 </div>
 </div>
+
+## Enable kerning and ligatures
+
+To enable kerning and ligatures, use `text-rendering: optimizeLegibility`
+
+```css
+body {
+  text-rendering: optimizeLegibility;
+}
+```
+
+## Enable subpixel antialiasing
+
+```css
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+```
