@@ -17,6 +17,7 @@ const abspath = import.meta.url.pathname;
 const astroContextSymbol = Symbol.for('astro.context');
 const astroContext = Astro.props[astroContextSymbol];
 
+
 let page:Page = toPage({
   layout: abspath,
   ...Astro.props.content,
@@ -24,9 +25,14 @@ let page:Page = toPage({
 });
 
 let projects: Page[] = await listProjects();
-let gardenItems: Page[] = await listGarden();
+let gardenItems: Page[] = (await listGarden()).sort( (a,b) => {
+  // Order by status (first are complete, then in-progresss, finally draft);
+  const statusOrder = {'draft': -1, 'in progress': 0, 'complete': 1};
+  const [statusA, statusB] = [statusOrder[a.status], statusOrder[b.status]];
+  return statusB - statusA;
+});
 
-let $ = loadHTML(page.content.content,null,false);
+let $ = loadHTML(page.content.content);
 
 ---
 
@@ -67,7 +73,7 @@ let $ = loadHTML(page.content.content,null,false);
 @use "sass:math";
 @use "src/styles/breakpoints" as bp;
 @use "src/styles/grids" as grids;
-@use "src/styles/typo" as typo;
+@use "src/styles/helpers" as h;
 
 #content {
   position: relative;
@@ -95,9 +101,9 @@ $fold: 100vh;
     justify-content: flex-end;
 
     > :global(.caption) {
-      font-family: var(--title-family);
+      font-family: var(--subtitle-family);
       font-size: calc( var(--h1) * 1.1 );
-      @include typo.weight(var(--text-weight));
+      @include h.weight(var(--subtitle-weight));
 
       margin-bottom: 1em;
     }

@@ -18,6 +18,7 @@
   @media (hover: hover) {
     & ul li a:hover {
       color: var(--text2);
+      transform: translateY(-1px);
     }
   }
 

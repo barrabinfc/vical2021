@@ -7,6 +7,7 @@ title: chilk
 subtitle: Portinari Kiosk App
 description: Portinari kiosk app
 publishedAt: 2018-06-03
+variant: full-width
 
 thumbnail:
   path: '/images/portinari/portal.jpg'

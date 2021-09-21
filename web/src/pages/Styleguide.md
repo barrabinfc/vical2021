@@ -4,14 +4,13 @@ status: in progress
 published: true
 
 title: Styleguide
-subtitle: Styleguide
+subtitle: Markdown styleguide example
 layout: ../layouts/Post/Post.astro
-description: I write about software programming.
+description: Styleguide example
 publishedAt: 2021-16-10
 ---
 
 <div class="pad4">
-  <h1>Colorscheme</h1>
   <div class="grid2">
     <div class="item grid2 pad4">
       <div class="surface surface1 item">Surface 1</div>
@@ -149,21 +148,8 @@ strictions are sub-optimal for sentence-level tasks,and could be very harmful wh
 BERT alleviates the previously mentioned unidi-rectionality constraint by using a “masked lan-guage model” (MLM) pre-training objective, in-spired by the Cloze task (Taylor, 1953). The
 masked language model randomly masks some ofthe tokens from the input, and the objective is topredict the original vocabulary id of the masked
 
-[^2]:
-
-  Dai and Le, 2015;
-  Peters et al.,2018a;
-  Radford et al., 2018;
-  Howard and Ruder, 2018
-
-[^3]:
-
-  Bowman et al., 2015;
-  Williams et al., 2018
-
-[^4]:
-
-  Tjong Kim Sang and De Meulder, 2003;
-  Rajpurkar et al., 2016.
+[^2]: Dai and Le, 2015; Peters et al.,2018a; Radford et al., 2018;Howard and Ruder, 2018
+[^3]: Bowman et al., 2015; Williams et al., 2018
+[^4]: Tjong Kim Sang and De Meulder, 2003; Rajpurkar et al., 2016.
 
 </div>

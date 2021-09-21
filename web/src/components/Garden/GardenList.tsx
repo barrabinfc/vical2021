@@ -9,22 +9,26 @@ export const GardenList = ({ items }: { items: Page[] }) => {
   return (
     <ul className={cn(style['garden-list'])}>
       {items.map(garden => (
-        <li className={cn(garden.slug)} key={garden.slug}>
+        <li className={cn(garden.slug, 'list-item')} key={garden.slug}>
           <div className={cn(style['garden-item'])}>
-            <h4 className={cn(style['title'])}>
+            <div className={cn('title4', style['title'])}>
               <a href={garden.url.pathname} className={cn(style['link-title'])}>
                 {garden.content.title}
               </a>
-            </h4>
+            </div>
             {garden.collection?.length > 0 && (
               <span className="tags-container" aria-label="in collection">
                 <Tag className="collection">{garden.collection}</Tag>
               </span>
             )}
             <div className="extra-container">
-              <span className="publishedAt" aria-label={`Published at: ${toDMYDateString(garden.publishedAt)}`}>
-                <em>{toDMYDateString(garden.publishedAt)}</em>
-              </span>
+              <time
+                className="publishedAt"
+                dateTime={garden.publishedAt.toString()}
+                aria-label={`Published at: ${toDMYDateString(garden.publishedAt)}`}
+              >
+                {toDMYDateString(garden.publishedAt)}
+              </time>
               <Tag className="status" variant={TagVariant.TRANSPARENT} aria-label={garden.status}>
                 {emojifyStatus(garden.status)}
               </Tag>

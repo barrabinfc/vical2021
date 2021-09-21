@@ -1,18 +1,25 @@
 @use "sass:math";
-@use "src/styles/typo" as typo;
+@use "src/styles/helpers" as h;
 
 .garden-list {
-  list-style: decimal;
+  list-style: lower-greek;
   padding-inline-end: calc(8 * var(--gap));
   padding-inline-start: calc(8 * var(--gap));
 
   li {
-    margin-block-end: 1em;
-    margin-block-start: 1em;
+    margin-block-end: 1.5em;
+    margin-block-start: 1.5em;
     color: var(--text2);
 
     &::marker {
       font-size: var(--h4);
+    }
+
+    &:hover,
+    &:focus-within {
+      color: var(--brand);
+      transform: translateY(-1px);
+      text-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
     }
   }
 }
@@ -23,8 +30,13 @@
   justify-content: flex-end;
 
   dfn {
+    font-style: normal;
     margin-inline-start: 0;
     padding: calc(2 * var(--gap));
+  }
+
+  :global(.status) {
+    font-size: 1.25em;
   }
 
   /** Adjacent tags */
@@ -34,10 +46,11 @@
 }
 
 .link-title {
-  @include typo.link-text;
+  @include h.link-text;
 }
+
 .title {
-  @include typo.weight(var(--text-weight));
+  @include h.weight(var(--text-weight));
   margin-block-start: 0;
   margin-block-end: 0;
   margin-right: auto;

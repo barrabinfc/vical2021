@@ -3,8 +3,11 @@
 @use "./grids" as grids;
 @use "colorscheme" as colors;
 
-@import "./typo";
-@import "./anims";
+@import url('https://rsms.me/inter/inter.css');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
+
+@import './typo';
+@import './anims';
 
 /**
  * Custom css properties (available at runtime only)
@@ -67,6 +70,7 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   word-wrap: break-word;
 
   background: var(--surface1);
@@ -117,6 +121,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.m-auto {
+  margin: 0 auto;
+}
+.align-center {
   align-items: center;
 }
 
