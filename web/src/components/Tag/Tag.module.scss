@@ -1,17 +1,17 @@
 /** Codes & Blockquotes */
 .tag {
   padding: calc(2 * var(--gap));
-  border-radius: var(--gap);
+  border-radius: calc(1.5 * var(--gap));
   margin: 0;
   overflow: hidden;
 
-  font-family: var(--code-family);
+  font-family: var(--title-family);
   font-size: var(--s-1);
   text-shadow: none;
 }
 
 .default {
-  background-color: var(--surface3);
+  background-color: var(--surface4);
   color: var(--text2);
 }
 

@@ -117,7 +117,7 @@ content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
       margin-inline-start: 0;
     }
 
-    dfn + dfn {
+    :global(.tag + .tag) {
       margin-left: calc( 2 * var(--gap));
     }
   }

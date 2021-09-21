@@ -1,6 +1,6 @@
 ---
 import {dirname,basename} from 'node:path'
-import {cn,toDMYDateString, emojifyStatus} from '../lib/helpers';
+import {cn,toDMYDateString, avoidWidowedWords, emojifyStatus} from '../lib/helpers';
 import {Page, toPage} from '../lib/page/Page'
 import {loadHTML, html} from '../lib/html';
 
@@ -33,7 +33,8 @@ let gardenItems: Page[] = (await listGarden()).sort( (a,b) => {
 });
 
 let $ = loadHTML(page.content.content);
-
+let title = $('#title');
+title.text( avoidWidowedWords(title.text()) );
 ---
 
 <BaseLayout {page}>
@@ -41,12 +42,9 @@ let $ = loadHTML(page.content.content);
     <section class="home" aria-labelledby="welcome">
       <div class="home-grid">
         <div class="item highlight pad4">
-          {html( $('#welcome') )}
-        </div>
-        <div class="item highlight2 pad4">
-          <div class="caption">
-            {html( $('#caption') ) }
-          </div>
+          {html( $('#spotlight') )}
+          {html( $('#title') )}
+          {html( $('#subtitle') ) }
         </div>
         <div class="item decoration">
           <img alt="nada" src="/pictures/Dieffenbachia robusta.png" />
@@ -60,8 +58,8 @@ let $ = loadHTML(page.content.content);
       <div class="pad4"/>
     </section>
 
-    <section class="pad4">
-      <h2>Digital Garden</h2>
+    <section class="digital-garden pad4">
+      <h2 class="title1">Digital Garden</h2>
       <GardenList items={gardenItems} />
       <div class="pad4"/>
     </section>
@@ -79,7 +77,7 @@ let $ = loadHTML(page.content.content);
   position: relative;
 }
 
-$fold: 100vh;
+$fold: 80vh;
 .home {
   width: 100%;
   height: $fold;
@@ -94,23 +92,28 @@ $fold: 100vh;
 
   :global(.highlight){
     grid-column: 4 / span 4;
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 4;
 
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
 
-    > :global(.caption) {
+    > :global(.heading-spotlight) {
       font-family: var(--subtitle-family);
       font-size: calc( var(--h1) * 1.1 );
+      @include h.weight(var(--subtitle-weight));
+    }
+    > :global(.heading-title){
+      font-family: var(--subtitle-family);
+      font-size: calc( var(--h3) );
       @include h.weight(var(--subtitle-weight));
 
       margin-bottom: 1em;
     }
-  }
-  :global(.highlight2) {
-    grid-column: 4 / span 4;
-    grid-row: 4;
+
+    > :global(.heading-subtitle) {
+      font-size: var(--h5);
+    }
   }
   :global(.decoration) {
     grid-column: 1 / span 3;
@@ -121,9 +124,15 @@ $fold: 100vh;
     justify-content: flex-end;
 
     > img {
-      height: 100%;
+      height: clamp(400px, 800px, 1200px);
     }
   }
+}
+
+
+.digital-garden {
+  padding: 2em 4em;
+  background-color: var(--surface3);
 }
 
 </style>

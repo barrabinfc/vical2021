@@ -10,12 +10,14 @@ description: Personal website
 publishedAt: 2021-10-15
 ---
 
-<div role="heading" aria-level="1" id="welcome" class="caption">
-  Hi 👋<br/>
-  I'm <strong>Vitor</strong><br/>
-  I write software for the web
+<div role="heading" aria-level="1" id="spotlight" class="heading-spotlight">
+  <strong>Vitor Calejuri</strong>
+</div>
+<div role="heading" aria-level="2" id="title" class="heading-title">
+  I'm a developer living and working in São Paulo, Brazil.
 </div>
 
-<div id="caption" class="caption">
-  Potatoes
+<div id="subtitle" class="heading-subtitle">
+  You've found my digital garden. I write about web development,
+  software engineering and occasionaly, climbing and running.
 </div>

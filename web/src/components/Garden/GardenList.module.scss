@@ -2,9 +2,11 @@
 @use "src/styles/helpers" as h;
 
 .garden-list {
-  list-style: lower-greek;
-  padding-inline-end: calc(8 * var(--gap));
-  padding-inline-start: calc(8 * var(--gap));
+  list-style: none;
+  // padding-inline-end: calc(8 * var(--gap));
+  // padding-inline-start: calc(8 * var(--gap));
+  padding-inline-end: 0;
+  padding-inline-start: 0;
 
   li {
     margin-block-end: 1.5em;
@@ -29,7 +31,7 @@
   align-items: center;
   justify-content: flex-end;
 
-  dfn {
+  :global(.tag) {
     font-style: normal;
     margin-inline-start: 0;
     padding: calc(2 * var(--gap));
@@ -40,7 +42,7 @@
   }
 
   /** Adjacent tags */
-  :global(dfn + dfn) {
+  :global(.tag + .tag) {
     margin-left: var(--gap);
   }
 }

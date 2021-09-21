@@ -88,3 +88,12 @@ export const emojifyStatus = (status: 'draft' | 'in progress' | 'complete'): str
       return '❌';
   }
 };
+
+/**
+ * Avoid widowed words at the end.
+ */
+export const avoidWidowedWords = (text: string, widows: number = 3): string => {
+  const words = text.split(' ');
+  const [first, last] = [words.slice(0, -widows), words.slice(-widows)];
+  return first.join(' ') + ' ' + last.join('\u00A0');
+};

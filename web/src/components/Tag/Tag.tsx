@@ -21,9 +21,9 @@ export interface TagProps {
  */
 export const Tag = ({ className, children, variant = TagVariant.DEFAULT, ...attrs }: TagProps) => {
   return (
-    <dfn className={cn(styles.tag, styles[variant], className)} {...attrs}>
-      {children}
-    </dfn>
+    <span className={cn('tag', styles.tag, styles[variant], className)} {...attrs}>
+      <strong>{children}</strong>
+    </span>
   );
 };
 
