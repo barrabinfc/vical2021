@@ -130,12 +130,23 @@ $fold: 80vh;
 }
 
 .projects {
-  padding: 2em 4em;
+  @include bp.breakpoint(medium, min) {
+    padding: 2em 4em;
+  }
+  @include bp.breakpoint(medium, max) {
+    padding: calc( 4 * var(--gap)) calc( 4 * var(--gap));
+  }
 }
 
 .digital-garden {
-  padding: 2em 4em;
   background-color: var(--surface3);
+
+  @include bp.breakpoint(medium, min) {
+    padding: 2em 4em;
+  }
+  @include bp.breakpoint(medium, max) {
+    padding: calc( 4 * var(--gap)) calc( 4 * var(--gap));
+  }
 }
 
 </style>
