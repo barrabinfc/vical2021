@@ -18,18 +18,23 @@
   padding: var(--headerH) calc(var(--gap) * 8);
 
   display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .content {
+  flex-basis: 100%;
   width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .title,
 .subtitle {
   margin: 0;
+  overflow-wrap: normal;
   text-transform: capitalize;
 }
 .subtitle {

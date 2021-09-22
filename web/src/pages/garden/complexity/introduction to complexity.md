@@ -16,15 +16,15 @@ What is complexity? The term is incredibly hard to describe, but we can start
 with some concrete examples. A great example is ants. Nigel Franks, a well know ant researcher once wrote
 that:
 
-<div class="right-25">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Safari_ants_tunnel.jpg" alt="Ants building a tunnel"/>
-  <figcaption>Ants building a tunnel</ficaption>
-</div>
-
 > The solitary army ant is behaviorally one
 > of the least sophisticated animals imaginable…if 100 army ants are placed on a flat
 > surface, they will walk around and around in never decreasing circles until they die of
 > exhaustion. In extremely high numbers, however, it is a different story.
+
+<div class="right-25">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Safari_ants_tunnel.jpg" alt="Ants building a tunnel"/>
+  <figcaption>Ants building a tunnel</ficaption>
+</div>
 
 Figure 1 show a colony of army ants building a tunnel. Each ant on it's own is very simple, but the
 colony as a whole can work together cooperatively to accomplish complex tasks without central control. In other words, ant colonies can organize themselves to produce structures much more complicated than any single ant can produce.

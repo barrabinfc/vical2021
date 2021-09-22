@@ -80,6 +80,7 @@ content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
 
 <style lang="scss" global>
 @use "src/styles/grids" as grids;
+@use "src/styles/breakpoints" as bp;
 @use "src/styles/helpers" as h;
 
 .post-masthead {
@@ -87,19 +88,21 @@ content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
     max-width: 80vw;
     padding-left: 0;
     padding-right: 0;
+
+    @include bp.breakpoint(small, max) {
+      max-width: 90vw;
+    }
   }
 
   .metadata-container {
     display: flex;
-    align-items: center;
     justify-content: flex-start;
-
-    margin-block-start: 20%;
+    align-items: center;
 
     .date-container, .tags-container {
       display: flex;
-      align-items: center;
       justify-content: flex-start;
+      align-items: center;
     }
     .tags-container {
       margin-left: auto;
@@ -129,6 +132,11 @@ content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
   width: 75vw;
   width: clamp(16rem, 75vw, 90rem);
   margin: 3em auto;
+
+  @include bp.breakpoint(small, max) {
+    width: clamp(16rem, 90vw, 90rem);
+    margin: 3em auto;
+  }
 
   // > p:first-of-type::first-letter {
   //   font-family: var(--title-family);
@@ -321,10 +329,12 @@ content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
   /**
    * Images float
    */
-  .right-25 {
-    float: right;
-    width: 25%;
-    padding: 1em;
+  @include bp.breakpoint(medium, min) {
+    .right-25 {
+      float: right;
+      width: 25%;
+      padding: 1em;
+    }
   }
 
   .centered {
@@ -339,8 +349,8 @@ content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
 
 .surface {
   min-height: 120px;
-  width: 80%;
   border-radius: calc( var(--gap) * 4 );
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;

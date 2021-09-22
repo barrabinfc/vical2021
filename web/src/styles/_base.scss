@@ -1,5 +1,6 @@
 @use "variables" as *;
 @use "./helpers" as h;
+@use "./breakpoints" as bp;
 @use "./grids" as grids;
 @use "./colorscheme" as colors;
 
@@ -13,6 +14,15 @@
  * Custom css properties (available at runtime only)
  */
 :root {
+  /** Default font size for mobile */
+  --unit: 16px;
+  --scale: 1.125; /** Major second */
+
+  @include bp.breakpoint(medium, min) {
+    --unit: 18px;
+    --scale: 1.25; /** major third */
+  }
+
   /* Margin/padding units */
   --gap: #{$gap};
   --headerH: 64px;
@@ -176,11 +186,13 @@ body {
   justify-items: center;
 }
 
-.twocolumn-page {
-  columns: 2;
+@include bp.breakpoint(medium, min) {
+  .twocolumn-page {
+    columns: 2;
 
-  > p:first-of-type {
-    margin-top: 0;
+    > p:first-of-type {
+      margin-top: 0;
+    }
   }
 }
 
