@@ -28,9 +28,8 @@
         @content;
       }
     }
-
-    // If the breakpoint doesn't exist in the map.
   } @else {
+    // If the breakpoint doesn't exist in the map
     @if $direction == max {
       @media (max-width: $breakpoint) {
         @content;

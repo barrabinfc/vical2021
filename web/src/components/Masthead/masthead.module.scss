@@ -1,6 +1,5 @@
 .masthead {
-  height: 400px;
-  max-height: 600px;
+  height: #{clamp(400px, 70vh, 600px)};
   width: 100%;
   display: flex;
   background-color: var(--surface4);

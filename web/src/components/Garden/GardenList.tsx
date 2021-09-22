@@ -22,12 +22,8 @@ export const GardenList = ({ items, variant = GardenListVariant.DEFAULT }: Garde
     <ul className={cn(style['garden-list'])}>
       {items.map(garden => (
         <li className={cn(garden.slug, 'list-item')} key={garden.slug}>
-          <div className={cn(style['garden-item'])}>
-            <div className={cn('title4', style['item-title'])}>
-              <a href={garden.url.pathname} className={cn(style['link-title'])}>
-                {garden.content.title}
-              </a>
-            </div>
+          <a href={garden.url.pathname} className={cn(style['garden-item'])}>
+            <div className={cn('title4', style['item-title'])}>{garden.content.title}</div>
             <div className="extra-container">
               {garden.collection?.length > 0 && (
                 <span className="tags-container" aria-label="in collection">
@@ -48,7 +44,7 @@ export const GardenList = ({ items, variant = GardenListVariant.DEFAULT }: Garde
             {variant === GardenListVariant.WITH_SUBTITLE && (
               <div className={cn('item-subtitle', style['item-subtitle'])}>{garden.content.subtitle}</div>
             )}
-          </div>
+          </a>
         </li>
       ))}
     </ul>

@@ -2,12 +2,12 @@
 .tag {
   padding: calc(2 * var(--gap));
   border-radius: calc(1.5 * var(--gap));
-  margin: 0;
   overflow: hidden;
 
   font-family: var(--title-family);
   font-size: var(--s-1);
   text-shadow: none;
+  white-space: nowrap;
 }
 
 .default {

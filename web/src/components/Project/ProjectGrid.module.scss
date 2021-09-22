@@ -9,7 +9,7 @@
 
   @include grids.flexGrid($columns, $gap);
 
-  @include bp.breakpoint(medium, min) {
+  @include bp.breakpoint(small, min) {
     :global(.item:nth-child(1n)) {
       flex: 0 0 33%;
     }

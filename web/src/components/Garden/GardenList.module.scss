@@ -1,5 +1,6 @@
 @use "sass:math";
 @use "src/styles/helpers" as h;
+@use "src/styles/breakpoints" as bp;
 
 .garden-list {
   list-style: none;
@@ -27,6 +28,12 @@
 }
 
 .garden-item {
+  @include h.link-text;
+  text-decoration: none;
+
+  padding: 0;
+  color: inherit;
+
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -42,34 +49,65 @@
 
   /** Adjacent tags */
   :global(.tag + .tag) {
-    margin-inline-start: 1rem;
+    margin-inline-start: calc(4 * var(--gap));
   }
 }
 
-.link-title {
-  @include h.link-text;
-}
+// .link-title {
+//   @include h.link-text;
+//   color: inherit;
+//   padding: 0;
+// }
 
 .item-title {
   @include h.weight(var(--text-weight));
+  text-decoration: underline from-font;
+
   margin-block-start: 0;
   margin-block-end: 0;
   margin-right: auto;
 
-  flex: 1 1 70%;
+  @include bp.breakpoint(medium, min) {
+    flex: 1 1 50%;
+  }
+  @include bp.breakpoint(medium, max) {
+    flex: 1 1 100%;
+  }
 }
 
 :global(.extra-container) {
-  flex: 1 1 30%;
-  text-align: right;
+  @include bp.breakpoint(medium, min) {
+    flex: 1 1 30%;
+    text-align: right;
+  }
+  @include bp.breakpoint(medium, max) {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    :global(.tags-container) {
+      display: none;
+    }
+
+    :global(.publishedAt) {
+      margin-right: auto;
+      /** Since we hide tags-container, we should
+          remove the initial owl selector padding applied of this element */
+      margin-inline-start: 0;
+    }
+    :global(.status) {
+      margin-left: auto;
+    }
+  }
+
   & * + * {
-    margin-inline-start: 1rem;
+    margin-inline-start: calc(4 * var(--gap));
   }
 }
 
 .item-subtitle {
   flex: 1 1 100%;
-  padding-inline-start: var(--gap);
 }
 
 :global(.tags-container) {
@@ -77,4 +115,8 @@
   align-items: center;
   margin-block-start: 0;
   margin-block-end: 0;
+
+  & * + * {
+    margin-inline-start: calc(4 * var(--gap));
+  }
 }
