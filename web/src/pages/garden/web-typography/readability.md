@@ -35,9 +35,6 @@ To avoid words breaking separately into a new line, use the non-breaking space s
 
 I use the following function for React or server side rendering:
 
-<div class="grid2 align-center">
-<div class="item">
-
 ```ts
 function avoidWidowedWords(text: string, widows: number = 3): string {
   const words = text.split(' ');
@@ -46,10 +43,8 @@ function avoidWidowedWords(text: string, widows: number = 3): string {
 }
 ```
 
-</div>
 <div class="item surface surface1 pad4 m-auto">
   <h4>Title's can break nicely without&nbsp;widowed&nbsp;words</h4>
-</div>
 </div>
 
 ## Limit text to N lines
@@ -68,9 +63,6 @@ The feature is behind prefix `-webkit` and only works in combination with `displ
 }
 </style>
 
-<div class="grid2 align-center">
-<div class="item">
-
 ```css
 .titleMax2Lines {
   overflow: hidden;
@@ -81,10 +73,8 @@ The feature is behind prefix `-webkit` and only works in combination with `displ
 }
 ```
 
-</div>
 <div class="item surface surface1 pad4 m-auto">
   <h4 class="titleMax2Lines">Aliqua culpa dolore ullamco voluptate id dolore aliquip sit cupidatat. Officia tempor minim esse incididunt velit ex eu incididunt officia magna aute enim ex. Magna occaecat non deserunt Lorem occaecat sit voluptate adipisicing et culpa anim deserunt. Nisi voluptate magna aliqua excepteur ex adipisicing. Est sunt Lorem pariatur velit veniam anim veniam et excepteur cillum consectetur excepteur.</h4>
-</div>
 </div>
 
 ## Enable kerning and ligatures
