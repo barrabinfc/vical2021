@@ -6,6 +6,7 @@ $cardHeight: 280px;
 .card {
   height: 280px;
   max-height: $cardHeight;
+  contain: layout;
 
   width: 100%;
 
@@ -135,6 +136,7 @@ $cardHeight: 280px;
 }
 
 .title {
+  height: 1.25em;
   @include helpers.text-truncate(2, 2);
   text-transform: capitalize;
 
@@ -143,6 +145,7 @@ $cardHeight: 280px;
 }
 
 .subtitle {
+  height: 1.25em;
   @include helpers.text-truncate(2, 2);
 
   margin: 0;
@@ -163,4 +166,13 @@ $cardHeight: 280px;
     0 22.3px 17.9px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.02)),
     0 41.8px 33.4px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.03)),
     0 100px 80px hsl(var(--surface-shadow) / var(--shadow-strength));
+}
+
+/**
+ * Clamp line for animation
+ */
+.clamp-line {
+  position: relative;
+  overflow: hidden;
+  text-align: start;
 }

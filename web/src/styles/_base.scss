@@ -1,13 +1,13 @@
 @use "variables" as *;
 @use "./helpers" as h;
 @use "./grids" as grids;
-@use "colorscheme" as colors;
+@use "./colorscheme" as colors;
 
 @import url('https://rsms.me/inter/inter.css');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
 
 @import './typo';
-@import './anims';
+@import './imgs';
 
 /**
  * Custom css properties (available at runtime only)
