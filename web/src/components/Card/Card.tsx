@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { cn, range } from '~/lib/helpers';
 
 import { motion, useAnimation } from 'framer-motion';
-import AppearWhenVisible from '../anims/AppearWhenVisible';
 
 import styles from './Card.module.css';
 import { useInView } from 'react-intersection-observer';
+
+import { openSpring, closeSpring } from '../../lib/animations';
 
 export interface CardProps {
   href: string;
@@ -38,8 +39,8 @@ export default function Card({ href, avatar, content, className, children, loadi
 
   return (
     <motion.a ref={ref} href={href} className={cn(styles.card, className)} whileHover={{ scale: 1.02 }}>
-      <motion.div className={cn(styles['content-container'])}>
-        <motion.div className={cn(styles['content'])}>
+      <div className={cn(styles['content-container'])}>
+        <div className={cn(styles['content'])}>
           {avatar && (
             <div className={styles.avatar}>
               <picture>
@@ -48,37 +49,41 @@ export default function Card({ href, avatar, content, className, children, loadi
             </div>
           )}
           <div className={styles['title-container']} align-at="bottom">
-            <motion.h3
-              className={styles.title}
-              animate={controls}
-              initial="hidden"
-              transition={{ duration: 0.5 }}
-              variants={{
-                visible: { y: 0, transition: { delay: delay + 0.15 } },
-                hidden: { y: 50 }
-              }}
-            >
-              {content?.title}
-            </motion.h3>
-            {content?.subtitle && (
-              <motion.p
-                className={styles.subtitle}
+            <h3 className={cn(styles.title, styles['clamp-line'])}>
+              <motion.span
+                style={{ position: 'absolute' }}
                 animate={controls}
                 initial="hidden"
                 transition={{ duration: 0.5 }}
                 variants={{
-                  visible: { y: 0, transition: { delay: delay + 0.25 } },
-                  hidden: { y: 50 }
+                  visible: { y: 0, transition: { delay: delay + 0.15 }, ...openSpring },
+                  hidden: { y: 50, ...closeSpring }
                 }}
               >
-                {content?.subtitle}
-              </motion.p>
+                {content?.title}
+              </motion.span>
+            </h3>
+            {content?.subtitle && (
+              <p className={cn(styles.subtitle, styles['clamp-line'])}>
+                <motion.span
+                  style={{ position: 'absolute' }}
+                  animate={controls}
+                  initial="hidden"
+                  transition={{ duration: 0.5 }}
+                  variants={{
+                    visible: { y: 0, transition: { delay: delay + 0.25 }, ...openSpring },
+                    hidden: { y: 50, ...openSpring }
+                  }}
+                >
+                  {content?.subtitle}
+                </motion.span>
+              </p>
             )}
             {children && children}
           </div>
           <div className="cast-shadow"></div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </motion.a>
   );
 }

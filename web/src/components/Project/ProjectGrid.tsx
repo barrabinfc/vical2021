@@ -5,14 +5,14 @@ import { motion } from 'framer-motion';
 
 import style from './ProjectGrid.module.scss';
 
-import FadeInWhenVisible from '../anims/FadeInWhenVisible';
+import AppearWhenVisible from '../anims/AppearWhenVisible';
 import Card from '../Card/Card';
 
 export default function ProjectList({ projects }: { projects: Page[] }) {
   return (
     <motion.div className={cn(style['project-grid'])}>
       {projects.map((project, i) => (
-        <FadeInWhenVisible key={project.slug} className="item" delay={i / 10}>
+        <AppearWhenVisible key={project.slug} className="item" delay={i / 10}>
           <Card
             key={project.slug}
             delay={i / 5}
@@ -22,7 +22,7 @@ export default function ProjectList({ projects }: { projects: Page[] }) {
             className={`item ${project.slug}`}
             loading="lazy"
           />
-        </FadeInWhenVisible>
+        </AppearWhenVisible>
       ))}
     </motion.div>
   );
