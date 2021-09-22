@@ -5,7 +5,7 @@
  * A grid with display grid technique (not animable in 2021)
  */
 @mixin grid($columns: 3, $gap: 8px) {
-  @include bp.breakpoint(small, max) {
+  @include bp.breakpoint(medium, max) {
     display: grid;
     gap: $gap;
     grid-template-columns: 1fr;
@@ -55,7 +55,7 @@
     }
   }
 
-  @include bp.breakpoint(medium, min) {
+  @include bp.breakpoint(small, min) {
     /** Items with equal width */
     :global(.item) {
       flex: 0 0 $itemWidth;
