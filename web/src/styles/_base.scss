@@ -1,5 +1,6 @@
 @use "variables" as *;
 @use "./helpers" as h;
+@use "./breakpoints" as bp;
 @use "./grids" as grids;
 @use "colorscheme" as colors;
 
@@ -176,11 +177,13 @@ body {
   justify-items: center;
 }
 
-.twocolumn-page {
-  columns: 2;
+@include bp.breakpoint(medium, min) {
+  .twocolumn-page {
+    columns: 2;
 
-  > p:first-of-type {
-    margin-top: 0;
+    > p:first-of-type {
+      margin-top: 0;
+    }
   }
 }
 
