@@ -14,6 +14,15 @@
  * Custom css properties (available at runtime only)
  */
 :root {
+  /** Default font size for mobile */
+  --unit: 16px;
+  --scale: 1.125; /** Major second */
+
+  @include bp.breakpoint(medium, min) {
+    --unit: 18px;
+    --scale: 1.25; /** major third */
+  }
+
   /* Margin/padding units */
   --gap: #{$gap};
   --headerH: 64px;

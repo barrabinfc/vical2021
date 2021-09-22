@@ -6,7 +6,7 @@
 
 :root {
   --unit: 18px;
-  --scale: 1.2 /** minor third */;
+  --scale: 1.250 /** minor third */;
 
   --text-lineheight: 1.5;
   --text-weight: 300;
@@ -73,7 +73,7 @@ h5,
   font-family: var(--title-family);
   font-weight: var(--title-weight);
   font-variation-settings: 'wght' var(--title-weight);
-  margin: 2rem 0 2rem;
+  margin: 2.5rem 0 1.5rem;
   line-height: var(--title-lineheight);
 
   @include bp.breakpoint(small, max) {
