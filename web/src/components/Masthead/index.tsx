@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { avoidWidowedWords } from '../../lib/helpers';
+
 import styles from './masthead.module.scss';
 import { cn, hasReactChildren } from '~/lib/helpers';
 
@@ -18,11 +20,11 @@ export default function MastHead({ title, subtitle = undefined, image = undefine
         {image && <InlineImage src={image} alt={title} />}
         <div className={cn(styles.content)}>
           <h1 id="masthead-title" className={cn(styles.title)}>
-            {title}
+            {avoidWidowedWords(title)}
           </h1>
-          {subtitle && <h2 className={cn(styles.subtitle)}>{subtitle}</h2>}
-          {hasReactChildren(children) && children}
+          {subtitle && <h2 className={cn(styles.subtitle)}>{avoidWidowedWords(subtitle)}</h2>}
         </div>
+        {hasReactChildren(children) && children}
       </div>
     </div>
   );
