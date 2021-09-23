@@ -84,6 +84,8 @@ let page:Page = toPage({
 
   img {
     max-width: 100%;
+    display: flex;
+    margin: 0 auto;
   }
   figcaption {
     text-align: center;
@@ -114,20 +116,19 @@ let page:Page = toPage({
    * Tables
    */
   table {
+    margin-bottom: 1.5rem;
     border-spacing: 0px;
     border-top: 0px;
-
-    &:not(:last-child) {
-      margin-bottom: 1.5rem;
-    }
+    overflow: hidden;
+    table-layout: fixed;
 
     thead {
       background-color: var(--brand);
       color: var(--text1-invert);
 
       & th {
-        font-weight: var(--code-weight);
         font-size: 1.0rem;
+        font-weight: var(--code-weight);
         text-align: center;
       }
     }
@@ -149,7 +150,6 @@ let page:Page = toPage({
       font-size: var(--s0);
       padding: calc(2 * var(--gap));
       border-right: 1px solid var(--surface2);
-      text-align: center;
 
       &:first-of-type {
         border-left: 1px solid var(--surface2);
@@ -158,7 +158,7 @@ let page:Page = toPage({
   }
 
   hr {
-    margin: 3em 0em;
+    margin: 2em 0em;
     border: 0;
     height: 1px;
     background-image: radial-gradient(circle at center, var(--surface4),transparent)
