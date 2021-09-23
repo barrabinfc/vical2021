@@ -40,10 +40,6 @@ A Progressive Web Application that is lightweight, open source and offline & wit
 <div class="grid2 justifyCenter">
   <div class="mockup">
     <div class="marvel-device iphone-x">
-        <div class="notch">
-          <div class="camera"></div>
-          <div class="speaker"></div>
-        </div>
         <div class="top-bar"></div>
         <div class="sleep"></div>
         <div class="bottom-bar"></div>
@@ -64,10 +60,6 @@ A Progressive Web Application that is lightweight, open source and offline & wit
   </div>
   <div class="mockup">
     <div class="marvel-device iphone-x">
-      <div class="notch">
-        <div class="camera"></div>
-        <div class="speaker"></div>
-      </div>
       <div class="top-bar"></div>
       <div class="sleep"></div>
       <div class="bottom-bar"></div>
@@ -88,3 +80,11 @@ A Progressive Web Application that is lightweight, open source and offline & wit
   </div>
   </div>
 </div>
+
+<style>
+[project-slug="iching"] .logo {
+  -webkit-transform-origin: 50%  50%;
+  opacity: 0.18;
+  transform: scale(3.3);
+}
+</style>

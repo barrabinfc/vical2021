@@ -15,11 +15,12 @@ let page:Page = toPage({
   ...Astro.props.content,
   [astroContextSymbol]: astroContext
 });
+let content = page.content.content;
 ---
 
 <BaseLayout {page}>
   <script type="text/javascript" src="https://unpkg.com/external-svg-loader@latest/svg-loader.min.js" async></script>
-  <article id="content">
+  <article id="content" project-slug={page.slug.toLowerCase()}>
     <link rel="stylesheet" href="/styles/devices.min.css" />
     <link rel="stylesheet" href="/styles/browser.min.css" />
 
@@ -29,7 +30,7 @@ let page:Page = toPage({
       image={page.content.logo ?? null}
     ></Masthead>
     <section class={cn('project',page.content.variant)} aria-labelledby="masthead-title">
-      <slot />
+      {content}
     </section>
   </article>
 </BaseLayout>
@@ -66,6 +67,11 @@ let page:Page = toPage({
     width: 80vw;
     width: clamp(16rem, 80vw, 90rem);
     margin: 3em auto;
+
+    @include bp.breakpoint(small, max) {
+      width: clamp(16rem, 90vw, 90rem);
+      margin: 3em auto;
+    }
   }
 
   .description {

@@ -3,16 +3,27 @@
   width: 100%;
   display: flex;
   background-color: var(--surface4);
+  position: relative;
+  overflow: hidden;
 
   /** Give more space to children */
-  &.hasChildrenVariant {
+  &.withChildVariant {
     .contentContainer {
       padding-bottom: calc(var(--headerH) / 2);
     }
   }
 }
 
+.variant_withChild {
+  .contentContainer {
+    padding-bottom: calc(var(--headerH) / 2);
+  }
+}
+
 .contentContainer {
+  position: relative;
+  z-index: 0;
+
   width: 100%;
   margin: 0 auto;
   padding: var(--headerH) calc(var(--gap) * 8);
@@ -43,10 +54,9 @@
 }
 
 .logo {
-  width: clamp(48px, 96px, 128px);
-  padding-inline-end: 1rem;
-  transition: transform 0.13s ease-out;
-  &:hover {
-    transform: scale(1.2);
-  }
+  position: absolute;
+  contain: strict;
+  width: 100%;
+  height: inherit;
+  z-index: 0;
 }
