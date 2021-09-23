@@ -81,7 +81,7 @@ A Progressive Web Application that is lightweight, open source and offline & wit
   </div>
 </div>
 
-<style>
+<style global>
 [project-slug="iching"] .logo {
   -webkit-transform-origin: 50%  50%;
   opacity: 0.18;
