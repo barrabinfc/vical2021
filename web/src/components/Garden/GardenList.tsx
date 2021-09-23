@@ -1,5 +1,6 @@
 import React from 'react';
-import { cn, toDMYDateString, emojifyStatus } from '../../lib/helpers';
+import { HeadingLevel } from '../../@types/a11y';
+import { cn, toDMYDateString, toReadableDateString, emojifyStatus } from '../../lib/helpers';
 import { Page } from '../../lib/page';
 import Tag, { TagVariant } from '../Tag/Tag';
 
@@ -14,17 +15,22 @@ export enum GardenListVariant {
 export interface GardenListProps {
   items: Page[];
   className?: string | string[];
+  TitleHeadingLevel: HeadingLevel;
   variant?: GardenListVariant;
 }
 
-export const GardenList = ({ items, variant = GardenListVariant.DEFAULT }: GardenListProps) => {
+export const GardenList = ({
+  items,
+  TitleHeadingLevel = HeadingLevel.h2,
+  variant = GardenListVariant.DEFAULT
+}: GardenListProps) => {
   return (
     <ul className={cn(style['garden-list'])}>
       {items.map(garden => (
         <li className={cn(garden.slug, 'list-item')} key={garden.slug}>
           <a href={garden.url.pathname} className={cn(style['garden-item'])}>
-            <div className={cn('title4', style['item-title'])}>{garden.content.title}</div>
-            <div className="extra-container">
+            <TitleHeadingLevel className={cn('title4', style['item-title'])}>{garden.content.title}.</TitleHeadingLevel>
+            <div className="extra-container" aria-hidden="true">
               {garden.collection?.length > 0 && (
                 <span className="tags-container" aria-label="in collection">
                   <Tag className="collection">{garden.collection}</Tag>
@@ -33,7 +39,7 @@ export const GardenList = ({ items, variant = GardenListVariant.DEFAULT }: Garde
               <time
                 className="publishedAt"
                 dateTime={garden.publishedAt.toString()}
-                aria-label={`Published at: ${toDMYDateString(garden.publishedAt)}`}
+                aria-label={`Published at: ${toReadableDateString(garden.publishedAt)}`}
               >
                 {toDMYDateString(garden.publishedAt)}
               </time>
@@ -42,7 +48,7 @@ export const GardenList = ({ items, variant = GardenListVariant.DEFAULT }: Garde
               </Tag>
             </div>
             {variant === GardenListVariant.WITH_SUBTITLE && (
-              <div className={cn('item-subtitle', style['item-subtitle'])}>{garden.content.subtitle}</div>
+              <p className={cn('item-subtitle', style['item-subtitle'])}>{garden.content.subtitle}</p>
             )}
           </a>
         </li>

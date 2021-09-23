@@ -16,11 +16,16 @@ $cardHeight: 280px;
   border: 0;
   text-decoration: none;
 
+  transform: scale(1);
+  transition: transform 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
   /**
    * Hover/focus state
    */
   &:hover,
   &:focus {
+    transform: scale(1.05);
+
     .avatar img {
       filter: grayscale(0);
       transform: scale(1.025);

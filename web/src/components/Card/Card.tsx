@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { cn, range } from '~/lib/helpers';
+import { HeadingLevel } from '../../@types/a11y';
+
+import { cn } from '~/lib/helpers';
 
 import { motion, useAnimation } from 'framer-motion';
 
@@ -19,7 +21,9 @@ export interface CardProps {
     title: string;
     subtitle: string;
   };
+  TitleHeadingLevel?: HeadingLevel;
   className: string | string[];
+
   children?: React.ReactNode | React.ReactNode[];
   loading: 'lazy' | 'eager';
 
@@ -27,7 +31,16 @@ export interface CardProps {
   delay?: number;
 }
 
-export default function Card({ href, avatar, content, className, children, loading = 'lazy', delay = 0 }: CardProps) {
+export default function Card({
+  href,
+  avatar,
+  content,
+  TitleHeadingLevel = HeadingLevel.h2,
+  className,
+  children,
+  loading = 'lazy',
+  delay = 0
+}: CardProps) {
   const controls = useAnimation();
   const [ref, inView] = useInView();
 
@@ -38,7 +51,7 @@ export default function Card({ href, avatar, content, className, children, loadi
   }, [controls, inView]);
 
   return (
-    <motion.a ref={ref} href={href} className={cn(styles.card, className)} whileHover={{ scale: 1.02 }}>
+    <a ref={ref} href={href} className={cn(styles.card, className)}>
       <div className={cn(styles['content-container'])}>
         <div className={cn(styles['content'])}>
           {avatar && (
@@ -49,7 +62,7 @@ export default function Card({ href, avatar, content, className, children, loadi
             </div>
           )}
           <div className={styles['title-container']} align-at="bottom">
-            <h3 className={cn(styles.title, styles['clamp-line'])}>
+            <TitleHeadingLevel className={cn(styles.title, styles['clamp-line'], 'title3')}>
               <motion.span
                 style={{ position: 'absolute' }}
                 animate={controls}
@@ -62,7 +75,7 @@ export default function Card({ href, avatar, content, className, children, loadi
               >
                 {content?.title}
               </motion.span>
-            </h3>
+            </TitleHeadingLevel>
             {content?.subtitle && (
               <p className={cn(styles.subtitle, styles['clamp-line'])}>
                 <motion.span
@@ -84,6 +97,6 @@ export default function Card({ href, avatar, content, className, children, loadi
           <div className="cast-shadow"></div>
         </div>
       </div>
-    </motion.a>
+    </a>
   );
 }

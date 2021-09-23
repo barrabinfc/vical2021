@@ -6,8 +6,8 @@ import {Page, toPage} from '../../lib/page/Page';
 import Masthead from '../../components/Masthead';
 import Tag, {TagVariant} from '../../components/Tag/Tag';
 
-import {cn,fromISOString, toUnixTimestamp, toDMYDateString, emojifyStatus} from '../../lib/helpers';
-import {buildHTMLTransformerFn , HTMLTransformFn} from '../../lib/html';
+import {cn,toReadableDateString, toDMYDateString, emojifyStatus} from '../../lib/helpers';
+import {buildHTMLTransformerFn } from '../../lib/html';
 
 /** @ts-ignore */
 const abspath = import.meta.url.pathname;
@@ -61,7 +61,7 @@ content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
             <time
               className="publishedAt"
               dateTime={page.publishedAt.toString()}
-              aria-label={`Published at: ${toDMYDateString(page.publishedAt)}`}
+              aria-label={`Published at: ${toReadableDateString(page.publishedAt)}`}
             >
               {toDMYDateString(page.publishedAt)}
             </time>

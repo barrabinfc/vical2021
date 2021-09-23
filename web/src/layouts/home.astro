@@ -1,6 +1,7 @@
 ---
 import {dirname,basename} from 'node:path'
-import {cn,toDMYDateString, avoidWidowedWords, emojifyStatus} from '../lib/helpers';
+import {HeadingLevel} from '../@types/a11y';
+import {cn, avoidWidowedWords, emojifyStatus} from '../lib/helpers';
 import {Page, toPage} from '../lib/page/Page'
 import {loadHTML, html} from '../lib/html';
 
@@ -55,13 +56,19 @@ title.text( avoidWidowedWords(title.text()) );
 
     <section class="projects">
       <h2 class="title1 pad4-y">Projects</h2>
-      <ProjectGrid projects={projects} client:idle />
+      <ProjectGrid
+        TitleHeadingLevel={HeadingLevel.h3}
+        projects={projects}
+        client:idle />
       <div class="pad4"/>
     </section>
 
     <section class="digital-garden">
       <h2 class="title1 pad4-y">🌻 Digital Garden</h2>
-      <GardenList items={gardenItems} variant={GardenListVariant.WITH_SUBTITLE} />
+      <GardenList
+        items={gardenItems}
+        TitleHeadingLevel={HeadingLevel.h3}
+        variant={GardenListVariant.WITH_SUBTITLE} />
       <div class="pad4"/>
     </section>
   </div>

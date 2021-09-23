@@ -58,6 +58,19 @@ export function toDMYDateString(date: UnixTimestamp | Date): string {
   }
 }
 
+/* From Unix timestamp to readable string date   */
+export function toReadableDateString(date: UnixTimestamp): string;
+export function toReadableDateString(date: Date): string;
+export function toReadableDateString(date: UnixTimestamp | Date): string {
+  const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  switch (typeof date) {
+    case 'number':
+      return new Date(date * 1000).toLocaleDateString('en-US', options);
+    case 'object':
+      return date.toLocaleDateString('en-US', options);
+  }
+}
+
 /**
  * Slugify
  * Transform `txt` into a url friendly slug.
