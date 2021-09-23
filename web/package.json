@@ -8,6 +8,7 @@
     "build": "astro build",
     "debug": "DEBUG=* astro dev",
     "test": "uvu -r esbuild-register -r tests/setup/register ",
+    "devtest": "watchexec -w src npm test",
     "graphql": "cd apollo; npm start;",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
