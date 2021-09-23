@@ -205,3 +205,12 @@ body {
     margin-right: auto;
   }
 }
+
+/**
+ * Clamp line for animation
+ */
+.line-clamp {
+  position: relative;
+  overflow: hidden;
+  text-align: start;
+}

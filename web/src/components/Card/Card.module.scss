@@ -172,12 +172,3 @@ $cardHeight: 280px;
     0 41.8px 33.4px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.03)),
     0 100px 80px hsl(var(--surface-shadow) / var(--shadow-strength));
 }
-
-/**
- * Clamp line for animation
- */
-.clamp-line {
-  position: relative;
-  overflow: hidden;
-  text-align: start;
-}

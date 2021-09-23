@@ -62,7 +62,7 @@ export default function Card({
             </div>
           )}
           <div className={styles['title-container']} align-at="bottom">
-            <TitleHeadingLevel className={cn(styles.title, styles['clamp-line'], 'title3')}>
+            <TitleHeadingLevel className={cn(styles.title, 'title3', 'line-clamp')}>
               <motion.span
                 style={{ position: 'absolute' }}
                 animate={controls}
@@ -77,7 +77,7 @@ export default function Card({
               </motion.span>
             </TitleHeadingLevel>
             {content?.subtitle && (
-              <p className={cn(styles.subtitle, styles['clamp-line'])}>
+              <p className={cn(styles.subtitle, 'line-clamp')}>
                 <motion.span
                   style={{ position: 'absolute' }}
                   animate={controls}
