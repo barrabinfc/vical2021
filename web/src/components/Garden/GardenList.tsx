@@ -29,7 +29,10 @@ export const GardenList = ({
       {items.map(garden => (
         <li className={cn(garden.slug, 'list-item')} key={garden.slug}>
           <a href={garden.url.pathname} className={cn(style['garden-item'])}>
-            <TitleHeadingLevel className={cn('title4', style['item-title'])}>{garden.content.title}.</TitleHeadingLevel>
+            <TitleHeadingLevel className={cn('title4', style['item-title'])}>
+              {garden.content.title}
+              <span className="visually-hidden">.</span>
+            </TitleHeadingLevel>
             <div className="extra-container" aria-hidden="true">
               {garden.collection?.length > 0 && (
                 <span className="tags-container" aria-label="in collection">

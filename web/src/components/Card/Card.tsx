@@ -74,6 +74,7 @@ export default function Card({
                 }}
               >
                 {content?.title}
+                <span className="visually-hidden">.</span>
               </motion.span>
             </TitleHeadingLevel>
             {content?.subtitle && (
