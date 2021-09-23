@@ -5,11 +5,11 @@ import { avoidWidowedWords } from '../../lib/helpers';
 import styles from './masthead.module.scss';
 import { cn, hasReactChildren } from '~/lib/helpers';
 
-function InlineImage({ src, alt }: { src: string; alt: string }) {
+function InlineImage({ src }: { src: string }) {
   if (src.match(/svg/)) {
     return <svg className={cn(styles.logo)} data-src={src} width="76" color="var(--surface4)"></svg>;
   } else {
-    <img alt={alt} src={src} className={cn(styles.logo)} />;
+    <img alt="" src={src} className={cn(styles.logo)} />;
   }
 }
 
@@ -17,7 +17,7 @@ export default function MastHead({ title, subtitle = undefined, image = undefine
   return (
     <div className={cn(styles.masthead, className, hasReactChildren(children) && styles.hasChildrenVariant)}>
       <div className={cn(styles.contentContainer, 'content-container')}>
-        {image && <InlineImage src={image} alt={title} />}
+        {image && <InlineImage src={image} />}
         <div className={cn(styles.content)}>
           <h1 id="masthead-title" className={cn(styles.title)}>
             {avoidWidowedWords(title)}
