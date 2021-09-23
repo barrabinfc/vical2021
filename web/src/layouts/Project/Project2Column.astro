@@ -37,7 +37,7 @@ if(galleryAddress) {
 
 <style lang="scss" global>
 @use "sass:math";
-
+@use "src/styles/breakpoints" as bp;
 @use "src/styles/grids" as grids;
 @use "src/styles/helpers" as h;
 
@@ -54,16 +54,31 @@ $containerWidth: 100vw - (100vw * $containerPadW);
   $columnSizeVW: math.div( $containerWidth , $columns );
   $gap: calc( var(--gap) * 16);
 
-  @include grids.grid($columns, $gap);
-  width: 100%;
+  @include bp.breakpoint(medium, min) {
+    @include grids.grid($columns, $gap);
+    width: 100%;
+    .left {
+      min-width: 0;
+      grid-column: span 2;
+      align-self: start;
 
-  .left {
-    min-width: 0;
-    grid-column: span 2;
-    position: sticky;
-    top: 0px;
-  	align-self: start;
+      position: sticky;
+      top: 0px;
+    }
+    .right {
+      min-width: 0;
+      grid-column: 3 / #{($columns+1)};
+
+      img, video {
+        width: 100%;
+      }
+    }
   }
+
+  @include bp.breakpoint(small, max) {
+    @include grids.flexGrid();
+  }
+
   .right {
     min-width: 0;
     grid-column: 3 / #{($columns+1)};

@@ -30,7 +30,7 @@ let content = page.content.content;
       image={page.content.logo ?? null}
     ></Masthead>
     <section class={cn('project',page.content.variant)} aria-labelledby="masthead-title">
-      {content}
+      <slot/>
     </section>
   </article>
 </BaseLayout>
