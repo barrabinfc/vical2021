@@ -30,7 +30,7 @@ function isAstroPage(subject: Record<string | symbol, any>): subject is AstroPag
   return subject[AstroContextSymbol] !== undefined;
 }
 
-/** Markdown returned from @astrojs/markdown parser */
+/** Markdown returned from `@astrojs/markdown` parser */
 interface AstroMarkdownPage {
   astro: {
     headers: any[];
@@ -47,7 +47,10 @@ interface MarkdownPageReference extends AstroMarkdownPage {
   abspath: string;
 }
 
-/** Page schema (according to @schema.org) */
+/**
+ * Page schema, according to schema.org
+ * @see https://schema.org Schema.org
+ */
 const isPageSchema = t.isOneOf([t.isLiteral('article'), t.isLiteral('basic')], { exclusive: true });
 type PageSchema = t.InferType<typeof isPageSchema>;
 

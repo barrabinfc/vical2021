@@ -14,7 +14,7 @@ const astroConfig = JSON.parse(vicalPackage || '{}')._astroConfig;
 export const abspathOfPages = resolve(astroConfig.pages);
 
 /**
- * Convert a file path in src/pages/ folder to a URL
+ * Convert a file path in `src/pages/` folder to a {@link URL}
  */
 export const pagePathToUrl = (filepath: string): URL => {
   const relativePath = relative(abspathOfPages, filepath);
@@ -30,7 +30,8 @@ export const pagePathToUrl = (filepath: string): URL => {
 };
 
 /**
- * The inverse of pagePathToURL.
+ * The inverse of {@link pagePathToUrl}
+ *
  * Given a url, retrieve the absolute path to the file
  */
 export const urlToPagePath = (url: URL): string => {
