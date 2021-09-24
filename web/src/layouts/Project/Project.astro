@@ -15,11 +15,12 @@ let page:Page = toPage({
   ...Astro.props.content,
   [astroContextSymbol]: astroContext
 });
+let content = page.content.content;
 ---
 
 <BaseLayout {page}>
   <script type="text/javascript" src="https://unpkg.com/external-svg-loader@latest/svg-loader.min.js" async></script>
-  <article id="content">
+  <article id="content" project-slug={page.slug.toLowerCase()}>
     <link rel="stylesheet" href="/styles/devices.min.css" />
     <link rel="stylesheet" href="/styles/browser.min.css" />
 
@@ -29,15 +30,15 @@ let page:Page = toPage({
       image={page.content.logo ?? null}
     ></Masthead>
     <section class={cn('project',page.content.variant)} aria-labelledby="masthead-title">
-      <slot />
+      <slot/>
     </section>
   </article>
 </BaseLayout>
 
 <style lang="scss" global>
 @use "sass:math";
-
 @use "src/styles/grids" as grids;
+@use "src/styles/breakpoints" as bp;
 @use "src/styles/helpers" as h;
 
 .project-masthead {
@@ -45,6 +46,10 @@ let page:Page = toPage({
     max-width: 80vw;
     padding-left: 0;
     padding-right: 0;
+
+    @include bp.breakpoint(small, max) {
+      max-width: 90vw;
+    }
   }
 }
 .project-masthead.full-width {
@@ -59,9 +64,14 @@ let page:Page = toPage({
   position: relative;
 
   &:not(.full-width) {
-    width: 75vw;
-    width: clamp(16rem, 75vw, 90rem);
+    width: 80vw;
+    width: clamp(16rem, 80vw, 90rem);
     margin: 3em auto;
+
+    @include bp.breakpoint(small, max) {
+      width: clamp(16rem, 90vw, 90rem);
+      margin: 3em auto;
+    }
   }
 
   .description {
@@ -84,6 +94,8 @@ let page:Page = toPage({
 
   img {
     max-width: 100%;
+    display: flex;
+    margin: 0 auto;
   }
   figcaption {
     text-align: center;
@@ -95,7 +107,6 @@ let page:Page = toPage({
   .title {
       /** Headings of text shoul be smooth */
     --title-weight: var(--subtitle-weight);
-
 
     position: relative;
     max-width: 50ch;
@@ -114,20 +125,19 @@ let page:Page = toPage({
    * Tables
    */
   table {
+    margin-bottom: 1.5rem;
     border-spacing: 0px;
     border-top: 0px;
-
-    &:not(:last-child) {
-      margin-bottom: 1.5rem;
-    }
+    overflow: hidden;
+    table-layout: fixed;
 
     thead {
       background-color: var(--brand);
       color: var(--text1-invert);
 
       & th {
-        font-weight: var(--code-weight);
         font-size: 1.0rem;
+        font-weight: var(--code-weight);
         text-align: center;
       }
     }
@@ -149,7 +159,6 @@ let page:Page = toPage({
       font-size: var(--s0);
       padding: calc(2 * var(--gap));
       border-right: 1px solid var(--surface2);
-      text-align: center;
 
       &:first-of-type {
         border-left: 1px solid var(--surface2);
@@ -158,7 +167,7 @@ let page:Page = toPage({
   }
 
   hr {
-    margin: 3em 0em;
+    margin: 2em 0em;
     border: 0;
     height: 1px;
     background-image: radial-gradient(circle at center, var(--surface4),transparent)
@@ -185,6 +194,32 @@ let page:Page = toPage({
       height: 100%;
       border-radius: inherit;
       @include h.shadow();
+    }
+  }
+}
+
+/**
+ * Gallery
+ */
+.gallery {
+  .page {
+    width: 100%;
+    height: clamp(640px, 50vh, 60vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.h100 {
+      height: clamp(640px, 100vh, 100vh);
+    }
+    &.h50 {
+      height: clamp(640px, 50vh, 50vh);
+    }
+    &.h70 {
+      height: clamp(640px, 70vh, 70vh);
+    }
+    &.h80 {
+      height: clamp(640px, 80vh, 80vh);
     }
   }
 }

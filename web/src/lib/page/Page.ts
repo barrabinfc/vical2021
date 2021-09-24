@@ -61,18 +61,13 @@ const isPageStatus = t.isOneOf([t.isLiteral('draft'), t.isLiteral('in progress')
 type PageStatus = t.InferType<typeof isPageStatus>;
 
 /** Page content */
-const isPageContent = t.isObject(
-  {
-    title: t.isString(),
-    subtitle: t.isString(),
-    description: t.isString(),
-    headers: t.isArray(t.isUnknown()),
-    content: t.isString()
-  },
-  {
-    extra: t.isUnknown()
-  }
-);
+const isPageContent = t.isPartial({
+  title: t.isString(),
+  subtitle: t.isString(),
+  description: t.isString(),
+  headers: t.isArray(t.isUnknown()),
+  content: t.isString()
+});
 type PageContent = Required<t.InferType<typeof isPageContent>>;
 
 /**
