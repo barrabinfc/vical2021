@@ -1,4 +1,4 @@
-import { loadHTML, html } from '../html/html';
+import { loadHTML, html } from '../html';
 import cheerio, { Cheerio, Node } from 'cheerio';
 
 export type HTMLTransformFn = (el: Cheerio<Node>, ctx: any) => void;

@@ -1,0 +1,57 @@
+.vicalvideo.video-js {
+  --bgcolor: hsla(var(--brand-hue) 10% 20% / 0.8);
+  --hovercolor: hsl(var(--brand-hue) 10% 20% / 0.5);
+}
+
+.vicalvideo.video-js .vjs-control-bar {
+  display: flex;
+  align-items: center;
+}
+
+.vicalvideo.video-js .vjs-poster {
+  background-size: 150%;
+}
+
+.vicalvideo.video-js .vjs-control-bar {
+  width: 100%;
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  width: calc(100% - 42px);
+  border-radius: 10px;
+  height: 4em;
+  background-color: var(--bgcolor);
+}
+
+.vicalvideo.video-js .vjs-big-play-button {
+  background-color: var(--bgcolor);
+  border: transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.vicalvideo.video-js:hover .vjs-big-play-button {
+  background-color: var(--surface3);
+  color: var(--text2);
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.vicalvideo.video-js .vjs-menu-button-inline .vjs-menu {
+  top: 4px;
+}
+
+.vicalvideo.video-js .vjs-control:before,
+.vicalvideo.video-js .vjs-time-control {
+  line-height: 40px;
+}
+
+.vicalvideo.video-js .vjs-tech {
+  object-fit: cover;
+}
+
+.vicalvideo.video-js.vjs-fluid {
+  overflow: hidden;
+  min-height: 414px;
+}

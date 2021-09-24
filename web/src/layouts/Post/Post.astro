@@ -8,6 +8,7 @@ import Tag, {TagVariant} from '../../components/Tag/Tag';
 
 import {cn,toReadableDateString, toDMYDateString, emojifyStatus} from '../../lib/helpers';
 import {buildHTMLTransformerFn } from '../../lib/html';
+import transformFootnoteLinksInNewPage from '../../lib/html/transformers/footnotesLinksInNewPage';
 
 /** @ts-ignore */
 const abspath = import.meta.url.pathname;
@@ -35,14 +36,8 @@ const transformRelativeImagePath = buildHTMLTransformerFn( 'img[src^="./"]',  (e
   el.attr('src', Astro.resolve(relativeTargetPath + src.slice(1)) );
 });
 
-/** Open links in new page  */
-const transformFootnoteLinks = buildHTMLTransformerFn( 'a:not([href^="/"])', (el, ctx) => {
-  el.attr('target','_blank');
-  el.attr('rel',"noopener noreferrer");
-});
-
 let content = transformRelativeImagePath( page.content.content );
-content = transformFootnoteLinks( content );
+content = transformFootnoteLinksInNewPage( content );
 content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
 
 ---
