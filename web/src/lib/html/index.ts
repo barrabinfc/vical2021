@@ -1,2 +1,2 @@
 export * from './html';
-export * from './transformers';
+export * from './transformers/buildTransformerFn';

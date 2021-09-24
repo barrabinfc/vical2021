@@ -3,8 +3,8 @@
   --brand-saturation: 96%;
   --brand-lightness: 63%;
 
-  /* light */
   --nice: #fedfce;
+  /* light hsl(15 96% 83%) */
   --brand-light: hsl(var(--brand-hue) var(--brand-saturation) var(--brand-lightness));
   --brand2-light: hsl(153 33% 32%);
 
@@ -17,13 +17,13 @@
   --surface4-light: hsl(var(--brand-hue) 96% 90%);
 
   --surface-shadow-light: var(--brand-hue) 10% 20%;
-  --shadow-strength-light: 0.02;
+  --shadow-strength-light: 0.08;
 
-  /* dark */
+  /* dark hsl(15 43% 42%) */
   --brand-dark: hsl(var(--brand-hue) calc(var(--brand-saturation) / 2) calc(var(--brand-lightness) / 1.5));
   --text1-dark: hsl(var(--brand-hue) 15% 98%);
   --text2-dark: hsl(var(--brand-hue) 5% 65%);
-  --surface1-dark: hsl(var(--brand-hue) 10% 10%);
+  --surface1-dark: hsl(var(--brand-hue) 10% 10%); /** hsl(15 10% 25%) */
   --surface2-dark: hsl(var(--brand-hue) 10% 15%);
   --surface3-dark: hsl(var(--brand-hue) 5% 20%);
   --surface4-dark: hsl(var(--brand-hue) 5% 25%);

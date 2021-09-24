@@ -1,10 +1,21 @@
 <!-- Portinari gallery -->
 <div class="gallery">
-  <video poster='/images/portinari/tree_poster.jpg' preload="none"
-      controls src='/images/portinari/tree.mp4' type="video/mp4" /></video>
+  <video class="vicalvideo video-js vjs-default-skin vjs-big-play-centered"
+      width="640px"
+      height="354px"
+      data-setup='{"aspectRatio":"640:354","liveui": true, "responsive": false}'
+      preload="none" controls
+      poster='/images/portinari/tree_poster.jpg'>
+      <source src='/images/portinari/tree.mp4' type="video/mp4" />
+  </video>
+
   <img src="/images/portinari/thumb.jpg" alt="Showcase" />
-  <video poster='/images/portinari/user_poster.jpg' preload="none"
-  controls src='/images/portinari/user.mp4' type="video/mp4"></video>
+
+  <video
+    preload="none" controls
+    poster='/images/portinari/user_poster.jpg'>
+    <source src='/images/portinari/user.mp4' type='video/mp4' />
+  </video>
 
   <div class="page h50">
     <div class="mockup">
@@ -19,11 +30,11 @@
     </div>
   </div>
   <div class="page h70">
-    <div class="mockup">
+    <figure class="mockup">
       <div class="browser-mockup with-url">
         <img src="/images/portinari/admin.png" alt="Administrator screen" />
       </div>
-        <figcaption class="text2">Administration Screen<figcaption>
-    </div>
+        <figcaption class="text2">Administration Screen</figcaption>
+    </figure>
   </div>
 </div>

@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/base.astro';
 import Masthead from '../../components/Masthead';
 
 import {cn} from '../../lib/helpers';
+import Video from '../../components/video/video.tsx';
 
 /** @ts-ignore */
 const abspath = import.meta.url.pathname;
@@ -20,9 +21,16 @@ let content = page.content.content;
 
 <BaseLayout {page}>
   <script type="text/javascript" src="https://unpkg.com/external-svg-loader@latest/svg-loader.min.js" async></script>
+  <!-- <script type="text/javascript" src="https://vjs.zencdn.net/5-unsafe/video.js" async></script> -->
   <article id="content" project-slug={page.slug.toLowerCase()}>
     <link rel="stylesheet" href="/styles/devices.min.css" />
     <link rel="stylesheet" href="/styles/browser.min.css" />
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.10.2/video-js.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="/styles/vjs/vjs.css" />
+    <!-- <link rel="stylesheet" href="https://vjs.zencdn.net/5-unsafe/video-js.css" /> -->
+    <!-- <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet"> -->
+
+    <Video client:idle />
 
     <Masthead className={cn('project-masthead','surface4', page.content.variant)}
       title={page.content.title}
@@ -177,14 +185,17 @@ let content = page.content.content;
 
 .mockup {
   text-align: center;
+  --shadow-strength: 0.08;
 
   > .browser-mockup {
     width: 70%;
     margin: 0 auto;
+    @include h.shadow();
   }
 
   > .marvel-device {
     zoom: 0.5;
+
     &::after {
       content: ' ';
       position: absolute;
