@@ -108,7 +108,6 @@ let content = page.content.content;
       /** Headings of text shoul be smooth */
     --title-weight: var(--subtitle-weight);
 
-
     position: relative;
     max-width: 50ch;
 
@@ -195,6 +194,32 @@ let content = page.content.content;
       height: 100%;
       border-radius: inherit;
       @include h.shadow();
+    }
+  }
+}
+
+/**
+ * Gallery
+ */
+.gallery {
+  .page {
+    width: 100%;
+    height: clamp(640px, 50vh, 60vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.h100 {
+      height: clamp(640px, 100vh, 100vh);
+    }
+    &.h50 {
+      height: clamp(640px, 50vh, 50vh);
+    }
+    &.h70 {
+      height: clamp(640px, 70vh, 70vh);
+    }
+    &.h80 {
+      height: clamp(640px, 80vh, 80vh);
     }
   }
 }
