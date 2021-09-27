@@ -1,25 +1,35 @@
 ---
-import {toPage} from '../../lib/page/Page'
-import Project from './Project.astro'
 import {resolve, relative, dirname } from 'node:path'
 import {readFileSync} from 'node:fs';
 
+import {toPage} from '../../lib/page/Page'
+import applyPostProcess from './postprocessors';
+import Project from './Project.astro'
 
+
+/** @ts-ignore */
+const abspath = import.meta.url.pathname;
 const astroContextSymbol = Symbol.for('astro.context');
 const astroContext = Astro.props[astroContextSymbol];
 
 const page = toPage({
+  layout: abspath,
   ...Astro.props.content,
   [astroContextSymbol]: astroContext
 });
+
+let contentHtml = applyPostProcess(page.content.content);
 
 /** If we have a gallery file, load it's html */
 const galleryAddress = page.content.gallery;
 let galleryHTML = `<pre>File ${galleryAddress} Not found</pre>`
 if(galleryAddress) {
   const galleryAddressFullPath = resolve(`${process.cwd()}/${galleryAddress}`);
+  /** @ts-ignore */
   const galleryAddressRelativePath = relative(dirname(import.meta.url.pathname), galleryAddressFullPath );
+
   galleryHTML = readFileSync(galleryAddressFullPath).toString();
+  galleryHTML = applyPostProcess(galleryHTML);
 }
 
 ---
@@ -27,7 +37,7 @@ if(galleryAddress) {
 <Project content={page.content}>
   <div class="two-columns">
     <section class="content pad8 left">
-      <slot/>
+      {contentHtml}
     </section>
     <aside class="showcase right">
       {galleryHTML}
@@ -68,10 +78,6 @@ $containerWidth: 100vw - (100vw * $containerPadW);
     .right {
       min-width: 0;
       grid-column: 3 / #{($columns+1)};
-
-      img, video {
-        width: 100%;
-      }
     }
   }
 
@@ -83,8 +89,14 @@ $containerWidth: 100vw - (100vw * $containerPadW);
     min-width: 0;
     grid-column: 3 / #{($columns+1)};
 
+    .gallery {
+      display: flex;
+      flex-direction: column;
+    }
+
     img, video {
       width: 100%;
+      object-fit: cover;
     }
   }
 }
