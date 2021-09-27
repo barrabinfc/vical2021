@@ -1,6 +1,8 @@
 .vicalvideo.video-js {
   --bgcolor: hsla(var(--brand-hue) 10% 20% / 0.8);
   --hovercolor: hsl(var(--brand-hue) 10% 20% / 0.5);
+  width: 100%;
+  min-height: 354px;
 }
 
 .vicalvideo.video-js .vjs-control-bar {
@@ -18,7 +20,7 @@
   bottom: 14px;
   left: 14px;
   right: 14px;
-  width: calc(100% - 42px);
+  width: calc(100% - 28px);
   border-radius: 10px;
   height: 4em;
   background-color: var(--bgcolor);
@@ -29,6 +31,7 @@
   border: transparent;
   top: 50%;
   left: 50%;
+  margin-left: 0;
   transform: translate(-50%, -50%) scale(1);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }

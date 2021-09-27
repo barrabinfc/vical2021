@@ -1,10 +1,16 @@
 ---
+/**
+ * Project layout base class.
+ * It can be inherited and customized via slots
+ * @see {Project2Column.astro}
+ */
 import {toPage, Page} from '../../lib/page/Page'
 import BaseLayout from '../../layouts/base.astro';
 import Masthead from '../../components/Masthead';
 
 import {cn} from '../../lib/helpers';
-import Video from '../../components/video/video.tsx';
+
+import MarkdownComponentsHydration from '../../components/MarkdownComponentsHydration/MarkdownComponentsHydration.tsx';
 
 /** @ts-ignore */
 const abspath = import.meta.url.pathname;
@@ -16,21 +22,25 @@ let page:Page = toPage({
   ...Astro.props.content,
   [astroContextSymbol]: astroContext
 });
+
+/* In case of inherited layout
+ * We add a <slot name="content">
+ */
+const isInherited = !page.layout.endsWith('Project.astro');
 let content = page.content.content;
+
+/** Run progressive enhancements of markdown */
+if(!isInherited) {
+  /** @todo */
+  content = content;
+}
 ---
 
 <BaseLayout {page}>
   <script type="text/javascript" src="https://unpkg.com/external-svg-loader@latest/svg-loader.min.js" async></script>
-  <!-- <script type="text/javascript" src="https://vjs.zencdn.net/5-unsafe/video.js" async></script> -->
   <article id="content" project-slug={page.slug.toLowerCase()}>
     <link rel="stylesheet" href="/styles/devices.min.css" />
     <link rel="stylesheet" href="/styles/browser.min.css" />
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.10.2/video-js.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="/styles/vjs/vjs.css" />
-    <!-- <link rel="stylesheet" href="https://vjs.zencdn.net/5-unsafe/video-js.css" /> -->
-    <!-- <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet"> -->
-
-    <Video client:idle />
 
     <Masthead className={cn('project-masthead','surface4', page.content.variant)}
       title={page.content.title}
@@ -38,7 +48,11 @@ let content = page.content.content;
       image={page.content.logo ?? null}
     ></Masthead>
     <section class={cn('project',page.content.variant)} aria-labelledby="masthead-title">
-      <slot/>
+      <MarkdownComponentsHydration client:idle>
+      {
+        (isInherited ? <slot/> : content)
+      }
+      </MarkdownComponentsHydration>
     </section>
   </article>
 </BaseLayout>
@@ -62,13 +76,14 @@ let content = page.content.content;
 }
 .project-masthead.full-width {
   .content-container {
-    max-width: none;
+    max-width: 1440px;
     padding: var(--headerH) calc(var(--gap) * 8);
   }
 }
 
 .project  {
   max-width: 1440px;
+  margin: 0 auto;
   position: relative;
 
   &:not(.full-width) {
@@ -213,6 +228,7 @@ let content = page.content.content;
  * Gallery
  */
 .gallery {
+
   .page {
     width: 100%;
     height: clamp(640px, 50vh, 60vh);
