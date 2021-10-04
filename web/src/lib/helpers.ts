@@ -4,8 +4,15 @@ export const cn = (...args) => {
   return args.filter(Boolean).join(' ');
 };
 
-export const range = n => {
+export const range = (n) => {
   return Array.from({ length: n }).map((_, i) => i);
+};
+
+/**
+ * Get value of CSS variable `--variable`
+ */
+export const getCSSPropertyValue = (variable: string) => {
+  return getComputedStyle(document.documentElement).getPropertyValue(variable);
 };
 
 /**
@@ -37,7 +44,7 @@ export const hasReactChildren = (child: React.ReactElement): boolean => {
 /**
  * Read a ISO string
  */
-export const fromISOString = str => {
+export const fromISOString = (str) => {
   return Date.parse(str);
 };
 
@@ -80,7 +87,7 @@ export const slugifyRaw = (splitTransform: [string, string] = [' ', ''], txt: st
   return txt
     .trim()
     .split(splitTransform[0])
-    .map(token => token.slice(0, 1).toUpperCase() + token.slice(1).toLowerCase())
+    .map((token) => token.slice(0, 1).toUpperCase() + token.slice(1).toLowerCase())
     .join(splitTransform[1])
     .replace(/[^0-9a-z_-]/gi, '');
 };
