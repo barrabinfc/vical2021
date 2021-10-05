@@ -2,37 +2,11 @@ import React, { lazy, Suspense } from 'react';
 
 import htmr from 'htmr';
 import { ErrorBoundary } from 'react-error-boundary';
-import ContentLoader from 'react-content-loader';
 
 export interface MarkdownComponentsHydrationProps {
   children: React.ReactElement;
-  transformers: Record<string, () => React.ReactElement>;
+  transformers: Record<string, (props: any) => JSX.Element>;
 }
-
-const Loader = (props) => (
-  <ContentLoader
-    speed={4}
-    viewBox={`0 0 400 150`}
-    preserveAspectRatio="xMinYMin slice"
-    backgroundColor="transparent"
-    foregroundColor="#cfcfcf"
-    {...props}
-  >
-    <rect x="0" y="0" width="400" height={150} />
-  </ContentLoader>
-);
-
-const wrapLoadingComponent = (LazyComponent: React.LazyExoticComponent<any>) => {
-  return (props) => {
-    const { width, height } = props;
-
-    return (
-      <Suspense fallback={<Loader {...props} />}>
-        <LazyComponent {...props} />
-      </Suspense>
-    );
-  };
-};
 
 /**
  * Hydrate components from a htmlString
@@ -59,15 +33,20 @@ export const MarkdownComponentsHydration = ({ children, transformers }: Markdown
 
     const childHTML = children.props.value;
 
-    const videoComponent = React.lazy(() => import('../../components/video/video'));
-    const videoWithLoading = wrapLoadingComponent(videoComponent);
-
     return (
       <div className="markdown-components-hydration">
         <ErrorBoundary FallbackComponent={errorMsgComponent}>
           {htmr(childHTML, {
             transform: {
-              video: videoWithLoading
+              _: (Node, props, children) => {
+                /** text node */
+                if (typeof props === 'undefined') {
+                  return Node;
+                }
+
+                return <Node {...props}>{children}</Node>;
+              },
+              ...transformers
             }
           })}
         </ErrorBoundary>
