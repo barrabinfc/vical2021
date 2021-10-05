@@ -53,6 +53,8 @@
   --anim-easeOutExpo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/**
+ * Disabled until VIC-51 is implemented
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
@@ -71,6 +73,7 @@
     --shadow-strength: var(--shadow-strength-dark);
   }
 }
+*/
 
 * {
   box-sizing: border-box;
