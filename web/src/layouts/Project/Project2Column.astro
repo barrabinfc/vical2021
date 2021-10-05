@@ -3,9 +3,7 @@ import {resolve, relative, dirname } from 'node:path'
 import {readFileSync} from 'node:fs';
 
 import {toPage} from '../../lib/page/Page'
-import applyPostProcess from './postprocessors';
 import Project from './Project.astro'
-
 
 /** @ts-ignore */
 const abspath = import.meta.url.pathname;
@@ -18,7 +16,7 @@ const page = toPage({
   [astroContextSymbol]: astroContext
 });
 
-let contentHtml = applyPostProcess(page.content.content);
+let contentHtml = page.content.content;
 
 /** If we have a gallery file, load it's html */
 const galleryAddress = page.content.gallery;
@@ -29,7 +27,6 @@ if(galleryAddress) {
   const galleryAddressRelativePath = relative(dirname(import.meta.url.pathname), galleryAddressFullPath );
 
   galleryHTML = readFileSync(galleryAddressFullPath).toString();
-  galleryHTML = applyPostProcess(galleryHTML);
 }
 
 ---
@@ -94,7 +91,12 @@ $containerWidth: 100vw - (100vw * $containerPadW);
       flex-direction: column;
     }
 
-    img, video {
+    img{
+      width: 100%;
+      object-fit: cover;
+    }
+
+    video {
       width: 100%;
       object-fit: cover;
     }

@@ -10,7 +10,7 @@ import Masthead from '../../components/Masthead';
 
 import {cn} from '../../lib/helpers';
 
-import MarkdownComponentsHydration from '../../components/MarkdownComponentsHydration/MarkdownComponentsHydration.tsx';
+import ProjectHydration from './hydration/index.tsx';
 
 /** @ts-ignore */
 const abspath = import.meta.url.pathname;
@@ -48,11 +48,11 @@ if(!isInherited) {
       image={page.content.logo ?? null}
     ></Masthead>
     <section class={cn('project',page.content.variant)} aria-labelledby="masthead-title">
-      <MarkdownComponentsHydration client:idle>
+      <ProjectHydration client:idle>
       {
         (isInherited ? <slot/> : content)
       }
-      </MarkdownComponentsHydration>
+      </ProjectHydration>
     </section>
   </article>
 </BaseLayout>

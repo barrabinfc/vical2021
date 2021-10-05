@@ -12,6 +12,8 @@ import { HtmrOptions } from 'htmr/src/types';
  *  transformToReactComponent('<p><a>Custom component</a></p>', {
  *    a: MyLinkComponent
  *  })
+ *
+ * @deprecated Use MarkdownComponentsHydration instead
  */
 export const transformToReactComponent = (htmlContent: string, components: HtmrOptions['transform']): ReactNode => {
   return htmr(htmlContent, { transform: components });

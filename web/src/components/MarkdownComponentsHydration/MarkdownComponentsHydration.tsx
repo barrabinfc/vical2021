@@ -1,44 +1,23 @@
 import React, { lazy, Suspense } from 'react';
 
 import htmr from 'htmr';
+// import type { Props } from 'htmr';
 import { ErrorBoundary } from 'react-error-boundary';
-import ContentLoader from 'react-content-loader';
 
 export interface MarkdownComponentsHydrationProps {
   children: React.ReactElement;
-  transformers: Record<string, () => React.ReactElement>;
+  transformers: Record<string, (props: any) => JSX.Element>;
 }
 
-const Loader = (props) => (
-  <ContentLoader
-    speed={4}
-    viewBox={`0 0 400 150`}
-    preserveAspectRatio="xMinYMin slice"
-    backgroundColor="transparent"
-    foregroundColor="#cfcfcf"
-    {...props}
-  >
-    <rect x="0" y="0" width="400" height={150} />
-  </ContentLoader>
-);
-
-const wrapLoadingComponent = (LazyComponent: React.LazyExoticComponent<any>) => {
-  return (props) => {
-    const { width, height } = props;
-
-    return (
-      <Suspense fallback={<Loader {...props} />}>
-        <LazyComponent {...props} />
-      </Suspense>
-    );
-  };
-};
+interface HtmrElementProps extends JSX.IntrinsicAttributes {
+  is?: string;
+}
 
 /**
  * Hydrate components from a htmlString
  *
  * @param htmlContent the html
- * @param components transform tags named `key` into `Value`
+ * @param transformers transform nodes named `key` into `Value` component
  * @example
  *
  * MarkdownComponentsHydration({children: '<p><a>Custom component</a></p>', transformers: {
@@ -59,15 +38,32 @@ export const MarkdownComponentsHydration = ({ children, transformers }: Markdown
 
     const childHTML = children.props.value;
 
-    const videoComponent = React.lazy(() => import('../../components/video/video'));
-    const videoWithLoading = wrapLoadingComponent(videoComponent);
-
     return (
       <div className="markdown-components-hydration">
         <ErrorBoundary FallbackComponent={errorMsgComponent}>
           {htmr(childHTML, {
             transform: {
-              video: videoWithLoading
+              _: (Node, props: HtmrElementProps, children) => {
+                /** text node */
+                if (typeof props === 'undefined') {
+                  return Node;
+                }
+
+                /** Enable transform for web-components is=xxx syntax */
+                if (props['is'] !== undefined) {
+                  const Component = transformers[props['is']];
+                  if (Component) {
+                    const { is, ...originalProps } = props;
+                    return <Component {...originalProps}>{children}</Component>;
+                  } else {
+                    console.error(
+                      `MarkdownComponentsHydration could not find component ${props['is']} for client-side hydration`
+                    );
+                  }
+                }
+                return <Node {...props}>{children}</Node>;
+              },
+              ...transformers
             }
           })}
         </ErrorBoundary>
