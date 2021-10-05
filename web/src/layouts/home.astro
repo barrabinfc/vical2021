@@ -13,11 +13,12 @@ import {listGarden} from '../pages/garden';
 import ProjectGrid from '../components/Project/ProjectGrid.tsx';
 import GardenList, {GardenListVariant} from '../components/Garden/GardenList.tsx';
 
+import RubberBall from '../components/RubberBall/index.ts';
+
 /** @ts-ignore */
 const abspath = import.meta.url.pathname;
 const astroContextSymbol = Symbol.for('astro.context');
 const astroContext = Astro.props[astroContextSymbol];
-
 
 let page:Page = toPage({
   layout: abspath,
@@ -71,8 +72,8 @@ title.text( avoidWidowedWords(title.text()) );
         variant={GardenListVariant.WITH_SUBTITLE} />
       <div class="pad4"/>
     </section>
+    <RubberBall client:idle />
   </div>
-
 </BaseLayout>
 
 <style lang="scss" scoped>
@@ -171,6 +172,8 @@ $fold: 90vh;
 }
 
 .projects {
+  z-index: 1;
+
   @include bp.breakpoint(medium, min) {
     padding: 2em 4em;
   }
@@ -180,6 +183,7 @@ $fold: 90vh;
 }
 
 .digital-garden {
+  z-index: 1;
   background-color: var(--surface3);
 
   @include bp.breakpoint(medium, min) {
