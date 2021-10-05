@@ -25,11 +25,11 @@ export const useMousePosition = () => {
     mousePosition.current = { x: e.clientX, y: e.clientY };
   }
   function onTouchStart(e: TouchEvent) {
-    e.preventDefault();
+    // e.preventDefault();
     return false;
   }
   function onTouchMove(e: TouchEvent) {
-    e.preventDefault();
+    // e.preventDefault();
     let touch = e.changedTouches[0];
     mousePosition.current = { x: touch.pageX, y: touch.pageY };
   }

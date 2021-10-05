@@ -98,7 +98,7 @@ export default function RubberBall(props: RubberBallProps = defaultRubberBallPro
     hoverSpring.set((hoveredLink.current ? 1.0 : 0.0));
     ball.fill = ballColorSpring.get();
     ball.scale = ballScaleSpring.get();
-    stage.current.style.mixBlendMode = (hoverDirection.get() < 0 ? 'exclusion' : 'screen');
+    stage.current.style.mixBlendMode = (hoverDirection.get() < 0 ? 'exclusion' : 'luminosity');
 
     delta.copy(mouse).subSelf(ball.translation);
     ball.vertices.forEach((v, i) => {

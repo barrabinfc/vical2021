@@ -3,9 +3,9 @@
   height: 100vh;
   position: fixed;
   contain: paint;
+  isolation: isolate;
   top: 0;
   left: 0;
   overflow: hidden;
   pointer-events: none;
-  mix-blend-mode: exclusion;
 }
