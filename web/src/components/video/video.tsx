@@ -22,7 +22,7 @@ type VideoProps = React.PropsWithChildren<{
 }>;
 
 const defaultVideoOptions: VideoOptions = {
-  aspectRatio: '640:640',
+  aspectRatio: '16:9',
   liveui: true,
   responsive: false
 };
@@ -64,7 +64,7 @@ export const video = ({
       controls={controls}
       poster={poster}
       preload={preload}
-      className={cn('video-js', className)}
+      className={cn('video-js', 'vicalvideo', 'vjs-default-skin', 'vjs-big-play-centered', className)}
     >
       {children}
     </video>

@@ -38,7 +38,7 @@ const wrapLoadingComponent = (LazyComponent: React.LazyExoticComponent<any>) => 
  * Hydrate components from a htmlString
  *
  * @param htmlContent the html
- * @param components transform tags named `key` into `Value`
+ * @param transformers transform nodes named `key` into `Value` component
  * @example
  *
  * MarkdownComponentsHydration({children: '<p><a>Custom component</a></p>', transformers: {
