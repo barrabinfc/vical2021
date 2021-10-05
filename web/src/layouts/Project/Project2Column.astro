@@ -5,9 +5,6 @@ import {readFileSync} from 'node:fs';
 import {toPage} from '../../lib/page/Page'
 import Project from './Project.astro'
 
-// import applyPostProcess from './postprocessors';
-import MarkdownComponentsHydration from '../../components/MarkdownComponentsHydration/MarkdownComponentsHydration.tsx';
-
 /** @ts-ignore */
 const abspath = import.meta.url.pathname;
 const astroContextSymbol = Symbol.for('astro.context');
@@ -19,7 +16,6 @@ const page = toPage({
   [astroContextSymbol]: astroContext
 });
 
-// let contentHtml = applyPostProcess(page.content.content);
 let contentHtml = page.content.content;
 
 /** If we have a gallery file, load it's html */
@@ -31,7 +27,6 @@ if(galleryAddress) {
   const galleryAddressRelativePath = relative(dirname(import.meta.url.pathname), galleryAddressFullPath );
 
   galleryHTML = readFileSync(galleryAddressFullPath).toString();
-  // galleryHTML = applyPostProcess(galleryHTML);
 }
 
 ---
@@ -42,9 +37,7 @@ if(galleryAddress) {
       {contentHtml}
     </section>
     <aside class="showcase right">
-      <!-- <MarkdownComponentsHydration client:idle> -->
-        {galleryHTML}
-      <!-- </MarkdownComponentsHydration> -->
+      {galleryHTML}
     </aside>
   </div>
 </Project>
@@ -98,7 +91,12 @@ $containerWidth: 100vw - (100vw * $containerPadW);
       flex-direction: column;
     }
 
-    img, video {
+    img{
+      width: 100%;
+      object-fit: cover;
+    }
+
+    video {
       width: 100%;
       object-fit: cover;
     }
