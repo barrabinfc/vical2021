@@ -200,6 +200,7 @@ if(!isInherited) {
 
 .mockup {
   text-align: center;
+  height: 100%;
   --shadow-strength: 0.08;
 
   > .browser-mockup {
@@ -208,20 +209,20 @@ if(!isInherited) {
     @include h.shadow();
   }
 
-  > .marvel-device {
-    zoom: 0.5;
+  // > .marvel-device {
+  //   zoom: 0.5;
 
-    &::after {
-      content: ' ';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: inherit;
-      @include h.shadow();
-    }
-  }
+  //   &::after {
+  //     content: ' ';
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     width: 100%;
+  //     height: 100%;
+  //     border-radius: inherit;
+  //     @include h.shadow();
+  //   }
+  // }
 }
 
 /**

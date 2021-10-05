@@ -9,12 +9,16 @@ import { MarkdownComponentsHydration } from '../../../components/MarkdownCompone
 export const ProjectHydrationTransformers = () => {
   const videoComponent = React.lazy(() => import('../../../components/video/video'));
   const tagComponent = React.lazy(() => import('../../../components/Tag/Tag'));
+  const ipadMockupComponent = React.lazy(() => import('../../../components/Mockups/Tablet/IpadPro13'));
 
   const videoWithLoading = wrapSuspenseLoader(videoComponent);
   const tagWithLoading = wrapSuspenseLoader(tagComponent);
+  const ipadMockupWithLoading = wrapSuspenseLoader(ipadMockupComponent);
 
   return {
     video: videoWithLoading,
+    tag: tagWithLoading,
+    ipadMockup: ipadMockupWithLoading,
     tag: tagWithLoading
   };
 };
