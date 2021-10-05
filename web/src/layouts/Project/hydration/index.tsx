@@ -8,10 +8,14 @@ import { MarkdownComponentsHydration } from '../../../components/MarkdownCompone
  */
 export const ProjectHydrationTransformers = () => {
   const videoComponent = React.lazy(() => import('../../../components/video/video'));
+  const tagComponent = React.lazy(() => import('../../../components/Tag/Tag'));
+
   const videoWithLoading = wrapSuspenseLoader(videoComponent);
+  const tagWithLoading = wrapSuspenseLoader(tagComponent);
 
   return {
-    video: videoWithLoading
+    video: videoWithLoading,
+    tag: tagWithLoading
   };
 };
 
@@ -20,4 +24,3 @@ export default ({ children }) => {
     <MarkdownComponentsHydration transformers={ProjectHydrationTransformers()}>{children}</MarkdownComponentsHydration>
   );
 };
-// export default ProjectHydrationTransformers;

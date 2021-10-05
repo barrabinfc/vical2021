@@ -1,11 +1,16 @@
 import React, { lazy, Suspense } from 'react';
 
 import htmr from 'htmr';
+// import type { Props } from 'htmr';
 import { ErrorBoundary } from 'react-error-boundary';
 
 export interface MarkdownComponentsHydrationProps {
   children: React.ReactElement;
   transformers: Record<string, (props: any) => JSX.Element>;
+}
+
+interface HtmrElementProps extends JSX.IntrinsicAttributes {
+  is?: string;
 }
 
 /**
@@ -38,12 +43,24 @@ export const MarkdownComponentsHydration = ({ children, transformers }: Markdown
         <ErrorBoundary FallbackComponent={errorMsgComponent}>
           {htmr(childHTML, {
             transform: {
-              _: (Node, props, children) => {
+              _: (Node, props: HtmrElementProps, children) => {
                 /** text node */
                 if (typeof props === 'undefined') {
                   return Node;
                 }
 
+                /** Enable transform for web-components is=xxx syntax */
+                if (props['is'] !== undefined) {
+                  const Component = transformers[props['is']];
+                  if (Component) {
+                    const { is, ...originalProps } = props;
+                    return <Component {...originalProps}>{children}</Component>;
+                  } else {
+                    console.error(
+                      `MarkdownComponentsHydration could not find component ${props['is']} for client-side hydration`
+                    );
+                  }
+                }
                 return <Node {...props}>{children}</Node>;
               },
               ...transformers
