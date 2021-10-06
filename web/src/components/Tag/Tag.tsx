@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './Tag.module.scss';
-import { cn } from '~/lib/helpers';
+import { cn } from '../../lib/helpers';
 
 export enum TagVariant {
   DEFAULT = 'default',
