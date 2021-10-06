@@ -53,12 +53,6 @@
   }
 }
 
-// .link-title {
-//   @include h.link-text;
-//   color: inherit;
-//   padding: 0;
-// }
-
 .item-title {
   @include h.weight(var(--text-weight));
   text-decoration: underline from-font;
@@ -76,15 +70,16 @@
 }
 
 :global(.extra-container) {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: nowrap;
+
   @include bp.breakpoint(medium, min) {
     flex: 1 1 30%;
-    text-align: right;
   }
   @include bp.breakpoint(medium, max) {
     flex: 1 1 100%;
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
 
     :global(.tags-container) {
       display: none;
