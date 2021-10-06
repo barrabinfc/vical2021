@@ -4,10 +4,10 @@ status: complete
 published: true
 layout: ../../../layouts/Project/Project.astro
 title: I Ching
-subtitle: The book of changes app
+subtitle: The chinese book of changes application built with React
 description: The book of changes app
 thumbnail:
-  path: /images/textures/cashmere-la.jpg
+  path: /images/iching/yin_yang_filled.svg
 
 publishedAt: 2018-06-01
 

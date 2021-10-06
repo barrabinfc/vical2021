@@ -1,5 +1,4 @@
 ---
-import {dirname,basename} from 'node:path'
 import {HeadingLevel} from '../@types/a11y';
 import {cn, avoidWidowedWords, emojifyStatus} from '../lib/helpers';
 import {Page, toPage} from '../lib/page/Page'
@@ -84,7 +83,7 @@ title.text( avoidWidowedWords(title.text()) );
     </section>
 
     <section class="projects">
-      <h2 class="title1 pad4-y">Projects that i've worked</h2>
+      <h2 class="title1 pad4-y">What i've worked on</h2>
       <ProjectGrid
         TitleHeadingLevel={HeadingLevel.h3}
         projects={projects}
@@ -220,6 +219,20 @@ $fold: 90vh;
   @include bp.breakpoint(medium, max) {
     padding: calc( 4 * var(--gap)) calc( 4 * var(--gap));
   }
+}
+</style>
+
+<style global>
+.card.Iching-Index .avatar img {
+  opacity: 0.8;
+  -webkit-transform-origin: 50%  50%;
+  transform: scale(2.5) rotate(180deg);
+}
+
+.card.Iching-Index:hover .avatar img,
+.card.Iching-Index:focus .avatar img {
+  opacity: 1;
+  transform: scale(4.8) rotate(240deg);
 }
 
 </style>

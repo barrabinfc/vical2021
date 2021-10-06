@@ -52,11 +52,11 @@ export default function Card({
   }, [controls, inView]);
 
   return (
-    <a ref={ref} href={href} className={cn(styles.card, className)}>
+    <a ref={ref} href={href} className={cn('card', styles.card, className)}>
       <div className={cn(styles['content-container'])}>
         <div className={cn(styles['content'])}>
           {avatar && (
-            <div className={styles.avatar}>
+            <div className={cn('avatar', styles.avatar)}>
               <picture>
                 <img src={avatar?.path} loading={loading} alt={avatar?.alt || ''} />
               </picture>
@@ -68,7 +68,6 @@ export default function Card({
                 style={{ position: 'absolute' }}
                 animate={controls}
                 initial="hidden"
-                transition={{ duration: 0.5 }}
                 variants={{
                   visible: { y: 0, transition: { delay: delay + 0.15 }, ...openSpring },
                   hidden: { y: 50, ...closeSpring }
@@ -84,7 +83,6 @@ export default function Card({
                   style={{ position: 'absolute' }}
                   animate={controls}
                   initial="hidden"
-                  transition={{ duration: 0.5 }}
                   variants={{
                     visible: { y: 0, transition: { delay: delay + 0.25 }, ...openSpring },
                     hidden: { y: 50, ...openSpring }
