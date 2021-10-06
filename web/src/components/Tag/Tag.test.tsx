@@ -3,7 +3,7 @@ import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 
 import fs from 'fs';
-import * as ReactTest from '~/../tests/setup/react';
+import * as ReactTest from '../../../tests/setup/react';
 
 import Tag, { TagVariant } from './Tag';
 import TagStyle from './Tag.module.scss';
