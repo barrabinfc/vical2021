@@ -39,7 +39,6 @@ if(!isInherited) {
 <BaseLayout {page}>
   <script type="text/javascript" src="https://unpkg.com/external-svg-loader@latest/svg-loader.min.js" async></script>
   <article id="content" project-slug={page.slug.toLowerCase()}>
-    <link rel="stylesheet" href="/styles/devices.min.css" />
     <link rel="stylesheet" href="/styles/browser.min.css" />
 
     <Masthead className={cn('project-masthead','surface4', page.content.variant)}
@@ -209,20 +208,6 @@ if(!isInherited) {
     @include h.shadow();
   }
 
-  // > .marvel-device {
-  //   zoom: 0.5;
-
-  //   &::after {
-  //     content: ' ';
-  //     position: absolute;
-  //     top: 0;
-  //     left: 0;
-  //     width: 100%;
-  //     height: 100%;
-  //     border-radius: inherit;
-  //     @include h.shadow();
-  //   }
-  // }
 }
 
 /**
