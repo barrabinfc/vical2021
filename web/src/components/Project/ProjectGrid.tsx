@@ -26,7 +26,10 @@ export default function ProjectList({ projects, TitleHeadingLevel = HeadingLevel
             href={project.url.pathname}
             TitleHeadingLevel={TitleHeadingLevel}
             avatar={{ ...project.thumbnail, width: 0, height: 0 }}
-            content={project.content}
+            content={{
+              title: project.content.title,
+              subtitle: project.content.subtitle
+            }}
             className={`item ${project.slug}`}
             loading="lazy"
           />

@@ -26,13 +26,45 @@ let page:Page = toPage({
   [astroContextSymbol]: astroContext
 });
 
-let projects: Page[] = await listProjects();
-let gardenItems: Page[] = (await listGarden()).sort( (a,b) => {
+interface PageSummary {
+  name: string;
+  url: Page['url'];
+  slug: Page['slug'];
+  status: Page['status'];
+  publishedAt: Page['publishedAt'];
+  content: {
+    title: Page['content']['title'];
+    subtitle: Page['content']['subtitle'];
+  },
+  thumbnail: Page['thumbnail'];
+  tags: Page['tags'];
+  collection?: Page['collection'];
+}
+
+const toPageSummary = (page: Page): PageSummary => {
+  return {
+    name: page.name,
+    url: page.url,
+    slug: page.slug,
+    content: {
+      title: page.content.title,
+      subtitle: page.content.subtitle,
+    },
+    thumbnail: page.thumbnail,
+    tags: page.tags,
+    status: page.status,
+    publishedAt: page.publishedAt,
+    collection: page.collection ?? [],
+  }
+}
+let projects: PageSummary[] = (await listProjects()).map( toPageSummary );
+
+let gardenItems: PageSummary[] = (await listGarden()).sort( (a,b) => {
   // Order by status (first are complete, then in-progresss, finally draft);
   const statusOrder = {'draft': -1, 'in progress': 0, 'complete': 1};
   const [statusA, statusB] = [statusOrder[a.status], statusOrder[b.status]];
   return statusB - statusA;
-});
+}).map( toPageSummary );
 
 let $ = loadHTML(page.content.content);
 let title = $('#title');
@@ -48,15 +80,11 @@ title.text( avoidWidowedWords(title.text()) );
           {html( $('#title') )}
           {html( $('#subtitle') ) }
         </div>
-
-        <!-- <div class="item decoration">
-          <img alt="nada" src="/pictures/Dieffenbachia robusta.png" />
-        </div> -->
       </div>
     </section>
 
     <section class="projects">
-      <h2 class="title1 pad4-y">Projects</h2>
+      <h2 class="title1 pad4-y">Projects that i've worked</h2>
       <ProjectGrid
         TitleHeadingLevel={HeadingLevel.h3}
         projects={projects}
