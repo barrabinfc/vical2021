@@ -13,7 +13,8 @@ import { openSpring, closeSpring } from '../../lib/animations';
 export interface CardProps {
   href: string;
   avatar: {
-    path: string;
+    path?: string;
+    alt?: string;
     width: number;
     height: number;
   };
@@ -57,7 +58,7 @@ export default function Card({
           {avatar && (
             <div className={styles.avatar}>
               <picture>
-                <img src={avatar?.path} loading={loading} alt={content?.title || 'A image'} />
+                <img src={avatar?.path} loading={loading} alt={avatar?.alt || ''} />
               </picture>
             </div>
           )}
