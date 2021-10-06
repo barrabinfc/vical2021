@@ -51,7 +51,7 @@
     "remark-unwrap-images": "^3.0.0",
     "shiki": "^0.9.11",
     "slugify": "^1.6.0",
-    "two.js": "^0.7.1",
+    "two.js": "0.7.1",
     "typanion": "^3.3.2",
     "util-inspect": "^0.1.8",
     "video.js": "^5.20.4"

@@ -40,6 +40,10 @@ function RubberBallStaticDOM({
   );
 }
 
+/**
+ * Rubberball is almost a verbatim copy of two.js example rubber ball
+ * https://two.js.org/examples/rubber-ball.html
+ */
 export default function RubberBall(props: RubberBallProps = defaultRubberBallProps) {
   const stage = useRef<HTMLDivElement>();
   props = { ...props, ...defaultRubberBallProps };
@@ -121,7 +125,7 @@ export default function RubberBall(props: RubberBallProps = defaultRubberBallPro
     two = new Two({
       width: window.innerWidth,
       height: window.innerHeight,
-      type: Two.Types['webgl']
+      type: Two.Types['svg']
     }).appendTo(stage.current);
 
     ball = two.makeCircle(two.width / 2, two.height / 2, radius, 32);
