@@ -16,7 +16,7 @@
     $breakpoint-value: map-get($breakpoints, $breakpoint);
 
     @if $direction == max {
-      @media (max-width: ($breakpoint-value - 1)) {
+      @media (max-width: ($breakpoint-value)) {
         @content;
       }
     } @else if $direction == min {

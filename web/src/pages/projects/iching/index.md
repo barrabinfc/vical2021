@@ -40,46 +40,15 @@ A Progressive Web Application that is lightweight, open source and offline & wit
 <div class="gallery grid2 justifyCenter">
   <div class="page h50">
     <div class="mockup">
-      <div class="marvel-device iphone-x">
-          <div class="top-bar"></div>
-          <div class="sleep"></div>
-          <div class="bottom-bar"></div>
-          <div class="volume"></div>
-          <div class="overflow">
-            <div class="shadow shadow--tr"></div>
-            <div class="shadow shadow--tl"></div>
-            <div class="shadow shadow--br"></div>
-            <div class="shadow shadow--bl"></div>
-          </div>
-          <div class="inner-shadow"></div>
-          <div class="screen">
-            <div class="slideshow" data-time="1500" data-animation="opacity">
-              <img src="/images/iching/frontpage_new.jpg" alt="Frontpage" />
-            </div>
-          </div>
+      <div is="iphoneMockup">
+        <img src="/images/iching/frontpage_new.jpg" alt="Iching app home screen" />
       </div>
     </div>
   </div>
   <div class="page h50">
     <div class="mockup">
-      <div class="marvel-device iphone-x">
-        <div class="top-bar"></div>
-        <div class="sleep"></div>
-        <div class="bottom-bar"></div>
-        <div class="volume"></div>
-        <div class="overflow">
-          <div class="shadow shadow--tr"></div>
-          <div class="shadow shadow--tl"></div>
-          <div class="shadow shadow--br"></div>
-          <div class="shadow shadow--bl"></div>
-        </div>
-        <div class="inner-shadow"></div>
-        <div class="screen">
-          <!-- Content goes here -->
-          <div class="slideshow" data-time="1500" data-animation="opacity">
-            <img src="/images/iching/INTERPRETATION2.jpg" alt="Interpretation" />
-          </div>
-        </div>
+      <div is="iphoneMockup">
+        <img src="/images/iching/INTERPRETATION2.jpg" alt="Screen displaying the iching of Enthusiasm" />
       </div>
     </div>
   </div>
