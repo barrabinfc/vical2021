@@ -96,10 +96,6 @@ if(!isInherited) {
     }
   }
 
-  .description {
-    margin: 2em 0;
-  }
-
   /** Limit line-lengths */
   p,
   li {
@@ -160,7 +156,7 @@ if(!isInherited) {
       & th {
         font-size: 1.0rem;
         font-weight: var(--code-weight);
-        text-align: center;
+        text-align: left;
       }
     }
     tr:not(:last-child) {
@@ -186,6 +182,112 @@ if(!isInherited) {
         border-left: 1px solid var(--surface2);
       }
     }
+
+    /** Links in table should be use display: block */
+    td a {
+      display: block;
+    }
+
+
+    /**
+     * Responsive table
+     */
+    @include bp.breakpoint(small, max) {
+      width: 100%;
+    }
+
+    thead {
+      display: table-header-group;
+      @include bp.breakpoint(small, max) {
+        display: none;
+      }
+    }
+    td {
+      display: table-cell;
+      @include bp.breakpoint(small, max) {
+        display: flex;
+        flex-basis: 100%;
+        align-self: stretch;
+      }
+    }
+
+    .tableTitle {
+      display: none;
+      @include bp.breakpoint(small, max) {
+        display: table-column;
+      }
+    }
+
+    .tableContent {
+      @include bp.breakpoint(small, max) {
+        display: table-column;
+      }
+    }
+
+    /**
+     * Spacing of rows/columns for mobile
+     */
+    @include bp.breakpoint(small,max) {
+      // Reset padding, since td in mobile is a container for the table
+      td {
+        padding: 0;
+        border-top: 1px solid var(--surface2);
+      }
+      /** Same style of thead */
+      td .tableTitle {
+        width: 40%;
+        background-color: var(--brand);
+        color: var(--text1-invert);
+      }
+      td .tableContent  {
+        width: 60%;
+      }
+
+      // item spacing
+      td .tableTitle,
+      td .tableContent {
+        > * {
+          padding: calc(2 * var(--gap));
+
+          // Disable wrap, since it break rows alignment
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    /**
+     * Workaround: Unstyle p in tables, since remark-responsive-table wrap in <p> tags
+     */
+    td .tableTitle p {
+      max-width: none;
+      font-size: inherit;
+      margin-block-start: 0;
+      margin-block-end: 0;
+      margin-inline-start: 0;
+      margin-inline-end: 0;
+    }
+
+    /** Links needs to be without margin to match baseline from first column */
+    td .tableContent a {
+      margin: 0;
+    }
+
+    .tableDescription.desktop {
+      display: table-cell;
+
+      @include bp.breakpoint(small, max) {
+        display: none;
+      }
+    }
+
+    .tableDescription.mobile {
+      display: none;
+      @include bp.breakpoint(small, max) {
+        display: block;
+      }
+    }
+
   }
 
   hr {
