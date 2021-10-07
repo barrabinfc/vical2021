@@ -1,12 +1,20 @@
 import { test } from 'uvu';
 import { expect } from 'chai';
 
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
 import { pagePathToUrl } from './pagePathToUrl';
 
+/** Get the absolute path of pages by reading astroConfig */
+const vicalPackage = readFileSync(resolve('package.json'), 'utf8');
+const astroConfig = JSON.parse(vicalPackage || '{}')._astroConfig;
+export const abspathOfPages = resolve(astroConfig.pages);
+
 const abspathFixtures = [
-  '/Users/vitorcalejuri/Projects/vical.me/web/src/pages/projects/iching/index.md',
-  '/Users/vitorcalejuri/Projects/vical.me/web/src/pages/garden/complexity/introduction to complexity.md',
-  '/Users/vitorcalejuri/Projects/vical.me/web/src/pages/garden/hipocratic-oath-for-developers.md'
+  `${abspathOfPages}/projects/iching/index.md`,
+  `${abspathOfPages}/garden/complexity/introduction to complexity.md`,
+  `${abspathOfPages}/garden/hipocratic-oath-for-developers.md`
 ];
 
 test('pagePathToUrl(projects/iching/index) should return the correct URL for index', async () => {
