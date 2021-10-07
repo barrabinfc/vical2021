@@ -39,7 +39,7 @@ export const MarkdownComponentsHydration = ({ children, transformers }: Markdown
     const childHTML = children.props.value;
 
     return (
-      <div className="markdown-components-hydration">
+      <div className="markdown-components-hydration" style={{ display: 'contents' }}>
         <ErrorBoundary FallbackComponent={errorMsgComponent}>
           {htmr(childHTML, {
             transform: {
