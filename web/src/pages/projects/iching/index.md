@@ -4,7 +4,7 @@ status: complete
 published: true
 layout: ../../../layouts/Project/Project.astro
 title: I Ching
-subtitle: The chinese book of changes application built with React
+subtitle: A application for playing the IChing, the chinese book of changes.
 description: The book of changes app
 thumbnail:
   path: /images/iching/yin_yang_filled.svg
@@ -21,17 +21,20 @@ currentColor: asd
 
 <div class="description">
 
-The I Ching ,also known as Book of Changes, is an ancient Chinese divination text and the oldest of the Chinese classics.
+Me and friends used to start the day by playing the IChing[^1]. It was fun and most of all, inspirative. The IChing[^1], also know as Book of changes is a ancient chinese Tao classic and full of meditative advice for **virtue**, **inner strength and integrity**. I'm not living with those friends anymore, but i miss those morning rituals.
 
-A Progressive Web Application that is lightweight, open source and offline & without ads, built using React, Service Workers and UX of material-ui. Indistinguible from a native application and with a score of 90/100 in lighthouse performance benchmarks. 👌
+So i've created my own mobile application
+of the IChing[^1]. My goal in the project was to create a clean and lightweight application using only contemporary web technologies. I built it with [React](https://reactjs.org/), [Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) for offline support and [material-ui](https://mui.com/) for the UX.
+
+The app is almost indistinguible from a native application, with a score of **90/100** in lighthouse[^2] performance benchmarks. 👌
 
 </div>
 
 <div class="toc-contents center">
 
-| Source Code                                    | URL                   | Created at | Technology | License          |
-| ---------------------------------------------- | --------------------- | ---------- | ---------- | ---------------- |
-| [github](https://github.com/barrabinfc/iching) | [website](iching.xyz) | 06/2018    | React, SPA | Creative commons |
+| URL                   | Source Code                                    | Created at | Technology | License                                                                                                                                                                                                         |
+| --------------------- | ---------------------------------------------- | ---------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [website](iching.xyz) | [github](https://github.com/barrabinfc/iching) | 06/2018    | React, Web | <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img width="88px" height="32px" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> |
 
 </div>
 
@@ -53,6 +56,20 @@ A Progressive Web Application that is lightweight, open source and offline & wit
     </div>
   </div>
 </div>
+
+---
+
+### Lessons Learned
+
+The most important one is the performance of client-side rendering. When i started, i thought that
+rendering on the client device using react was fast enough, since it's a common practice of the tech scene, but it showed it's limitations. Huge bundle output, poor performance on old mobile phones and a effective wall on lighthouse performance metrics around 80/90%. A sizable effort was done to minimize bundle size, remove dependencies and improve FCP time.
+
+I now take great care for dependencies and bundle output. I avoid client-side rendering when possible using **island architectures**[^5] with Progressive hydration to acchieve extremely fast websites experiences. I've also
+ditched webpack and core-js compilation in favor of [native javascript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+
+[^1]: [Iching wikipedia](https://en.wikipedia.org/wiki/Tao_Te_Ching)
+[^2]: [Lighthouse performance metrics](https://lighthouse-dot-webdotdevsite.appspot.com//lh/html?url=https%3A%2F%2Fiching.netlify.app%2F)
+[^5]: [Island Architecture](https://jasonformat.com/islands-architecture/)
 
 <style global>
 [project-slug="iching"] .logo {
