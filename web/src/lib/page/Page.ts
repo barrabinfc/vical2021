@@ -5,6 +5,12 @@ import { isSimpleISO8601 } from '../validation/isSimpleISO8601';
 import { abspathOfPages, pagePathToUrl, urlToPagePath } from './pagePathToUrl';
 
 const AstroContextSymbol = Symbol.for('astro.context');
+
+/**
+ * Abstract a page from astro into project domain Page.
+ * Maintain a consistent schema between pages!
+ */
+
 interface AstroPage {
   /** rendered markdown content */
   astro: {
@@ -113,6 +119,46 @@ const isPage = t.isObject({
 type Page = t.InferType<typeof isPage>;
 
 /**
+ * A page summary, without content.
+ * Useful for hydration, since it will only have the required
+ * fields for displaying a preview/link of a page.
+ */
+interface PageSummary {
+  name: string;
+  url: Page['url'];
+  slug: Page['slug'];
+  status: Page['status'];
+  publishedAt: Page['publishedAt'];
+  content: {
+    title: Page['content']['title'];
+    subtitle: Page['content']['subtitle'];
+  };
+  thumbnail: Page['thumbnail'];
+  tags: Page['tags'];
+  collection?: Page['collection'];
+}
+
+/**
+ * Convert a Page to a Page summary
+ */
+const toPageSummary = (page: Page): PageSummary => {
+  return {
+    name: page.name,
+    url: page.url,
+    slug: page.slug,
+    content: {
+      title: page.content.title,
+      subtitle: page.content.subtitle
+    },
+    thumbnail: page.thumbnail,
+    tags: page.tags,
+    status: page.status,
+    publishedAt: page.publishedAt,
+    collection: page.collection ?? []
+  };
+};
+
+/**
  * Convert to Page interface
  */
 function toPage(content: MarkdownPageReference, cwd?: string): Page;
@@ -181,6 +227,7 @@ export {
   AstroPage,
   MarkdownPageReference,
   Page,
+  PageSummary,
   PageSchema,
   PageStatus,
   PageContent,
@@ -189,5 +236,6 @@ export {
   isPageSchema,
   isPageStatus,
   isPageContent,
-  toPage
+  toPage,
+  toPageSummary
 };
