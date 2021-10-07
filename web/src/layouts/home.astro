@@ -1,7 +1,7 @@
 ---
 import {HeadingLevel} from '../@types/a11y';
-import {cn, avoidWidowedWords, emojifyStatus} from '../lib/helpers';
-import {Page, toPage} from '../lib/page/Page'
+import {cn, avoidWidowedWords} from '../lib/helpers';
+import {Page, toPage, AstroPage, PageSummary, toPageSummary } from '../lib/page/Page'
 import {loadHTML, html} from '../lib/html';
 
 import BaseLayout from './base.astro';
@@ -14,50 +14,8 @@ import GardenList, {GardenListVariant} from '../components/Garden/GardenList.tsx
 
 import RubberBall from '../components/RubberBall/index.ts';
 
-/** @ts-ignore */
-const abspath = import.meta.url.pathname;
-const astroContextSymbol = Symbol.for('astro.context');
-const astroContext = Astro.props[astroContextSymbol];
-
-let page:Page = toPage({
-  layout: abspath,
-  ...Astro.props.content,
-  [astroContextSymbol]: astroContext
-});
-
-interface PageSummary {
-  name: string;
-  url: Page['url'];
-  slug: Page['slug'];
-  status: Page['status'];
-  publishedAt: Page['publishedAt'];
-  content: {
-    title: Page['content']['title'];
-    subtitle: Page['content']['subtitle'];
-  },
-  thumbnail: Page['thumbnail'];
-  tags: Page['tags'];
-  collection?: Page['collection'];
-}
-
-const toPageSummary = (page: Page): PageSummary => {
-  return {
-    name: page.name,
-    url: page.url,
-    slug: page.slug,
-    content: {
-      title: page.content.title,
-      subtitle: page.content.subtitle,
-    },
-    thumbnail: page.thumbnail,
-    tags: page.tags,
-    status: page.status,
-    publishedAt: page.publishedAt,
-    collection: page.collection ?? [],
-  }
-}
+let page: Page = await runPageTransforms();
 let projects: PageSummary[] = (await listProjects()).map( toPageSummary );
-
 let gardenItems: PageSummary[] = (await listGarden()).sort( (a,b) => {
   // Order by status (first are complete, then in-progresss, finally draft);
   const statusOrder = {'draft': -1, 'in progress': 0, 'complete': 1};
@@ -65,9 +23,41 @@ let gardenItems: PageSummary[] = (await listGarden()).sort( (a,b) => {
   return statusB - statusA;
 }).map( toPageSummary );
 
-let $ = loadHTML(page.content.content);
-let title = $('#title');
-title.text( avoidWidowedWords(title.text()) );
+async function runPageTransforms(){
+  return await Promise.resolve(Astro.props.content)
+                        .then(concatenateMetadata)
+                        .then(toPage)
+                        .then(applyPostProcess)
+}
+
+function concatenateMetadata( astroMarkdownPage: AstroPage ) {
+  /** @ts-ignore */
+  const abspath = import.meta.url.pathname;
+  const astroContextSymbol = Symbol.for('astro.context');
+  const astroContext = Astro.props[astroContextSymbol];
+
+  return {
+    layout: abspath,
+    ...astroMarkdownPage,
+    [astroContextSymbol]: astroContext
+  }
+}
+
+function applyPostProcess( page:Page ) {
+  let $ = loadHTML(page.content.content);
+
+  let title = $('#title');
+  title.text( avoidWidowedWords(title.text()) );
+
+  page.content.$ = $;
+  page.content.html = {};
+  page.content.html['title'] = html( title );
+  page.content.html['spotlight'] = html( $('#spotlight') );
+  page.content.html['subtitle'] = html($('#subtitle'));
+
+  return page;
+}
+
 ---
 
 <BaseLayout {page}>
@@ -75,9 +65,9 @@ title.text( avoidWidowedWords(title.text()) );
     <section class="home" aria-labelledby="welcome">
       <div class="home-grid">
         <div class="item highlight pad4">
-          {html( $('#spotlight') )}
-          {html( $('#title') )}
-          {html( $('#subtitle') ) }
+          {page.content.html['spotlight']}
+          {page.content.html['title']}
+          {page.content.html['subtitle']}
         </div>
       </div>
     </section>

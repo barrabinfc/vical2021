@@ -4,7 +4,7 @@
  * It can be inherited and customized via slots
  * @see {Project2Column.astro}
  */
-import {toPage, Page} from '../../lib/page/Page'
+import {toPage, Page, AstroPage} from '../../lib/page/Page'
 import BaseLayout from '../../layouts/base.astro';
 import Masthead from '../../components/Masthead';
 
@@ -12,28 +12,32 @@ import {cn} from '../../lib/helpers';
 
 import ProjectHydration from './hydration/index.tsx';
 
-/** @ts-ignore */
-const abspath = import.meta.url.pathname;
-const astroContextSymbol = Symbol.for('astro.context');
-const astroContext = Astro.props[astroContextSymbol];
+let page:Page = await runPageTransforms();
 
-let page:Page = toPage({
-  layout: abspath,
-  ...Astro.props.content,
-  [astroContextSymbol]: astroContext
-});
-
-/* In case of inherited layout
- * We add a <slot name="content">
- */
-const isInherited = !page.layout.endsWith('Project.astro');
-let content = page.content.content;
-
-/** Run progressive enhancements of markdown */
-if(!isInherited) {
-  /** @todo */
-  content = content;
+async function runPageTransforms() {
+  return await Promise.resolve(Astro.props.content)
+                        .then(concatenateMetadata)
+                        .then(toPage)
+                        .then(applyPostProcess)
 }
+
+function concatenateMetadata( astroMarkdownPage: AstroPage ) {
+  /** @ts-ignore */
+  const abspath = import.meta.url.pathname;
+  const astroContextSymbol = Symbol.for('astro.context');
+  const astroContext = Astro.props[astroContextSymbol];
+
+  return {
+    layout: abspath,
+    ...astroMarkdownPage,
+    [astroContextSymbol]: astroContext
+  }
+}
+
+function applyPostProcess( page: Page ) {
+  return page;
+}
+
 ---
 
 <BaseLayout {page}>
@@ -49,7 +53,7 @@ if(!isInherited) {
     <section class={cn('project',page.content.variant)} aria-labelledby="masthead-title">
       <ProjectHydration client:idle>
       {
-        (isInherited ? <slot/> : content)
+        (!page.layout.endsWith('Project.astro') ? <slot/> : page.content.content)
       }
       </ProjectHydration>
     </section>

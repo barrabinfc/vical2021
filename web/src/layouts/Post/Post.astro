@@ -1,25 +1,39 @@
 ---
 import {relative,dirname} from 'node:path'
 import BaseLayout from '../base.astro';
-import {Page, toPage} from '../../lib/page/Page';
+import {Page, toPage, AstroPage} from '../../lib/page/Page';
 
 import Masthead from '../../components/Masthead';
 import Tag, {TagVariant} from '../../components/Tag/Tag';
 
 import {cn,toReadableDateString, toDMYDateString, emojifyStatus} from '../../lib/helpers';
+
 import {buildHTMLTransformerFn } from '../../lib/html';
 import transformFootnoteLinksInNewPage from '../../lib/html/transformers/footnotesLinksInNewPage';
+import transformEscapeBracketLeft from '../../lib/html/transformers/astroCode.js';
 
-/** @ts-ignore */
-const abspath = import.meta.url.pathname;
-const astroContextSymbol = Symbol.for('astro.context');
-const astroContext = Astro.props[astroContextSymbol];
+let page: Page = await runPageTransforms();
 
-let page:Page = toPage({
-  layout: abspath,
-  ...Astro.props.content,
-  [astroContextSymbol]: astroContext
-});
+async function runPageTransforms(){
+  return await Promise.resolve(Astro.props.content)
+            .then(concatenateMetadata)
+            .then(toPage)
+            .then(applyPostProcess)
+}
+
+
+function concatenateMetadata( astroMarkdownPage:AstroPage ) {
+  /** @ts-ignore */
+  const abspath = import.meta.url.pathname;
+  const astroContextSymbol = Symbol.for('astro.context');
+  const astroContext = Astro.props[astroContextSymbol];
+
+  return {
+    layout: abspath,
+    ...astroMarkdownPage,
+    [astroContextSymbol]: astroContext
+  }
+}
 
 function resolveRelativeToCwd( path: string ) {
   /** @ts-ignore */
@@ -28,17 +42,23 @@ function resolveRelativeToCwd( path: string ) {
   return relativeToPagePath;
 }
 
-/** Relative images */
-const transformRelativeImagePath = buildHTMLTransformerFn( 'img[src^="./"]',  (el,ctx) => {
-  const targetPath = dirname(page.abspath);
-  const relativeTargetPath = resolveRelativeToCwd( targetPath );
-  const src = el.attr('src');
-  el.attr('src', Astro.resolve(relativeTargetPath + src.slice(1)) );
-});
+async function applyPostProcess( page: Page ) {
+  /** Relative images */
+  const transformRelativeImagePath = buildHTMLTransformerFn( 'img[src^="./"]',  (el,ctx) => {
+    const targetPath = dirname(page.abspath);
+    const relativeTargetPath = resolveRelativeToCwd( targetPath );
+    const src = el.attr('src');
+    el.attr('src', Astro.resolve(relativeTargetPath + src.slice(1)) );
+  });
 
-let content = transformRelativeImagePath( page.content.content );
-content = transformFootnoteLinksInNewPage( content );
-content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
+  page.content.content = await Promise.resolve(page.content.content)
+                                        .then( transformRelativeImagePath )
+                                        .then( transformFootnoteLinksInNewPage )
+                                        .then( transformEscapeBracketLeft )
+
+  return page;
+}
+
 
 ---
 
@@ -68,7 +88,7 @@ content = content.replace(/ASTRO_ESCAPED_LEFT_CURLY_BRACKET/g, '{')
       )}
     </Masthead>
     <div class="post">
-      {content}
+      {page.content.content}
     </div>
   </article>
 </BaseLayout>

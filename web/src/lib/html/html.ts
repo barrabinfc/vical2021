@@ -12,6 +12,7 @@ export const loadHTML = (htmlString: string): CheerioAPI => {
 
 /**
   Get the HTML as string of element `el`
+
   @example
    html( $('.pear') )
  */
