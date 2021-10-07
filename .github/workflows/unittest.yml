@@ -1,7 +1,7 @@
 name: Unit Test
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
@@ -20,10 +20,10 @@ jobs:
 
       - uses: abbbi/github-actions-tune@v1
 
-      - name: Setup Node.js 12.x
+      - name: Setup Node.js 16.x
         uses: actions/setup-node@master
         with:
-          node-version: 12.x
+          node-version: 16.x
 
       - name: use cache
         uses: actions/cache@v2
