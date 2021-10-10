@@ -1,0 +1,69 @@
+/** Playground */
+.robotPlayground {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.robotEditor {
+  flex-basis: 40%;
+}
+.robotCanvas {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/** Canvas */
+.toyrobotCanvasWrapper {
+  width: calc((32px * 4) * 5);
+  height: calc((32px * 4) * 5);
+
+  // Grid
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAE1JREFUWEft1bENADAIA0HTMxKDsxUjJG1qKJCip0eyr7FV1dHiGQEQQAABBBBAYCKQmXJ3RUR70EdzvB6gXft5HAkQAAEEEEAAgS8ELrzOf6F3pp6dAAAAAElFTkSuQmCC')
+    center center;
+}
+.bmoImage {
+  display: none;
+}
+
+/** Editor */
+.editorWrapper {
+  position: relative;
+  min-width: 320px;
+  width: 100%;
+  height: 640px;
+  flex-basis: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.editorToolbar {
+  display: flex;
+  padding: var(--gap);
+  width: 100%;
+  min-width: max-content;
+  background-color: var(--surface2);
+}
+.toolbarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--gap);
+  border: 0;
+  padding: 0.5em;
+  background-color: var(--nice);
+  &:hover {
+    cursor: pointer;
+    background-color: var(--brand);
+  }
+
+  /** Variants */
+  &:global([data-modifier='active']) {
+    position: relative;
+    box-shadow: 0 0 0 2px var(--brand);
+  }
+}
+
+.editorCode {
+  background-color: var(--surface3);
+}
