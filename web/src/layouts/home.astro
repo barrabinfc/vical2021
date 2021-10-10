@@ -1,7 +1,7 @@
 ---
 import {HeadingLevel} from '../@types/a11y';
 import {cn, avoidWidowedWords} from '../lib/helpers';
-import {Page, toPage, AstroPage, PageSummary, toPageSummary } from '../lib/page/Page'
+import {AstroContextSymbol, Page, toPage, AstroPage, PageSummary, toPageSummary } from '../lib/page/Page'
 import {loadHTML, html} from '../lib/html';
 
 import BaseLayout from './base.astro';
@@ -33,13 +33,12 @@ async function runPageTransforms(){
 function concatenateMetadata( astroMarkdownPage: AstroPage ) {
   /** @ts-ignore */
   const abspath = import.meta.url.pathname;
-  const astroContextSymbol = Symbol.for('astro.context');
-  const astroContext = Astro.props[astroContextSymbol];
+  const astroContext = Astro.props[AstroContextSymbol];
 
   return {
     layout: abspath,
     ...astroMarkdownPage,
-    [astroContextSymbol]: astroContext
+    [AstroContextSymbol]: astroContext
   }
 }
 

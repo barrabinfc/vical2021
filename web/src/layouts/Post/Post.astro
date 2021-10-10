@@ -1,7 +1,7 @@
 ---
 import {relative,dirname} from 'node:path'
 import BaseLayout from '../base.astro';
-import {Page, toPage, AstroPage} from '../../lib/page/Page';
+import {AstroContextSymbol, Page, toPage, AstroPage} from '../../lib/page/Page';
 
 import Masthead from '../../components/Masthead';
 import Tag, {TagVariant} from '../../components/Tag/Tag';
@@ -24,13 +24,12 @@ async function runPageTransforms(){
 function concatenateMetadata( astroMarkdownPage:AstroPage ) {
   /** @ts-ignore */
   const abspath = import.meta.url.pathname;
-  const astroContextSymbol = Symbol.for('astro.context');
-  const astroContext = Astro.props[astroContextSymbol];
+  const astroContext = Astro.props[AstroContextSymbol];
 
   return {
     layout: abspath,
     ...astroMarkdownPage,
-    [astroContextSymbol]: astroContext
+    [AstroContextSymbol]: astroContext
   }
 }
 

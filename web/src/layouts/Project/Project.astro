@@ -4,7 +4,7 @@
  * It can be inherited and customized via slots
  * @see {Project2Column.astro}
  */
-import {toPage, Page, AstroPage} from '../../lib/page/Page'
+import {AstroContextSymbol, toPage, Page, AstroPage} from '../../lib/page/Page'
 import BaseLayout from '../../layouts/base.astro';
 import Masthead from '../../components/Masthead';
 
@@ -24,13 +24,12 @@ async function runPageTransforms() {
 function concatenateMetadata( astroMarkdownPage: AstroPage ) {
   /** @ts-ignore */
   const abspath = import.meta.url.pathname;
-  const astroContextSymbol = Symbol.for('astro.context');
-  const astroContext = Astro.props[astroContextSymbol];
+  const astroContext = Astro.props[AstroContextSymbol];
 
   return {
     layout: abspath,
     ...astroMarkdownPage,
-    [astroContextSymbol]: astroContext
+    [AstroContextSymbol]: astroContext
   }
 }
 

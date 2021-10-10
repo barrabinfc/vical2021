@@ -2,18 +2,17 @@
 import {resolve, relative, dirname } from 'node:path'
 import {readFileSync} from 'node:fs';
 
-import {toPage} from '../../lib/page/Page'
+import {AstroContextSymbol, toPage} from '../../lib/page/Page'
 import Project from './Project.astro'
 
 /** @ts-ignore */
 const abspath = import.meta.url.pathname;
-const astroContextSymbol = Symbol.for('astro.context');
-const astroContext = Astro.props[astroContextSymbol];
+const astroContext = Astro.props[AstroContextSymbol];
 
 const page = toPage({
   layout: abspath,
   ...Astro.props.content,
-  [astroContextSymbol]: astroContext
+  [AstroContextSymbol]: astroContext
 });
 
 let contentHtml = page.content.content;

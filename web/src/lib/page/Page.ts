@@ -1,10 +1,21 @@
 import { dirname, relative, basename } from 'node:path';
 import * as t from 'typanion';
+import { CustomError } from '../errors';
 import { slugifyFilepath } from '../helpers';
 import { isSimpleISO8601 } from '../validation/isSimpleISO8601';
 import { abspathOfPages, pagePathToUrl, urlToPagePath } from './pagePathToUrl';
 
 const AstroContextSymbol = Symbol.for('astro.context');
+
+interface AstroContext {
+  pageCSS: string[];
+  pageScripts: string[];
+  request: {
+    params: Record<string, any>;
+    url: URL;
+    canonicalUrl: URL;
+  };
+}
 
 /**
  * Abstract a page from astro into project domain Page.
@@ -20,16 +31,9 @@ interface AstroPage {
   };
   /** Frontmatter */
   [k: string]: any;
+
   /** Astro page context */
-  [AstroContextSymbol]: {
-    pageCSS: string[];
-    pageScripts: string[];
-    request: {
-      params: Record<string, any>;
-      url: URL;
-      canonicalUrl: URL;
-    };
-  };
+  [AstroContextSymbol]: AstroContext;
 }
 
 function isAstroPage(subject: Record<string | symbol, any>): subject is AstroPage {
@@ -45,6 +49,8 @@ interface AstroMarkdownPage {
   };
   /** frontmatter */
   [k: string]: any;
+
+  [AstroContextSymbol]: AstroContext;
 }
 
 /** A page after @astrojs/markdown parser with name&abspath */
@@ -80,7 +86,7 @@ type PageContent = Required<t.InferType<typeof isPageContent>>;
  * Page Entity
  * Every page must have those fields.
  */
-const isPage = t.isObject({
+const pageProps = {
   name: t.isString(),
   abspath: t.isString(),
   slug: t.isString(),
@@ -115,7 +121,8 @@ const isPage = t.isObject({
       }
     )
   )
-});
+};
+const isPage = t.isObject(pageProps);
 type Page = t.InferType<typeof isPage>;
 
 /**
@@ -178,6 +185,12 @@ function toPage(content: AstroPage | MarkdownPageReference, cwd?: string): Page 
     relativePath = relative(abspathOfPages, dirname(abspath));
     collection = (relativePath && relativePath.split('/')) || [];
   } else {
+    /** @ts-ignore */
+    if (!cwd && !content[AstroContextSymbol]) {
+      throw new CustomError(
+        `Did you forgot to forward astro.context or pass cwd? Add to page object obejct => [Symbol.for('astro.context')]: Astro.props[Symbol.for('astro.context')]'`
+      );
+    }
     name = content.name;
     slug = slugifyFilepath(name.replace(/\.\w*?$/g, ''));
     abspath = content.abspath;
@@ -187,9 +200,8 @@ function toPage(content: AstroPage | MarkdownPageReference, cwd?: string): Page 
   }
 
   /** Aggregate properties received that are not reserved  */
-  const reservedProps = ['astro', AstroContextSymbol];
+  const reservedProps = ['astro', AstroContextSymbol, ...Object.keys(pageProps)];
   const otherProps = Object.fromEntries(Object.entries(content).filter(([key, v]) => !reservedProps.includes(key)));
-
   return {
     name,
     abspath,
@@ -224,6 +236,7 @@ function toPage(content: AstroPage | MarkdownPageReference, cwd?: string): Page 
 }
 
 export {
+  AstroContextSymbol,
   AstroPage,
   MarkdownPageReference,
   Page,
