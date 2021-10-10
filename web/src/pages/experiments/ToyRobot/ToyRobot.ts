@@ -21,7 +21,7 @@ The file is assumed to have ASCII encoding. It is assumed that the PLACE command
 
 */
 
-type Vec2 = [number, number];
+export type Vec2 = [number, number];
 
 const DIRECTIONS = ['N', 'S', 'E', 'W'] as const;
 export type RobotDirection = typeof DIRECTIONS[number];
@@ -101,10 +101,10 @@ export class ToyRobot {
   place(x: string | number, y: string | number, direction: RobotDirection) {
     // Force casting to Number
     x = Number(x);
-    y = Number(x);
+    y = Number(y);
 
     if (!(this.validDirection(direction) && this.inDimensionBounds([x, y]))) {
-      console.warn(`Ignoring place(Invalid params): ${{ x, y, direction }}`);
+      console.warn(`Ignoring place(Invalid params): {${x}, ${y}, ${direction}} }`);
       return;
     }
     this.position = [x, y];
@@ -173,9 +173,10 @@ export class ToyRobot {
   }
 
   /**
-   * Run commands in series
+   * Run commands in bulk
    */
   runAll(commands: Generator<RobotCommand, void, unknown>) {
+    console.log('runAll', commands);
     for (let cmd of commands) {
       const [action, args] = cmd;
       this.dispatchAction(action, args);
@@ -196,5 +197,39 @@ export class ToyRobot {
         throw new Error(`Invalid command(${action} ${args}) at line ${commandNumber}`);
       }
     }
+  }
+}
+
+/**
+ * Parse arguments, with casted numbers
+ */
+const parseArgsAndCast = (args: string): (string | number)[] => {
+  if (!args) {
+    return [];
+  }
+
+  const params = args.split(',').map((f) => f.trim());
+  const isNumber = /^\d+([.|e]\d)*$/; /** int, float and scientific notation */
+  return params.map((p) => {
+    if (isNumber.test(p)) {
+      return Number(p);
+    } else {
+      return p;
+    }
+  });
+};
+
+export function parseLine(line: string): null | RobotCommand {
+  const [command, ...args] = line
+    .trim()
+    .split(' ')
+    .map((p) => p.trim());
+
+  // Skip empty / comments
+  if (command !== '' && !command.startsWith('#')) {
+    const parsedArgs = parseArgsAndCast(args.join(''));
+    return [command as CommandSymbol, parsedArgs];
+  } else {
+    return null;
   }
 }

@@ -32,7 +32,6 @@ const page = toPage({
     content: ''
   },
   robotCommands: `# Go to center
-PLACE 0 0 N
 MOVE
 MOVE
 RIGHT
@@ -54,7 +53,7 @@ MOVE`,
   </Markdown>
 
   <RobotPlayground client:idle
-    dimensions={[5,5]}
+    dimensions={[10,10]}
     code={page.content.robotCommands} />
 
   <Markdown>

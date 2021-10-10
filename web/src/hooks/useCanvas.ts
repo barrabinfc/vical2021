@@ -7,7 +7,7 @@ export const useCanvas = (cb: (canvas: CanvasRenderingContext2D, ctx: HTMLCanvas
     const canvas = canvasRef.current as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
     return cb(ctx, canvas);
-  }, []);
+  });
 
   return canvasRef;
 };

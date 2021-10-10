@@ -8,9 +8,9 @@ import useCanvas from '../../../hooks/useCanvas';
 import style from './playground.module.scss';
 
 import BmoImage from './bmo.png';
-import { ToyRobot } from './ToyRobot';
+import { ToyRobot, Vec2 } from './ToyRobot';
 
-interface RobotCanvasCoordinates {
+interface RobotCanvasCoordinateSystem {
   width: number;
   height: number;
   /** A unit in robot coordinate system to canvas size */
@@ -21,20 +21,22 @@ interface RobotCanvasCoordinates {
 interface ToyRobotCanvasProps {
   className?: string;
   robot: ToyRobot;
+  dimensions: Vec2;
+  debug?: boolean;
 }
 
 export const ToyRobotCanvas = (props: ToyRobotCanvasProps) => {
-  const dimensions: [number, number] = [5, 5];
-  const coordinates: MutableRefObject<RobotCanvasCoordinates> = useRef({} as RobotCanvasCoordinates);
+  const dimensions: [number, number] = props.dimensions;
+  const coordSystem: MutableRefObject<RobotCanvasCoordinateSystem> = useRef({} as RobotCanvasCoordinateSystem);
 
   const robotImageEl = useRef(null);
   const robotImageSize = [64, 64];
-  const guidesEnabled = true;
+  const guidesEnabled = props.debug === true || false;
 
   const robot = props.robot;
 
   const drawGuides = (ctx) => {
-    const { width, height, unitX, unitY } = coordinates.current;
+    const { width, height, unitX, unitY } = coordSystem.current;
     ctx.strokeStyle = '#6dcff6';
     for (let x = 0; x < dimensions[0] + 1; x++) {
       ctx.beginPath();
@@ -51,7 +53,7 @@ export const ToyRobotCanvas = (props: ToyRobotCanvasProps) => {
   };
 
   const drawRobot = useCallback((ctx: CanvasRenderingContext2D) => {
-    const { width, height, unitX, unitY } = coordinates.current;
+    const { width, height, unitX, unitY } = coordSystem.current;
 
     ctx.save();
     // Invert Y Axis (0,0 should be bottom-left)
@@ -88,8 +90,9 @@ export const ToyRobotCanvas = (props: ToyRobotCanvasProps) => {
   /**
    * Render loop
    */
+  let raf = null;
   const renderLoop = (ctx) => {
-    const { width, height, unitX, unitY } = coordinates.current;
+    const { width, height, unitX, unitY } = coordSystem.current;
 
     ctx.clearRect(0, 0, width, height);
 
@@ -98,7 +101,7 @@ export const ToyRobotCanvas = (props: ToyRobotCanvasProps) => {
     }
 
     drawRobot(ctx);
-    requestAnimationFrame(() => renderLoop(ctx));
+    raf = requestAnimationFrame(() => renderLoop(ctx));
   };
 
   /**
@@ -110,14 +113,17 @@ export const ToyRobotCanvas = (props: ToyRobotCanvasProps) => {
 
     canvasRef.current.width = parentRect.width;
     canvasRef.current.height = parentRect.height;
-    coordinates.current = {
+    coordSystem.current = {
       width: parentRect.width,
       height: parentRect.height,
       unitX: parentRect.width / dimensions[0],
       unitY: parentRect.height / dimensions[1]
     };
 
-    requestAnimationFrame(() => renderLoop(ctx));
+    raf = requestAnimationFrame(() => renderLoop(ctx));
+    return () => {
+      cancelAnimationFrame(raf);
+    };
   };
 
   const canvasRef = useCanvas(setupCanvas);

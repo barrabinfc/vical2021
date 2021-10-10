@@ -2,7 +2,7 @@ import { suite } from 'uvu';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { ToyRobot, RobotCommand } from './ToyRobot';
+import { ToyRobot, RobotCommand, parseLine } from './ToyRobot';
 
 let robot;
 
@@ -131,14 +131,28 @@ function* commands() {
 }
 
 toyrobotSuite('ToyRobot.runAll()', async () => {
-  robot.runAll(commands);
+  robot.runAll(commands());
 });
-toyrobotSuite.only('ToyRobot.runStepByStep()', async () => {
+toyrobotSuite('ToyRobot.runStepByStep()', async () => {
   const robotRunGenerator = robot.runStepByStep(commands());
   for (let stepVal of robotRunGenerator) {
     console.log('step', stepVal);
   }
   robot.report();
+});
+
+/**
+ * Parsing
+ */
+toyrobotSuite.only('parseLine', async () => {
+  expect(parseLine('  ')).to.eql(null);
+  expect(parseLine('# Comment ')).to.eql(null);
+  expect(parseLine('PLACE 0,0,N')).to.eql(['PLACE', [0, 0, 'N']]);
+  expect(parseLine('PLACE 10.5, N')).to.eql(['PLACE', [10.5, 'N']]);
+  expect(parseLine('PLACE 0 0 N')).to.eql(['PLACE', ['00N']]);
+  expect(parseLine('MOVE')).to.eql(['MOVE', []]);
+  expect(parseLine('MOVE  ABCD,   EFG,   1234')).to.eql(['MOVE', ['ABCD', 'EFG', 1234]]);
+  expect(true).to.eql(true);
 });
 
 toyrobotSuite.run();

@@ -5,24 +5,23 @@ import { useBetween } from 'use-between';
 import { cn } from '../../../lib/helpers';
 import style from './playground.module.scss';
 
-import { RobotCommand, ToyRobot } from './ToyRobot';
+import { RobotCommand, ToyRobot, parseLine } from './ToyRobot';
 import Editor from './Editor';
 import Canvas from './Canvas';
-import { useRobotStateRefs } from './sharedState';
-// import { useKeyPressedCallback } from '../../../hooks/useKeyPressed';
+import { usePlaygroundState } from './usePlaygroundState';
+import { useKeyPressedCallback } from '~/hooks/useKeyPressed';
+
+function* lineGenerator(commands: string) {
+  for (let line of commands.split('\n')) {
+    yield line;
+  }
+}
 
 function* commandsGenerator(commands: string) {
-  const lines = commands.split('\n');
-  for (let l of lines) {
-    const [command, ...args] = l
-      .trim()
-      .split(' ')
-      .map((p) => p.trim());
-
-    // Skip empty / comments
-    if (command !== '' && !command.startsWith('#')) {
-      const argsWithoutSpaces = args.filter((a) => a !== ' ');
-      yield [command, argsWithoutSpaces] as RobotCommand;
+  for (let line of lineGenerator(commands)) {
+    const parsed = parseLine(line);
+    if (parsed) {
+      yield parsed;
     }
   }
 }
@@ -35,28 +34,42 @@ function* commandsGenerator(commands: string) {
  */
 export const ToyRobotPlayground = ({ dimensions, code }: { dimensions: [number, number]; code: string }) => {
   const robot = new ToyRobot({ dimensions });
-  const { commands, playing, setPlaying } = useRobotStateRefs(code);
+  const { commands, playing, setPlaying, debug, setDebug } = usePlaygroundState(code);
 
-  /** Play robot commands */
-  const play = () => {
-    setPlaying(true);
+  const debugPlay = useCallback(() => {
     const robotRunGenerator = robot.runStepByStep(commandsGenerator(commands.current));
     let result: any = { done: false };
+    console.groupCollapsed('Play');
     do {
       try {
         result = robotRunGenerator.next();
         if (result.value) {
-          console.info('Step: ', result.value);
+          console.log('Step: ', result.value);
         }
       } catch (e) {
         console.error(`Skipping! ${e.message}`);
         continue;
       }
-      setPlaying(false);
     } while (!result.done);
-  };
+    console.groupEnd();
+  }, [commands.current]);
 
-  /** BUG: This makes the whole component re-render */
+  /** Play robot commands */
+  const play = () => {
+    console.log('play', debug);
+    setPlaying(true);
+    if (debug) {
+      debugPlay();
+    } else {
+      robot.runAll(commandsGenerator(commands.current));
+    }
+    setPlaying(false);
+  };
+  const stop = useCallback(() => {
+    setPlaying(false);
+  }, []);
+
+  /** BUG: This makes the whole component re-render... twice */
   // const onCtrlEnter = () => {
   //   console.log('ctrlEnter');
   // };
@@ -67,11 +80,13 @@ export const ToyRobotPlayground = ({ dimensions, code }: { dimensions: [number, 
       <Editor
         className={cn(style.robotEditor)}
         playing={playing}
+        debug={debug}
+        setDebug={setDebug}
         commands={commands}
         onPlay={play}
-        onStop={console.log}
+        onStop={stop}
       />
-      <Canvas className={cn(style.robotCanvas)} robot={robot} />
+      <Canvas className={cn(style.robotCanvas)} robot={robot} debug={debug} dimensions={dimensions} />
     </div>
   );
 };

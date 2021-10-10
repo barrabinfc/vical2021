@@ -2,46 +2,58 @@ import React, { useState, useCallback } from 'react';
 import SimpleCodeEditor from 'react-simple-code-editor';
 import debounce from 'lodash.debounce';
 
-import * as RadixToolbar from '@radix-ui/react-toolbar/dist/index.module';
+import * as RToolbar from '@radix-ui/react-toolbar/dist/index.module';
 import { IdProvider } from '@radix-ui/react-id';
-import { PlayIcon, StopIcon } from '@radix-ui/react-icons';
+import { PlayIcon, StopIcon, Crosshair2Icon } from '@radix-ui/react-icons';
 
 import { cn } from '../../../lib/helpers';
 import style from './playground.module.scss';
-
-import { useRobotStateRefs } from './sharedState';
-import { ToyRobot } from './ToyRobot';
 
 interface ToyRobotEditor {
   className?: string;
   commands: React.MutableRefObject<string>;
   playing: boolean;
+  debug: boolean;
+  setDebug: (value: React.SetStateAction<boolean>) => void;
   onPlay: () => void;
   onStop: () => void;
 }
 
-export const Toolbar = ({ playing, onPlay, onStop }: Pick<ToyRobotEditor, 'playing' | 'onPlay' | 'onStop'>) => {
+export const Toolbar = ({ playing, onPlay, onStop, debug, setDebug }: Omit<ToyRobotEditor, 'commands'>) => {
   const togglePlaying = useCallback(() => {
     if (playing) {
       onStop();
     } else {
       onPlay();
     }
-  }, [playing]);
+  }, [playing, onPlay, onStop]);
+  const toggleDebug = useCallback(() => {
+    // Radix returns '' or true, so we cast by hand (ugly, but readable)
+    const inverse = debug === true ? false : true;
+    setDebug(inverse);
+  }, [debug]);
   console.log('Toolbar:render');
 
   return (
-    <RadixToolbar.Root aria-label="Toolbar" className={cn(style.editorToolbar)}>
-      <RadixToolbar.Separator />
-      <RadixToolbar.Button
-        className={cn(style.toolbarButton)}
-        data-modifier={cn(playing && 'active')}
+    <RToolbar.Root aria-label="Toolbar" className={cn(style.editorToolbar)}>
+      <RToolbar.ToggleGroup type="single" aria-label="Debug" onValueChange={toggleDebug}>
+        <RToolbar.ToggleItem className={cn(style.toolbarButton)} value={true} aria-label="Debug">
+          <Crosshair2Icon />
+        </RToolbar.ToggleItem>
+      </RToolbar.ToggleGroup>
+
+      <RToolbar.ToggleGroup
+        type="single"
+        aria-label="Play"
         style={{ marginLeft: 'auto' }}
-        onClick={togglePlaying}
+        onValueChange={togglePlaying}
+        value={playing}
       >
-        {playing ? <StopIcon /> : <PlayIcon />}
-      </RadixToolbar.Button>
-    </RadixToolbar.Root>
+        <RToolbar.ToggleItem className={cn(style.toolbarButton)} value={true}>
+          {playing ? <StopIcon /> : <PlayIcon />}
+        </RToolbar.ToggleItem>
+      </RToolbar.ToggleGroup>
+    </RToolbar.Root>
   );
 };
 
@@ -85,7 +97,13 @@ export const ToyRobotEditor = (props: ToyRobotEditor) => {
   return (
     <IdProvider>
       <div className={cn(style.editorWrapper, props.className || '')}>
-        <Toolbar playing={playing} onPlay={props.onPlay} onStop={props.onStop} />
+        <Toolbar
+          playing={playing}
+          onPlay={props.onPlay}
+          onStop={props.onStop}
+          debug={props.debug}
+          setDebug={props.setDebug}
+        />
         <Editor defaultCommands={props.commands.current} commandsRef={props.commands} />
       </div>
     </IdProvider>
