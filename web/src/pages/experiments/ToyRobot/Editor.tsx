@@ -32,7 +32,6 @@ export const Toolbar = ({ playing, onPlay, onStop, debug, setDebug }: Omit<ToyRo
     const inverse = debug === true ? false : true;
     setDebug(inverse);
   }, [debug]);
-  console.log('Toolbar:render');
 
   return (
     <RToolbar.Root aria-label="Toolbar" className={cn(style.editorToolbar)}>

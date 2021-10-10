@@ -35,7 +35,8 @@ function* commandsGenerator(commands: string) {
 export const ToyRobotPlayground = ({ dimensions, code }: { dimensions: [number, number]; code: string }) => {
   const robot = useRef(new ToyRobot({ dimensions }));
   const commands = useRef(code);
-  const { playing, setPlaying, debug, setDebug } = usePlaygroundState();
+  const playgroundState = usePlaygroundState();
+  const { playing, setPlaying, debug, setDebug } = playgroundState;
 
   const debugPlay = () => {
     const robotRunGenerator = robot.current.runStepByStep(commandsGenerator(commands.current));
@@ -77,15 +78,7 @@ export const ToyRobotPlayground = ({ dimensions, code }: { dimensions: [number, 
 
   return (
     <div className={cn(style.robotPlayground)}>
-      <Editor
-        className={cn(style.robotEditor)}
-        playing={playing}
-        debug={debug}
-        setDebug={setDebug}
-        commands={commands}
-        onPlay={play}
-        onStop={stop}
-      />
+      <Editor className={cn(style.robotEditor)} onPlay={play} onStop={stop} {...playgroundState} commands={commands} />
       <Canvas className={cn(style.robotCanvas)} dimensions={dimensions} robot={robot.current} debug={debug} />
     </div>
   );

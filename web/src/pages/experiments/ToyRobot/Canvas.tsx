@@ -133,7 +133,6 @@ export const ToyRobotCanvas = (props: ToyRobotCanvasProps) => {
   };
 
   const canvasRef = useCanvas(setupCanvas);
-  console.log('Canvas:render');
 
   return (
     <div className={cn(style.toyrobotCanvasWrapper, props.className)}>
