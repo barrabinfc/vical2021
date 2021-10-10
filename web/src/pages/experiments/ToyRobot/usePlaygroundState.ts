@@ -5,10 +5,9 @@ import { useBetween } from 'use-between';
 /**
  * Shared reactive state between components
  */
-export const usePlaygroundState = (initialCommands: string) => {
-  const commands = useRef(initialCommands);
+export const usePlaygroundState = () => {
   const [playing, setPlaying] = useState(false);
   const [debug, setDebug] = useState(false);
 
-  return { commands, playing, setPlaying, debug, setDebug };
+  return { playing, setPlaying, debug, setDebug };
 };

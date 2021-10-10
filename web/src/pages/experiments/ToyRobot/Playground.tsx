@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 
 import { useBetween } from 'use-between';
 
@@ -33,11 +33,12 @@ function* commandsGenerator(commands: string) {
  * Display the robot on a canvas
  */
 export const ToyRobotPlayground = ({ dimensions, code }: { dimensions: [number, number]; code: string }) => {
-  const robot = new ToyRobot({ dimensions });
-  const { commands, playing, setPlaying, debug, setDebug } = usePlaygroundState(code);
+  const robot = useRef(new ToyRobot({ dimensions }));
+  const commands = useRef(code);
+  const { playing, setPlaying, debug, setDebug } = usePlaygroundState();
 
-  const debugPlay = useCallback(() => {
-    const robotRunGenerator = robot.runStepByStep(commandsGenerator(commands.current));
+  const debugPlay = () => {
+    const robotRunGenerator = robot.current.runStepByStep(commandsGenerator(commands.current));
     let result: any = { done: false };
     console.groupCollapsed('Play');
     do {
@@ -52,22 +53,21 @@ export const ToyRobotPlayground = ({ dimensions, code }: { dimensions: [number, 
       }
     } while (!result.done);
     console.groupEnd();
-  }, [commands.current]);
+  };
 
   /** Play robot commands */
   const play = () => {
-    console.log('play', debug);
     setPlaying(true);
     if (debug) {
       debugPlay();
     } else {
-      robot.runAll(commandsGenerator(commands.current));
+      robot.current.runAll(commandsGenerator(commands.current));
     }
     setPlaying(false);
   };
-  const stop = useCallback(() => {
+  const stop = () => {
     setPlaying(false);
-  }, []);
+  };
 
   /** BUG: This makes the whole component re-render... twice */
   // const onCtrlEnter = () => {
@@ -86,7 +86,7 @@ export const ToyRobotPlayground = ({ dimensions, code }: { dimensions: [number, 
         onPlay={play}
         onStop={stop}
       />
-      <Canvas className={cn(style.robotCanvas)} robot={robot} debug={debug} dimensions={dimensions} />
+      <Canvas className={cn(style.robotCanvas)} dimensions={dimensions} robot={robot.current} debug={debug} />
     </div>
   );
 };

@@ -52,23 +52,26 @@ export const ToyRobotCanvas = (props: ToyRobotCanvasProps) => {
     }
   };
 
-  const drawRobot = useCallback((ctx: CanvasRenderingContext2D) => {
-    const { width, height, unitX, unitY } = coordSystem.current;
+  const drawRobot = useCallback(
+    (ctx: CanvasRenderingContext2D) => {
+      const { width, height, unitX, unitY } = coordSystem.current;
 
-    ctx.save();
-    // Invert Y Axis (0,0 should be bottom-left)
-    ctx.setTransform(1, 0, 0, -1, 0, height);
-    ctx.translate(robot.position[0] * unitX + unitX / 2, robot.position[1] * unitY + unitY / 2);
-    ctx.rotate(robot.angleInRadians);
-    ctx.drawImage(
-      robotImageEl.current,
-      -robotImageSize[0] / 2,
-      -robotImageSize[1] / 2,
-      robotImageSize[0],
-      robotImageSize[1]
-    );
-    ctx.restore();
-  }, []);
+      ctx.save();
+      // Invert Y Axis (0,0 should be bottom-left)
+      ctx.setTransform(1, 0, 0, -1, 0, height);
+      ctx.translate(robot.position[0] * unitX + unitX / 2, robot.position[1] * unitY + unitY / 2);
+      ctx.rotate(robot.angleInRadians);
+      ctx.drawImage(
+        robotImageEl.current,
+        -robotImageSize[0] / 2,
+        -robotImageSize[1] / 2,
+        robotImageSize[0],
+        robotImageSize[1]
+      );
+      ctx.restore();
+    },
+    [...props.dimensions]
+  );
 
   /**
    * Setup events
@@ -91,18 +94,21 @@ export const ToyRobotCanvas = (props: ToyRobotCanvasProps) => {
    * Render loop
    */
   let raf = null;
-  const renderLoop = (ctx) => {
-    const { width, height, unitX, unitY } = coordSystem.current;
+  const renderLoop = useCallback(
+    (ctx) => {
+      const { width, height, unitX, unitY } = coordSystem.current;
 
-    ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, width, height);
 
-    if (guidesEnabled) {
-      drawGuides(ctx);
-    }
+      if (guidesEnabled) {
+        drawGuides(ctx);
+      }
 
-    drawRobot(ctx);
-    raf = requestAnimationFrame(() => renderLoop(ctx));
-  };
+      drawRobot(ctx);
+      raf = requestAnimationFrame(() => renderLoop(ctx));
+    },
+    [guidesEnabled]
+  );
 
   /**
    * Setup canvas

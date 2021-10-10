@@ -176,7 +176,6 @@ export class ToyRobot {
    * Run commands in bulk
    */
   runAll(commands: Generator<RobotCommand, void, unknown>) {
-    console.log('runAll', commands);
     for (let cmd of commands) {
       const [action, args] = cmd;
       this.dispatchAction(action, args);
