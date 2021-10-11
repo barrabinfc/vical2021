@@ -15,16 +15,9 @@ publishedAt: 2021-09-20
 The browser does a remarkable job of layouting text, but still has many missing pieces that exists are standard for printed text.
 I've collected many tips and strategies for improving readability.
 
-### Use relative dimensions
-
-Pixel measurements are not suitable for responsive designs. Use `em` and `rem`
-
 ### Use a modular scale for typography
 
-A modular scale will scale better than hand-picked font-sizes and will help achieve a harmonious scale.
-And it will greatly simplify css code for responsive design:
-
-Those typographic rulers are helpful:
+A modular scale achieve a harmonious design using ratios. It will also simplify your css code.
 
 - [Typographic Ruler](https://type-scale.com/)
 - [Modular scale](https://www.modularscale.com/)
@@ -61,10 +54,9 @@ function avoidWidowedWords(text: string, widows: number = 3): string {
   <h4>Title's can break nicely without&nbsp;widowed&nbsp;words</h4>
 </div>
 
-### Limit text to N lines
+### Add a maximum vertical overflow
 
-Also called [Line clamping](https://caniuse.com/?search=line-clamp), works in all major browsers in 2021 🥰.
-
+This is called [Line clamping](https://caniuse.com/?search=line-clamp), and it works in all major browsers in 2021 🥰.
 The feature is behind prefix `-webkit` and only works in combination with `display: -webkit-box;`
 
 <style>
