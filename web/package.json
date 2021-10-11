@@ -19,6 +19,7 @@
     "@radix-ui/react-icons": "^1.0.3",
     "@radix-ui/react-popover": "^0.1.0",
     "@radix-ui/react-toolbar": "^0.1.0",
+    "@radix-ui/react-tooltip": "^0.1.0",
     "@silvenon/remark-smartypants": "^1.0.0",
     "@types/chai": "^4.2.21",
     "@types/sinon": "^10.0.2",

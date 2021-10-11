@@ -2,9 +2,11 @@ import React, { useState, useCallback } from 'react';
 import SimpleCodeEditor from 'react-simple-code-editor';
 import debounce from 'lodash.debounce';
 
-import * as RToolbar from '@radix-ui/react-toolbar/dist/index.module';
 import { IdProvider } from '@radix-ui/react-id';
 import { PlayIcon, StopIcon, Crosshair2Icon } from '@radix-ui/react-icons';
+
+import * as RToolbar from '@radix-ui/react-toolbar/dist/index.module';
+// import * as RTooltip from '@radix-ui/react-tooltip';
 
 import { cn } from '../../../lib/helpers';
 import style from './playground.module.scss';
@@ -39,6 +41,13 @@ export const Toolbar = ({ playing, onPlay, onStop, debug, setDebug }: Omit<ToyRo
         <RToolbar.ToggleItem className={cn(style.toolbarButton)} value={true} aria-label="Debug">
           <Crosshair2Icon />
         </RToolbar.ToggleItem>
+
+        {/* <RTooltip.Root> */}
+        {/* <RTooltip.Trigger></RTooltip.Trigger> */}
+        {/* <RTooltip.Content> */}
+        {/* <span>Coisa</span> */}
+        {/* </RTooltip.Content> */}
+        {/* </RTooltip.Root> */}
       </RToolbar.ToggleGroup>
 
       <RToolbar.ToggleGroup
