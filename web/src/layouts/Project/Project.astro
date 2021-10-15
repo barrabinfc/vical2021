@@ -4,7 +4,7 @@
  * It can be inherited and customized via slots
  * @see {Project2Column.astro}
  */
-import {AstroContextSymbol, toPage, Page, AstroPage} from '../../lib/page/Page'
+import {AstroContextSymbol, toPage, Page, isPage, AstroPage} from '../../lib/page/Page'
 import BaseLayout from '../../layouts/base.astro';
 import Masthead from '../../components/Masthead';
 
@@ -15,10 +15,18 @@ import ProjectHydration from './hydration/index.tsx';
 let page:Page = await runPageTransforms();
 
 async function runPageTransforms() {
-  return await Promise.resolve(Astro.props.content)
-                        .then(concatenateMetadata)
-                        .then(toPage)
-                        .then(applyPostProcess)
+  return await Promise.resolve(readPageData())
+                      .then(applyPostProcess)
+}
+
+function readPageData() {
+  if(isPage(Astro.props.content)){
+    return Promise.resolve(Astro.props.content)
+  } else {
+    return Promise.resolve(Astro.props.content)
+                  .then(concatenateMetadata)
+                  .then(toPage)
+  }
 }
 
 function concatenateMetadata( astroMarkdownPage: AstroPage ) {
@@ -305,6 +313,8 @@ function applyPostProcess( page: Page ) {
 .mockup {
   text-align: center;
   height: 100%;
+  width: 100%;
+
   --shadow-strength: 0.08;
 
   > .browser-mockup {

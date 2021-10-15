@@ -202,6 +202,7 @@ function toPage(content: AstroPage | MarkdownPageReference, cwd?: string): Page 
   /** Aggregate properties received that are not reserved  */
   const reservedProps = ['astro', AstroContextSymbol, ...Object.keys(pageProps)];
   const otherProps = Object.fromEntries(Object.entries(content).filter(([key, v]) => !reservedProps.includes(key)));
+  // console.log(content);
   return {
     name,
     abspath,

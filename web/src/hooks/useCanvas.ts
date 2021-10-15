@@ -5,7 +5,15 @@ export const useCanvas = (cb: (canvas: CanvasRenderingContext2D, ctx: HTMLCanvas
 
   useEffect(() => {
     const canvas = canvasRef.current as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d');
+
+    let ctx = null;
+    ctx = canvas.getContext('2d');
+    // OffscreenCanvas: Not yet ready
+    // if (canvas.transferControlToOffscreen) {
+    //   let offscreen = new OffscreenCanvas();
+    //   let ctx = offscreen.getContext('2d');
+    // } else {
+    // }
     return cb(ctx, canvas);
   });
 

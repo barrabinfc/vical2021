@@ -19,14 +19,14 @@ export const listRootPages = async (): Promise<Page[]> => {
   }
 
   const markdownFiles = [...(await listMarkdown(cwd))];
-  return markdownFiles.map(page => toPage(page, cwd));
+  return markdownFiles.map((page) => toPage(page, cwd));
 };
 
 test('Pages should match Page interface', async () => {
   const rootPages = await listRootPages();
 
   const pagesSuite = suite('src/pages/');
-  rootPages.forEach(page => {
+  rootPages.forEach((page) => {
     pagesSuite(`${page.name} should match Page interface`, () => {
       expectPageInterface(page);
     });

@@ -44,14 +44,14 @@ The app is almost indistinguible from a native application, with a score of **90
   <div class="page h50">
     <div class="mockup">
       <div is="iphoneMockup">
-        <img src="/images/iching/frontpage_new.jpg" alt="Iching app home screen" />
+        <img src="/images/iching/frontpage(iPhone X).png" alt="Iching app home screen" />
       </div>
     </div>
   </div>
   <div class="page h50">
     <div class="mockup">
       <div is="iphoneMockup">
-        <img src="/images/iching/INTERPRETATION2.jpg" alt="Screen displaying the iching of Enthusiasm" />
+        <img src="/images/iching/interpretation3(iPhone X).png" alt="Screen displaying the iching of The Creative" />
       </div>
     </div>
   </div>
