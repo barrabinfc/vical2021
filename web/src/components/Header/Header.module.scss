@@ -1,8 +1,21 @@
 @use 'src/styles/variables' as *;
 @use 'src/styles/breakpoints' as bp;
+@use 'src/styles/helpers' as h;
 
 .header {
   position: relative;
+  height: var(--headerH);
+  background-color: transparent;
+  backdrop-filter: blur(0px);
+
+  transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+/** Header variants */
+:global(.header.translucent) {
+  background: rgba(255, 255, 255, 0.47);
+  backdrop-filter: blur(6px);
+  --shadow-strength: 0.02;
+  @include h.shadow();
 }
 
 @include bp.breakpoint(small, min) {
@@ -18,9 +31,6 @@
   padding: calc(var(--gap) * 6);
   display: flex;
   height: var(--headerH);
-
-  background: rgba(255, 255, 255, 0.47);
-  backdrop-filter: blur(6px);
 
   @include bp.breakpoint(small, max) {
     padding: calc(var(--gap) * 4);
