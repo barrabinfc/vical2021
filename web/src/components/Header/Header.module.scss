@@ -1,9 +1,8 @@
-@use "src/styles/variables" as *;
-@use "src/styles/breakpoints" as bp;
+@use 'src/styles/variables' as *;
+@use 'src/styles/breakpoints' as bp;
 
 .header {
   position: relative;
-  z-index: 100;
 }
 
 @include bp.breakpoint(small, min) {
@@ -13,11 +12,15 @@
 }
 
 .wrapper {
+  top: 0;
   box-sizing: border-box;
   margin: 0 auto;
   padding: calc(var(--gap) * 6);
   display: flex;
   height: var(--headerH);
+
+  background: rgba(255, 255, 255, 0.47);
+  backdrop-filter: blur(6px);
 
   @include bp.breakpoint(small, max) {
     padding: calc(var(--gap) * 4);

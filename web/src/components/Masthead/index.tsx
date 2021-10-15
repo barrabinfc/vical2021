@@ -23,10 +23,10 @@ export default function MastHead({ title, subtitle = undefined, image = undefine
       {image && <InlineImage src={image} />}
       <div className={cn(styles.contentContainer, 'content-container')}>
         <div className={cn(styles.content)}>
-          <h1 id="masthead-title" className={cn(styles.title)}>
+          <h1 id="masthead-title" className={cn('title', styles.title)}>
             {avoidWidowedWords(title)}
           </h1>
-          {subtitle && <h2 className={cn(styles.subtitle)}>{avoidWidowedWords(subtitle)}</h2>}
+          {subtitle && <h2 className={cn('subtitle', styles.subtitle)}>{avoidWidowedWords(subtitle)}</h2>}
         </div>
         {hasReactChildren(children) && children}
       </div>
