@@ -2,14 +2,14 @@ import React, { useState, useCallback, useRef } from 'react';
 
 import { useBetween } from 'use-between';
 
-import { cn } from '../../../lib/helpers';
+import { cn } from '../../lib/helpers';
 import style from './playground.module.scss';
 
 import { RobotCommand, ToyRobot, parseLine } from './ToyRobot';
 import Editor from './Editor';
 import Canvas from './Canvas';
 import { usePlaygroundState } from './usePlaygroundState';
-import { useKeyPressedCallback } from '~/hooks/useKeyPressed';
+import { useKeyPressedCallback } from '../../hooks/useKeyPressed';
 
 function* lineGenerator(commands: string) {
   for (let line of commands.split('\n')) {

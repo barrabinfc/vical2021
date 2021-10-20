@@ -8,10 +8,10 @@ import SEO from '../components/seo';
 import Header from '../components/Header/Header.tsx';
 import Footer from '../components/Footer/Footer.jsx';
 
-import SettingsPanel from '../components/Settings/SettingsPanel.tsx';
+// import SettingsPanel from '../components/Settings/SettingsPanel.tsx';
 
 const page:Page = Astro.props.page;
-let seo = {
+let seo = page.schema && {
   schema: page.schema,
   permalink: page.url.href,
   title: page.content.title,
@@ -19,8 +19,7 @@ let seo = {
   datePublished: page.publishedAt.toISOString(),
   images: (page.thumbnail?.path && [page.thumbnail.path]) ?? [],
   author: defaultSettings.author
-}
-
+} || {};
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +27,7 @@ let seo = {
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{page.content.title}</title>
+    <title>{page.content?.title}</title>
     <link rel="stylesheet" href={Astro.resolve('../styles/global.css')} />
 
     <link rel="shortcut icon" href="/favicon/favicon.ico">
@@ -40,11 +39,13 @@ let seo = {
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#fb7346">
 
-    <meta name="description" content={page.content.description} />
+    <meta name="description" content={page.content?.description} />
     <meta name="schema" content={page.schema} />
+
     <SEO module="og" {...seo} />
     <SEO module="twitter" {...seo} />
     <SEO module="ld" {...seo} />
+
   </head>
   <body data-layout="base">
 

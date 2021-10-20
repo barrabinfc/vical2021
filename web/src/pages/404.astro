@@ -1,22 +1,24 @@
 ---
-import BaseLayout from '../layouts/base.astro';
-import SvgPlaceholder from '../components/SvgPlaceholder';
+import {AstroContextSymbol, Page, toPage, AstroPage, PageSummary, toPageSummary } from '../lib/page/Page'
 
-let content = {
+import BaseLayout from '../layouts/base.astro';
+// import SvgPlaceholder from '../components/SvgPlaceholder';
+
+let page = {
   title: 'Page not found',
   description: 'Page not found',
-  schema: 'article'
+  schema: 'basic',
+  url: new URL('https://vical.me/404'),
+  publishedAt: new Date(),
+  content: {
+    description: 'Page not found'
+  },
 };
 
-export interface Props {
-  content: {
-    title: string,
-    description: string
-  }
-}
 ---
+
 <!DOCTYPE html>
-<BaseLayout {content}>
+<BaseLayout {page}>
   <article id="content">
     <section class="page404">
       <div class="grid2">
@@ -46,6 +48,7 @@ export interface Props {
   overflow: hidden;
   display: flex;
   align-items: flex-end;
+  min-height: calc(100vh - var(--footerH));
 }
 
 .grid2 {
@@ -53,13 +56,14 @@ export interface Props {
   margin: 1em;
   margin-top: var(--headerH);
 
-  display: grid;
+  display: flex;
   grid-gap: calc(var(--gap) * 4);
 
-  :global(.headline) {
-    grid-column: span 1;
-    grid-row: span 6;
+  @include bp.breakpoint(small,max) {
+    flex-direction: column;
+  }
 
+  :global(.headline) {
     writing-mode: vertical-rl;
     > h1 {
       margin-top: 0;
@@ -67,14 +71,10 @@ export interface Props {
 
     @include bp.breakpoint(small, max) {
       writing-mode: horizontal-tb;
-      grid-column: span 6;
-      grid-row: 1;
     }
   }
 
   :global(.highlight) {
-    grid-column: 2 / span 5;
-    grid-row: span 6;
     display: flex;
 
     > img {
@@ -85,8 +85,6 @@ export interface Props {
     }
 
     @include bp.breakpoint(small, max) {
-      grid-column: span 6;
-      grid-row: 2 / span 5;
 
       > img {
         min-height: 320px;

@@ -1,6 +1,6 @@
 import { dirname } from 'node:path';
-import { Page, toPage } from '../../lib/page';
-import { listMarkdown } from '../../lib/listMarkdown';
+import { Page, toPage } from '../page';
+import { listMarkdown } from '../listMarkdown';
 
 /**
  * Fetch all projects in the folder 'src/pages/projects'.

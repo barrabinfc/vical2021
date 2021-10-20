@@ -18,6 +18,7 @@
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 100%;
   min-height: 100%;
+  overflow: hidden;
 }
 
 .header {
@@ -31,10 +32,12 @@
 
 .main {
   display: block;
+  min-height: calc( 100vh - var(--footerH));
 }
 
 .footer {
   color: var(--text1-invert);
   background-color: var(--surface2-dark);
+  height: var(--footerH);
 }
 </style>

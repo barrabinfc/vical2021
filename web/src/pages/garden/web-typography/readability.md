@@ -29,7 +29,7 @@ and is separated by the rest of the paragraph.
 
 <div class="pad4">
 
-![widow line](./widow-example.png)
+![widow line](/images/garden/web-typography/widow-example.png)
 
 <figcaption>A widow word example</figcaption>
 
