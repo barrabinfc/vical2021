@@ -8,7 +8,7 @@ import { PlayIcon, StopIcon, Crosshair2Icon } from '@radix-ui/react-icons';
 import * as RToolbar from '@radix-ui/react-toolbar/dist/index.module';
 // import * as RTooltip from '@radix-ui/react-tooltip';
 
-import { cn } from '../../../lib/helpers';
+import { cn } from '../../lib/helpers';
 import style from './playground.module.scss';
 
 interface ToyRobotEditor {

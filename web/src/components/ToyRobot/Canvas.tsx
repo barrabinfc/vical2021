@@ -1,8 +1,8 @@
 import React, { MutableRefObject, useCallback, useEffect, useRef } from 'react';
 
-import { cn } from '../../../lib/helpers';
+import { cn } from '../../lib/helpers';
 
-import useCanvas from '../../../hooks/useCanvas';
+import useCanvas from '../../hooks/useCanvas';
 // import { useKeyPressedCallback } from '../../../hooks/useKeyPressed';
 
 import style from './playground.module.scss';

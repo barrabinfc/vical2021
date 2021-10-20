@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { HeadingLevel } from '../../@types/a11y';
 
-import { cn } from '~/lib/helpers';
+import { cn } from '../../lib/helpers';
 
 import { motion, useAnimation } from 'framer-motion';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import videojs from 'video.js';
-import { cn } from '~/lib/helpers';
+import { cn } from '../../lib/helpers';
 
 import '../../../public/styles/vjs/vjs.css';
 import './video.scss';

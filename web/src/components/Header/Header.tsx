@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navigation from '../Navigation/Navigation';
-import { cn } from '~/lib/helpers';
+import { cn } from '../../lib/helpers';
 
 import useWindowScrollPosition from '@rehooks/window-scroll-position';
 

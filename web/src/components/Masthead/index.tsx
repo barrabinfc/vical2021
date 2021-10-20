@@ -3,7 +3,7 @@ import React from 'react';
 import { avoidWidowedWords } from '../../lib/helpers';
 
 import styles from './masthead.module.scss';
-import { cn, hasReactChildren } from '~/lib/helpers';
+import { cn, hasReactChildren } from '../../lib/helpers';
 
 function InlineImage({ src, className }: { src: string; className?: string }) {
   if (src.match(/svg/)) {

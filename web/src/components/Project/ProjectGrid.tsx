@@ -1,6 +1,6 @@
 import React from 'react';
-import { cn } from '~/lib/helpers';
-import { HeadingLevel } from '~/@types/a11y';
+import { cn } from '../../lib/helpers';
+import { HeadingLevel } from '../../@types/a11y';
 
 import { Page } from '../../lib/page';
 import { motion } from 'framer-motion';

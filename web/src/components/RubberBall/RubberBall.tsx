@@ -3,7 +3,7 @@ import type { Property } from 'csstype';
 
 import { useMousePosition } from '../../hooks/useMousePosition';
 import { useHover } from '../../hooks/useHover';
-import { cn, getCSSPropertyValue } from '~/lib/helpers';
+import { cn, getCSSPropertyValue } from '../../lib/helpers';
 
 import Two from 'two.js';
 import { useCycle, useSpring, useTransform } from 'framer-motion';
