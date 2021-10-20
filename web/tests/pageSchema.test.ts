@@ -1,11 +1,11 @@
 import { test, suite } from 'uvu';
 import { expect } from 'chai';
 
-import { Page, toPage, isPage } from '../lib/page';
-import { expectPageInterface } from '../lib/page/Page.test';
-import { listMarkdown } from '../lib/listMarkdown';
+import { Page, toPage, isPage } from '../src/lib/page';
+import { expectPageInterface } from '../src/lib/page/Page.test';
+import { listMarkdown } from '../src/lib/listMarkdown';
 
-import { dirname } from 'node:path';
+import { dirname, resolve } from 'node:path';
 
 /**
  * Fetch all root pages
@@ -13,7 +13,8 @@ import { dirname } from 'node:path';
  */
 export const listRootPages = async (): Promise<Page[]> => {
   /** @ts-ignore */
-  const cwd = dirname(import.meta?.url?.pathname ?? `${__dirname}/pages`);
+  const cwd = resolve(`${__dirname}/../src/pages/`);
+  console.log(cwd);
   if (!/pages$/.test(cwd)) {
     throw new Error(`cwd() should be in pages/ folder`);
   }
