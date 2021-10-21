@@ -28,7 +28,6 @@
 }
 
 .garden-item {
-  @include h.link-text;
   text-decoration: none;
 
   padding: 0;
@@ -55,7 +54,8 @@
 
 .item-title {
   @include h.weight(var(--text-weight));
-  text-decoration: underline from-font;
+  // text-decoration: underline from-font;
+  @include h.link-text();
 
   margin-block-start: 0;
   margin-block-end: 0;
