@@ -2,39 +2,28 @@
 @use 'src/styles/breakpoints' as bp;
 @use 'src/styles/helpers' as h;
 
-.header {
-  position: relative;
-  height: var(--headerH);
-  background-color: transparent;
-  backdrop-filter: blur(0px);
-
-  transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
-}
-/** Header variants */
-:global(.header.translucent) {
-  background: rgba(255, 255, 255, 0.47);
-  backdrop-filter: blur(6px);
-  --shadow-strength: 0.02;
-  @include h.shadow();
-}
-
 @include bp.breakpoint(small, min) {
   :root {
     --headerH: 92px;
   }
 }
 
-.wrapper {
-  top: 0;
-  box-sizing: border-box;
-  margin: 0 auto;
-  padding: calc(var(--gap) * 6);
+.header {
+  position: relative;
   display: flex;
   height: var(--headerH);
+  padding: calc(4 * var(--gap));
 
+  background-color: var(--surface1-translucent);
+  @include bp.breakpoint(medium, min) {
+    padding: calc(var(--gap) * 4) 4em;
+  }
   @include bp.breakpoint(small, max) {
     padding: calc(var(--gap) * 4);
+    background-color: var(--surface1-translucent);
   }
+
+  transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .branding {
@@ -73,39 +62,23 @@ a.skipMain {
   width: 1px;
   height: 1px;
   overflow: hidden;
-  z-index: -999;
+  z-index: 1;
 }
 a.skipMain:focus {
   left: 0;
-  top: auto;
+  top: 2px;
   width: 30%;
-  height: auto;
+  height: calc(100% - 4px);
+  outline-width: 2px;
   overflow: auto;
   margin: 0 35%;
   padding: var(--gap);
 
   font-size: var(--h3);
   font-weight: bold;
-
-  outline: 3px solid inherit;
   text-align: center;
-}
-
-.toggleNavButton {
-  appearance: none;
-  cursor: pointer;
-  font-size: 25px;
-  border: none;
-  background: none;
-  margin: 0;
-  color: inherit;
-
-  & svg {
-    display: block;
-    fill: inherit;
-  }
-
-  @include bp.breakpoint(medium, min) {
-    display: none;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }

@@ -1,11 +1,39 @@
-@use "src/styles/breakpoints" as bp;
+@use 'src/styles/breakpoints' as bp;
 
 .nav {
-  display: none;
+  display: flex;
+  align-items: center;
 
-  & ul {
+  & ul[role='menu'] {
     margin: 0;
     padding: 0;
+    list-style: none;
+
+    @include bp.breakpoint(medium, max) {
+      display: block;
+      position: absolute;
+      top: var(--headerH);
+      right: 0;
+      width: 100%;
+      height: auto;
+      opacity: 1;
+
+      padding: 1rem 0;
+      color: var(--text1);
+      background-color: var(--surface1-translucent);
+
+      transition: clip-path 300ms ease;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+
+      &[hidden] {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+      }
+    }
+
+    @include bp.breakpoint(medium, min) {
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 
   & ul li a {
@@ -13,6 +41,13 @@
     color: inherit;
     text-decoration: none;
     text-transform: uppercase;
+
+    @include bp.breakpoint(medium, max) {
+      padding: 0.5rem 1.5rem;
+    }
+    @include bp.breakpoint(medium, min) {
+      padding: 0.5rem;
+    }
   }
 
   @media (hover: hover) {
@@ -21,55 +56,46 @@
       transform: translateY(-1px);
     }
   }
+}
 
-  @include bp.breakpoint(medium, max) {
-    position: absolute;
-    transform: translateX(calc(var(--gap) * 2));
-    width: calc(100% - calc(var(--gap) * 4));
-    background: var(--surface1);
-    color: var(--text1);
-    border: 1px solid var(--surface2);
-    box-shadow: var(--surface-shadow) 4px 4px 0px 0px;
-    left: 0;
-    right: 0;
-    top: 4.3rem;
-    animation: opacity var(--anim-quick) 1;
+.toggleNavButton {
+  appearance: none;
+  cursor: pointer;
+  font-size: 25px;
+  border: none;
+  background: none;
+  margin: 0;
+  color: inherit;
 
-    & ul {
-      padding: 1rem 0;
-    }
-
-    & ul li a {
-      padding: 0.5rem 1.5rem;
-    }
+  & svg {
+    display: block;
+    fill: inherit;
   }
 
   @include bp.breakpoint(medium, min) {
-    display: flex;
-    align-items: center;
-
-    & ul {
-      list-style: none;
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    & ul li a {
-      padding: 0.5rem;
-    }
+    display: none;
   }
 }
 
-@keyframes opacity {
+@keyframes slideFromTop {
   from {
+    transform: translateY(-50px) scale(1.005);
     opacity: 0;
   }
+
   to {
+    transform: translateY(0px) scale(1);
     opacity: 1;
   }
 }
 
-.showNav {
-  display: block;
-  opacity: 1;
+@keyframes growFromTop {
+  from {
+    opacity: 1;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+  }
+
+  to {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
 }
