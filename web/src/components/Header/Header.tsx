@@ -7,19 +7,19 @@ import useWindowScrollPosition from '@rehooks/window-scroll-position';
 import Icon from '../icon';
 import styles from './Header.module.scss';
 
-export default function Header() {
+export default function Header({ fixed = false }: { fixed: boolean }) {
   const [showNav, setShowNav] = useState(false);
   const handleShowNav = () => setShowNav(true);
   const handleHideNav = () => setShowNav(false);
 
   let headerVariant = [];
-  if (!import.meta.env.SSR) {
+  if (fixed && !import.meta.env.SSR) {
     const position = useWindowScrollPosition({ throttle: 100 });
-    headerVariant = (position.y >= 32 && ['header', 'translucent']) || [];
+    headerVariant = (position.y >= 32 && ['translucent']) || [];
   }
 
   return (
-    <div className={cn(styles.header, ...headerVariant)}>
+    <div className={cn(styles.header, 'header', ...headerVariant)}>
       <div className={styles.wrapper}>
         <a className={styles.skipMain} href="#main">
           Skip to main content
