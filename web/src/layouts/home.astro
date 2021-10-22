@@ -9,7 +9,8 @@ import BaseLayout from './base.astro';
 import {listProjects} from '../lib/projects';
 import {listGarden} from '../lib/garden';
 
-import Picture from '../components/Picture/index';
+import LazyMotion from '../components/LazyMotion/LazyMotion.tsx';
+import Picture from '../components/Picture/Picture.tsx';
 import ProjectGrid from '../components/Project/ProjectGrid.tsx';
 import GardenList, {GardenListVariant} from '../components/Garden/GardenList.tsx';
 
@@ -62,36 +63,36 @@ function applyPostProcess( page:Page ) {
 
 <BaseLayout {page}>
   <div id="content">
-    <section class="home" aria-labelledby="welcome">
-      <div class="home-grid">
-        <div class="item highlight pad4">
-          {page.content.html['spotlight']}
-          {page.content.html['title']}
-          {page.content.html['subtitle']}
+      <section class="home" aria-labelledby="welcome">
+        <div class="home-grid">
+          <div class="item highlight pad4">
+            {page.content.html['spotlight']}
+            {page.content.html['title']}
+            {page.content.html['subtitle']}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="projects">
-      <h2 class="title1 pad4-y">What i've worked on</h2>
-      <ProjectGrid
-        TitleHeadingLevel={HeadingLevel.h3}
-        projects={projects}
-        client:idle />
-      <div class="pad4"/>
-    </section>
+      <section class="projects">
+        <h2 class="title1 pad4-y">What i've worked on</h2>
+        <ProjectGrid
+          TitleHeadingLevel={HeadingLevel.h3}
+          projects={projects}
+          client:idle />
+        <div class="pad4"/>
+      </section>
 
-    <section class="digital-garden">
-      <h2 class="title1 pad4-y">
-        <Picture src="/pictures/spectabrite6.png" height="76px" />
-       Digital Garden
-      </h2>
-      <GardenList
-        items={gardenItems}
-        TitleHeadingLevel={HeadingLevel.h3}
-        variant={GardenListVariant.WITH_SUBTITLE} />
-      <div class="pad4"/>
-    </section>
+      <section class="digital-garden">
+        <h2 class="title1 pad4-y">
+          <Picture src="/pictures/spectabrite6.png" height="76px" />
+        Digital Garden
+        </h2>
+        <GardenList
+          items={gardenItems}
+          TitleHeadingLevel={HeadingLevel.h3}
+          variant={GardenListVariant.WITH_SUBTITLE} />
+        <div class="pad4"/>
+      </section>
     <!-- <RubberBall client:media={'(min-width: 426px), (prefers-reduced-motion: reduce)'} /> -->
   </div>
 </BaseLayout>

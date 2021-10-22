@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+
 import { useInView } from 'react-intersection-observer';
-import { motion, useAnimation } from 'framer-motion';
+import { m, useAnimation } from 'framer-motion';
+import { LazyMotion, domAnimation } from 'framer-motion';
 
 import { openSpring, closeSpring } from '../../lib/animations';
 
@@ -23,7 +25,7 @@ export default function AppearWhenVisible({
   }, [controls, inView]);
 
   return (
-    <motion.div
+    <m.div
       className={className}
       ref={ref}
       animate={controls}
@@ -35,6 +37,6 @@ export default function AppearWhenVisible({
       }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
