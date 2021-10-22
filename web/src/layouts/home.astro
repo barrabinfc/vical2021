@@ -9,6 +9,7 @@ import BaseLayout from './base.astro';
 import {listProjects} from '../lib/projects';
 import {listGarden} from '../lib/garden';
 
+import Picture from '../components/Picture/index';
 import ProjectGrid from '../components/Project/ProjectGrid.tsx';
 import GardenList, {GardenListVariant} from '../components/Garden/GardenList.tsx';
 
@@ -82,7 +83,7 @@ function applyPostProcess( page:Page ) {
 
     <section class="digital-garden">
       <h2 class="title1 pad4-y">
-        <img src="/pictures/spectabrite6.png" height="76px" />
+        <Picture src="/pictures/spectabrite6.png" height="76px" />
        Digital Garden
       </h2>
       <GardenList
@@ -165,7 +166,9 @@ $fold: 80vh;
     isolation: isolate;
     content: ' ';
     // background: url('/pictures/Dieffenbachia robusta.png') no-repeat;
-    background: url('/pictures/Philodentrum.png') no-repeat;
+    background-repeat: no-repeat;
+    background-image: url('/pictures/Philodentrum.webp');
+    background-image: -webkit-image-set(url('/pictures/Philodentrum.png'));
     background-position: center bottom;
 
     @include bp.breakpoint(medium, min) {
