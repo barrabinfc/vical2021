@@ -26,7 +26,7 @@ export const GardenList = ({
 }: GardenListProps) => {
   return (
     <ul className={cn(style['garden-list'])}>
-      {items.map(garden => (
+      {items.map((garden) => (
         <li className={cn(garden.slug, 'list-item')} key={garden.slug}>
           <a href={garden.url.pathname} className={cn(style['garden-item'])}>
             <TitleHeadingLevel className={cn('title4', style['item-title'])}>

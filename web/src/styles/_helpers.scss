@@ -27,38 +27,96 @@
 }
 
 @mixin straightSquiggle() {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 269 7' fill='currentColor' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.09086 1.12038L3.09077 1.1204L3.09068 1.12042L3.08736 1.12111L3.0716 1.12449C3.05721 1.12763 3.0354 1.1325 3.00764 1.13904C2.95193 1.15215 2.87319 1.17176 2.78288 1.19732C2.59619 1.25016 2.3846 1.32164 2.22442 1.40368C2.04582 1.49516 1.83146 1.63006 1.671 1.77278C1.59084 1.84407 1.53826 1.90491 1.50901 1.95031C1.50074 1.96316 1.49574 1.97254 1.49284 1.97863C1.5023 2.12057 1.58909 2.66124 1.95575 3.24592C2.33031 3.84321 3.00126 4.49464 4.21749 4.80996L4.2175 4.80993L4.22228 4.81122C4.22228 4.81121 4.22709 4.81244 4.23829 4.81458C4.25023 4.81687 4.26648 4.81964 4.28769 4.82279C4.33037 4.82912 4.38673 4.83604 4.45812 4.84336C4.60086 4.858 4.79182 4.87306 5.03178 4.88837C5.51112 4.91895 6.17151 4.94961 7.00393 4.9802C8.66795 5.04136 11.0069 5.10179 13.9334 5.16105C19.7857 5.27956 27.9791 5.39321 37.8036 5.49867C57.4522 5.70959 83.6198 5.88771 110.619 6.00646C164.624 6.24398 221.938 6.24386 237.077 5.79417L237.078 5.79416C245.772 5.54432 251.721 5.19436 255.5 4.85476C257.12 4.70916 258.335 4.56599 259.194 4.43449C258.945 4.39148 258.677 4.34914 258.399 4.30811C257.045 4.10796 255.507 3.94688 254.815 3.89366C253.41 3.78559 239.666 2.9686 234.858 2.96866L234.85 2.96853L217.776 2.69392L217.775 2.69389L217.769 2.69385L217.741 2.69361L217.627 2.69264L217.181 2.68882L215.439 2.67392L208.823 2.61735L185.189 2.41544C165.619 2.24835 139.496 2.02556 113.287 1.80276C60.867 1.35716 8.11062 0.911611 6.74087 0.911611C5.38137 0.911611 4.45938 0.965803 3.88238 1.01892C3.59395 1.04547 3.39202 1.07172 3.26498 1.09073C3.20147 1.10024 3.15672 1.10792 3.12929 1.11293L3.10095 1.1183L3.09753 1.11899L3.09754 1.11902L3.09114 1.12032L3.09106 1.12034L3.09094 1.12036L3.09086 1.12038Z' fill='currentColor' stroke='currentColor' /%3E%3C/svg%3E");
+  // background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 269 7' fill='currentColor' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.09086 1.12038L3.09077 1.1204L3.09068 1.12042L3.08736 1.12111L3.0716 1.12449C3.05721 1.12763 3.0354 1.1325 3.00764 1.13904C2.95193 1.15215 2.87319 1.17176 2.78288 1.19732C2.59619 1.25016 2.3846 1.32164 2.22442 1.40368C2.04582 1.49516 1.83146 1.63006 1.671 1.77278C1.59084 1.84407 1.53826 1.90491 1.50901 1.95031C1.50074 1.96316 1.49574 1.97254 1.49284 1.97863C1.5023 2.12057 1.58909 2.66124 1.95575 3.24592C2.33031 3.84321 3.00126 4.49464 4.21749 4.80996L4.2175 4.80993L4.22228 4.81122C4.22228 4.81121 4.22709 4.81244 4.23829 4.81458C4.25023 4.81687 4.26648 4.81964 4.28769 4.82279C4.33037 4.82912 4.38673 4.83604 4.45812 4.84336C4.60086 4.858 4.79182 4.87306 5.03178 4.88837C5.51112 4.91895 6.17151 4.94961 7.00393 4.9802C8.66795 5.04136 11.0069 5.10179 13.9334 5.16105C19.7857 5.27956 27.9791 5.39321 37.8036 5.49867C57.4522 5.70959 83.6198 5.88771 110.619 6.00646C164.624 6.24398 221.938 6.24386 237.077 5.79417L237.078 5.79416C245.772 5.54432 251.721 5.19436 255.5 4.85476C257.12 4.70916 258.335 4.56599 259.194 4.43449C258.945 4.39148 258.677 4.34914 258.399 4.30811C257.045 4.10796 255.507 3.94688 254.815 3.89366C253.41 3.78559 239.666 2.9686 234.858 2.96866L234.85 2.96853L217.776 2.69392L217.775 2.69389L217.769 2.69385L217.741 2.69361L217.627 2.69264L217.181 2.68882L215.439 2.67392L208.823 2.61735L185.189 2.41544C165.619 2.24835 139.496 2.02556 113.287 1.80276C60.867 1.35716 8.11062 0.911611 6.74087 0.911611C5.38137 0.911611 4.45938 0.965803 3.88238 1.01892C3.59395 1.04547 3.39202 1.07172 3.26498 1.09073C3.20147 1.10024 3.15672 1.10792 3.12929 1.11293L3.10095 1.1183L3.09753 1.11899L3.09754 1.11902L3.09114 1.12032L3.09106 1.12034L3.09094 1.12036L3.09086 1.12038Z' fill='currentColor' stroke='currentColor' /%3E%3C/svg%3E");
+  background-image: url('/images/straight-squiggle2.svg');
+  background-repeat: repeat-x;
+  background-size: contain;
 }
 
 /** Links */
 @mixin link-text {
   position: relative;
   padding: 0 var(--gap) 0 var(--gap);
-  margin-bottom: 0.25em;
+  margin-bottom: 0.3em;
 
   color: var(--text2);
   text-decoration: none;
-  // text-decoration: underline;
-  // text-decoration-thickness: from-font;
 
-  transition: color 0.078s ease-in-out;
-
+  transition: color 0.178s ease-in-out;
+  box-decoration-break: clone;
   &::after {
     position: absolute;
+    box-decoration-break: clone;
     content: ' ';
-    bottom: 0;
+    bottom: -2px;
     left: 0;
     width: 100%;
-    height: -webkit-fill-available;
-    max-height: 4px;
-    min-height: 2px;
+    // height: -webkit-fill-available;
+    height: 4px;
     @include straightSquiggle();
-    background-repeat: no-repeat;
-    background-size: cover;
   }
 
   &:hover {
     color: var(--brand);
-    transform: translateY(-1px);
+  }
+}
+
+@mixin link-mark {
+  position: relative;
+  padding: 0 var(--gap) 0 var(--gap);
+  margin-bottom: 0.3em;
+  z-index: 1;
+
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: bold;
+
+  transition: color 0.178s ease-in-out;
+  background: transparent;
+
+  box-decoration-break: clone;
+
+  // &::after {
+  //   position: absolute;
+  //   background: transparent;
+  //   box-decoration-break: clone;
+  //   content: ' ';
+  //   bottom: -4px;
+  //   left: 0;
+  //   width: 100%;
+  //   // height: -webkit-fill-available;
+  //   height: 4px;
+  //   @include straightSquiggle();
+  //   // z-index: -1;
+  // }
+
+  &::after {
+    position: absolute;
+    content: ' ';
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.8em 0.3em;
+    background: transparent;
+    background-image: linear-gradient(
+      to left,
+      hsla(var(--brand-hue), var(--brand-saturation), var(--brand-lightness), 0.1),
+      hsla(var(--brand-hue), var(--brand-saturation), var(--brand-lightness), 0.7) 10%,
+      hsla(var(--brand-hue), var(--brand-saturation), var(--brand-lightness), 0.3)
+    );
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+
+    transition: clip-path 0.173s ease-out;
+    clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+    z-index: -1;
+  }
+
+  &:hover {
+    color: black;
+    &::after {
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
   }
 }

@@ -37,9 +37,7 @@ The app scores above **90/100** in lighthouse[^2] performance benchmarks. 👌
 
 </div>
 
----
-
-<div class="gallery grid2 justifyCenter">
+<div class="gallery grid2 justifyCenter full-bleed surface3" style="padding: 2em 0;">
   <div class="page h50">
     <div class="mockup">
       <div is="iphoneMockup">
@@ -55,8 +53,6 @@ The app scores above **90/100** in lighthouse[^2] performance benchmarks. 👌
     </div>
   </div>
 </div>
-
----
 
 ### Lessons Learned
 

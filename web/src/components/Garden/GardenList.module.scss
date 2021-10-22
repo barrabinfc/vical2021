@@ -1,6 +1,6 @@
-@use "sass:math";
-@use "src/styles/helpers" as h;
-@use "src/styles/breakpoints" as bp;
+@use 'sass:math';
+@use 'src/styles/helpers' as h;
+@use 'src/styles/breakpoints' as bp;
 
 .garden-list {
   list-style: none;
@@ -21,7 +21,6 @@
     &:hover,
     &:focus-within {
       color: var(--brand);
-      transform: translateY(-1px);
       text-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
     }
   }
@@ -54,16 +53,15 @@
 
 .item-title {
   @include h.weight(var(--text-weight));
-  // text-decoration: underline from-font;
   @include h.link-text();
 
   margin-block-start: 0;
   margin-block-end: 0;
   margin-right: auto;
 
-  @include bp.breakpoint(medium, min) {
-    flex: 1 1 50%;
-  }
+  // @include bp.breakpoint(medium, min) {
+  //   flex: 1 1 50%;
+  // }
   @include bp.breakpoint(medium, max) {
     flex: 1 1 100%;
   }
@@ -104,6 +102,8 @@
 .item-subtitle {
   flex: 1 1 100%;
   margin: 0;
+
+  color: initial;
 }
 
 :global(.tags-container) {

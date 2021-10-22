@@ -22,7 +22,7 @@ export default function Navigation() {
 
       <ul role="menu" hidden={!showNav}>
         <li role="menuitem">
-          <a href="/about">About</a>
+          <a href="/about">about</a>
         </li>
         <li role="menuitem">
           <a href="/projects">projects</a>

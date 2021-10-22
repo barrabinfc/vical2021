@@ -43,24 +43,9 @@
     & a {
       display: block;
       width: fit-content;
-      position: relative;
-      color: inherit;
-      text-decoration: none;
-      text-transform: uppercase;
 
-      &::after {
-        position: absolute;
-        color: currentColor;
-        fill: currentColor;
-        content: ' ';
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        @include h.straightSquiggle();
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
+      @include h.link-mark();
+      padding: 0 0.5em;
     }
 
     @include bp.breakpoint(medium, max) {
@@ -72,7 +57,6 @@
 
     &:hover {
       color: var(--brand);
-      transform: translateY(-1px);
     }
   }
 }
