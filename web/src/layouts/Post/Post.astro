@@ -10,26 +10,34 @@ import {cn,toReadableDateString, toDMYDateString, emojifyStatus} from '../../lib
 
 import {buildHTMLTransformerFn } from '../../lib/html';
 import transformFootnoteLinksInNewPage from '../../lib/html/transformers/footnotesLinksInNewPage';
-import transformEscapeBracketLeft from '../../lib/html/transformers/astroCode.js';
+import transformEscapeBracketLeft from '../../lib/html/transformers/astroCode.ts';
+
+// console.log("Astro", Astro);
+// console.log('Astro.props.content.astro', Astro.props.content.astro);
+
+const debug = (page) => {
+  console.log('This Page => ', page.layout);
+  return page;
+}
 
 let page: Page = await runPageTransforms();
 
 async function runPageTransforms(){
   return await Promise.resolve(Astro.props.content)
             .then(concatenateMetadata)
+            .then(debug)
             .then(toPage)
             .then(applyPostProcess)
 }
 
-function concatenateMetadata( astroMarkdownPage:AstroPage ) {
+function concatenateMetadata( astroPage:AstroPage ) {
   /** @ts-ignore */
-  const abspath = import.meta.url.pathname;
-  const astroContext = Astro.props[AstroContextSymbol];
+  const abspath = Astro.request.url.pathname
 
   return {
     layout: abspath,
-    ...astroMarkdownPage,
-    [AstroContextSymbol]: astroContext
+    url: Astro.request.url,
+    ...astroPage,
   }
 }
 
@@ -43,6 +51,7 @@ function resolveRelativeToCwd( path: string ) {
 async function applyPostProcess( page: Page ) {
   /** Relative images */
   const transformRelativeImagePath = buildHTMLTransformerFn( 'img[src^="./"]',  (el,ctx) => {
+    // console.log('element prototype', el.__prototype__)
     const targetPath = dirname(page.abspath);
     const relativeTargetPath = resolveRelativeToCwd( targetPath );
     const src = el.attr('src');

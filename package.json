@@ -9,7 +9,7 @@
       "apollo"
     ],
     "nohoist": [
-      "web/esbuild-register"
+      "**/esbuild-register"
     ]
   },
   "scripts": {

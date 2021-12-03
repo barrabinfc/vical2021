@@ -5,7 +5,7 @@ import { cn } from '../../lib/helpers';
 
 import { motion, useAnimation } from 'framer-motion';
 
-import styles from './Card.module.css';
+import styles from './Card.module.scss';
 import { useInView } from 'react-intersection-observer';
 
 import { openSpring, closeSpring } from '../../lib/animations';

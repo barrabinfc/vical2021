@@ -1,14 +1,6 @@
 export default function ThumbIcon() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="29"
-      height="35"
-      viewBox="-5 -5 29 35"
-      id="Login"
-      x="758"
-      y="806"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="35" viewBox="-5 -5 29 35" id="Login" x="758" y="806">
       <title>Login</title>
       <defs>
         <path id="aya" d="M.562 24.392h17.999v-24H.562z" />

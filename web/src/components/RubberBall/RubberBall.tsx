@@ -29,6 +29,7 @@ function RubberBallStaticDOM({
   ref: React.MutableRefObject<HTMLDivElement>;
   blendMode: RubberBallProps['blendMode'];
 }) {
+  console.log('RubberlBallStaticDom');
   return (
     <div
       ref={ref}
@@ -45,6 +46,7 @@ function RubberBallStaticDOM({
  * https://two.js.org/examples/rubber-ball.html
  */
 export default function RubberBall(props: RubberBallProps = defaultRubberBallProps) {
+  console.log('RubberBall!');
   const stage = useRef<HTMLDivElement>();
   props = { ...props, ...defaultRubberBallProps };
 
@@ -86,23 +88,17 @@ export default function RubberBall(props: RubberBallProps = defaultRubberBallPro
    * Avoid quickly toggling the blend-modes, cancelling transition when hovering adjacent links
    * Delay a little bit until spring crossed the 0 edge to toggle the blend-mode
    */
-  var hoverDirection = useTransform(
-    hoverSpring,
-    [0,1],
-    [-1,1]
-  )
-
-
+  var hoverDirection = useTransform(hoverSpring, [0, 1], [-1, 1]);
 
   function update() {
     mouse.x = mousePosition.current.x;
     mouse.y = mousePosition.current.y;
 
     /** Hovered over a link, change ball style */
-    hoverSpring.set((hoveredLink.current ? 1.0 : 0.0));
+    hoverSpring.set(hoveredLink.current ? 1.0 : 0.0);
     ball.fill = ballColorSpring.get();
     ball.scale = ballScaleSpring.get();
-    stage.current.style.mixBlendMode = (hoverDirection.get() < 0 ? 'exclusion' : 'luminosity');
+    stage.current.style.mixBlendMode = hoverDirection.get() < 0 ? 'exclusion' : 'luminosity';
 
     delta.copy(mouse).subSelf(ball.translation);
     ball.vertices.forEach((v, i) => {
@@ -130,7 +126,7 @@ export default function RubberBall(props: RubberBallProps = defaultRubberBallPro
 
     ball = two.makeCircle(two.width / 2, two.height / 2, radius, 32);
     ball.noStroke().fill = ballHoverVariants['out'].color;
-    ball.vertices.forEach(v => {
+    ball.vertices.forEach((v) => {
       v.origin = new Two.Vector().copy(v);
     });
 

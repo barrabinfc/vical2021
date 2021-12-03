@@ -1,10 +1,10 @@
-import { resolve, relative } from 'node:path';
+import { resolve, relative } from 'path';
 import { Page, toPage } from '../page';
-import { listMarkdown } from '../listMarkdown';
 
 /**
  * Fetch all garden posts in the folder 'src/pages/garden'.
  * @return {Page[]}
+ * @deprecated
  */
 export const listGarden = async (): Promise<Page[]> => {
   /** @ts-ignore */

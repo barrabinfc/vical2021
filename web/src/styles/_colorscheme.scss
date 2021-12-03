@@ -3,7 +3,11 @@
   --brand-saturation: 96%;
   --brand-lightness: 63%;
 
-  --nice: hsl(21 96% 90%);
+  --nice-hue: 21;
+  --nice-saturation: 96%;
+  --nice-lightness: 90%;
+  --nice: hsl(var(--nice-hue) var(--nice-saturation) var(--nice-lightness));
+
   /* light hsl(15 96% 83%) */
   --brand-light: hsl(var(--brand-hue) var(--brand-saturation) var(--brand-lightness));
   --brand2-light: hsl(153 33% 32%);

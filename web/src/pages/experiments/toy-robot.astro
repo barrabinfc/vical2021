@@ -1,14 +1,13 @@
 ---
-import {toPage, AstroContextSymbol} from '../../lib/page/Page.ts'
-import {pagePathToUrl} from '../../lib/page/pagePathToUrl.js'
+import {toPage} from '../../lib/page/Page.ts'
+import {pagePathToUrl} from '../../lib/page/pagePathToUrl'
 
 import { Markdown } from 'astro/components';
 import MinimalLayout from '../../layouts/minimal.astro';
 
 import RobotPlayground from '../../components/ToyRobot/Playground.tsx';
 
-/** @ts-ignore */
-const abspath = import.meta.url.pathname;
+const abspath = Astro.request.url.pathname;
 
 const page = toPage({
   name: 'toy-robot',
@@ -41,7 +40,7 @@ MOVE`,
 ---
 <MinimalLayout page={page} className='wrapper'>
 
-  <Markdown>
+<Markdown>
   # Toy Robot
 
   The Toy Robot exercise was originally developed by Jon Eaves.
@@ -50,14 +49,11 @@ MOVE`,
   The Toy Robot exercise is commonly used in interviews as the ways to solve it in any language are not as simple as they first may seem.
   This is **my personal implementation** in typescript.
 
-  </Markdown>
+</Markdown>
 
-  <RobotPlayground client:idle
-    dimensions={[10,10]}
-    code={page.content.robotCommands} />
+  <RobotPlayground client:load code={page.content.robotCommands} />
 
-  <Markdown>
-
+<Markdown>
 #### The Toy What Now?
 The Toy Robot! It's a very common interview exercise given to new programmers.
 

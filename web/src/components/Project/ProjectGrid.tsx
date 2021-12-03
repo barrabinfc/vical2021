@@ -16,11 +16,14 @@ export interface ProjectListProps {
 }
 
 export default function ProjectList({ projects, TitleHeadingLevel = HeadingLevel.h2 }: ProjectListProps) {
+  console.log('ProjectList');
+
   return (
     <div className={cn(style['project-grid'])}>
       <LazyMotion>
         {projects.map((project, i) => (
-          <AppearWhenVisible key={project.slug} className="item" delay={i / 10}>
+          // <AppearWhenVisible key={project.slug} className="item" delay={i / 10}>
+          <div key={project.slug} className="item">
             <Card
               key={project.slug}
               delay={i / 5}
@@ -34,7 +37,8 @@ export default function ProjectList({ projects, TitleHeadingLevel = HeadingLevel
               className={`item ${project.slug}`}
               loading="lazy"
             />
-          </AppearWhenVisible>
+          </div>
+          // </AppearWhenVisible>
         ))}
       </LazyMotion>
     </div>

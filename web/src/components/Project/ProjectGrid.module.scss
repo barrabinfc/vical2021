@@ -1,6 +1,6 @@
-@use "sass:math";
-@use "src/styles/breakpoints" as bp;
-@use "src/styles/grids" as grids;
+@use 'sass:math';
+@use 'src/styles/breakpoints' as bp;
+@use 'src/styles/grids' as grids;
 
 .project-grid {
   $columns: 3;

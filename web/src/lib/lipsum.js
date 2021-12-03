@@ -1,4 +1,4 @@
-import { loremIpsum } from "react-lorem-ipsum";
+import { loremIpsum } from 'react-lorem-ipsum';
 
 export const lipsum = (paragraphs = 6, avgSentencesPerParagraph = 4) => {
   return loremIpsum({

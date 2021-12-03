@@ -1,10 +1,9 @@
 ---
-/**
- * Project layout base class.
- * It can be inherited and customized via slots
- * @see {Project2Column.astro}
- */
-import {AstroContextSymbol, toPage, Page, isPage, AstroPage} from '../../lib/page/Page'
+
+// Project layout base class.
+// It can be inherited and customized via slots
+
+import {toPage, Page, isPage, AstroPage} from '../../lib/page/Page'
 import BaseLayout from '../../layouts/base.astro';
 import Masthead from '../../components/Masthead';
 
@@ -20,7 +19,8 @@ async function runPageTransforms() {
 }
 
 function readPageData() {
-  if(isPage(Astro.props.content)){
+  const inheritedPage = isPage(Astro.props.content);
+  if(inheritedPage){
     return Promise.resolve(Astro.props.content)
   } else {
     return Promise.resolve(Astro.props.content)
@@ -29,15 +29,11 @@ function readPageData() {
   }
 }
 
-function concatenateMetadata( astroMarkdownPage: AstroPage ) {
-  /** @ts-ignore */
-  const abspath = import.meta.url.pathname;
-  const astroContext = Astro.props[AstroContextSymbol];
-
+function concatenateMetadata( astroPage: AstroPage ) {
   return {
-    layout: abspath,
-    ...astroMarkdownPage,
-    [AstroContextSymbol]: astroContext
+    layout: Astro.request.url.pathname,
+    url: Astro.request.url,
+    ...astroPage,
   }
 }
 
@@ -48,7 +44,7 @@ function applyPostProcess( page: Page ) {
 ---
 
 <BaseLayout {page}>
-  <script type="text/javascript" src="https://unpkg.com/external-svg-loader@latest/svg-loader.min.js" async></script>
+  <!-- <script type="text/javascript" src="https://unpkg.com/external-svg-loader@latest/svg-loader.min.js" async></script> -->
   <article id="content" project-slug={page.slug.toLowerCase()}>
     <link rel="stylesheet" href="/styles/browser.min.css" />
 

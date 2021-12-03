@@ -42,7 +42,7 @@
   & ul li {
     & a {
       display: block;
-      width: fit-content;
+      width: max-content;
 
       @include h.link-mark();
       padding: 0 0.5em;

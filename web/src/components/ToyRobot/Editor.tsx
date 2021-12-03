@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import SimpleCodeEditor from 'react-simple-code-editor';
+import reactSimpleCodeEditor from 'react-simple-code-editor';
 import debounce from 'lodash.debounce';
 
 import { IdProvider } from '@radix-ui/react-id';
 import { PlayIcon, StopIcon, Crosshair2Icon } from '@radix-ui/react-icons';
 
-import * as RToolbar from '@radix-ui/react-toolbar/dist/index.module';
+import * as RToolbar from '@radix-ui/react-toolbar';
 // import * as RTooltip from '@radix-ui/react-tooltip';
 
 import { cn } from '../../lib/helpers';
@@ -85,19 +85,26 @@ export const Editor = ({
   }, []);
 
   return (
-    <SimpleCodeEditor
-      className={cn(style.editorCode)}
-      value={localCommands}
-      onValueChange={updateCommands}
-      highlight={(code) => code}
-      padding={10}
-      style={{
-        height: '100%',
-        fontFamily: '"Fira code", "Fira Mono", monospace',
-        fontSize: 12
-      }}
-    />
+    <pre className={cn(style.editorCode)}>
+      <code dangerouslySetInnerHTML={{ __html: localCommands.split('\n').join('<br>') }}></code>
+    </pre>
   );
+  // return (
+  // return (
+  //   <reactSimpleCodeEditor.default
+  //     className={cn(style.editorCode)}
+  //     value={localCommands}
+  //     onValueChange={updateCommands}
+  //     highlight={(code) => code}
+  //     padding={10}
+  //     style={{
+  //       height: '100%',
+  //       fontFamily: '"Fira code", "Fira Mono", monospace',
+  //       fontSize: 12
+  //     }}
+  //   />
+  // );
+  // );
 };
 
 export const ToyRobotEditor = (props: ToyRobotEditor) => {

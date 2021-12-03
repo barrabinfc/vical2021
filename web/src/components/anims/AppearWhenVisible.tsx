@@ -9,12 +9,13 @@ import { openSpring, closeSpring } from '../../lib/animations';
 export default function AppearWhenVisible({
   className,
   children,
-  delay
+  delay,
+  ...props
 }: {
   className?: string;
   children: React.ReactElement | React.ReactElement[];
   delay?: number;
-}) {
+}): JSX.Element {
   const controls = useAnimation();
   const [ref, inView] = useInView();
 
@@ -35,6 +36,7 @@ export default function AppearWhenVisible({
         visible: { opacity: 1, y: 0, scale: 1.0, transition: { delay }, ...openSpring },
         hidden: { opacity: 0, y: 100, scale: 1.1, ...closeSpring }
       }}
+      // {...props}
     >
       {children}
     </m.div>

@@ -1,14 +1,14 @@
 import { test } from 'uvu';
 import { expect } from 'chai';
 
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 
 import { pagePathToUrl } from './pagePathToUrl';
 
 /** Get the absolute path of pages by reading astroConfig */
 const vicalPackage = readFileSync(resolve('package.json'), 'utf8');
-const astroConfig = JSON.parse(vicalPackage || '{}')._astroConfig;
+const astroConfig = JSON.parse(vicalPackage || '{}').astroConfig;
 export const abspathOfPages = resolve(astroConfig.pages);
 
 const abspathFixtures = [

@@ -2,17 +2,13 @@
 import {resolve, relative, dirname } from 'node:path'
 import {readFileSync} from 'node:fs';
 
-import {AstroContextSymbol, toPage} from '../../lib/page/Page'
+import {toPage} from '../../lib/page/Page'
 import Project from './Project.astro'
 
-/** @ts-ignore */
-const abspath = import.meta.url.pathname;
-const astroContext = Astro.props[AstroContextSymbol];
-
 const page = toPage({
-  layout: abspath,
-  ...Astro.props.content,
-  [AstroContextSymbol]: astroContext
+    layout: Astro.request.url.pathname,
+    url: Astro.request.url,
+    ...Astro.props.content,
 });
 
 let contentHtml = page.content.content;
@@ -22,9 +18,6 @@ const galleryAddress = page.content.gallery;
 let galleryHTML = `<pre>File ${galleryAddress} Not found</pre>`
 if(galleryAddress) {
   const galleryAddressFullPath = resolve(`${process.cwd()}/${galleryAddress}`);
-  /** @ts-ignore */
-  const galleryAddressRelativePath = relative(dirname(import.meta.url.pathname), galleryAddressFullPath );
-
   galleryHTML = readFileSync(galleryAddressFullPath).toString();
 }
 ---

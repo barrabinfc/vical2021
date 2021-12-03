@@ -1,8 +1,8 @@
 /**
  * Convert a absolute path to a URL route
  */
-import { resolve, dirname, relative, basename } from 'node:path';
-import { readFileSync } from 'node:fs';
+import { resolve, dirname, relative, basename } from 'path';
+import { readFileSync } from 'fs';
 
 /**
  * Read astro config.
@@ -10,7 +10,7 @@ import { readFileSync } from 'node:fs';
  * we read the config at runtime( as opposed to a simple ES 'import' ).
  */
 const vicalPackage = readFileSync(resolve('package.json'), 'utf8');
-const astroConfig = JSON.parse(vicalPackage || '{}')._astroConfig;
+const astroConfig = JSON.parse(vicalPackage || '{}').astroConfig;
 export const abspathOfPages = resolve(astroConfig.pages);
 
 /**
@@ -35,6 +35,10 @@ export const pagePathToUrl = (filepath: string): URL => {
  * Given a url, retrieve the absolute path to the file
  */
 export const urlToPagePath = (url: URL): string => {
-  const urlPathname = (url.pathname.endsWith('/') && url.pathname.slice(0, -1) + '/index') || url.pathname;
-  return `${abspathOfPages}${urlPathname + '.md'}`;
+  if (url.protocol === 'file:') {
+    return url.pathname;
+  } else {
+    const urlPathname = (url.pathname.endsWith('/') && url.pathname.slice(0, -1) + '/index') || url.pathname;
+    return `${abspathOfPages}${urlPathname}.md`;
+  }
 };

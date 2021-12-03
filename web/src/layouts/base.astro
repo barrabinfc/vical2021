@@ -8,8 +8,6 @@ import SEO from '../components/seo';
 import Header from '../components/Header/Header.tsx';
 import Footer from '../components/Footer/Footer.jsx';
 
-// import SettingsPanel from '../components/Settings/SettingsPanel.tsx';
-
 const page:Page = Astro.props.page;
 let seo = page.schema && {
   schema: page.schema,
@@ -28,7 +26,11 @@ let seo = page.schema && {
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{page.content?.title}</title>
-    <link rel="stylesheet" href={Astro.resolve('../styles/global.css')} />
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
+    </style>
+    <link rel="stylesheet" href={Astro.resolve('../styles/global.scss')} />
 
     <link rel="shortcut icon" href="/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
@@ -50,18 +52,11 @@ let seo = page.schema && {
   <body data-layout="base">
 
     <div class="root">
-      <main class="container">
-        <Layout>
-
-          <Header slot="header" client:idle />
-          <div class="container-wrapper">
-            <slot />
-            <!-- <SettingsPanel client:idle /> -->
-          </div>
-
-          <Footer slot="footer" />
-        </Layout >
-      </main>
+      <Layout>
+        <Header slot="header" client:idle />
+        <slot />
+        <Footer slot="footer" />
+      </Layout >
     </div>
 
   </body>

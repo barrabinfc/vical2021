@@ -1,7 +1,7 @@
 /**
  * Aliases
  */
-require('module-alias/register');
+// require('module-alias/register');
 
 /**
  * Register css modules in UVU test runner

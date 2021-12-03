@@ -1,5 +1,5 @@
 import React from 'react';
-import {SEOItem} from '../types';
+import { SEOItem } from '../types';
 
 import OGBasic from './basic';
 
@@ -7,5 +7,5 @@ import OGBasic from './basic';
  * Renders open graph / facebook article
  */
 export default function Article(props: SEOItem) {
-  return <OGBasic {...props} schema='article' />
+  return <OGBasic {...props} schema="article" />;
 }

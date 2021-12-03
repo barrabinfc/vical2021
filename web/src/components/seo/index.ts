@@ -1,5 +1,5 @@
 import { SEOItem, SEOModules, SEOSchema } from './types';
-export type {SEOItem, SEOModules, SEOSchema}
+export type { SEOItem, SEOModules, SEOSchema };
 
 import createDebug from 'debug';
 import { errorId } from '../../lib/helpers';
@@ -55,7 +55,7 @@ function getSEOSchemaModule(moduleName: SEOModules, schemaName: SEOSchema): Rend
  * @param {SEOProps} props The page to be described
  * @returns {JSX.Element}
  */
-export default function SEO( props: SEOItem & { module: SEOModules } ) {
+export default function SEO(props: SEOItem & { module: SEOModules }) {
   const seoRenderFn = getSEOSchemaModule(props.module, props.schema.toLowerCase() as SEOSchema);
   return seoRenderFn(props);
 }

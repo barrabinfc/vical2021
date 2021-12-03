@@ -4,7 +4,7 @@ import { cn } from '../../lib/helpers';
 import styles from './Navigation.module.scss';
 import Icon from '../icon';
 
-export default function Navigation() {
+export function Navigation() {
   const [showNav, setShowNav] = useState(false);
   const handleShowNav = () => setShowNav(true);
   const handleHideNav = () => setShowNav(false);
@@ -31,3 +31,5 @@ export default function Navigation() {
     </nav>
   );
 }
+
+export default Navigation;

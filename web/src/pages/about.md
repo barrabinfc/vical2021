@@ -2,7 +2,7 @@
 schema: basic
 status: in progress
 published: true
-layout: ../layouts/Post/Post.astro
+layout: ../layouts/minimal.astro
 
 title: About
 subtitle: I write software for the web plataform
