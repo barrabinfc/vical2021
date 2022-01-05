@@ -1,7 +1,7 @@
 ---
 
 // Project layout base class.
-// It can be inherited and customized via slots
+// It can be inherited by a sublayout and customized via slots
 
 import {toPage, Page, isPage, AstroPage} from '../../lib/page/Page'
 import BaseLayout from '../../layouts/base.astro';
@@ -15,10 +15,13 @@ let page:Page = await runPageTransforms();
 
 async function runPageTransforms() {
   return await Promise.resolve(readPageData())
-                      .then(applyPostProcess)
-}
+}                      
 
 function readPageData() {
+  /** 
+   * This layout may already have page & metadata if it's a inherited layout (@ex: a variant @see {Project2Columns.astro})
+   *  so we can skip in that case.
+   */
   const inheritedPage = isPage(Astro.props.content);
   if(inheritedPage){
     return Promise.resolve(Astro.props.content)
@@ -37,15 +40,11 @@ function concatenateMetadata( astroPage: AstroPage ) {
   }
 }
 
-function applyPostProcess( page: Page ) {
-  return page;
-}
-
 ---
 
 <BaseLayout {page}>
   <!-- <script type="text/javascript" src="https://unpkg.com/external-svg-loader@latest/svg-loader.min.js" async></script> -->
-  <article id="content" project-slug={page.slug.toLowerCase()}>
+  <article id="content" data-projectSlug={page.slug.toLowerCase()}>
     <link rel="stylesheet" href="/styles/browser.min.css" />
 
     <Masthead className={cn('project-masthead','surface4', page.content.variant)}
@@ -53,12 +52,10 @@ function applyPostProcess( page: Page ) {
       subtitle={page.content.subtitle}
       image={page.content.logo ?? null}
     ></Masthead>
-    <section class={cn('project',page.content.variant)} aria-labelledby="masthead-title">
-      <ProjectHydration client:idle>
+    <section class={cn('project',page.content.variant, Astro.props.class)} aria-labelledby="masthead-title">
       {
         (!page.layout.endsWith('Project.astro') ? <slot/> : page.content.content)
       }
-      </ProjectHydration>
     </section>
   </article>
 </BaseLayout>
@@ -142,7 +139,7 @@ function applyPostProcess( page: Page ) {
     }
   }
 
-  p:first-of-type {
+  p:first-of-type, h1:first-of-type, h2:first-of-type,h3:first-of-type {
     margin-top: 0;
   }
 

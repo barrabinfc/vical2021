@@ -20,12 +20,13 @@ interface RobotCanvasCoordinateSystem {
 
 interface ToyRobotCanvasProps {
   className?: string;
-  robot: ToyRobot;
   dimensions: Vec2;
   debug?: boolean;
+  robot: MutableRefObject<ToyRobot>;
 }
 
 export const ToyRobotCanvas = (props: ToyRobotCanvasProps) => {
+  console.log('received props', props);
   const dimensions: [number, number] = props.dimensions;
   const coordSystem: MutableRefObject<RobotCanvasCoordinateSystem> = useRef({} as RobotCanvasCoordinateSystem);
 
@@ -33,7 +34,7 @@ export const ToyRobotCanvas = (props: ToyRobotCanvasProps) => {
   const robotImageSize = [64, 64];
   const guidesEnabled = props.debug === true || false;
 
-  const robot = props.robot;
+  const robot = props.robot.current;
 
   const drawGuides = (ctx) => {
     const { width, height, unitX, unitY } = coordSystem.current;

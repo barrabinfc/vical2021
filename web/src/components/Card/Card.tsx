@@ -11,6 +11,7 @@ import { useInView } from 'react-intersection-observer';
 import { openSpring, closeSpring } from '../../lib/animations';
 
 export interface CardProps {
+  As?: 'a' | 'div';
   href: string;
   avatar: {
     path?: string;
@@ -21,29 +22,37 @@ export interface CardProps {
   content: {
     title: string;
     subtitle: string;
+    description?: string;
   };
   TitleHeadingLevel?: HeadingLevel;
   className: string | string[];
 
   children?: React.ReactNode | React.ReactNode[];
+  variant?: 'label-bottom';
   loading: 'lazy' | 'eager';
 
   /** Anim options */
   delay?: number;
 }
+export type props = CardProps;
 
 export default function Card({
+  As = 'a',
   href,
   avatar,
   content,
   TitleHeadingLevel = HeadingLevel.h2,
   className,
   children,
+  variant = 'label-bottom',
   loading = 'lazy',
   delay = 0
-}: CardProps) {
+}: CardProps): JSX.Element {
   const controls = useAnimation();
   const [ref, inView] = useInView();
+
+  const inViewTransitionSpeed = 200;
+  const inViewTransitionEasing = [];
 
   useEffect(() => {
     if (inView) {
@@ -52,51 +61,42 @@ export default function Card({
   }, [controls, inView]);
 
   return (
-    <a ref={ref} href={href} className={cn('card', styles.card, className)}>
-      <div className={cn(styles['content-container'])}>
-        <div className={cn(styles['content'])}>
-          {avatar && (
-            <div className={cn('avatar', styles.avatar)}>
-              <picture>
-                <img src={avatar?.path} loading={loading} alt={avatar?.alt || ''} />
-              </picture>
-            </div>
-          )}
-          <div className={styles['title-container']} align-at="bottom">
-            <TitleHeadingLevel className={cn(styles.title, 'title3', 'line-clamp')}>
-              <motion.span
-                style={{ position: 'absolute' }}
-                animate={controls}
-                initial="hidden"
-                variants={{
-                  visible: { y: 0, transition: { delay: delay + 0.15 }, ...openSpring },
-                  hidden: { y: 50, ...closeSpring }
-                }}
-              >
-                {content?.title}
-                <span className="visually-hidden">.</span>
-              </motion.span>
-            </TitleHeadingLevel>
-            {content?.subtitle && (
-              <p className={cn(styles.subtitle, 'line-clamp')}>
-                <motion.span
-                  style={{ position: 'absolute' }}
-                  animate={controls}
-                  initial="hidden"
-                  variants={{
-                    visible: { y: 0, transition: { delay: delay + 0.25 }, ...openSpring },
-                    hidden: { y: 50, ...openSpring }
-                  }}
-                >
-                  {content?.subtitle}
-                </motion.span>
-              </p>
-            )}
-            {children && children}
-          </div>
-          <div className="cast-shadow"></div>
+    <As ref={ref} href={href} className={cn('card', styles.card, className)}>
+      {avatar && (
+        <div className={cn('avatar', styles.avatar)}>
+          <picture>
+            <img src={avatar?.path} loading={loading} alt={avatar?.alt || ''} />
+          </picture>
         </div>
+      )}
+      <div className={styles['title-container']} data-variant={variant}>
+        <TitleHeadingLevel className={cn(styles.title, 'title3')}>
+          <motion.div
+            animate={controls}
+            initial="hidden"
+            variants={{
+              visible: { y: 0, transition: { delay: delay + 0.15 }, ...openSpring },
+              hidden: { y: inViewTransitionSpeed, ...closeSpring }
+            }}
+          >
+            {content?.title}
+          </motion.div>
+        </TitleHeadingLevel>
+        {content?.subtitle && (
+          <motion.p
+            className={cn(styles.subtitle)}
+            animate={controls}
+            initial="hidden"
+            variants={{
+              visible: { y: 0, transition: { delay: delay + 0.25 }, ...openSpring },
+              hidden: { y: inViewTransitionSpeed, ...openSpring }
+            }}
+          >
+            {content?.subtitle}
+          </motion.p>
+        )}
+        {children && children}
       </div>
-    </a>
+    </As>
   );
 }

@@ -5,8 +5,6 @@ import { slugifyFilepath } from '../helpers';
 import { isSimpleISO8601 } from '../validation/isSimpleISO8601';
 import { abspathOfPages, pagePathToUrl, urlToPagePath } from './pagePathToUrl';
 
-const AstroContextSymbol = Symbol.for('astro.context');
-
 /**
  * Interface of a raw astro page (Astro.props.content)
  * It contains the properties of a page, it's props and markdown result.
@@ -91,6 +89,7 @@ const pageProps = {
     )
   )
 };
+export const props = pageProps;
 const isPage = t.isObject(pageProps);
 type Page = t.InferType<typeof isPage>;
 
@@ -150,8 +149,7 @@ const toPageSummary = (page: MarkdownPageReference): PageSummary => {
  * Convert to Page interface
  */
 function toPage(content: MarkdownPageReference, cwd?: string): Page;
-function toPage(content: AstroPage, cwd?: string): Page;
-function toPage(content: AstroPage | MarkdownPageReference, cwd?: string): Page {
+function toPage(content: AstroPage, cwd?: string): Page {
   let name, slug, abspath, relativePath, collection;
 
   /** Transform from  url.com/path/filename into a url friendly slug  */

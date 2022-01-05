@@ -1,7 +1,7 @@
 ---
 import {relative,dirname} from 'node:path'
 import BaseLayout from '../base.astro';
-import {AstroContextSymbol, Page, toPage, AstroPage} from '../../lib/page/Page';
+import {Page, toPage, AstroPage} from '../../lib/page/Page';
 
 import Masthead from '../../components/Masthead';
 import Tag, {TagVariant} from '../../components/Tag/Tag';
@@ -12,20 +12,11 @@ import {buildHTMLTransformerFn } from '../../lib/html';
 import transformFootnoteLinksInNewPage from '../../lib/html/transformers/footnotesLinksInNewPage';
 import transformEscapeBracketLeft from '../../lib/html/transformers/astroCode.ts';
 
-// console.log("Astro", Astro);
-// console.log('Astro.props.content.astro', Astro.props.content.astro);
-
-const debug = (page) => {
-  console.log('This Page => ', page.layout);
-  return page;
-}
-
 let page: Page = await runPageTransforms();
 
 async function runPageTransforms(){
   return await Promise.resolve(Astro.props.content)
             .then(concatenateMetadata)
-            .then(debug)
             .then(toPage)
             .then(applyPostProcess)
 }
@@ -59,9 +50,9 @@ async function applyPostProcess( page: Page ) {
   });
 
   page.content.content = await Promise.resolve(page.content.content)
-                                        .then( transformRelativeImagePath )
-                                        .then( transformFootnoteLinksInNewPage )
-                                        .then( transformEscapeBracketLeft )
+                                        // .then( transformRelativeImagePath )
+                                        // .then( transformFootnoteLinksInNewPage )
+                                        // .then( transformEscapeBracketLeft )
 
   return page;
 }

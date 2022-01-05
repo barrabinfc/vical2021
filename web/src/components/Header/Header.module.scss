@@ -2,12 +2,6 @@
 @use 'src/styles/breakpoints' as bp;
 @use 'src/styles/helpers' as h;
 
-@include bp.breakpoint(small, min) {
-  :root {
-    --headerH: 92px;
-  }
-}
-
 .header {
   position: relative;
   display: flex;

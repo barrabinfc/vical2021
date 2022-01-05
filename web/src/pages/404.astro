@@ -1,19 +1,65 @@
 ---
-import {AstroContextSymbol, Page, toPage, AstroPage, PageSummary, toPageSummary } from '../lib/page/Page'
+import { toPage } from '../lib/page/Page'
 
 import BaseLayout from '../layouts/base.astro';
 // import SvgPlaceholder from '../components/SvgPlaceholder';
 
-let page = {
+const abspath = Astro.request.url.pathname;
+
+/**
+toPage({
+  name: 'toy-robot',
+  abspath: abspath,
+  slug: 'toy-robot',
+  collection: 'experiments',
+  layout: 'minimal.astro',
+  status: 'draft',
+  url: pagePathToUrl(abspath),
+  tags: [],
+  schema: 'website',
+
+  published: false,
+  publishedAt: null,
+
+  content: {
+    title: 'Toy Robot',
+    subtitle: 'Toy Robot exercise using generator',
+    description: '',
+    headers: [],
+    content: ''
+  },
+  robotCommands: `# Go to center
+MOVE
+MOVE
+RIGHT
+MOVE
+MOVE`,
+}, abspath)
+ */
+
+let page = toPage({
+  name: 'not-found',
+  abspath,
+  slug: '404',
+  collection: [],
   title: 'Page not found',
   description: 'Page not found',
   schema: 'basic',
   url: new URL('https://vical.me/404'),
+  tags: [],
+  layout: 'minimal.astro',
+  status: 'draft',
+  
+  published: false,
   publishedAt: new Date(),
   content: {
-    description: 'Page not found'
+    title: 'Page not found',
+    subtitle: 'Failed to find the page',
+    description: '',
+    headers: [],
+    content: '',
   },
-};
+}, abspath);
 
 ---
 

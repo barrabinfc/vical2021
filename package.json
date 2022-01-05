@@ -9,7 +9,8 @@
       "apollo"
     ],
     "nohoist": [
-      "**/esbuild-register"
+      "**/esbuild-register",
+      "**/vite-plugin-remote-assets"
     ]
   },
   "scripts": {

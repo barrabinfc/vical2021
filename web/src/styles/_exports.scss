@@ -1,7 +1,9 @@
 @use 'variables' as *;
 
 /**
- * Exported variables (available at buildtime only)
+ * Exported variables (available at buildtime only, like macros)
+ * @usage
+ *  import { $blue, $red } from 'styles/_exports';
  */
 :export {
   breakpoint-small: map-get($breakpoints, 'small');

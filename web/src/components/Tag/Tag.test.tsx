@@ -2,7 +2,6 @@ import React from 'react';
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 
-import fs from 'fs';
 import * as ReactTest from '../../../tests/setup/react';
 
 import Tag, { TagVariant } from './Tag';

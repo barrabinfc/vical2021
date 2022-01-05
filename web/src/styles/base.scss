@@ -7,22 +7,37 @@
 @import './typo';
 @import './imgs';
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 /**
- * Custom css properties (available at runtime only)
+ * Customize the properties (available at browser time)
  */
-:root {
+body {
   /** Default font size for mobile */
-  --unit: 16px;
+  --unit: 14px;
   --scale: 1.125; /** Major second */
 
+  /** For tablets&desktop */
   @include bp.breakpoint(medium, min) {
-    --unit: 18px;
+    --unit: 16px;
     --scale: 1.25; /** major third */
   }
 
   /* Margin/padding units */
   --gap: #{$gap};
+
   --headerH: 64px;
+  @include bp.breakpoint(small, min) {
+    --headerH: 92px;
+  }
+
   --footerH: 80px;
 
   /** Default colorscheme is light */
@@ -75,15 +90,6 @@
 }
 */
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -96,11 +102,12 @@ body {
   padding: 0;
 }
 
-/** Global wrapper */
-.container {
-  width: 100%;
-  flex: 1 1 100%;
-}
+// TODO: Remove this, .container is not used
+// /** Global wrapper */
+// .container {
+//   width: 100%;
+//   flex: 1 1 100%;
+// }
 
 /* Reusable wrapper */
 .wrapper {
@@ -118,24 +125,28 @@ body {
   width: 1px;
 }
 
+.text-pad {
+  padding: calc(var(--unit) * 2) calc(var(--unit) * 2);
+}
+
 .pad4 {
-  padding: calc(var(--gap) * 4) calc(var(--gap) * 4);
+  padding: var(--unit) var(--unit);
 }
 .pad4-x {
-  padding: 0 calc(var(--gap) * 4);
+  padding: 0 var(--unit);
 }
 .pad4-y {
-  padding: calc(var(--gap) * 4) 0;
+  padding: var(--unit) 0;
 }
 
 .pad8 {
-  padding: calc(var(--gap) * 8) calc(var(--gap) * 8);
+  padding: calc(var(--unit) * 2) calc(var(--unit) * 2);
 }
 .pad8-x {
-  padding: 0 calc(var(--gap) * 8);
+  padding: 0 calc(var(--unit) * 2);
 }
 .pad8-y {
-  padding: calc(var(--gap) * 8) 0;
+  padding: calc(var(--unit) * 2) 0;
 }
 
 .fl-y-center {
@@ -182,7 +193,10 @@ body {
   @include h.shadow();
 }
 
-/** Grid generics */
+/** 
+ * Grid generics 
+ * 2x2 grid
+ */
 .grid2 {
   @include grids.grid(2);
   align-content: space-evenly;
@@ -202,14 +216,19 @@ body {
   }
 }
 
+/**
+ * Cut the element out of it's container,
+ * make it to occupy 100% viewport width, 
+ * while in flow mode.
+ */
 .full-bleed {
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  & > * {
-    max-width: 50rem;
-    margin-left: auto;
-    margin-right: auto;
-  }
+  // & > * {
+  //   max-width: 50rem;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  // }
 }
 
 /**

@@ -16,8 +16,6 @@ export interface ProjectListProps {
 }
 
 export default function ProjectList({ projects, TitleHeadingLevel = HeadingLevel.h2 }: ProjectListProps) {
-  console.log('ProjectList');
-
   return (
     <div className={cn(style['project-grid'])}>
       <LazyMotion>
@@ -34,7 +32,8 @@ export default function ProjectList({ projects, TitleHeadingLevel = HeadingLevel
                 title: project.content.title,
                 subtitle: project.content.subtitle
               }}
-              className={`item ${project.slug}`}
+              className={`item`}
+              data-slug={project.slug}
               loading="lazy"
             />
           </div>

@@ -5,9 +5,9 @@ setup: |
   import Debug from 'astro/debug';
 
 schema: basic
+layout: ../layouts/home.astro
 status: in progress
 published: true
-layout: ../layouts/home.astro
 
 title: Vical
 subtitle: I'm vitor and i write web software

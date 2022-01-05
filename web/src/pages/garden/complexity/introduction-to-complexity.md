@@ -23,7 +23,7 @@ that:
 
 <div class="right-25">
   <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Safari_ants_tunnel.jpg" alt="Ants building a tunnel"/>
-  <figcaption>Ants building a tunnel</ficaption>
+  <figcaption>Ants building a tunnel</figcaption>
 </div>
 
 Figure 1 show a colony of army ants building a tunnel. Each ant on it's own is very simple, but the
@@ -41,10 +41,11 @@ like the ants or termites, neurons can self-organize into complex structures tha
 and survive.
 
 <div class="centered">
+
   <img src="/pictures/brain-innerworkings.png" alt="brain architecture"/>
   <figcaption>Brain architecture
-  <sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup>
-  </ficaption>
+    <sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup>
+  </figcaption>
 </div>
 
 Yet another complex system is the immune system, distributed across the body and involving many different organs and trillions of cells moving around the bloodstream or lymph stream protecting ad healing the body from damage or disease.

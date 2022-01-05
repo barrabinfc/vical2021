@@ -35,6 +35,16 @@ interface ToyRobotPlaygroundProps {
   code?: string;
 }
 
+interface ToyRobotCanvasMembraneProps extends ToyRobotPlaygroundProps {
+  dimensions: ToyRobotPlaygroundProps['dimensions'];
+  debug: boolean;
+}
+
+const CanvasMembrane = React.forwardRef((props: ToyRobotCanvasMembraneProps, ref: React.MutableRefObject<ToyRobot>) => {
+  console.log('CanvasMembrane => (props,refs)', ref);
+  return <Canvas className={cn(style.robotCanvas)} dimensions={props.dimensions} debug={props.debug} robot={ref} />;
+});
+
 /**
  * Playground ToyRobot.
  *
@@ -90,7 +100,7 @@ export function ToyRobotPlayground(config: ToyRobotPlaygroundProps): JSX.Element
   return (
     <div className={cn(style.robotPlayground)}>
       <Editor className={cn(style.robotEditor)} onPlay={play} onStop={stop} {...playgroundState} commands={commands} />
-      <Canvas className={cn(style.robotCanvas)} dimensions={dimensions} robot={robot.current} debug={debug} />
+      <CanvasMembrane dimensions={dimensions} debug={debug} ref={robot} />
     </div>
   );
 }

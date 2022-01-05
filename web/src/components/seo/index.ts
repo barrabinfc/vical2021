@@ -10,7 +10,7 @@ import defaultSettings from '../../lib/settings';
 const debug = createDebug('vical:components:seo');
 
 export class SEOModuleNotFound extends CustomError {
-  name: 'SEOModuleNotFound';
+  declare name: 'SEOModuleNotFound';
 }
 
 import ldModule from './ld';
