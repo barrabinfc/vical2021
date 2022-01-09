@@ -6,10 +6,6 @@
   "workspaces": {
     "packages": [
       "web"
-    ],
-    "nohoist": [
-      "**/esbuild-register",
-      "**/vite-plugin-remote-assets"
     ]
   },
   "scripts": {
