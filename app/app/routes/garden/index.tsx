@@ -1,12 +1,13 @@
 import { Link, useLoaderData } from "remix";
 import { GardenPost, getGardenPosts } from "~/features/garden";
 
+import MinimalLayout from '~/layouts/minimal'
 export const loader = getGardenPosts;
 
 export default function Garden() {
   const posts = useLoaderData<GardenPost[]>();
   return (
-    <div>
+    <MinimalLayout>
       <h1>Digital garden</h1>
       <p>Some of my pages</p>
       <ul>
@@ -16,6 +17,6 @@ export default function Garden() {
           </li>
         ))}
       </ul>
-    </div>
+    </MinimalLayout>
   );
 }
