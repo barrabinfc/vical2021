@@ -1,7 +1,7 @@
 /**
  * HTML parser helper
  */
-import cheerio, { load, CheerioAPI } from 'cheerio';
+import cheerio, { html as cheerioOuterHTML, load, CheerioAPI } from 'cheerio';
 
 /**
  Parse `htmlString` as a fragment
@@ -14,6 +14,7 @@ export const loadHTML = (htmlString: string): CheerioAPI => {
   Get the HTML as string of element `el`
 
   @example
-   html( $('.pear') )
+   html( $('.pear') ) =>
+    <div class="pear">...</div>
  */
-export const html = cheerio.html;
+export const html = cheerioOuterHTML;

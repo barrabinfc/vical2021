@@ -57,7 +57,7 @@ export default function CardExpand({ href, avatar, content, className, loading =
                   <motion.img
                     layout
                     initial={false}
-                    src={avatar?.url}
+                    src={avatar?.path}
                     loading={loading}
                     // width={avatarWidth} height={avatarHeight}
                     alt={content?.title || 'A image'}

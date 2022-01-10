@@ -19,12 +19,12 @@ export function useHover({ selector }: { selector: string }) {
 
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll(selector));
-    elements.forEach(el => {
+    elements.forEach((el) => {
       el.addEventListener('pointerover', hoverHandler);
       el.addEventListener('pointerleave', hoverOutHandler);
     });
     return () => {
-      elements.forEach(el => {
+      elements.forEach((el) => {
         el.removeEventListener('pointerover', hoverHandler);
         el.removeEventListener('pointerleave', hoverHandler);
       });

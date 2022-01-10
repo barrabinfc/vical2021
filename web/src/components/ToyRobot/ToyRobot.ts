@@ -20,6 +20,7 @@ REPORT announces the X,Y and F of the robot.
 The file is assumed to have ASCII encoding. It is assumed that the PLACE command has only one space, that is PLACE 1, 2, NORTH is an invalid command. All commands must be in upcase, all lower and mixed case commands will be ignored.
 
 */
+import debug from 'debug';
 
 export type Vec2 = [number, number];
 
@@ -30,12 +31,17 @@ const COMMANDS = ['PLACE', 'MOVE', 'LEFT', 'RIGHT', 'REPORT'] as const;
 type CommandSymbol = typeof COMMANDS[number];
 export type RobotCommand = [CommandSymbol, [...any]];
 
+// Setup logging
+let log, warn, info;
+log = warn = info = debug('vical:toyrobot');
+
 export class ToyRobot {
   private _direction: RobotDirection = 'N';
   private _position: Vec2 = [0, 0];
   dimensions: Vec2;
 
   constructor({ dimensions }: { dimensions: Vec2 }) {
+    log('Created ToyRobot');
     this.dimensions = dimensions;
   }
 
@@ -44,7 +50,7 @@ export class ToyRobot {
   }
   set position([x, y]: [x: number, y: number]) {
     if (!this.inDimensionBounds([x, y])) {
-      console.warn('not in bounds', x, y);
+      warn('not in bounds', x, y);
       return;
     }
     this._position = [x, y];
@@ -104,7 +110,7 @@ export class ToyRobot {
     y = Number(y);
 
     if (!(this.validDirection(direction) && this.inDimensionBounds([x, y]))) {
-      console.warn(`Ignoring place(Invalid params): {${x}, ${y}, ${direction}} }`);
+      warn(`Ignoring place(Invalid params): {${x}, ${y}, ${direction}} }`);
       return;
     }
     this.position = [x, y];
@@ -169,7 +175,7 @@ export class ToyRobot {
 
   // REPORT announces the X,Y and direction of the robot.
   report() {
-    console.info(this.state);
+    info(this.state);
   }
 
   /**

@@ -1,17 +1,13 @@
-import 'module-alias/register.js';
-import { readFileSync } from 'fs';
+// @ts-check
+// import RemoteAssets from 'vite-plugin-remote-assets';
 
-import * as shiki from 'shiki';
-
-const packageFileContent = readFileSync('./package.json', 'utf8');
-const packageInfo = JSON.parse(packageFileContent);
-const astroConfig = packageInfo._astroConfig;
-
-const highlighter = await shiki.getHighlighter({ theme: 'poimandres' });
-
-export default /** @type {import('astro').AstroUserConfig} */ ({
-  ...astroConfig,
-  markdownOptions: {
-    ...astroConfig.markdownOptions
+/** @type {import('astro').AstroUserConfig} */
+export default {
+  renderers: ['@astrojs/renderer-react'],
+  buildOptions: {
+    site: 'http://vical.me/'
+  },
+  vite: {
+    // plugins: [RemoteAssets()]
   }
-});
+};

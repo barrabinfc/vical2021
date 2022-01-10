@@ -5,11 +5,7 @@
   "private": true,
   "workspaces": {
     "packages": [
-      "web",
-      "apollo"
-    ],
-    "nohoist": [
-      "web/esbuild-register"
+      "web"
     ]
   },
   "scripts": {

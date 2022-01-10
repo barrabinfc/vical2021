@@ -1,5 +1,0 @@
-type Text {
-  type: RichTextTypeEnum
-  content: String
-  link: String
-}

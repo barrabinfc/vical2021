@@ -1,9 +1,12 @@
-/** Style broken images */
 img {
-  /* Same as first example */
   min-height: 32px;
+
+  /** Dont stretch/squeeze photos by :default */
+  max-width: 100%;
+  object-fit: cover;
 }
 
+/** Style broken images */
 img:before {
   content: ' ';
   display: block;
@@ -19,7 +22,7 @@ img:before {
 }
 
 img:after {
-  content: '🔗 Broken Image of ' attr(alt);
+  content: '🔗  ' attr(alt);
   display: block;
   font-size: 16px;
   font-style: normal;

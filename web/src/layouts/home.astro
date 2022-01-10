@@ -1,24 +1,20 @@
 ---
 import {HeadingLevel} from '../@types/a11y';
-import {cn, avoidWidowedWords} from '../lib/helpers';
-import {AstroContextSymbol, Page, toPage, AstroPage, PageSummary, toPageSummary } from '../lib/page/Page'
-import {loadHTML, html} from '../lib/html';
+import {Page, toPage, AstroPage, MarkdownPageReference, toPageSummary } from '../lib/page/Page'
 
 import BaseLayout from './base.astro';
-
-import {listProjects} from '../lib/projects';
-import {listGarden} from '../lib/garden';
 
 import LazyMotion from '../components/LazyMotion/LazyMotion.tsx';
 import Picture from '../components/Picture/Picture.tsx';
 import ProjectGrid from '../components/Project/ProjectGrid.tsx';
 import GardenList, {GardenListVariant} from '../components/Garden/GardenList.tsx';
 
-import RubberBall from '../components/RubberBall/index.ts';
+import RubberBall from '../components/RubberBall/RubberBall.tsx';
 
 let page: Page = await runPageTransforms();
-let projects: PageSummary[] = (await listProjects()).map( toPageSummary );
-let gardenItems: PageSummary[] = (await listGarden()).sort( (a,b) => {
+
+let projects = Astro.fetchContent<MarkdownPageReference>('../pages/projects/**/*.md').map(toPageSummary);
+let gardenItems = Astro.fetchContent<MarkdownPageReference>('../pages/garden/**/*.md').sort( (a,b) => {
   // Order by status (first are complete, then in-progresss, finally draft);
   const statusOrder = {'draft': -1, 'in progress': 0, 'complete': 1};
   const [statusA, statusB] = [statusOrder[a.status], statusOrder[b.status]];
@@ -29,112 +25,91 @@ async function runPageTransforms(){
   return await Promise.resolve(Astro.props.content)
                         .then(concatenateMetadata)
                         .then(toPage)
-                        .then(applyPostProcess)
 }
 
-function concatenateMetadata( astroMarkdownPage: AstroPage ) {
-  /** @ts-ignore */
-  const abspath = import.meta.url.pathname;
-  const astroContext = Astro.props[AstroContextSymbol];
-
+/** add layout absolute path property to the props */
+function concatenateMetadata( astroPage: AstroPage ) {
   return {
-    layout: abspath,
-    ...astroMarkdownPage,
-    [AstroContextSymbol]: astroContext
+    layout: Astro.request.url.pathname,
+    url: Astro.request.url,
+    ...astroPage,
   }
-}
-
-function applyPostProcess( page:Page ) {
-  let $ = loadHTML(page.content.content);
-
-  let title = $('#title');
-  title.text( avoidWidowedWords(title.text()) );
-
-  page.content.$ = $;
-  page.content.html = {};
-  page.content.html['title'] = html( title );
-  page.content.html['spotlight'] = html( $('#spotlight') );
-  page.content.html['subtitle'] = html($('#subtitle'));
-
-  return page;
 }
 
 ---
 
 <BaseLayout {page}>
-  <div id="content">
-      <section class="home" aria-labelledby="welcome">
-        <div class="home-grid">
-          <div class="item highlight pad4">
-            {page.content.html['spotlight']}
-            {page.content.html['title']}
-            {page.content.html['subtitle']}
-          </div>
-        </div>
-      </section>
 
-      <section class="projects">
-        <h2 class="title1 pad4-y">What i've worked on</h2>
-        <ProjectGrid
-          TitleHeadingLevel={HeadingLevel.h3}
-          projects={projects}
-          client:idle />
-        <div class="pad4"/>
-      </section>
+  <section class="home" aria-labelledby="welcome">
+    <div class="home-grid">
+      <div class="item highlight">
+        <slot />
+      </div>
+      <img  class="decoration" src="/pictures/Philodentrum.webp" alt="Astro logo" />
+    </div>
+  </section>
 
-      <section class="digital-garden">
-        <h2 class="title1 pad4-y">
-          <Picture src="/pictures/spectabrite6.png" height="76px" />
-        Digital Garden
-        </h2>
-        <GardenList
-          items={gardenItems}
-          TitleHeadingLevel={HeadingLevel.h3}
-          variant={GardenListVariant.WITH_SUBTITLE} />
-        <div class="pad4"/>
-      </section>
-    <!-- <RubberBall client:media={'(min-width: 426px), (prefers-reduced-motion: reduce)'} /> -->
-  </div>
+  <section class="projects">
+    <h2 class="title1 pad4-y">What i've worked on</h2>
+    <ProjectGrid
+      TitleHeadingLevel={HeadingLevel.h3}
+      projects={projects}
+      client:idle />
+    <div class="pad4"/>
+  </section>
+
+  <section class="digital-garden">
+    <h2 class="title1 pad4-y">
+      <Picture src="/pictures/spectabrite6.png" height="76px" />
+    Digital Garden
+    </h2>
+    <GardenList
+      items={gardenItems}
+      TitleHeadingLevel={HeadingLevel.h3}
+      variant={GardenListVariant.WITH_SUBTITLE} />
+    <div class="pad4"/>
+  </section>
+
+  <!-- <RubberBall client:idle /> -->
+  <!-- <RubberBall client:media={'(min-width: 426px), (prefers-reduced-motion: reduce)'} /> -->
 </BaseLayout>
 
-<style lang="scss" scoped>
-@use "sass:math";
-@use "src/styles/breakpoints" as bp;
-@use "src/styles/grids" as grids;
-@use "src/styles/helpers" as h;
+<style lang="scss" global hoist>
+  @use "sass:math";
+  @use "src/styles/grids" as grids;
+  @use "src/styles/breakpoints" as bp;
+  @use "src/styles/helpers" as h;
 
-#content {
-  position: relative;
-}
+  $fold: 80vh;
+  .home {
+    width: 100%;
+    height: $fold;
+  }
 
-$fold: 80vh;
-.home {
-  width: 100%;
-  height: $fold;
-}
-
-.home-grid {
-  position: relative;
-  height: 100%;
-
-  $gap: 0px;
-  @include grids.grid(6, $gap);
-  grid-template-rows: repeat(4, math.div( $fold, 4 ));
-
-  :global(.highlight){
-    grid-column: 4 / span 4;
-    grid-row: 1 / span 4;
-
+  .home-grid {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    z-index: 1;
+    height: 100%;
 
-    @include bp.breakpoint(medium, min) {
-      text-shadow: 0 2px 12px var(--surface1);
-    }
-    @include bp.breakpoint(medium, max) {
+    $gap: 0px;
+
+    @include grids.grid(6, $gap);
+    grid-template-rows: repeat(4, math.div($fold, 4) );
+
+    .highlight {
+      grid-column: 4 / span 3;
+      grid-row: 2 / span 3;
+
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+      isolation: isolate;
+      z-index: 100;
+      overflow: hidden;
+
+      padding: calc( var(--gap) * 4);
+
       background: linear-gradient(
         to bottom,
         transparent 0%,
@@ -142,95 +117,75 @@ $fold: 80vh;
         hsl(var(--brand-hue) var(--brand-saturation) 100% / 0.79) 70%,
         transparent 100%
       );
+
+
+      // @include bp.breakpoint(medium, max) {
+      //   grid-row: 2 / span 4;
+      //   justify-content: space-evenly;
+      // }
+
+      .heading-spotlight {
+        font-family: var(--subtitle-family);
+        font-size: calc( var(--h1) * 1.1 );
+        @include h.weight(var(--subtitle-weight));
+        margin: 0;
+      }
+      .heading-title {
+        font-family: var(--subtitle-family);
+        font-size: calc( var(--h3) );
+        @include h.weight(var(--subtitle-weight));
+        margin: 0;
+      }
+      .heading-subtitle {
+        font-size: var(--h5);
+      }
     }
 
-    > :global(.heading-spotlight) {
-      font-family: var(--subtitle-family);
-      font-size: calc( var(--h1) * 1.1 );
-      @include h.weight(var(--subtitle-weight));
-    }
-    > :global(.heading-title){
-      font-family: var(--subtitle-family);
-      font-size: calc( var(--h3) );
-      @include h.weight(var(--subtitle-weight));
+    .decoration {
+      grid-column: 1 / span 6;
+      grid-row: 1 / span 6;
 
-      margin-bottom: 1em;
-    }
+      position: relative;
+      object-fit: contain;
+    
+      @include bp.breakpoint(medium, min) {
+        /** Occupy left part of screen */
+        bottom: -5vh;
+        left: -22.5%;
+        width: 100%;
+        height: clamp(400px, $fold, 800px);
+      }
 
-    > :global(.heading-subtitle) {
-      font-size: var(--h5);
-    }
+      @include bp.breakpoint(medium, max) {
+        /** Occupy background */
+        opacity: 1;
+        bottom: -5vh;
+        left: 0%;
+        height: clamp(400px, $fold, 800px);
+      }
+    }    
   }
 
-  &::after {
-    position: absolute;
-    isolation: isolate;
-    content: ' ';
-    // background: url('/pictures/Dieffenbachia robusta.png') no-repeat;
-    background-repeat: no-repeat;
-    background-image: url('/pictures/Philodentrum.webp');
-    background-image: -webkit-image-set(url('/pictures/Philodentrum.png'));
-    background-position: center bottom;
+  .projects, .digital-garden {
+    background-color: var(--surface3);
 
     @include bp.breakpoint(medium, min) {
-      /** Occupy left part of screen */
-      background-size: contain;
-      bottom: -5vh;
-      left: -2.5%;
-      width: 55%;
-      height: clamp(400px, 100vh, 800px);
+      padding: 2em 4em;
     }
-
     @include bp.breakpoint(medium, max) {
-      /** Occupy background */
-      opacity: 1;
-      background-size: cover;
-      bottom: -5vh;
-      left: 0%;
-      width: 100%;
-      height: clamp(400px, 100vh, 800px);
+      padding: calc( 4 * var(--gap)) calc( 4 * var(--gap));
     }
-    z-index: 0;
   }
 
-}
-
-.projects {
-  z-index: 1;
-  background-color: var(--surface3);
-
-  @include bp.breakpoint(medium, min) {
-    padding: 2em 4em;
+  .card.Iching-Index .avatar img {
+    opacity: 0.8;
+    -webkit-transform-origin: 50%  50%;
+    transform: scale(2.5) rotate(180deg);
   }
-  @include bp.breakpoint(medium, max) {
-    padding: calc( 4 * var(--gap)) calc( 4 * var(--gap));
+
+  .card.Iching-Index:hover .avatar img,
+  .card.Iching-Index:focus .avatar img {
+    opacity: 1;
+    transform: scale(4.8) rotate(240deg);
   }
-}
-
-.digital-garden {
-  z-index: 1;
-  background-color: var(--surface3);
-
-  @include bp.breakpoint(medium, min) {
-    padding: 2em 4em;
-  }
-  @include bp.breakpoint(medium, max) {
-    padding: calc( 4 * var(--gap)) calc( 4 * var(--gap));
-  }
-}
-</style>
-
-<style global>
-.card.Iching-Index .avatar img {
-  opacity: 0.8;
-  -webkit-transform-origin: 50%  50%;
-  transform: scale(2.5) rotate(180deg);
-}
-
-.card.Iching-Index:hover .avatar img,
-.card.Iching-Index:focus .avatar img {
-  opacity: 1;
-  transform: scale(4.8) rotate(240deg);
-}
-
 </style>

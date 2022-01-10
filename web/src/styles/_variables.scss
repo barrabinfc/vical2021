@@ -2,8 +2,11 @@ $breakpoints: (
   small: 450px,
   medium: 768px,
   large: 1280px,
-  llarge:  1440px
+  llarge: 1440px
 );
 
+/** Minimum gap between elements */
 $gap: 4px;
-$maxWidth: 1440px;
+
+/** Maximum size of responsive design (above, it became centered) */
+$maxWidth: map-get($breakpoints, 'large');

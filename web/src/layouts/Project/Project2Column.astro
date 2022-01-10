@@ -1,43 +1,19 @@
 ---
-import {resolve, relative, dirname } from 'node:path'
-import {readFileSync} from 'node:fs';
+import { loadHTML} from '../../lib/html';
 
-import {AstroContextSymbol, toPage} from '../../lib/page/Page'
+import {toPage} from '../../lib/page/Page'
 import Project from './Project.astro'
 
-/** @ts-ignore */
-const abspath = import.meta.url.pathname;
-const astroContext = Astro.props[AstroContextSymbol];
-
 const page = toPage({
-  layout: abspath,
-  ...Astro.props.content,
-  [AstroContextSymbol]: astroContext
+    layout: Astro.request.url.pathname,
+    url: Astro.request.url,
+    ...Astro.props.content,
 });
 
-let contentHtml = page.content.content;
-
-/** If we have a gallery file, load it's html */
-const galleryAddress = page.content.gallery;
-let galleryHTML = `<pre>File ${galleryAddress} Not found</pre>`
-if(galleryAddress) {
-  const galleryAddressFullPath = resolve(`${process.cwd()}/${galleryAddress}`);
-  /** @ts-ignore */
-  const galleryAddressRelativePath = relative(dirname(import.meta.url.pathname), galleryAddressFullPath );
-
-  galleryHTML = readFileSync(galleryAddressFullPath).toString();
-}
 ---
 
-<Project content={page}>
-  <div class="two-columns">
-    <section class="content pad8 left">
-      {contentHtml}
-    </section>
-    <aside class="showcase right">
-      {galleryHTML}
-    </aside>
-  </div>
+<Project content={page} class="post">
+  <slot/>
 </Project>
 
 <style lang="scss" global>
@@ -46,58 +22,71 @@ if(galleryAddress) {
 @use "src/styles/grids" as grids;
 @use "src/styles/helpers" as h;
 
-$containerPadW: 0.1;
-$containerWidth: 100vw - (100vw * $containerPadW);
 
-.two-columns {
-  /**
-   * Subdivide in 5 columns
-   * left is  2 pieces
-   * right is 3 pieces
-   */
-  $columns: 5;
-  $columnSizeVW: math.div( $containerWidth , $columns );
-  $gap: calc( var(--gap) * 16);
+/** 
+  * Set a default background color
+  */
+.post {
+  --bg-color: var(--surface1);
+  background-color: var(--surface1);
 
-  @include bp.breakpoint(medium, min) {
-    @include grids.grid($columns, $gap);
-    width: 100%;
-    .left {
-      min-width: 0;
-      grid-column: span 2;
-      align-self: start;
-
-      position: sticky;
-      top: var(--headerH);
-    }
-    .right {
-      min-width: 0;
-      grid-column: 3 / #{($columns+1)};
-    }
+  > * {
+    /** Children must inherit the default bg color */
+    background-color: inherit;
   }
 
+  /** Hr forces a new line on the grid */
+  hr {
+    width: 100%;
+  }
+
+  /** 
+   * children elements, occupy one per line, follow after the first flex-line wrap 
+    * has padding for text
+   */
+  & > :not(.two-columns):not(hr) {
+    width: 100%;
+    padding: calc( var(--unit) * 2);
+  }
+
+  .bg-color {
+    background-color: var(--bg-color);
+  }
+
+  .sticky {
+    position: sticky;
+    z-index: 1;
+    top: 0px;
+    align-self: flex-start
+  }
+
+}
+
+/**
+  * Subdivide first line in 5 columns
+  *  left receive  2 pieces
+  *  right receive 3 pieces
+  * 
+  * {children} will wrap to next line, 
+  *  with width=100%, after left/right
+  */
+.two-columns {
+
+  @include grids.flexGrid(5, 0);
+
+  /** Mobile occupy one element per row */
   @include bp.breakpoint(small, max) {
-    @include grids.flexGrid();
+    flex-direction: column;
+  }
+
+  .left {
+    flex: math.div(2, 5);
+    padding-bottom: 0;
+    // align-self: flex-start;
   }
 
   .right {
-    min-width: 0;
-    grid-column: 3 / #{($columns+1)};
-
-    .gallery {
-      display: flex;
-      flex-direction: column;
-    }
-
-    img{
-      width: 100%;
-      object-fit: cover;
-    }
-
-    video {
-      width: 100%;
-      object-fit: cover;
-    }
+    flex: math.div(3,5);
   }
 }
 

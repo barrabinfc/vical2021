@@ -1,6 +1,6 @@
 // import {SEOItem} from '../types';
-import React from "react";
-import { SEOItem } from "../types";
+import React from 'react';
+import { SEOItem } from '../types';
 
 import BasicLD from './basic';
 
@@ -11,8 +11,8 @@ import BasicLD from './basic';
  */
 export default function Article(props: SEOItem) {
   const metadata = {
-    "@context": "https://schema.org",
-    "@type": "Article",
+    '@context': 'https://schema.org',
+    '@type': 'Article'
   };
   return BasicLD(props, metadata);
 }

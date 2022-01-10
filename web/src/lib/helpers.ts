@@ -84,12 +84,19 @@ export function toReadableDateString(date: UnixTimestamp | Date): string {
  * Capitalize each word, join it together, and strip non 09AZ-_ chars
  */
 export const slugifyRaw = (splitTransform: [string, string] = [' ', ''], txt: string = ''): string => {
-  return txt
-    .trim()
-    .split(splitTransform[0])
-    .map((token) => token.slice(0, 1).toUpperCase() + token.slice(1).toLowerCase())
-    .join(splitTransform[1])
-    .replace(/[^0-9a-z_-]/gi, '');
+  return (
+    txt
+      .trim()
+      // Remove file extension
+      .replace(/\.\w*?$/g, '')
+      // Transform some chars
+      .split(splitTransform[0])
+      // to Camelcase
+      .map((token) => token.slice(0, 1).toUpperCase() + token.slice(1).toLowerCase())
+      .join(splitTransform[1])
+      // Finally remove non-ascii chars
+      .replace(/[^0-9a-z_-]/gi, '')
+  );
 };
 
 export const slugify: (txt: string) => string = slugifyRaw.bind(null, null);

@@ -20,7 +20,8 @@ export default function ProjectList({ projects, TitleHeadingLevel = HeadingLevel
     <div className={cn(style['project-grid'])}>
       <LazyMotion>
         {projects.map((project, i) => (
-          <AppearWhenVisible key={project.slug} className="item" delay={i / 10}>
+          // <AppearWhenVisible key={project.slug} className="item" delay={i / 10}>
+          <div key={project.slug} className="item">
             <Card
               key={project.slug}
               delay={i / 5}
@@ -31,10 +32,12 @@ export default function ProjectList({ projects, TitleHeadingLevel = HeadingLevel
                 title: project.content.title,
                 subtitle: project.content.subtitle
               }}
-              className={`item ${project.slug}`}
+              className={`item`}
+              data-slug={project.slug}
               loading="lazy"
             />
-          </AppearWhenVisible>
+          </div>
+          // </AppearWhenVisible>
         ))}
       </LazyMotion>
     </div>

@@ -6,13 +6,14 @@ import useWindowScrollPosition from '@rehooks/window-scroll-position';
 
 import Icon from '../icon';
 import styles from './Header.module.scss';
+// const styles = {};
 
 export default function Header({ sticky = false }: { sticky: boolean }) {
   let headerVariant = [];
-  if (sticky && !import.meta.env.SSR) {
-    const position = useWindowScrollPosition({ throttle: 100 });
-    headerVariant = (position.y >= 32 && ['sticky']) || [];
-  }
+  // if (sticky && !import.meta.env.SSR) {
+  //   const position = useWindowScrollPosition({ throttle: 100 });
+  //   headerVariant = (position.y >= 32 && ['sticky']) || [];
+  // }
 
   return (
     <div className={cn(styles.header, 'header', ...headerVariant)}>
