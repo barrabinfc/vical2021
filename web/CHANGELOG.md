@@ -1,10 +1,6 @@
 # @vical/web
 
-## 0.3.0
-
-### Minor Changes
-
-- testing react remix
+## 0.2.1
 
 ### Patch Changes
 
