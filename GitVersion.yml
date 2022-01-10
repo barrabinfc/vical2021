@@ -1,0 +1,8 @@
+mode: Mainline
+branches: 
+  feature: 
+    increment: Minor
+
+ignore:
+  sha: []
+merge-message-formats: {}

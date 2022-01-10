@@ -37,4 +37,4 @@ jobs:
         run: cd web && yarn
 
       - name: Run UT
-        run: cd web && yarn test
+        run: cd app && yarn test
