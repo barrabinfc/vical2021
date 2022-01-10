@@ -1,7 +1,7 @@
 import { Link, useLoaderData } from "remix";
 import { GardenPost, getGardenPosts } from "~/features/garden";
 
-import MinimalLayout from '~/layouts/minimal'
+import MinimalLayout from "~/layouts/minimal";
 export const loader = getGardenPosts;
 
 export default function Garden() {

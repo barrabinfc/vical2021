@@ -44,9 +44,9 @@ I use the following function for React or server side rendering:
 
 ```ts
 function avoidWidowedWords(text: string, widows: number = 3): string {
-  const words = text.split(' ');
+  const words = text.split(" ");
   const [first, last] = [words.slice(0, -widows), words.slice(-widows)];
-  return first.join(' ') + ' ' + last.join('\u00A0');
+  return first.join(" ") + " " + last.join("\u00A0");
 }
 ```
 
