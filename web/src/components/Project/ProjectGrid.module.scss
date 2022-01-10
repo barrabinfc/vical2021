@@ -1,22 +1,23 @@
-@use "sass:math";
-@use "src/styles/breakpoints" as bp;
-@use "src/styles/grids" as grids;
+@use 'sass:math';
+@use 'src/styles/helpers' as h;
+@use 'src/styles/breakpoints' as bp;
+@use 'src/styles/grids' as grids;
 
 .project-grid {
   $columns: 3;
   $gap: 32px;
-  $itemWidth: calc(#{math.div(100%, $columns)});
-
   @include grids.flexGrid($columns, $gap);
 
+  $itemWidth: calc(#{math.div(100%, $columns)});
+
   @include bp.breakpoint(small, min) {
-    :global(.item:nth-child(1n)) {
+    .item:nth-child(1n) {
       flex: 0 0 33%;
     }
     :global(.item:nth-child(2n)) {
       flex: 0 0 calc(2 * #{$itemWidth} - #{$gap});
     }
-    :global(.item:nth-child(3n)) {
+    .item:nth-child(3n) {
       flex: 0 0 calc(3 * #{$itemWidth} - (2 * #{$gap}));
     }
   }

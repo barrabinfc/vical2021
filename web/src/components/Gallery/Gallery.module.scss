@@ -1,0 +1,14 @@
+.gallery {
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery > img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.gallery > video {
+  width: 100%;
+  object-fit: cover;
+}

@@ -1,7 +1,7 @@
 ---
 import {relative,dirname} from 'node:path'
 import BaseLayout from '../base.astro';
-import {AstroContextSymbol, Page, toPage, AstroPage} from '../../lib/page/Page';
+import {Page, toPage, AstroPage} from '../../lib/page/Page';
 
 import Masthead from '../../components/Masthead';
 import Tag, {TagVariant} from '../../components/Tag/Tag';
@@ -10,7 +10,7 @@ import {cn,toReadableDateString, toDMYDateString, emojifyStatus} from '../../lib
 
 import {buildHTMLTransformerFn } from '../../lib/html';
 import transformFootnoteLinksInNewPage from '../../lib/html/transformers/footnotesLinksInNewPage';
-import transformEscapeBracketLeft from '../../lib/html/transformers/astroCode.js';
+import transformEscapeBracketLeft from '../../lib/html/transformers/astroCode.ts';
 
 let page: Page = await runPageTransforms();
 
@@ -21,15 +21,14 @@ async function runPageTransforms(){
             .then(applyPostProcess)
 }
 
-function concatenateMetadata( astroMarkdownPage:AstroPage ) {
+function concatenateMetadata( astroPage:AstroPage ) {
   /** @ts-ignore */
-  const abspath = import.meta.url.pathname;
-  const astroContext = Astro.props[AstroContextSymbol];
+  const abspath = Astro.request.url.pathname
 
   return {
     layout: abspath,
-    ...astroMarkdownPage,
-    [AstroContextSymbol]: astroContext
+    url: Astro.request.url,
+    ...astroPage,
   }
 }
 
@@ -43,6 +42,7 @@ function resolveRelativeToCwd( path: string ) {
 async function applyPostProcess( page: Page ) {
   /** Relative images */
   const transformRelativeImagePath = buildHTMLTransformerFn( 'img[src^="./"]',  (el,ctx) => {
+    // console.log('element prototype', el.__prototype__)
     const targetPath = dirname(page.abspath);
     const relativeTargetPath = resolveRelativeToCwd( targetPath );
     const src = el.attr('src');
@@ -50,9 +50,9 @@ async function applyPostProcess( page: Page ) {
   });
 
   page.content.content = await Promise.resolve(page.content.content)
-                                        .then( transformRelativeImagePath )
-                                        .then( transformFootnoteLinksInNewPage )
-                                        .then( transformEscapeBracketLeft )
+                                        // .then( transformRelativeImagePath )
+                                        // .then( transformFootnoteLinksInNewPage )
+                                        // .then( transformEscapeBracketLeft )
 
   return page;
 }

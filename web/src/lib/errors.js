@@ -1,5 +1,5 @@
 export class CustomError extends Error {
-  name = "CustomError";
+  name = 'CustomError';
 
   constructor(message) {
     super(message);

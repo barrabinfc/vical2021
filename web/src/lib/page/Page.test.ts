@@ -19,7 +19,9 @@ const pageContent: PageContent = {
   subtitle: 'A hello world subtitle',
   description: 'Hello World',
   headers: [],
-  content: '<h1>Hello world</h1>'
+  content: '<h1>Hello world</h1>',
+  source: '',
+  html: ''
 };
 
 test('Page should match Page interface', () => {

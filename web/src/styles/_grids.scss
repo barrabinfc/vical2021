@@ -1,5 +1,5 @@
-@use "sass:math";
-@use "src/styles/breakpoints" as bp;
+@use 'sass:math';
+@use 'src/styles/breakpoints' as bp;
 
 /**
  * A grid with display grid technique (not animable in 2021)

@@ -1,19 +1,28 @@
-@use "src/styles/variables" as *;
-@use "src/styles/helpers" as helpers;
+@use 'src/styles/variables' as *;
+@use 'src/styles/helpers' as helpers;
 
 $cardHeight: 280px;
 
+/**
+ * Cards have a full width and height auto, fixed at maximum 280px;
+ * They are generally links, and they have state (hover, focus)
+ */
 .card {
-  height: 280px;
-  max-height: $cardHeight;
-  contain: layout;
+  /** Disable default style of <A links> in the grid */
+  @include helpers.reset-link();
+  @include helpers.shadow();
 
   width: 100%;
+  height: 280px;
+  max-height: $cardHeight;
+
+  contain: paint;
+  overflow: hidden;
 
   display: flex;
   flex-direction: column;
 
-  border: 0;
+  border-radius: calc(var(--gap) * 4);
   text-decoration: none;
 
   transform: scale(1);
@@ -27,7 +36,7 @@ $cardHeight: 280px;
     transform: scale(1.05);
 
     .avatar img {
-      filter: grayscale(0);
+      // filter: grayscale(0);
       transform: scale(1.025);
     }
     .avatar::after {
@@ -36,21 +45,10 @@ $cardHeight: 280px;
   }
 }
 
-.content-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: block;
-}
-
-.content {
-  position: static;
-  border-radius: calc(var(--gap) * 4);
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-}
-
+/**
+ * Avatar is the background image.
+ * We use absolute for animations and positioning.
+ */
 .avatar {
   position: absolute;
   top: 0;
@@ -68,13 +66,14 @@ $cardHeight: 280px;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    background-color: white;
 
-    filter: grayscale(1);
+    // filter: grayscale(1);
     transition: filter 200ms ease-out, transform 250ms ease-out;
   }
 
   /**
-   * Overlays
+   * Overlays are layers applied above bg image.
    */
   &::before,
   &::after {
@@ -88,8 +87,9 @@ $cardHeight: 280px;
     opacity: 0;
   }
 
+  /* A gradient overlay from the bottom to the top , black to transparent */
   &::before {
-    opacity: 0.25;
+    opacity: 1.25;
     background: linear-gradient(
       to top,
       hsl(0 0% 0% / 0.79) 0%,
@@ -111,6 +111,7 @@ $cardHeight: 280px;
     );
     transition: 300ms opacity ease-out;
   }
+  /** A Gradient overlay from the left to the right, with --brand colors */
   &::after {
     background: linear-gradient(
       45deg,
@@ -131,44 +132,31 @@ $cardHeight: 280px;
   padding: 1em;
   overflow: hidden;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   color: var(--surface1);
 }
 
-.title-container[align-at='bottom'] {
+/**
+ * Align the title/subtitle from the bottom of the card (upwards)
+ */
+.title-container[data-variant='label-bottom'] {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-}
 
-.title {
-  height: 1.25em;
-  @include helpers.text-truncate(2, 2);
-  text-transform: capitalize;
+  .title {
+    @include helpers.text-truncate(2, 2);
+    text-transform: capitalize;
 
-  margin-top: 0.2em;
-  margin-bottom: 0.5em;
-}
+    margin-top: 0.2em;
+    margin-bottom: 0.5em;
+  }
 
-.subtitle {
-  height: 2.7em;
-  @include helpers.text-truncate(2, 2);
-
-  margin: 0;
-}
-
-:global(.cast-shadow) {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  z-index: -1;
-
-  box-shadow: 0 2.8px 2.2px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.03)),
-    0 0px 5px 5px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.01)),
-    0 12.5px 10px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.02)),
-    0 22.3px 17.9px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.02)),
-    0 41.8px 33.4px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.03)),
-    0 100px 80px hsl(var(--surface-shadow) / var(--shadow-strength));
+  .subtitle {
+    @include helpers.text-truncate(3, 3);
+    margin: 0;
+  }
 }

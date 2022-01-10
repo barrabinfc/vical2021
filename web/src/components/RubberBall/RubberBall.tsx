@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, DOMElement } from 'react';
+import React, { useRef, useEffect } from 'react';
 import type { Property } from 'csstype';
 
 import { useMousePosition } from '../../hooks/useMousePosition';
@@ -10,24 +10,28 @@ import { useCycle, useSpring, useTransform } from 'framer-motion';
 
 import style from './RubberBall.module.scss';
 
-export interface RubberBallProps {
-  radius: number;
-  drag: number;
-  blendMode: Property.MixBlendMode;
-}
+export type props = {
+  radius?: number;
+  drag?: number;
+  blendMode?: Property.MixBlendMode;
+};
 
-const defaultRubberBallProps: RubberBallProps = {
-  radius: 32,
+/**
+ * Export the types for runtime code-introspection tools
+ */
+const defaultRubberBallProps: props = {
+  radius: 16,
   drag: 0.31,
   blendMode: 'exclusion'
 };
+export const props = defaultRubberBallProps;
 
 function RubberBallStaticDOM({
   ref,
   blendMode
 }: {
   ref: React.MutableRefObject<HTMLDivElement>;
-  blendMode: RubberBallProps['blendMode'];
+  blendMode: props['blendMode'];
 }) {
   return (
     <div
@@ -42,9 +46,9 @@ function RubberBallStaticDOM({
 
 /**
  * Rubberball is almost a verbatim copy of two.js example rubber ball
- * https://two.js.org/examples/rubber-ball.html
+ * https://two.js.org/examples/rubber-ball.html.
  */
-export default function RubberBall(props: RubberBallProps = defaultRubberBallProps) {
+export default function RubberBall(props: props = defaultRubberBallProps) {
   const stage = useRef<HTMLDivElement>();
   props = { ...props, ...defaultRubberBallProps };
 
@@ -65,12 +69,11 @@ export default function RubberBall(props: RubberBallProps = defaultRubberBallPro
   /** Track hover over link elements */
   var hoveredLink = useHover({ selector: 'a[href]' });
   var ballHoverVariants = {
-    hover: { scale: 1.0, color: getCSSPropertyValue('--brand') },
-    out: { scale: 2, color: getCSSPropertyValue('--nice') }
+    hover: { scale: 1.5, color: getCSSPropertyValue('--brand') },
+    out: { scale: 1, color: getCSSPropertyValue('--nice') }
   };
 
   var hoverSpring = useSpring(0, { stiffness: 400, damping: 30, bounce: 1.9 });
-  // var hoverDirection = useRef('out');
   var ballScaleSpring = useTransform(
     hoverSpring,
     [0, 1],
@@ -86,23 +89,17 @@ export default function RubberBall(props: RubberBallProps = defaultRubberBallPro
    * Avoid quickly toggling the blend-modes, cancelling transition when hovering adjacent links
    * Delay a little bit until spring crossed the 0 edge to toggle the blend-mode
    */
-  var hoverDirection = useTransform(
-    hoverSpring,
-    [0,1],
-    [-1,1]
-  )
-
-
+  var hoverDirection = useTransform(hoverSpring, [0, 1], [-1, 1]);
 
   function update() {
     mouse.x = mousePosition.current.x;
     mouse.y = mousePosition.current.y;
 
     /** Hovered over a link, change ball style */
-    hoverSpring.set((hoveredLink.current ? 1.0 : 0.0));
+    hoverSpring.set(hoveredLink.current ? 1.0 : 0.0);
     ball.fill = ballColorSpring.get();
     ball.scale = ballScaleSpring.get();
-    stage.current.style.mixBlendMode = (hoverDirection.get() < 0 ? 'exclusion' : 'luminosity');
+    stage.current.style.mixBlendMode = hoverDirection.get() < 0 ? 'exclusion' : 'overlay';
 
     delta.copy(mouse).subSelf(ball.translation);
     ball.vertices.forEach((v, i) => {
@@ -129,8 +126,9 @@ export default function RubberBall(props: RubberBallProps = defaultRubberBallPro
     }).appendTo(stage.current);
 
     ball = two.makeCircle(two.width / 2, two.height / 2, radius, 32);
-    ball.noStroke().fill = ballHoverVariants['out'].color;
-    ball.vertices.forEach(v => {
+    ball.stroke = '#fff';
+    ball.fill = ballHoverVariants['out'].color;
+    ball.vertices.forEach((v) => {
       v.origin = new Two.Vector().copy(v);
     });
 

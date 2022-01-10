@@ -2,13 +2,11 @@
   <header class="header">
     <slot name="header" />
   </header>
-  <div class="main" id="main" tabIndex={-1}>
+  <main class="main" id="main" tabIndex={-1}>
     <slot />
-  </div>
-  <footer class="footer">
-    <div class="container pad4">
-      <slot name="footer" class="container" />
-    </div>
+  </main>
+  <footer class="footer pad4">
+    <slot name="footer" />
   </footer>
 </section>
 
@@ -18,7 +16,6 @@
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 100%;
   min-height: 100%;
-  overflow: hidden;
 }
 
 .header {
@@ -30,6 +27,7 @@
   z-index: 100;
 }
 
+/** Occupy viewport height */
 .main {
   display: block;
   min-height: calc( 100vh - var(--footerH));

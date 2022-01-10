@@ -1,5 +1,6 @@
 import { loadHTML, html } from '../html';
-import cheerio, { Cheerio, Node } from 'cheerio';
+import { Cheerio, Node } from 'cheerio';
+import * as cheerio from 'cheerio';
 
 export type HTMLTransformFn = (el: Cheerio<Node>, ctx: any) => void;
 
@@ -26,12 +27,14 @@ export const buildHTMLTransformerFn = (
   resolveFn: (el: Cheerio<Node>, ctx: any) => void,
   context?: any
 ): ((html: string) => string) => {
+  // console.log(cheerio);
   return (htmlString: string) => {
     let $ = loadHTML(htmlString);
     const elements = $(selector);
 
     elements.map((i, elStr) => {
-      const el = cheerio(elStr);
+      // console.log(`element ${i}`, elStr, resolveFn);
+      const el = $(elStr);
       resolveFn(el, context);
     });
     return $.html();

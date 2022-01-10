@@ -3,7 +3,6 @@ import { expect } from 'chai';
 
 import { Page, toPage, isPage } from '../src/lib/page';
 import { expectPageInterface } from '../src/lib/page/Page.test';
-import { listMarkdown } from '../src/lib/listMarkdown';
 
 import { dirname, resolve } from 'node:path';
 
@@ -19,7 +18,7 @@ export const listRootPages = async (): Promise<Page[]> => {
     throw new Error(`cwd() should be in pages/ folder`);
   }
 
-  const markdownFiles = [...(await listMarkdown(cwd))];
+  const markdownFiles = [];
   return markdownFiles.map((page) => toPage(page, cwd));
 };
 
