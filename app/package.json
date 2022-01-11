@@ -8,6 +8,8 @@
     "build": "remix build",
     "dev": "remix dev",
     "dev:netlify": "cross-env NODE_ENV=development netlify dev",
+    "deploy": "npm run build",
+    "postdeploy": "netlify deploy",
     "postinstall": "remix setup node",
     "start": "remix-serve build",
     "test": "ts-mocha"
