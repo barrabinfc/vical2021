@@ -1,7 +1,7 @@
-name: Version
+name: Bump Version
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
@@ -26,10 +26,24 @@ jobs:
         with:
           node-version: 12.x
 
-      - name: Install Dependencies
-        run: npm install
+      - name: use cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
-      - name: Create Release Pull Request
-        uses: changesets/action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Create Changeset
+        run: yarn changeset version
+
+      - name: Commit changelog
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with: 
+          commit_message: "bump version"
+
+
+      
