@@ -7,14 +7,21 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev",
+    "dev:netlify": "cross-env NODE_ENV=development netlify dev",
+    "deploy": "npm run build",
+    "postdeploy": "netlify deploy",
     "postinstall": "remix setup node",
     "start": "remix-serve build",
     "test": "ts-mocha"
   },
   "dependencies": {
+    "@netlify/functions": "^0.10.0",
+    "@remix-run/netlify": "^1.1.1",
     "@remix-run/react": "^1.1.1",
     "@remix-run/serve": "^1.1.1",
     "@types/mocha": "^9.0.0",
+    "esbuild": "^0.14.11",
+    "mdx-bundler": "^8.0.1",
     "mocha": "^9.1.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -24,6 +31,7 @@
   },
   "devDependencies": {
     "@remix-run/dev": "^1.1.1",
+    "@types/chai": "^4.3.0",
     "@types/expect": "^24.3.0",
     "@types/mocha": "^9.0.0",
     "@types/react": "^17.0.24",
