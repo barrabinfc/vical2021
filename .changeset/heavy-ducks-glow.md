@@ -1,5 +1,5 @@
 ---
-"@vical/web": patch
+"@vical/app": patch
 ---
 
 Feature/vic-65-add-continuous-deploy-build-workflow
