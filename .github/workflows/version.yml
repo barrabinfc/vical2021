@@ -1,7 +1,7 @@
-name: Deploy
+name: Bump Version
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
@@ -9,14 +9,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
-    name: Deploy
+  publish:
+    name: Version
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
         with:
-          fetch-depth: 1
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
 
       - uses: abbbi/github-actions-tune@v1
 
@@ -34,7 +35,15 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install Dependencies
-        run: cd app && yarn install --frozen-lockfile
+        run: yarn install
 
-      - name: Run build
-        run: cd app && yarn build
+      - name: Create Changeset
+        run: yarn changeset version
+
+      - name: Commit changelog
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with: 
+          commit_message: "bump version"
+
+
+      
