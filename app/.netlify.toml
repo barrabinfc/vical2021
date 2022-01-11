@@ -9,7 +9,7 @@
 
 [[redirects]]
   from = "/*"
-  to = "/build"
+  to = "/.netlify/functions/server"
   status = 200
 
 [[headers]]
