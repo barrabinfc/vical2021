@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "vical-app",
+  "name": "@vical/app",
   "version": "0.0.1",
   "description": "",
   "license": "",
