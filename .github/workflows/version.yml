@@ -1,4 +1,4 @@
-name: Publish
+name: Version
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   publish:
-    name: Publish
+    name: Version
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
