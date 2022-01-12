@@ -4,6 +4,7 @@
 export type Post = {
   slug: string;
   title: string;
+  content: string;
 };
 
 export function getPosts() {
@@ -11,10 +12,12 @@ export function getPosts() {
     {
       slug: "first post",
       title: "First Post",
+      content: "",
     },
     {
       slug: "second post",
       title: "second Post",
+      content: "",
     },
   ];
   return posts;

@@ -43,7 +43,7 @@ jobs:
       - name: Commit changelog
         uses: stefanzweifel/git-auto-commit-action@v4
         with: 
-          commit_message: "bump version"
+          commit_message: "docs(changeset): changelogs and version bump"
 
 
       

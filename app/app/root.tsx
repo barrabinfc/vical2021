@@ -7,10 +7,15 @@ import {
   Scripts,
   ScrollRestoration,
 } from "remix";
-import type { MetaFunction } from "remix";
+import { MetaFunction } from "remix";
+
+import pkg from "../package.json";
 
 export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
+  return {
+    title: `${pkg.name}`,
+    version: pkg.version,
+  };
 };
 
 export default function App() {
