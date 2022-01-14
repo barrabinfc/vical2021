@@ -1,7 +1,13 @@
-import path from "path";
-import fs from "fs/promises";
+// import path from "path";
+// import fs from "fs/promises";
 
-import { Post } from "~/features/posts";
+// import { Post } from "~/features/posts";
+
+type Post = {
+  slug: string;
+  title: string;
+  content: string;
+};
 
 /**
  * A garden post (a garden is like a wiki page)

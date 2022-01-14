@@ -1,5 +1,5 @@
-import { resolve } from 'path';
-import { MarkdownPageReference, Page, toPage } from '../page';
+import { resolve } from "path";
+import { Page } from "../page";
 // import { listMarkdown } from '../listMarkdown';
 
 /**
@@ -7,7 +7,8 @@ import { MarkdownPageReference, Page, toPage } from '../page';
  * @return {MarkdownPage[]}
  * @deprecated
  */
-export const listProjects = async (markdownFiles: MarkdownPageReference[]): Promise<Page[]> => {
+export const listProjects = async (): // markdownFiles: MarkdownPageReference[]
+Promise<Page[]> => {
   /** @ts-ignore */
   const cwd = resolve(`src/pages/projects`);
   if (!/projects$/.test(cwd)) {
@@ -18,6 +19,9 @@ export const listProjects = async (markdownFiles: MarkdownPageReference[]): Prom
   // const markdownFiles = [...(await listMarkdown(cwd))];
   // console.info('import.meta => ', import.meta);
   // const markdownFiles = Astro.fetchContent(cwd);
-  // console.info('markdownFiles =>', markdownFiles);
-  return markdownFiles.map((page) => toPage(page, cwd)).filter((markdownPage) => markdownPage.published);
+  // // console.info('markdownFiles =>', markdownFiles);
+  // return markdownFiles
+  //   .map((page) => toPage(page, cwd))
+  //   .filter((markdownPage) => markdownPage.published);
+  return [];
 };

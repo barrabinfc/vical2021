@@ -1,27 +1,35 @@
-import { useLoaderData } from "remix";
-import type { LoaderFunction } from "remix";
+import { useLoaderData, LoaderFunction, useParams } from "remix";
 import htmr from "htmr";
+import { getMDXComponent } from "mdx-bundler/client";
 
 import { getGardenPosts } from "~/features/garden";
-import { Post } from "~/features/posts";
+import { getPost, PostReference } from "~/features/posts";
+import { Page } from "~/lib/page/Page";
+import { renderMDX } from "~/lib/md";
+import React from "react";
 
-export const loader: LoaderFunction = async ({ params }) => {
-  const posts = await getGardenPosts();
-  for(let post of posts){
-    if(post.slug === params.slug){
-      return post;
-    }
-  }
-  return null
+import { Simplify } from "type-fest";
+
+export const loader: LoaderFunction = async ({
+  params,
+}): Promise<{ post: Page; code: string }> => {
+  const post = await getPost<Page["attributes"]>(params.slug || "");
+  const body = await renderMDX(post.body);
+  return { post: post, code: body.code };
 };
 
 export default function GardenSlug() {
-  const post = useLoaderData<Post>();
+  let { post, code } = useLoaderData();
+  let { slug } = useParams();
+  const Component = React.useMemo(() => getMDXComponent(code), [code]);
+
   return (
     <section>
-      <h1>{post.title}</h1>
-      <pre>Post - {post.slug}</pre>
-      {htmr(post.content)}
+      {/* {post} */}
+      <h1>Post {slug}</h1>
+      <pre>{JSON.stringify(post.attributes, null, "\t")}</pre>
+      <pre>{post.body}</pre>
+      {<Component />}
     </section>
   );
 }

@@ -1,18 +1,18 @@
 // import { test, suite } from 'uvu';
 import { expect } from "chai";
 
-// import { isPage, Page, PageContent } from './Page';
+import { isPage, Page } from "./Page";
 // import { pagePathToUrl } from './pagePathToUrl';
 
-// export const expectPageInterface = (page: Page): void => {
-//   const errors: string[] = [];
-//   isPage(page, { errors });
-//   if (errors.length) {
-//     expect.fail(false, true, errors.join('\n'), 'isPage');
-//   } else {
-//     expect(true).to.be.true;
-//   }
-// };
+export const expectPageInterface = (page: Page): void => {
+  const errors: string[] = [];
+  isPage(page, { errors });
+  if (errors.length) {
+    expect.fail(false, true, errors.join("\n"), "isPage");
+  } else {
+    expect(true).to.be.true;
+  }
+};
 
 // const pageContent: PageContent = {
 //   title: 'hello world',

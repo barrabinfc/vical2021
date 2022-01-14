@@ -1,2 +1,2 @@
-export type { Post } from "./posts";
-export { getPosts } from "./posts";
+export type { PostReference } from "./posts";
+export { getPosts , getPost } from "./posts";

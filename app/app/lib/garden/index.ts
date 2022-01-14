@@ -1,5 +1,5 @@
-import { resolve, relative } from 'path';
-import { Page, toPage } from '../page';
+import { resolve, relative } from "path";
+import { Page } from "../page";
 
 /**
  * Fetch all garden posts in the folder 'src/pages/garden'.
