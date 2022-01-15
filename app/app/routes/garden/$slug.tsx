@@ -1,21 +1,28 @@
-import { useLoaderData, LoaderFunction, useParams } from "remix";
-import htmr from "htmr";
+import { useLoaderData, LoaderFunction, useParams, MetaFunction } from "remix";
 import { getMDXComponent } from "mdx-bundler/client";
 
-import { getGardenPosts } from "~/features/garden";
-import { getPost, PostReference } from "~/features/posts";
+import { getPost } from "~/features/posts";
 import { Page } from "~/lib/page/Page";
 import { renderMDX } from "~/lib/md";
 import React from "react";
 
-import { Simplify } from "type-fest";
+import { SetRequired, Simplify } from "type-fest";
 
 export const loader: LoaderFunction = async ({
   params,
 }): Promise<{ post: Page; code: string }> => {
-  const post = await getPost<Page["attributes"]>(params.slug || "");
+  const post = await getPost<Page["attributes"]>(params["slug"] || "");
   const body = await renderMDX(post.body);
+
   return { post: post, code: body.code };
+};
+
+export const meta: MetaFunction = ({ data }) => {
+  const post: Page = data.post;
+  return {
+    title: post.attributes.title ?? "",
+    description: post.attributes.description ?? "",
+  };
 };
 
 export default function GardenSlug() {

@@ -11,12 +11,19 @@ import { MetaFunction } from "remix";
 
 import pkg from "../package.json";
 
+import sharedStyles from "~/styles/shared.css";
+
 export const meta: MetaFunction = () => {
   return {
     title: `${pkg.name}`,
     version: pkg.version,
   };
 };
+
+// image("https://media.giphy.com/media/JsKCmPf8a96pl0Zyol/giphy.gif");
+export function links() {
+  return [{ rel: "stylesheet", href: sharedStyles, test: "alo" }];
+}
 
 export default function App() {
   const matches = useMatches();

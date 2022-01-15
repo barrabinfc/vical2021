@@ -1,5 +1,12 @@
 # @vical/app
 
+## 0.1.0
+
+### Minor Changes
+
+- Enable posts with markdown
+- Adding skeleton layout and css
+
 ## 0.0.3
 
 ### Patch Changes

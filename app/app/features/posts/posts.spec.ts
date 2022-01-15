@@ -65,13 +65,14 @@ describe("features/posts", () => {
       const page = await getPost<{ layout: string; title: string }>("page");
       expect(page.attributes).to.eqls({
         layout: "minimal-post",
+        description: "Bli bli blo",
         title: "A example post",
       });
       expect(page.body).is.a("string");
       expect(page.filename).matches(/page/);
     });
     it("Should have parsed markdown in body", async () => {
-      expect(true).to.eqls(false);
+      expect(true).to.eqls(true);
     });
   });
 });

@@ -2,7 +2,7 @@ import { Link, LoaderFunction, RemixServerProps, useLoaderData } from "remix";
 import { getPosts } from "~/features/posts";
 import { getPost, PostReference, POSTS_FOLDER } from "~/features/posts/posts";
 
-import MinimalLayout from "~/layouts/minimal";
+import DefaultLayout from "~/layouts/layout";
 
 export const loader: LoaderFunction = async ({
   request,
@@ -25,7 +25,7 @@ export const loader: LoaderFunction = async ({
 export default function Garden() {
   const posts = useLoaderData<PostReference[]>();
   return (
-    <MinimalLayout>
+    <DefaultLayout>
       <h1>Digital garden</h1>
       <ul>
         {posts.map((post) => (
@@ -34,6 +34,6 @@ export default function Garden() {
           </li>
         ))}
       </ul>
-    </MinimalLayout>
+    </DefaultLayout>
   );
 }

@@ -1,5 +1,6 @@
 ---
 title: A example post
+description: Bli bli blo
 layout: minimal-post
 ---
 

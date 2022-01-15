@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@vical/app",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "",
   "license": "",
   "scripts": {
@@ -16,7 +16,8 @@
     "postdeploy": "netlify deploy",
     "postinstall": "remix setup node",
     "start": "remix-serve build",
-    "test": "ts-mocha --paths"
+    "test": "ts-mocha --parallel --paths --exit -r source-map-support/register",
+    "test:e2e": "ts-mocha --paths --exit -r source-map-support/register ./tests/**.ts -f e2e"
   },
   "dependencies": {
     "@netlify/functions": "^0.10.0",
@@ -24,18 +25,27 @@
     "@remix-run/react": "^1.1.1",
     "@remix-run/serve": "^1.1.1",
     "@types/chai-as-promised": "^7.1.4",
+    "@types/jest-image-snapshot": "^4.3.1",
     "@types/mocha": "^9.0.0",
     "chai-as-promised": "^7.1.1",
+    "chai-image": "^3.0.0",
     "esbuild": "^0.14.11",
+    "expect": "^27.4.6",
+    "expect-mocha-image-snapshot": "^2.0.14",
     "front-matter": "^4.0.2",
     "htmr": "^1.0.1",
+    "jest-image-snapshot": "^4.5.1",
     "mdx-bundler": "^8.0.1",
-    "mocha": "^9.1.3",
+    "mocha": "^9.1.4",
+    "mocha-chai-jest-snapshot": "^1.1.3",
     "npm": "^8.3.1",
+    "open-props": "^1.1.3",
+    "puppeteer": "^13.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "remix": "^1.1.1",
     "should": "^13.2.3",
+    "source-map-support": "^0.5.21",
     "totalist": "^2.0.0",
     "ts-node": "^10.4.0",
     "typanion": "^3.7.1"
@@ -48,6 +58,7 @@
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
     "chai": "^4.3.4",
+    "chai-image": "^3.0.0",
     "ts-mocha": "^8.0.0",
     "type-fest": "^2.9.0",
     "typescript": "^4.1.2"
