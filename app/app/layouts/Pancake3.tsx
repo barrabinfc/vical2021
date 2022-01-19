@@ -3,11 +3,11 @@ import React from "react";
 export default function Pancake3({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header className="header">header</header>
+      <header className="header"></header>
       <main className="main" id="main" tabIndex={-1}>
         {children}
       </main>
-      <footer className="footer">footer</footer>
+      <footer className="footer"></footer>
     </>
   );
 }

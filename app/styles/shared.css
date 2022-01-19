@@ -1,0 +1,7 @@
+@import "open-props";
+
+/* coisa */
+@import "./reset.css";
+@import "./typography/typography.css";
+@import "./colors.css";
+@import "./buttons.pcss";

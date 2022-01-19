@@ -22,7 +22,7 @@
     "jsx": "react-jsx",
     "moduleResolution": "node",
 
-    "typeRoots": ["./types"],
+    "typeRoots": ["types"],
     "types": ["mocha"],
 
     "baseUrl": ".",

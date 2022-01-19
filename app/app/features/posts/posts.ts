@@ -45,7 +45,7 @@ export async function getPost<T = Page>(slug: string): Promise<MDOutput<T>> {
   /**
    * Matches the slug with filename
    */
-  const slugFilenameMatcher = new RegExp(slug.toLowerCase() + ".mdx?$", "gm");
+  const slugFilenameMatcher = new RegExp(slug.toLowerCase() + ".mdx?$", "gmi");
   const files = await getMatchingFiles(POSTS_FOLDER, [slugFilenameMatcher]);
 
   if (!files.length) {

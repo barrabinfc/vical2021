@@ -1,3 +1,2 @@
-export type { GardenPost } from "./garden";
-
-export { getGardenPosts } from "./garden";
+// export { getGardenPosts } from "./garden";
+export { getGardenPost, getGardenPosts } from "./garden";

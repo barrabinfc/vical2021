@@ -1,45 +1,40 @@
-// import path from "path";
-// import fs from "fs/promises";
+import { resolve } from "path";
+import { readFile } from "fs/promises";
 
-// import { Post } from "~/features/posts";
+import { getMatchingFiles } from "~/lib/fs";
+import { Page } from "~/lib/page";
+import { parse as parseMarkdown, MDOutput } from "~/lib/md";
 
-type Post = {
-  slug: string;
-  title: string;
-  content: string;
-};
+export const GARDEN_POSTS_FOLDER = resolve(process.cwd(), "posts/garden");
+
+export async function getGardenPosts(): Promise<string[]> {
+  return await getMatchingFiles(GARDEN_POSTS_FOLDER, [/\.mdx?$/]);
+}
 
 /**
- * A garden post (a garden is like a wiki page)
+ * Retrieve a single Post indicated by `slug` from filesystem
+ *
+ * @throws {Error}
  */
-export type GardenPost = Post;
+export async function getGardenPost<T = Page>(
+  slug: string
+): Promise<MDOutput<T>> {
+  /**
+   * Matches the slug with filename
+   */
+  const slugFilenameMatcher = new RegExp(slug.toLowerCase() + ".mdx?$", "gmi");
+  const files = await getMatchingFiles(GARDEN_POSTS_FOLDER, [
+    slugFilenameMatcher,
+  ]);
 
-export async function getGardenPosts() {
-  // const gardenPath = path.join(__dirname, "posts");
+  if (!files.length) {
+    throw new Error(`No post found for slug: ${slug}`);
+  }
+  const filePath = files[0];
+  const content = await readFile(filePath, "utf8");
 
-  // const dir = await fs.readdir(gardenPath);
-
-  const posts: Post[] = [
-    {
-      slug: "first post",
-      title: "First Post",
-      content: "<h3>This is the 1 post</h3>",
-    },
-    {
-      slug: "second post",
-      title: "second Post",
-      content: "<h3>This is the 2 post</h3>",
-    },
-    {
-      slug: "third post",
-      title: "third Post",
-      content: "<h3>This is the 3 post</h3>",
-    },
-    {
-      slug: "4 post",
-      title: "4 Post",
-      content: "<h3>This is the 4 post</h3>",
-    },
-  ];
-  return posts;
+  return parseMarkdown<T>({
+    filename: filePath,
+    body: content.toString(),
+  });
 }

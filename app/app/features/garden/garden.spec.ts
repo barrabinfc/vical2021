@@ -1,4 +1,4 @@
-import { GardenPost, getGardenPosts } from "./garden";
+import { getGardenPosts } from "./garden";
 import { expect } from "chai";
 
 describe("features/garden", function() {

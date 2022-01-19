@@ -5,5 +5,8 @@
  */
 module.exports = {
   recursive: false,
-  spec: ["app/**/*.spec.ts"], // the positional arguments!
+  spec: [
+    // "tests/**/*.spec.mjs",
+    "app/**/*.spec.ts",
+  ], // the positional arguments!
 };

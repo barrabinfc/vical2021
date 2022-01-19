@@ -22,7 +22,7 @@ export const meta: MetaFunction = () => {
 
 // image("https://media.giphy.com/media/JsKCmPf8a96pl0Zyol/giphy.gif");
 export function links() {
-  return [{ rel: "stylesheet", href: sharedStyles, test: "alo" }];
+  return [{ rel: "stylesheet", href: sharedStyles }];
 }
 
 export default function App() {

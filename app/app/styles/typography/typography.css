@@ -1,0 +1,117 @@
+@font-face {
+  font-family: manrope vf;
+  src: url(/fonts/manrope/variable/Manrope[wght].woff2) format('woff2-variations');
+  font-style: normal;
+  font-variation-settings: 'wght' 500;
+  font-variation-ligatures: normal;
+  font-weight: 200 800;
+}
+
+@font-face {
+  font-family: Manrope;
+  src: url(/fonts/manrope/webfonts/Manrope-ExtraLight.woff2) format('woff2');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: Manrope;
+  src: url(/fonts/manrope/webfonts/Manrope-Light.woff2) format('woff2');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: Manrope;
+  src: url(/fonts/manrope/webfonts/Manrope-Regular.woff2) format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Manrope;
+  src: url(/fonts/manrope/webfonts/Manrope-Medium.woff2) format('woff2');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Manrope;
+  src: url(/fonts/manrope/webfonts/Manrope-SemiBold.woff2) format('woff2');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: Manrope;
+  src: url(/fonts/manrope/webfonts/Manrope-Bold.woff2) format('woff2');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Manrope;
+  src: url(/fonts/manrope/webfonts/Manrope-ExtraBold.woff2) format('woff2');
+  font-weight: 800;
+}
+
+:root {
+  --font-sans: manrope vf, Manrope, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+    Droid Sans, Helvetica Neue, sans-serif;
+}
+
+body,
+html,
+input {
+  font-family: manrope vf, Manrope, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+    Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-1); /** Default is 1em = 16px */
+
+  color: var(--text1);
+}
+
+/** Disable the default margin of headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+a:-webkit-any-link {
+  color: inherit;
+  text-decoration: none;
+
+  outline-offset: 4px;
+}
+
+a[href] {
+  color: var(--link);
+  &:visited {
+    color: var(--link-visited);
+  }
+}
+
+a._no-link_1s0as_42 {
+  color: #000;
+  color: initial;
+  &:visited {
+    color: #000;
+    color: initial;
+  }
+}
+
+._headline_1s0as_49 {
+  font-size: var(--font-size-fluid-3);
+}
+
+/** h2 and beyound */
+
+._subheadline_1s0as_54 {
+  font-size: var(--font-size-fluid-1);
+}
+
+._caption_1s0as_58 {
+  color: var(--text2);
+  font-size: var(--font-size-fluid-0);
+  font-weight: normal;
+}
