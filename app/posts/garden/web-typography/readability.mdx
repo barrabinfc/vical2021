@@ -59,15 +59,18 @@ function avoidWidowedWords(text: string, widows: number = 3): string {
 This is called [Line clamping](https://caniuse.com/?search=line-clamp), and it works in all major browsers in 2021 🥰.
 The feature is behind prefix `-webkit` and only works in combination with `display: -webkit-box;`
 
+
 <style>
+{`
   .titleMax2Lines {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2; /* number of lines to show */
   -webkit-box-orient: vertical;
-}
+`}
 </style>
+
 
 ```css
 .titleMax2Lines {
