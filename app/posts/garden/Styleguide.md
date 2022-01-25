@@ -130,7 +130,7 @@ Nested bulleted lists, deeper levels:
 
 And a video
 
-<iframe width="100%" height="315" src="https://www.youtube-nocookie.com/embed/ntk8XsxVDi0" title="T-Cell" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="100%" height="315" loading="lazy" src="https://www.youtube-nocookie.com/embed/ntk8XsxVDi0" title="T-Cell" frameborder="0" allow="autoplay; picture-in-picture" allowfullscreen ></iframe>
 
 ### A two column page
 

@@ -64,6 +64,6 @@ hr {
 
 /** Create a root stacking ctx */
 
-#root {
+#_root_1n1pt_1 {
   isolation: isolate;
 }

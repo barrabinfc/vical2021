@@ -1,5 +1,13 @@
 import { Outlet } from "remix";
-import { DefaultLayout } from "~/layouts/layout";
+import { DefaultLayout, links as layoutLinks } from "~/layouts/layout";
+
+export function links() {
+  return [...layoutLinks()];
+}
+
+export const handle = {
+  hydrate: true,
+};
 
 export default function Garden() {
   return (

@@ -27,7 +27,6 @@ export const meta: MetaFunction = ({ data }) => {
   return {
     title: post.attributes.title ?? "",
     description: post.attributes.description ?? "",
-    styles: styles,
   };
 };
 
@@ -37,7 +36,7 @@ export default function GardenSlug() {
   const Component = React.useMemo(() => getMDXComponent(code), [code]);
 
   return (
-    <section>
+    <section className="post">
       <pre>{JSON.stringify(styles)}</pre>
       <p>{styles}</p>
       {<Component />}

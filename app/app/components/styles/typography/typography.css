@@ -91,7 +91,7 @@ a[href] {
   }
 }
 
-a.no-link {
+a._no-link_1s0as_42 {
   color: #000;
   color: initial;
   &:visited {
@@ -100,17 +100,17 @@ a.no-link {
   }
 }
 
-.headline {
+._headline_1s0as_49 {
   font-size: var(--font-size-fluid-3);
 }
 
 /** h2 and beyound */
 
-.subheadline {
+._subheadline_1s0as_54 {
   font-size: var(--font-size-fluid-1);
 }
 
-.caption {
+._caption_1s0as_58 {
   color: var(--text2);
   font-size: var(--font-size-fluid-0);
   font-weight: normal;

@@ -1,0 +1,111 @@
+/**
+ * Semantic Collapsible Navigation 
+ *  ul[role="menu"] **hidden** <-- Hidden for mobile users, needs click to appear.
+ */
+
+/* Container */
+.nav {
+  display: flex;
+  align-items: center;
+}
+/** Items container */
+.nav ul[role="menu"] {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav ul li a {
+  display: block;
+  width: max-content;
+
+  /* @include h.link-mark(); */
+  padding: 0 0.5em;
+}
+
+/** Show items */
+.toggleNavButton {
+  appearance: none;
+  cursor: pointer;
+  font-size: 25px;
+  border: none;
+  background: none;
+  margin: 0;
+  color: inherit;
+}
+.toggleNavButton svg {
+  display: block;
+  fill: inherit;
+}
+
+@custom-media --md-n-above    (width >= 768px)
+@media (--md-n-below) {
+  .nav ul[role="menu"] {
+    display: block;
+    position: absolute;
+    top: var(--headerH);
+    right: 0;
+    width: 100%;
+    height: auto;
+    opacity: 1;
+
+    padding: 1rem 0;
+    padding-top: 0;
+
+    color: var(--text1);
+    background-color: var(--surface1);
+
+    transition: clip-path 300ms ease;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  .nav ul[role="menu"][hidden] {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+  }
+  .nav ul li a {
+    padding: 0.5rem 1.5rem;
+  }
+}
+@media (--md-n-above) {
+  .nav ul[role="menu"] {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .nav ul li a {
+    padding: 0.5rem;
+  }
+
+  .nav ul li a:hover {
+    color: var(--brand);
+  }
+
+  .toggleNavButton {
+    display: none;
+  }
+}
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+@keyframes slideFromTop {
+  from {
+    transform: translateY(-50px) scale(1.005);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes growFromTop {
+  from {
+    opacity: 1;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+  }
+
+  to {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
