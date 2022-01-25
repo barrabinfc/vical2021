@@ -2,6 +2,7 @@
 
 /* coisa */
 @import "./reset.css";
+@import "./media.css";
 @import "./typography/typography.css";
 @import "./colors.css";
 @import "./buttons.pcss";
