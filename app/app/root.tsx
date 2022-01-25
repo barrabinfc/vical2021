@@ -7,9 +7,19 @@ import {
   Scripts,
   ScrollRestoration,
 } from "remix";
-import { MetaFunction } from "remix";
+import { MetaFunction, useLoaderData } from "remix";
 
 import pkg from "../package.json";
+
+export function loader() {
+  return {
+    ENV: {
+      FF: {
+        ServiceWorker: Boolean(process.env["FF_ServiceWorker"]),
+      },
+    },
+  };
+}
 
 export const meta: MetaFunction = () => {
   return {
@@ -22,6 +32,7 @@ export const meta: MetaFunction = () => {
  * Main entry point of web app
  */
 export default function App() {
+  const data = useLoaderData();
   const matches = useMatches();
 
   // If at least one route wants to hydrate, this will return true
@@ -38,6 +49,16 @@ export default function App() {
       <body>
         <Outlet />
         <ScrollRestoration />
+
+        {/**
+         * Browsers should be aware of environment variables and feature flags
+         * @see window.ENV['key']
+         */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+          }}
+        />
 
         {/* include the scripts, or not! */}
         {includeScripts ? <Scripts /> : null}

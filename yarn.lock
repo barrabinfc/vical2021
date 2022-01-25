@@ -2616,6 +2616,11 @@ domutils@^2.5.2:
     domelementtype "^2.2.0"
     domhandler "^4.2.0"
 
+dotenv@^14.3.1:
+  version "14.3.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-14.3.1.tgz#c82cfa57792b6081eb82de19fabc59d0fe2ad4d2"
+  integrity sha512-qMpNS0qiX1sFnBTn9zcXxL+IPcnb3WJni85/R60vSAE4V0TBWj9pyrq0dOoK87B4MdYkAUWU8WL4W/4OzYn9LQ==
+
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
