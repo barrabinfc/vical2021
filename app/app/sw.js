@@ -47,6 +47,8 @@ registerRoute(
   })
 );
 
+registerRoute("https://unpkg.com/open-props", new StaleWhileRevalidate());
+
 /**
  * Transform css
  */

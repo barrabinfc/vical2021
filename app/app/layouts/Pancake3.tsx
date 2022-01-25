@@ -6,6 +6,7 @@ export const links = () => [...HeaderLinks()];
 export const handle = {
   hydrate: true,
 };
+
 export default function Pancake3({ children }: { children: React.ReactNode }) {
   return (
     <>

@@ -11,8 +11,6 @@ import { MetaFunction } from "remix";
 
 import pkg from "../package.json";
 
-import sharedStyles from "~/styles/shared.css";
-
 export const meta: MetaFunction = () => {
   return {
     title: `${pkg.name}`,
@@ -20,11 +18,9 @@ export const meta: MetaFunction = () => {
   };
 };
 
-// image("https://media.giphy.com/media/JsKCmPf8a96pl0Zyol/giphy.gif");
-export function links() {
-  return [{ rel: "stylesheet", href: sharedStyles }];
-}
-
+/**
+ * Main entry point of web app
+ */
 export default function App() {
   const matches = useMatches();
 

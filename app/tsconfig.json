@@ -1,8 +1,11 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+  "$schema": "http://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "strict": true,
     "target": "ES2019",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "exactOptionalPropertyTypes": true,
@@ -30,6 +33,7 @@
       "~/*": ["./app/*"]
     }
   },
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
   "ts-node": {
     "require": ["tsconfig-paths/register"]
   }

@@ -37,9 +37,7 @@ export default function GardenSlug() {
 
   return (
     <section className="post">
-      <pre>{JSON.stringify(styles)}</pre>
-      <p>{styles}</p>
-      {<Component />}
+      <Component />
     </section>
   );
 }

@@ -7,14 +7,14 @@
   "scripts": {
     "bump": "cd ../ && yarn changeset tag",
     "build:sw": "NODE_ENV=production rollup -c",
-    "build:css": "postcss styles --base styles --dir app/styles --env production",
+    "build:css": "cp app/styles/**/*.css public/build/_assets",
     "build:backup": "mkdir -p backup && cp -r netlify/functions/server public/build backup/",
     "build:clean": "rm -rf netlify/functions/server/build public/build",
     "prebuild": "npm run bump",
     "build": "remix build",
-    "postbuild": "npm run build:sw && npm run build:css",
+    "postbuild": "npm run build:sw && npm run",
     "dev": "remix dev",
-    "dev:css": "postcss styles --base styles --dir app/styles -w",
+    "dev:css": "npm run build:css",
     "dev:netlify": "cross-env NODE_ENV=development netlify dev",
     "dev:sw": "rollup -c --watch",
     "predev": "npm run dev:sw &",
@@ -27,6 +27,8 @@
     "test:e2e": "ts-mocha --paths --exit -r source-map-support/register ./tests/**.ts -f e2e"
   },
   "dependencies": {
+    "@microsoft/api-documenter": "^7.15.1",
+    "@microsoft/api-extractor": "^7.19.4",
     "@netlify/functions": "^0.10.0",
     "@remix-run/netlify": "^1.1.1",
     "@remix-run/react": "^1.1.1",

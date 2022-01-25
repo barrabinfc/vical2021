@@ -10,20 +10,20 @@ description: Styleguide example
 publishedAt: 2021-16-10
 ---
 
-<div class="pad4">
-  <div class="grid2">
-    <div class="item grid2 pad4">
-      <div class="surface surface1 item">Surface 1</div>
-      <div class="surface surface2 item">Surface 2</div>
-      <div class="surface surface3 item">Surface 3</div>
-      <div class="surface surface4 item">Surface 4</div>
+<div className="pad4">
+  <div className="grid2">
+    <div className="item grid2 pad4">
+      <div className="surface surface1 item">Surface 1</div>
+      <div className="surface surface2 item">Surface 2</div>
+      <div className="surface surface3 item">Surface 3</div>
+      <div className="surface surface4 item">Surface 4</div>
     </div>
-    <div class="item fl-y-center pad4">
-      <div class="text1">
+    <div className="item fl-y-center pad4">
+      <div className="text1">
         <h1>● Text color 1</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia nibh eu congue ullamcorper. Vestibulum vitae augue pharetra justo fringilla dignissim.</p>
       </div>
-      <div class="text2">
+      <div className="text2">
         <h2>● Text color 2</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia nibh eu congue ullamcorper. Vestibulum vitae augue pharetra justo fringilla dignissim.</p>
       </div>
@@ -130,11 +130,11 @@ Nested bulleted lists, deeper levels:
 
 And a video
 
-<iframe width="100%" height="315" loading="lazy" src="https://www.youtube-nocookie.com/embed/ntk8XsxVDi0" title="T-Cell" frameborder="0" allow="autoplay; picture-in-picture" allowfullscreen ></iframe>
+<iframe width="100%" height="315" loading="lazy" src="https://www.youtube-nocookie.com/embed/ntk8XsxVDi0" title="T-Cell" frameBorder="0" allow="autoplay; picture-in-picture" allowFullScreen ></iframe>
 
 ### A two column page
 
-<div class="twocolumn-page">
+<div className="twocolumn-page">
 
 Language model pre-training has been shown tobe effective for improving many natural languageprocessing tasks [^2]. These include sentence-level tasks such as
 natural language inference[^3] and paraphrasing (Dolanand Brockett, 2005), which aim to predict the re-
