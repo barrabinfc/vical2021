@@ -1,8 +1,5 @@
 .post {
-  max-width: 1440px;
   position: relative;
-  width: 80vw;
-  width: clamp(16rem, 80vw, 90rem);
   margin: 3em auto;
 }
 

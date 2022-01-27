@@ -211,7 +211,7 @@ html {
 
   --text1-dark: var(--gray-1);
   --text2-dark: var(--gray-3);
-   --textInvert-dark: var(--gray-9);
+   --textinvert-dark: var(--gray-9);
 
   --link-dark: var(--indigo-3);
   --link-visited-dark: var(--grape-3);
@@ -236,7 +236,7 @@ html {
   --link: var(--link-light);
   --link-visited: var(--link-visited-light);
 
-  --surface1: var(--bg-light)
+  --surface1: var(--bg-light);
   --surface2: var(--bg-subtle-light);
   --surface3: var(--bg-inset-light);
   --surface4: var(--bg-emphasis-light);
@@ -393,11 +393,16 @@ a.no-link:visited {
   --headerH: 64px;
 }
 
-/* Reusable wrapper */
+/* 
+ * Fluid wrapper (of a page)
+ *  - margin of 5% to each horizontal edge
+ */
 
-.wrapper {
-  width: 90%;
-  margin: 0 auto;
+.wrapper-fluid {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  width: clamp(16rem, 90vw, 76rem);
 }
 
 .visually-hidden {

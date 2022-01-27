@@ -9,10 +9,15 @@
   --headerH: 64px;
 }
 
-/* Reusable wrapper */
-.wrapper {
-  width: 90%;
-  margin: 0 auto;
+/* 
+ * Fluid wrapper (of a page)
+ *  - margin of 5% to each horizontal edge
+ */
+.wrapper-fluid {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  width: clamp(16rem, 90vw, 76rem);
 }
 
 .visually-hidden {

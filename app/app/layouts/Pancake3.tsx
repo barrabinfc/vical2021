@@ -10,7 +10,7 @@ export const handle = {
 export default function Pancake3({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header>
+      <header className="wrapper-fluid">
         <Header sticky={false} />
       </header>
       <main className="main" id="main" tabIndex={-1}>

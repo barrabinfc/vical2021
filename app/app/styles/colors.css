@@ -27,7 +27,7 @@ html {
 
   --text1-dark: var(--gray-1);
   --text2-dark: var(--gray-3);
-   --textInvert-dark: var(--gray-9);
+   --textinvert-dark: var(--gray-9);
 
   --link-dark: var(--indigo-3);
   --link-visited-dark: var(--grape-3);
@@ -52,7 +52,7 @@ html {
   --link: var(--link-light);
   --link-visited: var(--link-visited-light);
 
-  --surface1: var(--bg-light)
+  --surface1: var(--bg-light);
   --surface2: var(--bg-subtle-light);
   --surface3: var(--bg-inset-light);
   --surface4: var(--bg-emphasis-light);
