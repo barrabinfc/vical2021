@@ -1,10 +1,12 @@
 .header {
+  --headerH: 64px;
+
   position: relative;
   display: flex;
   height: var(--headerH);
-  padding: calc(4 * var(--gap));
+  padding: var(--size-2);
 
-  background-color: var(--surface1-translucent);
+  /* background-color: var(--indigo-5); */
   // @include bp.breakpoint(medium, min) {
   //   padding: calc(var(--gap) * 4) 4em;
   // }
@@ -17,8 +19,8 @@
 }
 
 .branding {
-  font-size: var(--h5);
-  font-weight: var(--title-weight);
+  font-size: var(--font-size--fluid-2);
+  font-weight: var(--font-weight-4);
   flex: 1 1 100%;
 
   display: flex;
@@ -62,9 +64,9 @@ a.skipmain:focus {
   outline-width: 2px;
   overflow: auto;
   margin: 0 35%;
-  padding: var(--gap);
+  padding: var(--size-2);
 
-  font-size: var(--h3);
+  font-size: var(----font-size-fluid-2);
   font-weight: bold;
   text-align: center;
   display: flex;

@@ -2,16 +2,22 @@
   position: relative;
   margin: 3em auto;
 
-  /* a:not(.footnote-ref, .footnote-backref) {
-    @include h.link-text;
-  } */
-  a.footnote-backref {
-    padding: 0 var(--gap);
-    text-decoration: none;
+  & > h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 2em;
   }
-  a.footnote-back {
-    text-decoration: none;
-    margin-bottom: 0;
+  & > h1 {
+    font-size: var(--font-size-fluid-3);
+  }
+  & > h2 {
+    font-size: var(--font-size-fluid-2);
+  }
+  & > h3 {
+    font-size: var(--font-size-fluid-1);
   }
 
   img {
@@ -19,6 +25,7 @@
     display: flex;
     margin: 0 auto;
   }
+
   figcaption {
     text-align: center;
     color: var(--text2);
@@ -116,6 +123,7 @@
     padding-left: calc(2 * var(--gap));
     position: relative;
   }
+
   blockquote > p {
     font-size: inherit;
     font-style: italic;

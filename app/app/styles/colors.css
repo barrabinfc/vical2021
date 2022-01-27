@@ -1,6 +1,9 @@
 html {
-  /** Light */
+  /* -------------------------------------------------------------------------- */
+  /* --------------------------------- Light --------------------------------- */
+  /* -------------------------------------------------------------------------- */
   --brand-light: var(--orange-6);
+  --brand-emphasis-light: var(--green-6);
 
   /* Foreground elements are text and icons */
   --fg-light: var(--gray-8);
@@ -22,7 +25,9 @@ html {
   --surface-shadow-light: 200 10% 20%;
   --shadow-strength-light: 5%;
 
-  /** Dark */
+  /* -------------------------------------------------------------------------- */
+  /* --------------------------------- * Dark --------------------------------- */
+  /* -------------------------------------------------------------------------- 
   --brand-dark: var(--orange-3);
 
   --text1-dark: var(--gray-1);
@@ -40,27 +45,29 @@ html {
 
   --surface-shadow-dark: 200 50% 3%;
   --shadow-strength-dark: 8%;
+  */
 }
 
 :root {
   --brand: var(--brand-light);
+  --brand-emphasis: var(----brand-emphasis-light);
 
-  --text1: var(--fg-light);
-  --text2: var(--fg-muted-light);
-  --textInvert: var(--fg-emphasis-light);
+  --fg: var(--fg-light);
+  --fg-muted: var(--fg-muted-light);
+  --fg-emphasis: var(--fg-emphasis-light);
 
   --link: var(--link-light);
   --link-visited: var(--link-visited-light);
 
-  --surface1: var(--bg-light);
-  --surface2: var(--bg-subtle-light);
-  --surface3: var(--bg-inset-light);
-  --surface4: var(--bg-emphasis-light);
+  --bg: var(--bg-light);
+  --bg-subtle: var(--bg-subtle-light);
+  --bg-inset: var(--bg-inset-light);
+  --bg-emphasis: var(--bg-emphasis-light);
 
-  --surfaceInvert: var(--surfaceInvert-light);
+  /* --surfaceInvert: var(--surfaceInvert-light); */
 
-  --surface-shadow: var(--surface-shadow-light);
-  --shadow-strength: var(--shadow-strength-light);
+  /* --surface-shadow: var(--surface-shadow-light); */
+  /* --shadow-strength: var(--shadow-strength-light); */
 }
 
 /**
@@ -86,3 +93,18 @@ html {
   }
 }
 */
+
+/** Colorscheme */
+.bg {
+  background-color: var(--bg);
+}
+.bg.subtle {
+  background-color: var(--bg-subtle);
+}
+.bg.inset {
+  background-color: var(--bg-inset);
+}
+.bg.emphasis {
+  background-color: var(--bg-emphasis);
+  color: var(--fg-emphasis);
+}

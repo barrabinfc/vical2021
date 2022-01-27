@@ -3,18 +3,25 @@
   margin: 3em auto;
 }
 
-  /* a:not(.footnote-ref, .footnote-backref) {
-    @include h.link-text;
-  } */
-
-  .post a.footnote-backref {
-    padding: 0 var(--gap);
-    text-decoration: none;
+  .post > h1,
+  .post h2,
+  .post h3,
+  .post h4,
+  .post h5,
+  .post h6 {
+    line-height: 2em;
   }
 
-  .post a.footnote-back {
-    text-decoration: none;
-    margin-bottom: 0;
+  .post > h1 {
+    font-size: var(--font-size-fluid-3);
+  }
+
+  .post > h2 {
+    font-size: var(--font-size-fluid-2);
+  }
+
+  .post > h3 {
+    font-size: var(--font-size-fluid-1);
   }
 
   .post img {

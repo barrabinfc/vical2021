@@ -12,7 +12,17 @@ input {
   font-size: var(--font-size-1); /** Default is 1em = 16px */
   line-height: 1.5em;
 
-  color: var(--text1);
+  color: var(--fg);
+}
+
+.text {
+  color: var(--fg);
+}
+.text.muted {
+  color: var(--fg-muted);
+}
+.text.emphasis {
+  color: var(--fg-emphasis);
 }
 
 /** Disable the default margin of headings */
@@ -55,15 +65,17 @@ p {
 
 .headline {
   font-size: var(--font-size-fluid-3);
+  line-height: 2em;
 }
 
 /** h2 and beyound */
 .subheadline {
   font-size: var(--font-size-fluid-1);
+  line-height: 2em;
 }
 
 .caption {
-  color: var(--text2);
+  color: var(----fg-muted);
   font-size: var(--font-size-fluid-0);
   font-weight: normal;
 }

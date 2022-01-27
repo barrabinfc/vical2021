@@ -57,11 +57,13 @@ export default function MastHead({
       {image && <InlineImage src={image.src} />}
       <div className={cn("contentContainer")}>
         <div className={cn("content", "wrapper-fluid")}>
-          <h1 id="title" className={cn("title")}>
+          <h1 id="title" className={cn("title", "headline")}>
             {avoidWidowedWords(title)}
           </h1>
           {subtitle && (
-            <h2 className={cn("subtitle")}>{avoidWidowedWords(subtitle)}</h2>
+            <h2 className={cn("subtitle", "subheadline")}>
+              {avoidWidowedWords(subtitle)}
+            </h2>
           )}
         </div>
         {children}

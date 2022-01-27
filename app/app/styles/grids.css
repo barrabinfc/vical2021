@@ -1,0 +1,19 @@
+/**
+ * Grid generics
+ * 2x column grid
+ */
+.grid2 {
+  /** otherwise, a 2 column grid */
+  display: grid;
+  grid-gap: var(--size-2);
+  grid-template-columns: repeat(2, 1fr);
+
+  align-content: space-evenly;
+  justify-content: space-evenly;
+}
+/* disable grid in mobile */
+@media (--sm-n-below) {
+.grid2 {
+    grid-template-columns: 1fr
+}
+  }

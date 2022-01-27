@@ -12,19 +12,19 @@ publishedAt: 2021-16-10
 
 <div className="pad4">
   <div className="grid2">
-    <div className="item grid2 pad4">
-      <div className="surface surface1 item">Surface 1</div>
-      <div className="surface surface2 item">Surface 2</div>
-      <div className="surface surface3 item">Surface 3</div>
-      <div className="surface surface4 item">Surface 4</div>
+    <div className="item grid2">
+      <div className="layer bg">.bg</div>
+      <div className="layer bg subtle">.bg.subtle</div>
+      <div className="layer bg inset">.bg.inset</div>
+      <div className="layer bg emphasis">.bg.emphasis</div>
     </div>
-    <div className="item fl-y-center pad4">
-      <div className="text1">
-        <h1>● Text color 1</h1>
+    <div className="item ">
+      <div className="">
+        <h1>● Text color 1 - <Tag>.text</Tag></h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia nibh eu congue ullamcorper. Vestibulum vitae augue pharetra justo fringilla dignissim.</p>
       </div>
-      <div className="text2">
-        <h2>● Text color 2</h2>
+      <div className="text muted">
+        <h2>● Text color 2 - <code>.text.muted</code></h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia nibh eu congue ullamcorper. Vestibulum vitae augue pharetra justo fringilla dignissim.</p>
       </div>
     </div>

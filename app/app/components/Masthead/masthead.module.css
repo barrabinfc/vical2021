@@ -2,7 +2,7 @@
   height: clamp(400px, 70vh, 600px);
   width: 100%;
   display: flex;
-  background-color: var(--surface4);
+  /* background-color: var(--bg-subtle); */
   position: relative;
   overflow: hidden;
 }
@@ -25,7 +25,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    background-color: var(--surface4);
+    background-color: var(--bg-subtle);
   }
 
   .masthead .contentContainer .content {
