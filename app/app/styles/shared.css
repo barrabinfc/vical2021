@@ -332,6 +332,7 @@ html,
 input {
   font-family: var(--font-sans);
   font-size: var(--font-size-1); /** Default is 1em = 16px */
+  line-height: 1.5em;
 
   color: var(--text1);
 }
@@ -372,6 +373,12 @@ a.no-link:visited {
     color: #000;
     color: initial;
   }
+
+p {
+  margin-bottom: 1.5em;
+  line-height: 1.5em;
+  font-size: var(--font-size-1);
+}
 
 .headline {
   font-size: var(--font-size-fluid-3);
