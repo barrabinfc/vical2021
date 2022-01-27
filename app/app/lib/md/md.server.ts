@@ -1,6 +1,9 @@
 import parseFrontMatter from "front-matter";
 import { bundleMDX } from "mdx-bundler";
 
+// import rehypeHighlight from "rehype-highlight";
+// import remarkGfm from "remark-gfm";
+
 export type MDAttributes = Record<string, unknown>;
 export interface MDInput {
   filename: string;
@@ -29,7 +32,17 @@ async function parse<T = MDAttributes>({
  * Render a markdown file into html, or React components
  */
 async function renderMDX(body: string) {
-  return await bundleMDX({ source: body });
+  return await bundleMDX({
+    source: body,
+    xdmOptions(options, frontmatter) {
+      options.remarkPlugins = [...(options.remarkPlugins ?? [])];
+      // options.rehypePlugins = [
+      //   ...(options.rehypePlugins ?? []),
+      //   rehypeHighlight,
+      // ];
+      return options;
+    },
+  });
   // // it's generally a good idea to memoize this function call to
   // // avoid re-creating the component every render.
   // const Component = React.useMemo(() => getMDXComponent(code), [code]);

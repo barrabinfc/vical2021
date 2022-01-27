@@ -2,19 +2,23 @@ html {
   /** Light */
   --brand-light: var(--orange-6);
 
-  --text1-light: var(--gray-8);
-  --text2-light: var(--gray-6);
-  --textInvert-light: var(--gray-1);
+  /* Foreground elements are text and icons */
+  --fg-light: var(--gray-8);
+  --fg-muted-light: var(--gray-6);
+  --fg-emphasis-light: var(--gray-1);
 
-  --link-light: var(--indigo-7);
-  --link-visited-light: var(--grape-9);
+  /** Background colors apply to surfaces of components or UI elements, such as pages, boxes, and overlays. */
+  --bg-light: var(--gray-0);
+  --bg-subtle-light: var(--gray-2);
+  --bg-inset-light: var(--gray-4);
+  --bg-emphasis-light: var(--gray-9);
 
-  --surface1-light: var(--gray-0);
-  --surface2-light: var(--gray-1);
-  --surface3-light: var(--gray-2);
-  --surface4-light: var(--gray-4);
-  --surfaceInvert-light: var(--gray-9);
+  /** create bounds around content, like cards */
+  --border-light: var(--gray-6);
+  /** Dividers to emphasize the separation between items, columns */
+  --border-muted-light: var(--gray-4);
 
+  /* Legacy */
   --surface-shadow-light: 200 10% 20%;
   --shadow-strength-light: 5%;
 
@@ -23,7 +27,7 @@ html {
 
   --text1-dark: var(--gray-1);
   --text2-dark: var(--gray-3);
-  --textInvert-dark: var(--gray-9);
+   --textInvert-dark: var(--gray-9);
 
   --link-dark: var(--indigo-3);
   --link-visited-dark: var(--grape-3);
@@ -41,17 +45,17 @@ html {
 :root {
   --brand: var(--brand-light);
 
-  --text1: var(--text1-light);
-  --text2: var(--text2-light);
-  --textInvert: var(--textInvert-light);
+  --text1: var(--fg-light);
+  --text2: var(--fg-muted-light);
+  --textInvert: var(--fg-emphasis-light);
 
   --link: var(--link-light);
   --link-visited: var(--link-visited-light);
 
-  --surface1: var(--surface1-light);
-  --surface2: var(--surface2-light);
-  --surface3: var(--surface3-light);
-  --surface4: var(--surface4-light);
+  --surface1: var(--bg-light)
+  --surface2: var(--bg-subtle-light);
+  --surface3: var(--bg-inset-light);
+  --surface4: var(--bg-emphasis-light);
 
   --surfaceInvert: var(--surfaceInvert-light);
 
@@ -59,6 +63,7 @@ html {
   --shadow-strength: var(--shadow-strength-light);
 }
 
+/**
 @media (prefers-color-scheme: dark) {
   :root {
     --brand: var(--brand-dark);
@@ -80,3 +85,4 @@ html {
     --shadow-strength: var(--shadow-strength-dark);
   }
 }
+*/

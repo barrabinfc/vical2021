@@ -1,7 +1,7 @@
 import React from "react";
 import { UnixTimestamp } from "./types";
 
-export const cn = (...args: Array<string | boolean>) => {
+export const cn = (...args: Array<string | boolean | undefined | null>) => {
   return args.filter(Boolean).join(" ");
 };
 

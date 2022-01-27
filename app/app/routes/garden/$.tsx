@@ -7,7 +7,7 @@ import { Page } from "~/lib/page";
 import { renderMDX } from "~/lib/md";
 import { getGardenPost } from "~/features/garden";
 
-import { loader as slugLoader, meta as slugMeta , links as slugLinks } from './$slug';
+import { meta as slugMeta , links as slugLinks } from './$slug';
 
 export const loader: LoaderFunction = async ({ params }) => {
     const post = await getGardenPost<Page["attributes"]>(params["*"] || "");
@@ -21,8 +21,6 @@ export const links: LinksFunction = slugLinks;
 
 export default function GardenDeepSlug() {
     let { post, code } = useLoaderData();
-    let params = useParams();
-    let slug = params["*"];
 
     const Component = React.useMemo(() => getMDXComponent(code), [code]);
   

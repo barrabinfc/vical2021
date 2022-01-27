@@ -1,0 +1,218 @@
+.post {
+  max-width: 1440px;
+  position: relative;
+  width: 80vw;
+  width: clamp(16rem, 80vw, 90rem);
+  margin: 3em auto;
+
+  /* a:not(.footnote-ref, .footnote-backref) {
+    @include h.link-text;
+  } */
+  a.footnote-backref {
+    padding: 0 var(--gap);
+    text-decoration: none;
+  }
+  a.footnote-back {
+    text-decoration: none;
+    margin-bottom: 0;
+  }
+
+  img {
+    max-width: 100%;
+    display: flex;
+    margin: 0 auto;
+  }
+  figcaption {
+    text-align: center;
+    color: var(--text2);
+    font-style: italic;
+  }
+  a.footnote-backref {
+    padding: 0 var(--gap);
+    text-decoration: none;
+  }
+  a.footnote-back {
+    text-decoration: none;
+    margin-bottom: 0;
+  }
+
+  img {
+    max-width: 100%;
+    display: flex;
+    margin: 0 auto;
+  }
+  figcaption {
+    text-align: center;
+    color: var(--text2);
+    font-style: italic;
+  }
+
+  /** Headers */
+  .title {
+    /** Headings of text shoul be smooth */
+    --title-weight: var(--subtitle-weight);
+
+    position: relative;
+    max-width: 50ch;
+
+    /** Headings links */
+    a {
+      position: absolute;
+    }
+  }
+
+  /**
+  * Adjacent spacement fixes
+  */
+  p > code,
+  li > code {
+    padding: var(--gap) calc(var(--gap) * 1.5);
+    background-color: var(--surface3);
+    border-radius: var(--gap);
+  }
+
+  /* Adjacent list elements */
+  ul + p,
+  ol + p {
+    margin-top: 1.5rem;
+  }
+
+  /** lists */
+  ol,
+  ul {
+    margin-block-start: 0;
+    padding-inline-start: 1em;
+  }
+
+  ol li {
+    font-size: 1rem;
+  }
+
+  ul li {
+    color: var(--text2);
+    font-size: 1rem;
+  }
+
+  /** Codes & Blockquotes */
+  pre {
+    padding: calc(4 * var(--gap));
+    border-radius: var(--gap);
+    margin: 0 0 1rem 0;
+    background-color: var(--surface3);
+    overflow: auto;
+  }
+
+  pre,
+  code,
+  pre code {
+    font-family: var(--code-family);
+    font-size: var(--s0);
+    font-weight: var(--code-weight);
+    text-shadow: none;
+    overflow: hidden;
+  }
+
+  blockquote {
+    width: 100%;
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
+    padding-left: calc(2 * var(--gap));
+    position: relative;
+  }
+  blockquote > p {
+    font-size: inherit;
+    font-style: italic;
+
+    &::before {
+      position: absolute;
+      opacity: 0.9;
+      top: -0.5em;
+      left: -0.5em;
+      width: 1em;
+      height: 1em;
+      font-size: 6rem;
+      font-weight: bold;
+      content: "\201C";
+      color: var(--surface3);
+    }
+  }
+
+  /**
+   * Tables
+   */
+  table {
+    margin-bottom: 1.5rem;
+    border-spacing: 0px;
+    border-top: 0px;
+    overflow: hidden;
+    table-layout: fixed;
+
+    thead {
+      background-color: var(--brand);
+      color: var(--text1-invert);
+
+      & th {
+        font-size: 1rem;
+        font-weight: var(--code-weight);
+        text-align: center;
+      }
+    }
+    tr:not(:last-child) {
+      & td {
+        border-bottom: 1px solid var(--surface2);
+      }
+    }
+    & tr:last-child {
+      & td {
+        border-bottom: 1px solid var(--surface2);
+      }
+    }
+
+    & th,
+    & td {
+      font-family: var(--code-family);
+      font-weight: var(--code-weight);
+      font-size: var(--s0);
+      padding: calc(2 * var(--gap));
+      border-right: 1px solid var(--surface2);
+
+      &:first-of-type {
+        border-left: 1px solid var(--surface2);
+      }
+    }
+  }
+
+  hr {
+    margin: 2em 0em;
+    border: 0;
+    height: 1px;
+    background-image: radial-gradient(
+      circle at center,
+      var(--surface4),
+      transparent
+    );
+  }
+
+  /**
+   *
+   */
+  .footnotes {
+    ol {
+      margin-left: 1em;
+      li {
+        font-size: var(--s1);
+      }
+    }
+  }
+}
+
+/**
+   * Images float
+   */
+/* @include bp.breakpoint(medium, min) {
+  .right-25 {
+    float: right;
+    width: 25%;
+    padding: 1em;
+  }
+} */

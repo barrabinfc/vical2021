@@ -2,7 +2,6 @@ import * as t from "typanion";
 import { ValidationState } from "typanion";
 
 import { slugifyFilepath } from "../helpers";
-import { isSimpleISO8601 } from "../validation/isSimpleISO8601";
 
 /** '#115599 BAGUNCA */
 import { POSTS_FOLDER } from "~/features/posts/posts";
@@ -45,12 +44,12 @@ const pageProps = {
     status: isPageStatus,
     layout: t.isOptional(t.isString()),
 
-    title: t.isOptional(t.isString()),
+    title: t.isString(),
     subtitle: t.isOptional(t.isString()),
     description: t.isOptional(t.isString()),
 
     published: t.isOptional(t.isBoolean()),
-    publishedAt: t.isOptional(t.isDate()),
+    publishedAt: t.isDate(),
 
     /** Page thumbnail */
     thumbnail: t.isOptional(

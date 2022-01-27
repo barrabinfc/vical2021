@@ -5,9 +5,15 @@ import { getMDXComponent } from "mdx-bundler/client";
 import { getGardenPost } from "~/features/garden";
 import { Page } from "~/lib/page/Page";
 import { renderMDX } from "~/lib/md";
+import {
+  emojifyStatus,
+  toDMYDateString,
+  toReadableDateString,
+} from "~/lib/helpers";
 
-import styles from "../../features/garden/garden.module.css";
-// import styles from "$features/garden/garden.module.css";
+import Masthead, { links as MastheadLinks } from "~/components/Masthead";
+import Tag, { TagVariant } from "../../../../web/src/components/Tag/Tag";
+import Post, { links as PostLinks } from "~/components/Post";
 
 export const loader: LoaderFunction = async ({
   params,
@@ -19,7 +25,11 @@ export const loader: LoaderFunction = async ({
 };
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [
+    // { rel: "stylesheet", href: styles },
+    ...MastheadLinks(),
+    ...PostLinks(),
+  ];
 }
 
 export const meta: MetaFunction = ({ data }) => {
@@ -31,13 +41,47 @@ export const meta: MetaFunction = ({ data }) => {
 };
 
 export default function GardenSlug() {
-  let { post, code } = useLoaderData();
-  let { slug } = useParams();
+  let { post, code } = useLoaderData<{ post: Page; code: string }>();
   const Component = React.useMemo(() => getMDXComponent(code), [code]);
 
   return (
-    <section className="post">
-      <Component />
-    </section>
+    <article id="content">
+      <Masthead
+        className="post-masthead surface4"
+        title={post.attributes.title}
+        subtitle={post.attributes.subtitle || ""}>
+        {post.attributes.tags && (
+          <div className="metadata-container" aria-label="Tagged as">
+            <span className="date-container">
+              <Tag
+                className="status"
+                variant={TagVariant.TRANSPARENT}
+                aria-label={post.attributes.status}>
+                {emojifyStatus(post.attributes.status)}
+              </Tag>
+              <time
+                className="publishedAt"
+                dateTime={post.attributes.publishedAt?.toString()}
+                aria-label={`Published at: ${toReadableDateString(
+                  new Date(post.attributes.publishedAt)
+                )}`}>
+                {toDMYDateString(new Date(post.attributes.publishedAt))}
+              </time>
+            </span>
+            <span className="tags-container" aria-label="Tagged as">
+              {post.attributes.tags.map((tag) => (
+                <Tag className="tag" variant={TagVariant.TRANSPARENT} key={tag}>
+                  {tag}
+                </Tag>
+              ))}
+            </span>
+          </div>
+        )}
+      </Masthead>
+
+      <Post post={post}>
+        <Component />
+      </Post>
+    </article>
   );
 }
