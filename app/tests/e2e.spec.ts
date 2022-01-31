@@ -13,6 +13,8 @@ import puppeteer from "puppeteer";
 describe("e2e", () => {
   let browser: puppeteer.Browser;
   let page: puppeteer.Page;
+
+  /** Run server before */
   before(async () => {
     spawn("npm", ["run", "dev"], { stdio: "inherit", shell: true }).on(
       "exit",

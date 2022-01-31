@@ -1,7 +1,7 @@
 import React from "react";
 
-import { avoidWidowedWords } from "../../lib/helpers";
-import { cn } from "../../lib/helpers";
+import { avoidWidowedWords } from "~/lib/helpers";
+import { cn } from "~/lib/helpers";
 
 import styles from "./masthead.module.css";
 

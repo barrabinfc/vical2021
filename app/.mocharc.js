@@ -8,5 +8,6 @@ module.exports = {
   spec: [
     // "tests/**/*.spec.mjs",
     "app/**/*.spec.ts",
+    "app/**/*.spec.tsx",
   ], // the positional arguments!
 };

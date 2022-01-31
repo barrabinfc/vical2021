@@ -3,6 +3,8 @@
   "compilerOptions": {
     "strict": true,
     "target": "ES2019",
+    "allowJs": true,
+    "checkJs": true,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,

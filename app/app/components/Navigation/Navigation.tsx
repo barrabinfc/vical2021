@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { cn } from "../../lib/helpers";
+import { cn } from "~/lib/helpers";
 
 import Icon from "../icon";
 import styles from "./Navigation.module.css";
