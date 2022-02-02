@@ -31,7 +31,7 @@ export function reset() {
  * React render
  * @return {RenderOutput}
  */
-export function render(component, props = {}) {
+export function render(component: JSX.Element, props = {}) {
   const container = window.document.querySelector("main");
   reactRender(component, container);
   return { container, component };
@@ -43,7 +43,7 @@ export function render(component, props = {}) {
  * @param {String} event
  * @param {any} [details]
  */
-export async function fire(elem, event, details) {
+export async function fire(elem: HTMLElement, event: string, details: any) {
   await act(() => {
     let evt = new window.Event(event, details);
     elem.dispatchEvent(evt);

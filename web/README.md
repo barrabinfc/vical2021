@@ -1,12 +1,6 @@
-# Olárs! :shit:
+<div align="center">
+<h1>vical.me</h1>
 
-My name is Vitor, and this is my website. Nothing fancy, but it's clean static site with web components
-and all that jazz.
+## Personal site built with Remix
 
-### Built with astro
-
-ctrl+k, ctrl-p, + commando para debugar.
-
-- ctrl-p + feature flags do aplicativo.
-- ctrl-p + user preferences (dark-mode, etc, device)
-- carrega os scripts do leva, etc de debug.
+---

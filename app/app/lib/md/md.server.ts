@@ -1,5 +1,9 @@
-import parseFrontMatter from "front-matter";
+import { readFileSync } from "fs";
+import path from "path";
+
 import { bundleMDX } from "mdx-bundler";
+import { BundleMDXOptions } from "mdx-bundler/dist/types";
+import parseFrontMatter from "front-matter";
 
 // import rehypeHighlight from "rehype-highlight";
 // import remarkGfm from "remark-gfm";
@@ -28,25 +32,40 @@ async function parse<T = MDAttributes>({
   return { filename, attributes, body: rest.body };
 }
 
+const mdxResolveFolder = path.resolve("app/");
+const bundlePath = "build/_assets/";
+const bundleOutputFolder = path.resolve(`public/${bundlePath}`);
+
+const options: BundleMDXOptions<Record<string, any>> = {
+  xdmOptions(options, frontmatter) {
+    options.remarkPlugins = [...(options.remarkPlugins ?? [])];
+    return options;
+  },
+  esbuildOptions(options) {
+    console.log("entryPoints", options.entryPoints);
+    options.assetNames = "[name]";
+    options.loader = {
+      ...options.loader,
+      ".css": "file",
+    };
+    return options;
+  },
+  bundleDirectory: bundleOutputFolder,
+  bundlePath: `/${bundlePath}`,
+  cwd: mdxResolveFolder,
+};
+
 /**
  * Render a markdown file into html, or React components
  */
-async function renderMDX(body: string) {
-  return await bundleMDX({
-    source: body,
-    xdmOptions(options, frontmatter) {
-      options.remarkPlugins = [...(options.remarkPlugins ?? [])];
-      // options.rehypePlugins = [
-      //   ...(options.rehypePlugins ?? []),
-      //   rehypeHighlight,
-      // ];
-      return options;
-    },
-  });
-  // // it's generally a good idea to memoize this function call to
-  // // avoid re-creating the component every render.
-  // const Component = React.useMemo(() => getMDXComponent(code), [code]);
-  // return <Component />;
+async function renderMDX({ body, file }: { body?: string; file?: string }) {
+  if (body) {
+    return await bundleMDX({ source: body, ...options });
+  } else if (file) {
+    return await bundleMDX({ file: file, ...options });
+  } else {
+    throw new Error(`Please provide either a body or a file`);
+  }
 }
 
 export { parse, renderMDX };

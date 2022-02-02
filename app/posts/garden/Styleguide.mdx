@@ -10,6 +10,11 @@ description: Styleguide example
 publishedAt: 2021-16-10
 ---
 
+import Tag,{links as tagLinks} from './components/Tag';
+import LinkStyles from './lib/page/loadStyles';
+
+<LinkStyles links={[...tagLinks(),]} />
+
 <div className="pad4">
   <div className="grid2">
     <div className="item grid2">

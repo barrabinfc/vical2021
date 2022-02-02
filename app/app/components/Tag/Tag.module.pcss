@@ -8,20 +8,23 @@
   font-size: var(----font-size-1);
   text-shadow: none;
   white-space: nowrap;
-}
-.tag.default {
+
+  &.default {
     background-color: var(--bg-emphasis);
     color: var(--fg-emphasis);
   }
-.tag.success {
+
+  &.success {
     background-color: hsl(160, var(--brand-saturation), 35%);
     color: var(--surface1);
   }
-.tag.error {
+  &.error {
     background-color: hsl(10, var(--brand-saturation), 35%);
     color: var(--surface1);
   }
-.tag.transparent {
+
+  &.transparent {
     background-color: transparent;
     color: var(--text2);
   }
+}

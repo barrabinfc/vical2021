@@ -12,14 +12,14 @@ import {
 } from "~/lib/helpers";
 
 import Masthead, { links as MastheadLinks } from "~/components/Masthead";
-import Tag, { TagVariant } from "../../../../web/src/components/Tag/Tag";
+import Tag, { TagVariant, links as TagLinks } from "~/components/Tag/Tag";
 import Post, { links as PostLinks } from "~/components/Post";
 
 export const loader: LoaderFunction = async ({
   params,
 }): Promise<{ post: Page; code: string }> => {
   const post = await getGardenPost<Page["attributes"]>(params["slug"] || "");
-  const body = await renderMDX(post.body);
+  const body = await renderMDX({ body: post.body });
 
   return { post: post, code: body.code };
 };
@@ -29,6 +29,7 @@ export function links() {
     // { rel: "stylesheet", href: styles },
     ...MastheadLinks(),
     ...PostLinks(),
+    // ...TagLinks(),
   ];
 }
 
