@@ -1,7 +1,7 @@
 {
   "folders": [
     {
-      "path": "app"
+      "path": "web"
     }
   ],
   "settings": {
@@ -23,9 +23,13 @@
       "titleBar.inactiveForeground": "#e7e7e799",
       "sash.hoverBorder": "#3ab97f",
       "statusBarItem.remoteBackground": "#2e9264",
-      "statusBarItem.remoteForeground": "#e7e7e7"
+      "statusBarItem.remoteForeground": "#e7e7e7",
+      "commandCenter.border": "#e7e7e799"
     },
-    "peacock.color": "#2e9264",
-    "cSpell.words": ["htmr"]
-  }
+    "peacock.color": "#2e9264"
+  },
+  "mocha.requires": [
+    "ts-node/register",
+    "tests/setup/register"
+  ]
 }
