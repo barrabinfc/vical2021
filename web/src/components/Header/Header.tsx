@@ -2,7 +2,7 @@ import React from 'react';
 import Navigation from '../Navigation/Navigation';
 import { cn } from '../../lib/helpers';
 
-import useWindowScrollPosition from '@rehooks/window-scroll-position';
+// import useWindowScrollPosition from '@rehooks/window-scroll-position';
 
 import Icon from '../icon';
 import styles from './Header.module.scss';

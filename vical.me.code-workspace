@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"folders": [
 		{
 			"path": "."
@@ -31,4 +32,39 @@
 		},
 		"peacock.color": "#42b883"
 	}
+=======
+  "folders": [
+    {
+      "path": "web"
+    }
+  ],
+  "settings": {
+    "typescript.tsdk": "web/node_modules/typescript/lib",
+    "workbench.colorCustomizations": {
+      "activityBar.activeBackground": "#3ab97f",
+      "activityBar.activeBorder": "#f0e7f7",
+      "activityBar.background": "#3ab97f",
+      "activityBar.foreground": "#15202b",
+      "activityBar.inactiveForeground": "#15202b99",
+      "activityBarBadge.background": "#f0e7f7",
+      "activityBarBadge.foreground": "#15202b",
+      "statusBar.background": "#2e9264",
+      "statusBar.foreground": "#e7e7e7",
+      "statusBarItem.hoverBackground": "#3ab97f",
+      "titleBar.activeBackground": "#2e9264",
+      "titleBar.activeForeground": "#e7e7e7",
+      "titleBar.inactiveBackground": "#2e926499",
+      "titleBar.inactiveForeground": "#e7e7e799",
+      "sash.hoverBorder": "#3ab97f",
+      "statusBarItem.remoteBackground": "#2e9264",
+      "statusBarItem.remoteForeground": "#e7e7e7",
+      "commandCenter.border": "#e7e7e799"
+    },
+    "peacock.color": "#2e9264"
+  },
+  "mocha.requires": [
+    "ts-node/register",
+    "tests/setup/register"
+  ]
+>>>>>>> feature/vic-61-implement-reading-markdown-files-and
 }
